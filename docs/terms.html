@@ -14,7 +14,6 @@
 
   <style>
     :root{
-      /* ✅ THEME SOMBRE (aligné index.html) */
       --bg:#0B1220;
       --panel:#0F172A;
       --text:#E5E7EB;
@@ -38,8 +37,6 @@
       --tap: 44px;
       --navH: 64px;
       --focus: 0 0 0 4px rgba(59,130,246,.25);
-
-      --iconWhite: #FFFFFF;
     }
 
     *{box-sizing:border-box}
@@ -48,7 +45,7 @@
       height:100%;
       width:100%;
       max-width:100%;
-      overflow-x:hidden; /* ✅ stop scroll horizontal */
+      overflow-x:hidden;
     }
     body{
       margin:0;
@@ -58,10 +55,9 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: geometricPrecision;
-      overflow-x:hidden; /* ✅ stop scroll horizontal */
+      overflow-x:hidden;
     }
 
-    /* ✅ flex children can shrink (important on mobile) */
     .nav-inner > * , .layout > * , .toc-links, .meta, .foot { min-width:0; }
 
     a{color:inherit; text-decoration:none}
@@ -69,7 +65,6 @@
     button{font-family:inherit}
     strong{font-weight:900}
 
-    /* ✅ global safe wrapping for long strings (emails/urls) */
     .content, .section p, .section li, footer, footer a, .link{
       overflow-wrap:anywhere;
       word-break: break-word;
@@ -78,7 +73,6 @@
     .container{max-width: var(--container); width:100%; margin:0 auto; padding:0 16px}
     @media (min-width: 720px){ .container{padding:0 20px} }
 
-    /* ========= A11Y ========= */
     .skip{
       position:absolute;
       left:12px;
@@ -97,13 +91,11 @@
     :focus{outline:none}
     :focus-visible{box-shadow: var(--focus); border-radius: 12px}
 
-    /* ========= Icons ========= */
     .ico{width:18px;height:18px; display:inline-block; flex:0 0 auto}
     .ico.sm{width:16px;height:16px}
     .ico.lg{width:20px;height:20px}
     .ico.xl{width:22px;height:22px}
 
-    /* ========= NAV (mobile-first) ========= */
     .nav{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
@@ -126,7 +118,6 @@
       min-width: 0;
     }
 
-    /* ✅ LOGO (sans background) */
     .logo{
       width:38px;
       height:38px;
@@ -185,8 +176,6 @@
       border-color: rgba(255,255,255,.18);
     }
 
-    .links{display:none; gap:10px; align-items:center}
-
     .pill{
       display:inline-flex;
       align-items:center;
@@ -215,13 +204,23 @@
       box-shadow: 0 14px 30px rgba(59,130,246,.14);
       color:#fff;
     }
+    .pill.danger,
+    .pill.danger[aria-current="page"]{
+      border: 1px solid rgba(239,68,68,.55);
+      background: rgba(239,68,68,.92);
+      color:#fff;
+      box-shadow: 0 14px 30px rgba(239,68,68,.20);
+    }
+    .pill.danger:hover{
+      background: rgba(220,38,38,.95);
+      border-color: rgba(252,165,165,.65);
+    }
     .pill[aria-current="page"]{
       background: rgba(245,158,11,.20);
       border-color: rgba(245,158,11,.55);
       color:#FDE68A;
     }
 
-    /* ========= Drawer menu (mobile) ========= */
     .backdrop{
       position:fixed;
       inset:0;
@@ -283,7 +282,7 @@
       border-radius: 16px;
       font-size: 15px;
       min-height: 46px;
-      white-space: normal; /* ✅ allow wrap inside drawer */
+      white-space: normal;
       text-align:center;
     }
     .drawer-foot{
@@ -293,6 +292,9 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.5;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
     .drawer-foot .pill{
       width:100%;
@@ -302,7 +304,6 @@
     .menu-open .backdrop{opacity:1; pointer-events:auto}
     .menu-open .drawer{transform: translateX(0)}
 
-    /* ========= MAIN / HERO ========= */
     main{padding: 18px 0 22px}
 
     .hero{
@@ -367,7 +368,6 @@
       flex-wrap:wrap;
     }
 
-    /* ========= Layout (mobile-first) ========= */
     .layout{
       margin-top: 14px;
       display:grid;
@@ -383,14 +383,13 @@
       }
     }
 
-    /* ✅ TOC: chips scrollables mobile (inside its box only) */
     .toc{
       border-radius: var(--radius);
       border:1px solid var(--line);
       background: rgba(15,23,42,.55);
       box-shadow: var(--shadow2);
       padding: 14px;
-      overflow:hidden; /* ✅ contain horizontal scroller */
+      overflow:hidden;
       max-width:100%;
     }
     @media (min-width: 980px){
@@ -460,7 +459,6 @@
       }
     }
 
-    /* ========= Content ========= */
     .content{
       border-radius: var(--radius);
       border:1px solid var(--line);
@@ -558,7 +556,6 @@
     }
     .link:hover{opacity:1}
 
-    /* ========= Footer ========= */
     footer{
       border-top: 1px solid var(--line);
       background: rgba(11,18,32,.55);
@@ -588,7 +585,6 @@
 <body>
   <a class="skip" href="#main">Aller au contenu principal</a>
 
-  <!-- ===== SVG ICONS (stroke/fill forcés en BLANC comme index) ===== -->
   <svg width="0" height="0" style="position:absolute">
     <symbol id="i-menu" viewBox="0 0 24 24">
       <line x1="4" y1="7" x2="20" y2="7" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
@@ -693,6 +689,12 @@
       <circle cx="12" cy="12" r="9" fill="none" stroke="#FFFFFF" stroke-width="2"/>
       <path d="M12 7v6l4 2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
+
+    <symbol id="i-building" viewBox="0 0 24 24">
+      <path d="M4 21h16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 21V7l6-4 6 4v14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
   </svg>
 
   <header class="nav" role="banner">
@@ -744,15 +746,27 @@
         <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
         Confidentialité
       </a>
-      <a class="pill primary" href="https://apps.apple.com/app/idXXXXXXXXX" rel="noopener noreferrer">
+      <a class="pill" href="terms.html" aria-current="page">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Conditions
+      </a>
+      <a class="pill" href="mentions-legales.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Mentions légales
+      </a>
+      <a class="pill primary" href="https://apps.apple.com/app/id6754794588" rel="noopener noreferrer">
          App Store
       </a>
     </nav>
 
     <div class="drawer-foot">
+      <a class="pill danger" href="delete-account.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Supprimer mon compte
+      </a>
       <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
         <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
-        Contact@urbalya.com
+        Contactez-nous
       </a>
     </div>
   </aside>
@@ -767,12 +781,13 @@
       <h1>Conditions d’utilisation</h1>
       <p class="lead">
         Ces conditions encadrent l’usage de Urbalya : publication de contenus, règles de modération,
-        signalement et retrait. En utilisant l’app, vous acceptez ces conditions.
+        signalement, retrait et fonctionnement général du service. En utilisant l’application ou les
+        pages support associées, vous acceptez ces conditions.
       </p>
 
       <div class="meta">
         <svg class="ico sm" aria-hidden="true"><use href="#i-clock"></use></svg>
-        Dernière mise à jour : 25 janvier 2026
+        Dernière mise à jour : 12 mars 2026
       </div>
     </section>
 
@@ -828,8 +843,29 @@
             1) Objet
           </h2>
           <p>
-            Urbalya permet de consulter et publier des contenus locaux (signalements, photos, messages) et d’afficher une carte.
+            Urbalya permet de consulter et publier des contenus locaux, d’échanger via certaines
+            fonctions communautaires et d’afficher des informations sur une carte.
           </p>
+          <p>
+            L’application est destinée aux utilisateurs âgés d’au moins <strong>16 ans</strong>.
+          </p>
+          <p>
+            Pour les citoyens, Urbalya est utilisée à titre gratuit et ne propose pas d’achat intégré
+            destiné à l’utilisateur final. Les éventuelles relations commerciales avec des mairies ou
+            des commerçants sont traitées hors de l’application.
+          </p>
+
+          <div class="callout info" role="note" aria-label="Information service">
+            <div class="icoWrap" aria-hidden="true">
+              <svg class="ico lg"><use href="#i-info"></use></svg>
+            </div>
+            <div>
+              <strong>Information :</strong> les règles relatives aux données personnelles, aux droits RGPD
+              et à la suppression du compte sont détaillées dans la
+              <a class="link" href="privacy.html">politique de confidentialité</a> et sur la
+              <a class="link" href="delete-account.html">page de suppression de compte</a>.
+            </div>
+          </div>
         </div>
 
         <div class="section" id="ugc">
@@ -839,8 +875,9 @@
           </h2>
           <p>
             Vous conservez vos droits sur les contenus que vous publiez. Vous concédez à Urbalya une licence mondiale,
-            non exclusive et gratuite pour héberger, stocker, reproduire, afficher et distribuer ces contenus dans l’app
-            et ses services techniques, pendant la durée nécessaire au service et aux obligations légales.
+            non exclusive et gratuite pour héberger, stocker, reproduire, afficher et distribuer ces contenus dans l’application
+            et ses services techniques, pendant la durée nécessaire au fonctionnement du service, à la modération,
+            à la sécurité et aux obligations légales applicables.
           </p>
 
           <div class="callout info" role="note" aria-label="Information licence">
@@ -848,7 +885,8 @@
               <svg class="ico lg"><use href="#i-info"></use></svg>
             </div>
             <div>
-              <strong>Information :</strong> cette licence sert uniquement à opérer le service (affichage, stockage, modération, transmission technique).
+              <strong>Information :</strong> cette licence sert uniquement à opérer le service
+              (affichage, stockage, diffusion technique, modération, prévention des abus et support).
             </div>
           </div>
         </div>
@@ -859,9 +897,11 @@
             3) Contenus interdits
           </h2>
           <ul>
-            <li>Atteinte aux droits d’auteur, marques, droits à l’image et à la vie privée.</li>
-            <li>Diffamation, incitation à la haine, contenus illicites, pornographie, exploitation de mineurs.</li>
-            <li>Spam, fraude, malware, coordonnées privées sans consentement.</li>
+            <li>Atteinte aux droits d’auteur, marques, droits à l’image, vie privée ou droits de tiers.</li>
+            <li>Diffamation, harcèlement, menaces, incitation à la haine, contenus illicites ou violents.</li>
+            <li>Contenus à caractère sexuel illicite, exploitation de mineurs, ou tout contenu manifestement illégal.</li>
+            <li>Spam, fraude, malware, usurpation d’identité ou collecte abusive d’informations.</li>
+            <li>Publication de coordonnées privées, informations sensibles ou données personnelles de tiers sans base légitime.</li>
           </ul>
 
           <div class="callout danger" role="note" aria-label="Tolérance zéro">
@@ -869,7 +909,8 @@
               <svg class="ico lg"><use href="#i-alert"></use></svg>
             </div>
             <div>
-              <strong>Tolérance zéro :</strong> le contenu choquant, abusif ou illégal peut être retiré et entraîner la suspension du compte.
+              <strong>Tolérance zéro :</strong> un contenu choquant, abusif ou illégal peut être retiré
+              sans préavis et entraîner la limitation ou la suspension du compte concerné.
             </div>
           </div>
         </div>
@@ -880,29 +921,42 @@
             4) Signalement et retrait
           </h2>
           <p>
-            Pour signaler une atteinte à des droits ou un contenu illicite, écrivez à
-            <a class="link" href="mailto:contact@urbalya.com?subject=Signalement%20-%20Urbalya">contact@urbalya.com</a>
-            avec : URL/ID, description, preuves (si applicable) et vos coordonnées.
+            Pour signaler un contenu, un profil ou une atteinte à des droits, vous pouvez utiliser les
+            outils de <strong>signalement</strong> disponibles dans l’application ou écrire à
+            <a class="link" href="mailto:contact@urbalya.com?subject=Signalement%20-%20Urbalya">contact@urbalya.com</a>.
           </p>
           <p>
-            Nous pouvons retirer ou restreindre l’accès aux contenus litigieux. L’app propose également des outils
-            de <strong>signalement</strong> et de <strong>blocage</strong>.
+            Pour faciliter le traitement, indiquez si possible :
+            URL, identifiant du contenu ou du profil, description, captures et tout élément utile.
+          </p>
+          <p>
+            Urbalya peut retirer un contenu, en restreindre la visibilité, demander des informations
+            complémentaires, ou prendre toute mesure proportionnée de modération ou de sécurité.
+          </p>
+          <p>
+            Pour l’assistance générale, consultez aussi la
+            <a class="link" href="support.html">page support</a>.
           </p>
         </div>
 
         <div class="section" id="tiers">
           <h2>
             <svg class="ico sm" aria-hidden="true"><use href="#i-shield"></use></svg>
-            5) Contenus et services tiers
+            5) Services tiers
           </h2>
           <p>
-            L’app peut afficher des contenus tiers (ex : cartes). Ces éléments restent la propriété de leurs titulaires et sont soumis à leurs licences.
+            L’application peut s’appuyer sur certains services techniques tiers nécessaires à son fonctionnement,
+            notamment pour la cartographie, l’envoi d’emails transactionnels, l’hébergement, la diffusion d’images
+            ou d’autres fonctions techniques.
           </p>
-          <ul>
-            <li><strong>Apple Maps</strong> : attribution gérée par iOS.</li>
-            <li><strong>Google Maps</strong> : mentions exigées par Google si utilisé.</li>
-            <li><strong>Mapbox / OpenStreetMap</strong> : “© OpenStreetMap contributors”, “© Mapbox” si utilisés.</li>
-          </ul>
+          <p>
+            Lorsque des services tiers sont utilisés, ils restent soumis à leurs propres conditions
+            d’utilisation et politiques applicables.
+          </p>
+          <p>
+            En l’état actuel du service, certaines fonctionnalités cartographiques peuvent notamment
+            s’appuyer sur <strong>Google Maps API</strong>.
+          </p>
         </div>
 
         <div class="section" id="liens">
@@ -910,7 +964,11 @@
             <svg class="ico sm" aria-hidden="true"><use href="#i-link"></use></svg>
             6) Liens externes
           </h2>
-          <p>Les liens vers des sites tiers sont fournis pour convenance. Urbalya ne contrôle pas ces contenus.</p>
+          <p>
+            Les liens vers des sites, services ou contenus tiers sont fournis pour convenance.
+            Urbalya n’exerce pas de contrôle général sur ces contenus externes et ne saurait être
+            responsable de leur disponibilité, contenu ou politique propre.
+          </p>
         </div>
 
         <div class="section" id="suspension">
@@ -918,7 +976,12 @@
             <svg class="ico sm" aria-hidden="true"><use href="#i-pause"></use></svg>
             7) Suspension
           </h2>
-          <p>Tout manquement peut entraîner suppression de contenus, limitation d’accès ou suspension de compte.</p>
+          <p>
+            En cas de manquement aux présentes conditions, Urbalya peut supprimer un contenu,
+            limiter certaines fonctionnalités, suspendre temporairement un compte ou prendre toute
+            mesure proportionnée nécessaire à la sécurité du service, à la modération ou au respect
+            des obligations légales.
+          </p>
         </div>
 
         <div class="section" id="modifs">
@@ -926,7 +989,15 @@
             <svg class="ico sm" aria-hidden="true"><use href="#i-refresh"></use></svg>
             8) Modifications
           </h2>
-          <p>Nous pouvons modifier ces conditions. La version en ligne fait foi.</p>
+          <p>
+            Urbalya peut modifier les présentes conditions pour refléter l’évolution du service,
+            de ses fonctionnalités, de ses prestataires techniques ou de ses obligations légales.
+            La version publiée en ligne fait foi.
+          </p>
+          <p>
+            Pour les informations légales sur l’éditeur, consultez les
+            <a class="link" href="mentions-legales.html">mentions légales</a>.
+          </p>
         </div>
       </article>
     </section>
@@ -940,6 +1011,8 @@
         <a href="support.html">Support</a>
         <a href="privacy.html">Confidentialité</a>
         <a href="terms.html">Conditions</a>
+        <a href="delete-account.html">Suppression compte</a>
+        <a href="mentions-legales.html">Mentions légales</a>
       </div>
     </div>
   </footer>

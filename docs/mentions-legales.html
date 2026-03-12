@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Mentions légales — Urbalya</title>
+  <meta
+    name="description"
+    content="Mentions légales du site support Urbalya : éditeur, contact, hébergement et services techniques."
+  />
+  <meta name="theme-color" content="#0B1220" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="cookie-consent.css" />
+
+  <style>
+    :root {
+      --bg: #0B1220;
+      --panel: #0F172A;
+      --text: #E5E7EB;
+      --muted: #94A3B8;
+      --line: rgba(255, 255, 255, 0.10);
+      --line2: rgba(255, 255, 255, 0.14);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+      --shadow2: 0 10px 30px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+      --accent: #3B82F6;
+      --accentSoft: rgba(59, 130, 246, 0.14);
+      --warn: #F59E0B;
+      --warnSoft: rgba(245, 158, 11, 0.10);
+      --container: 1100px;
+      --tap: 44px;
+      --navH: 64px;
+      --focus: 0 0 0 4px rgba(59, 130, 246, 0.25);
+    }
+
+    * { box-sizing: border-box; min-width: 0; }
+    html, body { height: 100%; width: 100%; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: geometricPrecision;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    button { font-family: inherit; }
+    strong { font-weight: 900; }
+
+    .container {
+      max-width: var(--container);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    @media (min-width: 720px) {
+      .container { padding: 0 20px; }
+    }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(2, 6, 23, 0.95);
+      border: 1px solid var(--line2);
+      transform: translateY(-200%);
+      transition: transform .15s ease;
+      z-index: 9999;
+    }
+
+    .skip:focus {
+      transform: translateY(0);
+      outline: none;
+      box-shadow: var(--focus);
+    }
+
+    :focus { outline: none; }
+    :focus-visible { box-shadow: var(--focus); border-radius: 12px; }
+
+    .ico { width: 18px; height: 18px; display: inline-block; flex: 0 0 auto; }
+    .ico.sm { width: 16px; height: 16px; }
+    .ico.xl { width: 22px; height: 22px; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 18, 32, 0.82);
+      border-bottom: 1px solid var(--line);
+      padding-top: env(safe-area-inset-top);
+    }
+
+    .nav-inner {
+      min-height: var(--navH);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+      min-width: 0;
+    }
+
+    .brand-text strong {
+      font-weight: 900;
+      letter-spacing: .2px;
+      font-size: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-text small {
+      display: block;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: .2px;
+      font-size: 12px;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-toggle {
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, .45);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      color: var(--text);
+    }
+
+    .nav-toggle:hover {
+      transform: translateY(-1px);
+      background: rgba(15, 23, 42, .65);
+      border-color: rgba(255, 255, 255, .18);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, .45);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      color: var(--text);
+      font-weight: 900;
+      font-size: 14px;
+      line-height: 1;
+      white-space: nowrap;
+      min-height: 38px;
+    }
+
+    .pill:hover {
+      transform: translateY(-1px);
+      background: rgba(15, 23, 42, .65);
+      border-color: rgba(255, 255, 255, .18);
+    }
+
+    .pill.primary {
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(59, 130, 246, .92);
+      box-shadow: 0 14px 30px rgba(59, 130, 246, .14);
+      color: #fff;
+    }
+
+    .pill.danger,
+    .pill.danger[aria-current="page"] {
+      border: 1px solid rgba(239, 68, 68, .55);
+      background: rgba(239, 68, 68, .92);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(239, 68, 68, .20);
+    }
+
+    .pill.danger:hover {
+      background: rgba(220, 38, 38, .95);
+      border-color: rgba(252, 165, 165, .65);
+    }
+
+    .pill[aria-current="page"] {
+      background: rgba(245, 158, 11, .20);
+      border-color: rgba(245, 158, 11, .55);
+      color: #FDE68A;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, .60);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 80;
+    }
+
+    .drawer {
+      position: fixed;
+      top: env(safe-area-inset-top);
+      right: 0;
+      width: min(92vw, 360px);
+      height: calc(100vh - env(safe-area-inset-top));
+      background: rgba(15, 23, 42, .94);
+      border-left: 1px solid var(--line);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .55);
+      transform: translateX(110%);
+      transition: transform .22s ease;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      padding: 14px;
+    }
+
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 6px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .drawer-close {
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(2, 6, 23, .35);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .drawer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 6px;
+    }
+
+    .drawer .pill {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 12px;
+      border-radius: 16px;
+      font-size: 15px;
+      min-height: 46px;
+    }
+
+    .drawer-foot {
+      margin-top: auto;
+      padding: 12px 6px 6px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .drawer-foot .pill {
+      width: 100%;
+      justify-content: center;
+      border-radius: 14px;
+    }
+
+    html.menu-open body { overflow: hidden; }
+    html.menu-open .backdrop { opacity: 1; pointer-events: auto; }
+    html.menu-open .drawer { transform: translateX(0); }
+
+    main {
+      padding-top: 24px;
+      padding-bottom: 28px;
+    }
+
+    .hero {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.55);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 4px;
+      background: rgba(239,68,68,.85);
+      opacity: .95;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(59, 130, 246, 0.30);
+      background: var(--accentSoft);
+      color: #BFDBFE;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 12px 0 8px;
+      font-size: clamp(28px, 5vw, 40px);
+      line-height: 1.05;
+      letter-spacing: -0.5px;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .notice {
+      margin-top: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(245, 158, 11, 0.30);
+      background: var(--warnSoft);
+      color: #FDE68A;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .sections {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .section-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.55);
+      box-shadow: var(--shadow2);
+      padding: 18px;
+    }
+
+    .section-card h2 {
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .section-card p,
+    .section-card li {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .section-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 860px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .info-box {
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(2, 6, 23, 0.22);
+      padding: 14px;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .info-box span,
+    .info-box a {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #BFDBFE;
+      border: 1px solid rgba(59, 130, 246, 0.26);
+      background: rgba(59, 130, 246, 0.12);
+    }
+
+    .link {
+      font-weight: 900;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 2px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      background: rgba(11, 18, 32, 0.55);
+      padding: 18px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .foot a {
+      color: var(--text);
+      font-weight: 900;
+      opacity: 0.92;
+    }
+
+    .foot a:hover { opacity: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; }
+      .pill, .nav-toggle { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Aller au contenu principal</a>
+
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <line x1="4" y1="7" x2="20" y2="7" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <line x1="4" y1="12" x2="20" y2="12" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <line x1="4" y1="17" x2="20" y2="17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-x" viewBox="0 0 24 24">
+      <line x1="6" y1="6" x2="18" y2="18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <line x1="18" y1="6" x2="6" y2="18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="M4 11l8-7 8 7" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 10v10h12V10" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-support" viewBox="0 0 24 24">
+      <path d="M4 12a8 8 0 0 1 16 0" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M4 12v4a2 2 0 0 0 2 2h2v-6H6a2 2 0 0 0-2 2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M20 12v4a2 2 0 0 1-2 2h-2v-6h2a2 2 0 0 1 2 2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M12 20h4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24">
+      <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2" />
+      <path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-file" viewBox="0 0 24 24">
+      <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M14 2v6h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M9 13h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M9 17h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2" />
+      <path d="M4 8l8 6 8-6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="i-info" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+      <path d="M12 10v6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-building" viewBox="0 0 24 24">
+      <path d="M4 21h16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 21V7l6-4 6 4v14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <header class="nav" role="banner">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="Aller à l'accueil Urbalya">
+        <span class="logo" aria-hidden="true">
+          <img class="logo-img" src="logo.png" alt="Urbalya" />
+        </span>
+        <span class="brand-text">
+          <strong>Urbalya</strong>
+          <small>Application citoyenne</small>
+        </span>
+      </a>
+
+      <div class="nav-actions">
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Ouvrir le menu"
+          aria-controls="drawer"
+          aria-expanded="false"
+          id="menuBtn"
+        >
+          <svg class="ico xl" aria-hidden="true"><use href="#i-menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer-head">
+      <div class="drawer-title">Navigation</div>
+      <button class="drawer-close" type="button" aria-label="Fermer le menu" id="closeBtn">
+        <svg class="ico xl" aria-hidden="true"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+
+    <nav class="drawer-nav" aria-label="Navigation mobile">
+      <a class="pill" href="index.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
+        Accueil
+      </a>
+      <a class="pill" href="support.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
+        Support
+      </a>
+      <a class="pill" href="privacy.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        Confidentialité
+      </a>
+      <a class="pill" href="terms.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Conditions
+      </a>
+      <a class="pill" href="mentions-legales.html" aria-current="page">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Mentions légales
+      </a>
+      <a class="pill primary" href="https://apps.apple.com/app/id6754794588" rel="noopener noreferrer">
+         App Store
+      </a>
+    </nav>
+
+    <div class="drawer-foot">
+      <a class="pill danger" href="delete-account.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Supprimer mon compte
+      </a>
+      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
+        <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+        Contactez-nous
+      </a>
+    </div>
+  </aside>
+
+  <main class="container" id="main" role="main">
+    <section class="hero" aria-label="Mentions légales Urbalya">
+      <span class="badge">
+        <svg class="ico sm" aria-hidden="true"><use href="#i-info"></use></svg>
+        Informations légales de l’éditeur
+      </span>
+
+      <h1>Mentions légales</h1>
+
+      <p class="lead">
+        La présente page a pour objet de fournir les informations légales relatives au site support
+        et aux services associés à Urbalya.
+      </p>
+
+      <div class="notice" role="note" aria-label="Placeholders à compléter">
+        Certaines informations non encore finalisées ont été laissées avec des placeholders
+        volontaires pour que tu puisses les retrouver facilement :
+        <strong>NUMERO_DE_SIREN</strong>,
+        <strong>RCS_VILLE</strong>,
+        <strong>HEBERGEUR_DU_SITE_SUPPORT</strong>.
+      </div>
+    </section>
+
+    <section class="sections" aria-label="Contenu légal">
+      <article class="section-card">
+        <h2>
+          <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+          Éditeur du site
+        </h2>
+
+        <div class="grid">
+          <div class="info-box">
+            <strong>Raison sociale</strong>
+            <span>LEMACH LABS</span>
+          </div>
+
+          <div class="info-box">
+            <strong>Forme juridique</strong>
+            <span>SASU</span>
+          </div>
+
+          <div class="info-box">
+            <strong>Siège social</strong>
+            <span>135 rue de L'Égalité, 59320 Haubourdin, France</span>
+          </div>
+
+          <div class="info-box">
+            <strong>SIREN</strong>
+            <span>NUMERO_DE_SIREN</span>
+          </div>
+
+          <div class="info-box">
+            <strong>RCS</strong>
+            <span>RCS_VILLE</span>
+          </div>
+
+          <div class="info-box">
+            <strong>Directeur de publication</strong>
+            <span>Yann Leroy</span>
+          </div>
+
+          <div class="info-box">
+            <strong>Email de contact</strong>
+            <a class="link" href="mailto:contact@urbalya.com">contact@urbalya.com</a>
+          </div>
+
+          <div class="info-box">
+            <strong>Objet du service</strong>
+            <span>Support, informations juridiques, assistance et documentation liés à l’application Urbalya.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="section-card">
+        <h2>
+          <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+          Hébergement du site support
+        </h2>
+
+        <ul>
+          <li><strong>Nom de l’hébergeur :</strong> GitHub, Inc. (GitHub Pages)</li>
+          <li><strong>Adresse :</strong> 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, United States</li>
+          <li><strong>Contact :</strong> GitHub Support</li>
+        </ul>
+
+        <p>
+          Ces champs sont volontairement laissés en placeholder tant que l’hébergeur exact du site
+          support n’est pas validé.
+        </p>
+      </article>
+
+      <article class="section-card">
+        <h2>
+          <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+          Infrastructure et services techniques associés
+        </h2>
+
+        <div class="grid">
+          <div class="info-box">
+            <strong>Render</strong>
+            <span>hébergement du backend API + base de données + logique de messagerie</span>
+          </div>
+
+          <div class="info-box">
+            <strong>Cloudflare Images</strong>
+            <span>stockage et diffusion des images</span>
+          </div>
+
+          <div class="info-box">
+            <strong>Google Maps API / Apple Maps / MapKit</strong>
+            <span>affichage cartographique et services de localisation</span>
+          </div>
+
+          <div class="info-box">
+            <strong>Mailjet</strong>
+            <span>envoi d’emails transactionnels</span>
+          </div>
+
+          <div class="info-box">
+            <strong>Zoho Mail</strong>
+            <span>gestion des boîtes mail</span>
+          </div>
+
+          <div class="info-box">
+            <strong>Cloudflare Mail</strong>
+            <span>DNS, proxy/CDN, Mail Routing</span>
+          </div>
+        </div>
+
+        <p style="margin-top:12px;">
+          Les détails relatifs au traitement des données personnelles, aux finalités, aux bases
+          légales, aux durées de conservation et aux droits des utilisateurs sont précisés dans la
+          <a class="link" href="privacy.html">politique de confidentialité</a>.
+        </p>
+      </article>
+
+      <article class="section-card">
+        <h2>
+          <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
+          Contact
+        </h2>
+
+        <ul>
+          <li><strong>Support général :</strong> <a class="link" href="mailto:contact@urbalya.com">contact@urbalya.com</a></li>
+          <li><strong>Support utilisateur :</strong> <a class="link" href="support.html">page support</a></li>
+          <li><strong>Suppression de compte :</strong> <a class="link" href="delete-account.html">page dédiée</a></li>
+          <li><strong>Protection des données :</strong> <a class="link" href="privacy.html">politique de confidentialité</a></li>
+        </ul>
+      </article>
+
+      <article class="section-card">
+        <h2>
+          <svg class="ico" aria-hidden="true"><use href="#i-info"></use></svg>
+          Propriété intellectuelle
+        </h2>
+
+        <p>
+          Sauf mention contraire, les contenus présents sur ce site support, notamment les textes,
+          éléments graphiques, logos, interfaces, documents et éléments de marque liés à Urbalya
+          sont protégés par les règles applicables en matière de propriété intellectuelle.
+        </p>
+
+        <p>
+          Toute reproduction, représentation, adaptation, diffusion ou exploitation non autorisée,
+          totale ou partielle, peut être interdite sans autorisation préalable écrite de l’éditeur.
+        </p>
+      </article>
+
+      <article class="section-card">
+        <h2>
+          <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+          Droit applicable
+        </h2>
+
+        <p>
+          Le présent site support et ses mentions légales sont soumis au droit français, sous réserve
+          des règles impératives éventuellement applicables dans le pays de résidence de
+          l’utilisateur.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container foot">
+      <div>
+        © <span id="y"></span> Urbalya —
+        <a href="mailto:contact@urbalya.com">contact@urbalya.com</a>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="index.html">Accueil</a>
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Confidentialité</a>
+        <a href="terms.html">Conditions</a>
+        <a href="delete-account.html">Suppression compte</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    const root = document.documentElement;
+    const btn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const backdrop = document.getElementById('backdrop');
+    const drawer = document.getElementById('drawer');
+
+    let lastFocus = null;
+
+    function setOpen(open) {
+      if (open) {
+        lastFocus = document.activeElement;
+        root.classList.add('menu-open');
+        btn.setAttribute('aria-expanded', 'true');
+        backdrop.setAttribute('aria-hidden', 'false');
+        const firstLink = drawer.querySelector('a, button');
+        setTimeout(() => firstLink && firstLink.focus(), 50);
+      } else {
+        root.classList.remove('menu-open');
+        btn.setAttribute('aria-expanded', 'false');
+        backdrop.setAttribute('aria-hidden', 'true');
+        if (lastFocus && typeof lastFocus.focus === 'function') {
+          lastFocus.focus();
+        }
+      }
+    }
+
+    if (btn) btn.addEventListener('click', () => setOpen(true));
+    if (closeBtn) closeBtn.addEventListener('click', () => setOpen(false));
+    if (backdrop) backdrop.addEventListener('click', () => setOpen(false));
+
+    document.addEventListener('keydown', (e) => {
+      if (!root.classList.contains('menu-open')) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        setOpen(false);
+      }
+    });
+
+    if (drawer) {
+      drawer.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target && target.closest && target.closest('a')) {
+          setOpen(false);
+        }
+      });
+    }
+  </script>
+
+  <script src="cookie-consent.js"></script>
+</body>
+</html>

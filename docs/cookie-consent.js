@@ -129,23 +129,68 @@
     var path = String(location.pathname || "").toLowerCase();
 
     document.querySelectorAll("nav.drawer-nav").forEach(function (nav) {
-      if (nav.querySelector('a[href="delete-account.html"]')) return;
+      var drawer = nav.closest(".drawer");
+      if (!drawer) return;
 
-      var link = document.createElement("a");
-      link.className = "pill";
-      link.href = "delete-account.html";
-      if (/delete-account\\.html$/.test(path)) {
-        link.setAttribute("aria-current", "page");
-      }
-      link.innerHTML =
-        '<svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>' +
-        "Supprimer mon compte";
+      var foot = drawer.querySelector(".drawer-foot");
+      if (!foot) return;
 
-      var appStoreLink = nav.querySelector("a.pill.primary");
-      if (appStoreLink && appStoreLink.parentNode === nav) {
-        nav.insertBefore(link, appStoreLink);
+      var appStoreLink = nav.querySelector('a[href*="apps.apple.com"]');
+      if (!appStoreLink) {
+        appStoreLink = document.createElement("a");
+        appStoreLink.className = "pill primary";
+        appStoreLink.href = "https://apps.apple.com/app/id6754794588";
+        appStoreLink.rel = "noopener noreferrer";
+        appStoreLink.textContent = " App Store";
+        nav.appendChild(appStoreLink);
       } else {
-        nav.appendChild(link);
+        appStoreLink.classList.add("pill");
+        appStoreLink.classList.add("primary");
+      }
+
+      var contactLink = foot.querySelector('a[href^="mailto:"]');
+      if (!contactLink) {
+        contactLink = document.createElement("a");
+        contactLink.href = "mailto:contact@urbalya.com?subject=Support%20Urbalya";
+        contactLink.className = "pill primary";
+        contactLink.innerHTML =
+          '<svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>' +
+          "Contactez-nous";
+        foot.appendChild(contactLink);
+      } else {
+        contactLink.classList.add("pill");
+        contactLink.classList.add("primary");
+        contactLink.classList.remove("danger");
+        contactLink.innerHTML =
+          '<svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>' +
+          "Contactez-nous";
+      }
+
+      var deleteLink = drawer.querySelector('a[href="delete-account.html"]');
+      if (!deleteLink) {
+        deleteLink = document.createElement("a");
+        deleteLink.href = "delete-account.html";
+        deleteLink.innerHTML =
+          '<svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>' +
+          "Supprimer mon compte";
+      }
+      deleteLink.classList.add("pill");
+      deleteLink.classList.add("danger");
+      deleteLink.classList.remove("primary");
+
+      if (/delete-account\\.html$/.test(path)) {
+        deleteLink.setAttribute("aria-current", "page");
+      } else if (deleteLink.getAttribute("aria-current") === "page") {
+        deleteLink.removeAttribute("aria-current");
+      }
+
+      if (deleteLink.parentNode && deleteLink.parentNode !== foot) {
+        deleteLink.parentNode.removeChild(deleteLink);
+      }
+      if (deleteLink.parentNode !== foot) {
+        foot.insertBefore(deleteLink, contactLink);
+      } else if (deleteLink.nextElementSibling !== contactLink) {
+        foot.insertBefore(deleteLink, contactLink);
       }
     });
 

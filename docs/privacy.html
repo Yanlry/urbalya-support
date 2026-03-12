@@ -4,7 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <title>Politique de confidentialité — Urbalya</title>
-  <meta name="description" content="Politique de confidentialité Urbalya : données collectées, finalités, conservation, droits RGPD." />
+  <meta
+    name="description"
+    content="Politique de confidentialité Urbalya : données collectées, finalités, conservation, droits RGPD et prestataires techniques."
+  />
   <meta name="theme-color" content="#0B1220" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +44,6 @@
       --focus: 0 0 0 4px rgba(59,130,246,.25);
     }
 
-    /* ✅ Anti-overflow global (empêche le scroll horizontal du body) */
     *{box-sizing:border-box; min-width:0}
     html,body{height:100%; width:100%}
     body{overflow-x:hidden}
@@ -59,7 +61,6 @@
     a{
       color:inherit;
       text-decoration:none;
-      /* ✅ Liens longs (email) ne doivent jamais élargir la page */
       overflow-wrap:anywhere;
       word-break:break-word;
     }
@@ -75,7 +76,6 @@
     }
     @media (min-width: 720px){ .container{padding:0 20px} }
 
-    /* ========= A11Y ========= */
     .skip{
       position:absolute;
       left:12px;
@@ -92,13 +92,11 @@
     :focus{outline:none}
     :focus-visible{box-shadow: var(--focus); border-radius: 12px}
 
-    /* ========= Icons ========= */
     .ico{width:18px;height:18px; display:inline-block; flex:0 0 auto}
     .ico.sm{width:16px;height:16px}
     .ico.lg{width:20px;height:20px}
     .ico.xl{width:22px;height:22px}
 
-    /* ========= NAV (mobile-first) ========= */
     .nav{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
@@ -173,8 +171,6 @@
     }
     .nav-toggle:hover{transform: translateY(-1px); background: rgba(15,23,42,.65); border-color: rgba(255,255,255,.18)}
 
-    .links{display:none; gap:10px; align-items:center}
-
     .pill{
       display:inline-flex;
       align-items:center;
@@ -197,6 +193,18 @@
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(59,130,246,.92);
       box-shadow: 0 14px 30px rgba(59,130,246,.14);
+      color:#fff;
+    }
+    .pill.danger,
+    .pill.danger[aria-current="page"]{
+      border: 1px solid rgba(239,68,68,.55);
+      background: rgba(239,68,68,.92);
+      color:#fff;
+      box-shadow: 0 14px 30px rgba(239,68,68,.20);
+    }
+    .pill.danger:hover{
+      background: rgba(220,38,38,.95);
+      border-color: rgba(252,165,165,.65);
     }
     .pill[aria-current="page"]{
       background: rgba(245,158,11,.20);
@@ -204,7 +212,6 @@
       color:#FDE68A;
     }
 
-    /* ========= Drawer menu (mobile) ========= */
     .backdrop{
       position:fixed;
       inset:0;
@@ -265,7 +272,7 @@
       border-radius: 16px;
       font-size: 15px;
       min-height: 46px;
-      white-space: normal; /* ✅ évite l’overflow si libellé plus long */
+      white-space: normal;
       text-align:center;
     }
     .drawer-foot{
@@ -275,6 +282,9 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.5;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
     .drawer-foot .pill{
       width:100%;
@@ -284,7 +294,6 @@
     .menu-open .backdrop{opacity:1; pointer-events:auto}
     .menu-open .drawer{transform: translateX(0)}
 
-    /* ========= MAIN / HERO ========= */
     main{padding: 18px 0 22px}
 
     .hero{
@@ -346,7 +355,6 @@
       flex-wrap:wrap;
     }
 
-    /* ========= Layout (mobile-first) ========= */
     .layout{
       margin-top: 14px;
       display:grid;
@@ -369,7 +377,7 @@
       box-shadow: var(--shadow2);
       padding: 14px;
       min-width:0;
-      overflow:hidden; /* ✅ empêche qu’un child déborde et crée un scroll horizontal global */
+      overflow:hidden;
     }
     @media (min-width: 980px){
       .toc{position: sticky; top: calc(var(--navH) + env(safe-area-inset-top) + 14px)}
@@ -446,7 +454,7 @@
       box-shadow: var(--shadow2);
       padding: 16px;
       min-width:0;
-      overflow:hidden; /* ✅ sécurité anti débordement */
+      overflow:hidden;
     }
     @media (min-width: 720px){ .content{padding: 18px} }
 
@@ -534,7 +542,6 @@
     }
     .link:hover{opacity:1}
 
-    /* ========= Footer ========= */
     footer{
       border-top: 1px solid var(--line);
       background: rgba(11,18,32,.55);
@@ -547,14 +554,6 @@
     .foot a{color: var(--text); font-weight:900; opacity:.92}
     .foot a:hover{opacity:1}
 
-    .sr-only{
-      position:absolute!important;
-      width:1px;height:1px;
-      padding:0;margin:-1px;
-      overflow:hidden;clip:rect(0,0,0,0);
-      white-space:nowrap;border:0;
-    }
-
     @media (prefers-reduced-motion: reduce){
       *{scroll-behavior:auto!important}
       .pill,.nav-toggle,.toc a{transition:none}
@@ -565,7 +564,6 @@
 <body>
   <a class="skip" href="#main">Aller au contenu principal</a>
 
-  <!-- ===== SVG ICONS (stroke/fill forcés BLANC) ===== -->
   <svg width="0" height="0" style="position:absolute">
     <symbol id="i-menu" viewBox="0 0 24 24">
       <line x1="4" y1="7" x2="20" y2="7" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
@@ -578,7 +576,6 @@
       <line x1="18" y1="6" x2="6" y2="18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
-    <!-- ✅ Ajout icône Support (comme index) -->
     <symbol id="i-support" viewBox="0 0 24 24">
       <path d="M4 12a8 8 0 0 1 16 0" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
       <path d="M4 12v4a2 2 0 0 0 2 2h2v-6H6a2 2 0 0 0-2 2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
@@ -669,6 +666,12 @@
       <path d="M12 9v5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
       <path d="M12 17h.01" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
     </symbol>
+
+    <symbol id="i-building" viewBox="0 0 24 24">
+      <path d="M4 21h16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 21V7l6-4 6 4v14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
   </svg>
 
   <header class="nav" role="banner">
@@ -721,15 +724,27 @@
         <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
         Confidentialité
       </a>
-      <a class="pill primary" href="https://apps.apple.com/app/idXXXXXXXXX" rel="noopener noreferrer">
+      <a class="pill" href="terms.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Conditions
+      </a>
+      <a class="pill" href="mentions-legales.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Mentions légales
+      </a>
+      <a class="pill primary" href="https://apps.apple.com/app/id6754794588" rel="noopener noreferrer">
          App Store
       </a>
     </nav>
 
     <div class="drawer-foot">
+      <a class="pill danger" href="delete-account.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Supprimer mon compte
+      </a>
       <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
         <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
-        Contact@urbalya.com
+        Contactez-nous
       </a>
     </div>
   </aside>
@@ -738,18 +753,19 @@
     <section class="hero" aria-label="Politique de confidentialité">
       <span class="badge">
         <svg class="ico sm" aria-hidden="true"><use href="#i-lock"></use></svg>
-        Conforme RGPD (informations essentielles)
+        Informations essentielles sur vos données
       </span>
 
       <h1>Politique de confidentialité</h1>
       <p class="lead">
-        Urbalya collecte uniquement les informations nécessaires au fonctionnement de l’application (compte, contenus,
-        notifications et, si vous l’autorisez, localisation). Aucun usage publicitaire sans consentement.
+        Urbalya collecte uniquement les informations nécessaires au fonctionnement de l’application :
+        création de compte, contenus publiés, messagerie, notifications et, si vous l’autorisez,
+        localisation liée aux fonctions cartographiques. Les citoyens n’achètent rien dans l’application.
       </p>
 
       <div class="meta">
         <svg class="ico sm" aria-hidden="true"><use href="#i-clock"></use></svg>
-        Dernière mise à jour : 25 janvier 2026
+        Dernière mise à jour : 12 mars 2026
       </div>
     </section>
 
@@ -765,7 +781,7 @@
         <div class="toc-links" id="tocLinks">
           <a href="#qui">
             <svg class="ico sm" aria-hidden="true"><use href="#i-users"></use></svg>
-            1) Qui sommes-nous ?
+            1) Responsable du traitement
           </a>
           <a href="#donnees">
             <svg class="ico sm" aria-hidden="true"><use href="#i-stack"></use></svg>
@@ -781,7 +797,7 @@
           </a>
           <a href="#destinataires">
             <svg class="ico sm" aria-hidden="true"><use href="#i-users"></use></svg>
-            4) Destinataires & transferts
+            4) Destinataires & prestataires
           </a>
           <a href="#durees">
             <svg class="ico sm" aria-hidden="true"><use href="#i-clock"></use></svg>
@@ -789,7 +805,7 @@
           </a>
           <a href="#droits">
             <svg class="ico sm" aria-hidden="true"><use href="#i-hand"></use></svg>
-            6) Vos droits (RGPD)
+            6) Vos droits
           </a>
           <a href="#securite">
             <svg class="ico sm" aria-hidden="true"><use href="#i-shield"></use></svg>
@@ -797,7 +813,7 @@
           </a>
           <a href="#enfants">
             <svg class="ico sm" aria-hidden="true"><use href="#i-baby"></use></svg>
-            8) Mineurs
+            8) Âge minimum
           </a>
           <a href="#maj">
             <svg class="ico sm" aria-hidden="true"><use href="#i-refresh"></use></svg>
@@ -810,15 +826,25 @@
         <div class="section" id="qui">
           <h2>
             <svg class="ico sm" aria-hidden="true"><use href="#i-users"></use></svg>
-            1) Qui sommes-nous ?
+            1) Responsable du traitement
           </h2>
           <p>
-            <strong>Urbalya</strong> est une application mobile permettant de consulter l’actualité locale, publier des
-            signalements, échanger et visualiser une carte de la ville.
+            Le responsable du traitement des données personnelles liées à l’application Urbalya et au
+            présent site support est :
           </p>
+          <ul>
+            <li><strong>Raison sociale :</strong> LEMACH LABS</li>
+            <li><strong>Forme juridique :</strong> SASU</li>
+            <li><strong>Siège social :</strong> 135 rue de L'Égalité, 59320 Haubourdin, France</li>
+            <li><strong>SIREN :</strong> NUMERO_DE_SIREN</li>
+            <li><strong>RCS :</strong> RCS_VILLE</li>
+            <li><strong>Directeur de publication :</strong> Yann Leroy</li>
+          </ul>
           <p>
-            Contact (confidentialité / RGPD) :
-            <a class="link" href="mailto:contact@urbalya.com?subject=RGPD%20-%20Urbalya">contact@urbalya.com</a>
+            Contact confidentialité / RGPD :
+            <a class="link" href="mailto:contact@urbalya.com?subject=RGPD%20-%20Urbalya">contact@urbalya.com</a>.
+            Les informations légales complémentaires sont disponibles sur la
+            <a class="link" href="mentions-legales.html">page Mentions légales</a>.
           </p>
         </div>
 
@@ -828,18 +854,21 @@
             2) Données que nous traitons
           </h2>
           <ul>
-            <li><strong>Compte :</strong> e-mail, pseudo, mot de passe (hashé côté serveur), photo de profil (facultatif).</li>
-            <li><strong>Contenus :</strong> signalements, commentaires, photos, pièces jointes.</li>
-            <li><strong>Localisation :</strong> position précise/approximative lorsque vous l’autorisez (ex : carte, proximité).</li>
-            <li><strong>Identifiants techniques :</strong> identifiant interne, jeton de notification push, logs de sécurité.</li>
-            <li><strong>Diagnostics :</strong> erreurs et performances (si activés / nécessaires au support).</li>
+            <li><strong>Compte :</strong> adresse email, nom, pseudo, mot de passe hashé côté serveur, photo de profil si vous en ajoutez une.</li>
+            <li><strong>Contenus publiés :</strong> signalements, messages, commentaires, photos, pièces jointes et autres contenus que vous choisissez de publier ou d’envoyer.</li>
+            <li><strong>Messagerie :</strong> messages privés et métadonnées nécessaires au fonctionnement de la conversation.</li>
+            <li><strong>Localisation :</strong> données de position lorsque vous l’autorisez pour les fonctions cartographiques ou de proximité.</li>
+            <li><strong>Identifiants techniques :</strong> identifiant utilisateur interne, adresse IP, identifiant d’appareil ou équivalent technique, jetons de notifications push, journaux de sécurité et de fonctionnement.</li>
+            <li><strong>Support :</strong> contenu des demandes adressées au support ou dans le cadre d’une demande liée à la suppression du compte ou à l’exercice de vos droits.</li>
           </ul>
 
           <div class="callout good" role="note" aria-label="Information importante">
             <div class="icoWrap" aria-hidden="true">
               <svg class="ico lg"><use href="#i-check"></use></svg>
             </div>
-            <div><strong>Information :</strong> aucune donnée bancaire n’est stockée par Urbalya.</div>
+            <div>
+              <strong>Information :</strong> Urbalya ne vend pas vos données personnelles et ne stocke pas de données bancaires des citoyens dans l’application.
+            </div>
           </div>
         </div>
 
@@ -849,13 +878,14 @@
             Cookies et consentement
           </h2>
           <p>
-            Conformément aux règles applicables (RGPD/ePrivacy), nous déposons uniquement les cookies strictement nécessaires
-            par défaut. Les cookies optionnels (mesure d’audience et préférences) sont activés uniquement si vous les acceptez.
+            Sur le site support, seuls les cookies strictement nécessaires sont déposés par défaut.
+            Les cookies optionnels liés à la mesure d’audience ou aux préférences ne sont activés que
+            si vous les acceptez.
           </p>
           <ul>
-            <li><strong>Durée de conservation du choix :</strong> 6 mois, puis une nouvelle demande de consentement est affichée.</li>
-            <li><strong>Refus aussi simple que l’acceptation :</strong> bouton “Tout refuser” au même niveau que “Tout accepter”.</li>
-            <li><strong>Retrait/modification à tout moment :</strong> bouton “Cookies” visible en bas de page.</li>
+            <li><strong>Durée de conservation du choix :</strong> 6 mois, puis une nouvelle demande de consentement peut être affichée.</li>
+            <li><strong>Refus aussi simple que l’acceptation :</strong> le bouton “Tout refuser” est proposé au même niveau que “Tout accepter”.</li>
+            <li><strong>Retrait ou modification :</strong> à tout moment via le bouton “Cookies” visible sur le site support.</li>
           </ul>
         </div>
 
@@ -865,11 +895,12 @@
             3) Finalités et bases légales
           </h2>
           <ul>
-            <li><strong>Fournir le service</strong> (compte, publications, carte) : exécution du service.</li>
-            <li><strong>Sécurité</strong>, prévention des abus, journalisation : intérêt légitime.</li>
-            <li><strong>Notifications</strong> : intérêt légitime et/ou consentement (push).</li>
-            <li><strong>Localisation</strong> : consentement (désactivable dans iOS).</li>
-            <li><strong>Amélioration produit</strong> (diagnostics anonymisés) : intérêt légitime.</li>
+            <li><strong>Création et gestion du compte :</strong> exécution du service demandé par l’utilisateur.</li>
+            <li><strong>Publication de contenus, carte, interactions locales et messagerie :</strong> exécution du service.</li>
+            <li><strong>Notifications liées au service :</strong> exécution du service et/ou intérêt légitime, selon la nature de la notification.</li>
+            <li><strong>Localisation :</strong> consentement de l’utilisateur, révocable dans les réglages de l’appareil.</li>
+            <li><strong>Sécurité, prévention des abus, modération, journalisation et lutte contre la fraude :</strong> intérêt légitime et, le cas échéant, respect d’obligations légales.</li>
+            <li><strong>Support, traitement des demandes RGPD et suppression de compte :</strong> exécution du service, intérêt légitime et/ou obligation légale selon la demande.</li>
           </ul>
 
           <div class="callout warn" role="note" aria-label="Important">
@@ -877,7 +908,7 @@
               <svg class="ico lg"><use href="#i-alert"></use></svg>
             </div>
             <div>
-              <strong>Important :</strong> vous pouvez retirer votre consentement (localisation / notifications) à tout moment via les réglages iOS.
+              <strong>Important :</strong> vous pouvez retirer votre consentement pour la localisation et certaines autorisations de l’appareil à tout moment depuis les réglages de votre téléphone.
             </div>
           </div>
         </div>
@@ -885,14 +916,26 @@
         <div class="section" id="destinataires">
           <h2>
             <svg class="ico sm" aria-hidden="true"><use href="#i-users"></use></svg>
-            4) Destinataires et transferts
+            4) Destinataires, prestataires et transferts
           </h2>
+          <p>
+            Les données peuvent être traitées, dans la limite de leurs besoins respectifs, par
+            l’éditeur d’Urbalya et par des prestataires techniques intervenant pour le fonctionnement du service.
+          </p>
           <ul>
-            <li><strong>Hébergement :</strong> serveur applicatif et base de données.</li>
-            <li><strong>Stockage médias :</strong> Amazon Web Services (ex : S3).</li>
-            <li><strong>Notifications :</strong> services push (ex : Expo / Apple / Google).</li>
+            <li><strong>Render :</strong> hébergement du backend et services applicatifs associés.</li>
+            <li><strong>Cloudflare Images :</strong> stockage et diffusion d’images.</li>
+            <li><strong>Mailjet :</strong> envoi d’emails transactionnels, notamment certains emails liés au compte ou au support.</li>
+            <li><strong>Google Maps API :</strong> fonctionnalités de cartographie.</li>
+            <li><strong>Zoho Mail / Cloudflare Mail :</strong> gestion du domaine, DNS, proxy et éventuellement mail routing.</li>
+            <li><strong>Prestataires de notifications push :</strong> lorsque nécessaire au fonctionnement des notifications de l’application.</li>
           </ul>
-          <p>Nous ne vendons pas vos données. Aucun suivi publicitaire inter-apps.</p>
+          <p>
+            Certains de ces prestataires peuvent impliquer des traitements techniques hors de l’Union européenne.
+            Lorsque cela s’applique, Urbalya cherche à encadrer ces traitements avec les garanties appropriées
+            disponibles selon le service concerné.
+          </p>
+          <p>Nous ne vendons pas vos données et nous n’organisons pas de suivi publicitaire inter-applications.</p>
         </div>
 
         <div class="section" id="durees">
@@ -901,29 +944,41 @@
             5) Durées de conservation
           </h2>
           <ul>
-            <li><strong>Compte et contenus :</strong> jusqu’à suppression du compte ou demande d’effacement (selon obligations légales).</li>
-            <li><strong>Logs techniques :</strong> jusqu’à 12 mois (sécurité/support).</li>
-            <li><strong>Sauvegardes :</strong> cycles techniques (jusqu’à 30 jours).</li>
+            <li><strong>Compte utilisateur et contenus associés :</strong> conservés tant que le compte est actif, puis supprimés à la suite d’une suppression de compte ou d’une demande d’effacement, sous réserve des obligations légales et contraintes techniques applicables.</li>
+            <li><strong>Sauvegardes techniques :</strong> cycles techniques pouvant aller jusqu’à 30 jours.</li>
+            <li><strong>Traces de sécurité, support et modération :</strong> conservées pendant une durée proportionnée aux besoins de sécurité, de prévention des abus, de support ou de respect des obligations légales.</li>
+            <li><strong>Demandes RGPD et demandes de support :</strong> conservées pendant la durée nécessaire au traitement de la demande et à la conservation des preuves utiles en cas de contestation ou d’obligation légale.</li>
           </ul>
         </div>
 
         <div class="section" id="droits">
           <h2>
             <svg class="ico sm" aria-hidden="true"><use href="#i-hand"></use></svg>
-            6) Vos choix et droits (RGPD)
+            6) Vos choix et vos droits
           </h2>
 
-          <p><strong>Réglages iOS :</strong></p>
+          <p><strong>Dans l’app ou via les réglages de l’appareil :</strong></p>
           <ul>
-            <li><strong>Localisation :</strong> iOS → Réglages → Urbalya → Localisation → “Jamais / Quand l’app est active”.</li>
-            <li><strong>Notifications :</strong> iOS → Réglages → Notifications → Urbalya.</li>
-            <li><strong>Suppression de compte :</strong> dans l’app → Paramètres → Compte → Supprimer mon compte.</li>
+            <li><strong>Localisation :</strong> vous pouvez la désactiver dans les réglages du téléphone ou de l’application.</li>
+            <li><strong>Notifications :</strong> vous pouvez les désactiver dans les réglages du téléphone.</li>
+            <li><strong>Suppression de compte dans l’app :</strong> via Paramètres → Compte → Supprimer mon compte.</li>
+            <li><strong>Suppression de compte via le web :</strong> via la <a class="link" href="delete-account.html">page publique de suppression de compte</a>.</li>
           </ul>
 
           <p>
-            Droits : accès, rectification, effacement, limitation, portabilité, opposition, retrait du consentement.
+            Conformément à la réglementation applicable, vous pouvez demander l’accès à vos données,
+            leur rectification, leur effacement, la limitation du traitement, la portabilité lorsque
+            cela s’applique, vous opposer à certains traitements, ou retirer un consentement déjà donné.
+          </p>
+
+          <p>
             Pour exercer vos droits :
             <a class="link" href="mailto:contact@urbalya.com?subject=Demande%20RGPD%20-%20Urbalya">contact@urbalya.com</a>.
+          </p>
+
+          <p>
+            Vous pouvez également introduire une réclamation auprès de l’autorité de contrôle compétente,
+            notamment la CNIL si vous résidez en France.
           </p>
         </div>
 
@@ -933,24 +988,39 @@
             7) Sécurité
           </h2>
           <p>
-            Chiffrement en transit (HTTPS), accès restreints, pratiques de sécurité (mots de passe hashés, contrôles d’accès, journalisation).
+            Urbalya met en place des mesures de sécurité adaptées au fonctionnement du service :
+            chiffrement en transit (HTTPS), contrôles d’accès, mots de passe hashés côté serveur,
+            journalisation de sécurité et restrictions d’accès aux outils techniques.
+          </p>
+          <p>
+            Malgré ces mesures, aucun système n’est totalement exempt de risque. En cas d’incident
+            nécessitant une information des utilisateurs, Urbalya pourra communiquer par les canaux appropriés.
           </p>
         </div>
 
         <div class="section" id="enfants">
           <h2>
             <svg class="ico sm" aria-hidden="true"><use href="#i-baby"></use></svg>
-            8) Mineurs
+            8) Âge minimum
           </h2>
-          <p>L’app ne vise pas les mineurs sans autorisation parentale lorsque la loi l’exige.</p>
+          <p>
+            L’application Urbalya est destinée à des utilisateurs âgés d’au moins <strong>16 ans</strong>.
+            Si vous pensez qu’un compte a été créé en violation de cette règle ou avec des informations inexactes,
+            vous pouvez nous contacter à
+            <a class="link" href="mailto:contact@urbalya.com?subject=Signalement%20mineur%20-%20Urbalya">contact@urbalya.com</a>.
+          </p>
         </div>
 
         <div class="section" id="maj">
           <h2>
             <svg class="ico sm" aria-hidden="true"><use href="#i-refresh"></use></svg>
-            9) Modifications
+            9) Modifications de cette politique
           </h2>
-          <p>Nous mettrons à jour cette page en cas de changement substantiel, avec une date de mise à jour visible en haut du document.</p>
+          <p>
+            Cette politique peut être mise à jour pour refléter l’évolution du service, de ses prestataires,
+            ou de ses obligations légales. La date de mise à jour visible en haut de la page sera modifiée
+            en conséquence.
+          </p>
         </div>
       </article>
     </section>
@@ -963,6 +1033,8 @@
         <a href="index.html">Accueil</a>
         <a href="support.html">Support</a>
         <a href="terms.html">Conditions</a>
+        <a href="delete-account.html">Suppression compte</a>
+        <a href="mentions-legales.html">Mentions légales</a>
       </div>
     </div>
   </footer>
@@ -970,7 +1042,6 @@
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // ✅ Menu mobile
     const root = document.documentElement;
     const btn = document.getElementById("menuBtn");
     const closeBtn = document.getElementById("closeBtn");
@@ -993,7 +1064,7 @@
         backdrop.setAttribute("aria-hidden", "true");
         if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
       }
-      console.log("📝 [WEB] menu =", { open });
+      console.log("📝 [WEB] privacy menu", { open });
     }
 
     if (btn) btn.addEventListener("click", () => setOpen(true));
@@ -1015,7 +1086,6 @@
       });
     }
 
-    // ✅ marquer le lien actif du sommaire en fonction du scroll
     const sections = Array.from(document.querySelectorAll(".section[id]"));
     const tocLinks = Array.from(document.querySelectorAll("#tocLinks a"));
 
@@ -1034,7 +1104,7 @@
         .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
       if (!visible) return;
       setActive(visible.target.id);
-      console.log("📝 [WEB] toc_active =", { id: visible.target.id });
+      console.log("📝 [WEB] privacy toc active", { id: visible.target.id });
     }, { rootMargin: "-30% 0px -60% 0px", threshold: [0.02, 0.05, 0.1, 0.2] });
 
     sections.forEach(s => io.observe(s));

@@ -36,8 +36,6 @@
       --tap: 44px;
       --navH: 64px;
       --focus: 0 0 0 4px rgba(59,130,246,.25);
-
-      --iconWhite: #FFFFFF;
     }
 
     *{box-sizing:border-box}
@@ -60,7 +58,6 @@
     .container{max-width: var(--container); margin:0 auto; padding:0 16px}
     @media (min-width: 720px){ .container{padding:0 20px} }
 
-    /* ========= A11Y ========= */
     .skip{
       position:absolute;
       left:12px;
@@ -77,13 +74,11 @@
     :focus{outline:none}
     :focus-visible{box-shadow: var(--focus); border-radius: 12px}
 
-    /* ========= Icons ========= */
     .ico{width:18px;height:18px; display:inline-block; flex:0 0 auto}
     .ico.sm{width:16px;height:16px}
     .ico.lg{width:20px;height:20px}
     .ico.xl{width:22px;height:22px}
 
-    /* ========= NAV (mobile-first) ========= */
     .nav{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
@@ -106,7 +101,6 @@
       min-width: 0;
     }
 
-    /* ✅ LOGO (sans background) */
     .logo{
       width:38px;
       height:38px;
@@ -184,13 +178,23 @@
       background: rgba(59,130,246,.92);
       box-shadow: 0 14px 30px rgba(59,130,246,.14);
     }
+    .pill.danger,
+    .pill.danger[aria-current="page"]{
+      border: 1px solid rgba(239,68,68,.55);
+      background: rgba(239,68,68,.92);
+      color:#fff;
+      box-shadow: 0 14px 30px rgba(239,68,68,.20);
+    }
+    .pill.danger:hover{
+      background: rgba(220,38,38,.95);
+      border-color: rgba(252,165,165,.65);
+    }
     .pill[aria-current="page"]{
       background: rgba(245,158,11,.20);
       border-color: rgba(245,158,11,.55);
       color:#FDE68A;
     }
 
-    /* ========= Drawer menu (mobile) ========= */
     .backdrop{
       position:fixed;
       inset:0;
@@ -259,6 +263,9 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.5;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
     .drawer-foot .pill{
       width:100%;
@@ -268,7 +275,6 @@
     .menu-open .backdrop{opacity:1; pointer-events:auto}
     .menu-open .drawer{transform: translateX(0)}
 
-    /* ========= HERO ========= */
     main{padding-bottom: 22px}
     .hero{padding: 26px 0 10px}
     .hero-grid{display:grid; grid-template-columns: 1fr; gap: 14px}
@@ -386,7 +392,6 @@
       flex: 0 0 auto;
     }
 
-    /* ========= SIDE ========= */
     .side{display:flex; flex-direction:column; gap: 12px}
     .mini{
       border-radius: var(--radius);
@@ -413,7 +418,6 @@
       letter-spacing:.2px;
     }
 
-    /* ========= SECTION + GRID ========= */
     .section{padding: 10px 0 26px}
     @media (min-width: 900px){ .section{padding:12px 0 42px} }
     .section-title{
@@ -460,7 +464,6 @@
     }
     .card p{margin:0; color:var(--muted); line-height:1.7; font-size:14px}
 
-    /* ========= FOOTER ========= */
     footer{
       border-top: 1px solid var(--line);
       background: rgba(11,18,32,.55);
@@ -482,7 +485,6 @@
 <body>
   <a class="skip" href="#main">Aller au contenu principal</a>
 
-  <!-- ===== SVG ICONS (✅ stroke/fill forcés en BLANC directement dans les symbol) ===== -->
   <svg width="0" height="0" style="position:absolute">
     <symbol id="i-menu" viewBox="0 0 24 24">
       <line x1="4" y1="7" x2="20" y2="7" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
@@ -630,15 +632,27 @@
         <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
         Confidentialité
       </a>
-      <a class="pill primary" href="https://apps.apple.com/app/idXXXXXXXXX" rel="noopener noreferrer">
+      <a class="pill" href="terms.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Conditions
+      </a>
+      <a class="pill" href="mentions-legales.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Mentions légales
+      </a>
+      <a class="pill primary" href="https://apps.apple.com/app/id6754794588" rel="noopener noreferrer">
          App Store
       </a>
     </nav>
 
     <div class="drawer-foot">
+      <a class="pill danger" href="delete-account.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Supprimer mon compte
+      </a>
       <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
         <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
-        Contact@urbalya.com
+        Contactez-nous
       </a>
     </div>
   </aside>
@@ -660,7 +674,7 @@
           </p>
 
           <div class="cta-row" aria-label="Actions rapides">
-            <a class="btn primary" href="https://apps.apple.com/app/idXXXXXXXXX" rel="noopener noreferrer" aria-label="Ouvrir l'App Store">
+            <a class="btn primary" href="https://apps.apple.com/app/id6754794588" rel="noopener noreferrer" aria-label="Ouvrir l'App Store">
                Télécharger <small>App Store</small>
             </a>
 
@@ -789,6 +803,8 @@
         <a href="support.html">Support</a>
         <a href="privacy.html">Confidentialité</a>
         <a href="terms.html">Conditions</a>
+        <a href="delete-account.html">Suppression compte</a>
+        <a href="mentions-legales.html">Mentions légales</a>
       </div>
     </div>
   </footer>

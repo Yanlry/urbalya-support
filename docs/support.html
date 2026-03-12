@@ -44,7 +44,7 @@
       margin:0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color:var(--text);
-      background: var(--bg); /* ✅ pas de dégradé */
+      background: var(--bg);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: geometricPrecision;
@@ -58,7 +58,6 @@
     .container{max-width: var(--container); margin:0 auto; padding:0 16px}
     @media (min-width: 720px){ .container{padding:0 20px} }
 
-    /* ========= A11Y ========= */
     .skip{
       position:absolute;
       left:12px;
@@ -75,13 +74,11 @@
     :focus{outline:none}
     :focus-visible{box-shadow: var(--focus); border-radius: 12px}
 
-    /* ========= Icons ========= */
     .ico{width:18px;height:18px; display:inline-block; flex:0 0 auto}
     .ico.sm{width:16px;height:16px}
     .ico.lg{width:20px;height:20px}
     .ico.xl{width:22px;height:22px}
 
-    /* ========= NAV (mobile-first) ========= */
     .nav{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
@@ -104,7 +101,6 @@
       min-width: 0;
     }
 
-    /* ✅ LOGO (sans background) */
     .logo{
       width:38px;
       height:38px;
@@ -179,8 +175,19 @@
     .pill:hover{transform: translateY(-1px); background: rgba(15,23,42,.65); border-color: rgba(255,255,255,.18)}
     .pill.primary{
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(59,130,246,.92); /* ✅ pas de dégradé */
+      background: rgba(59,130,246,.92);
       box-shadow: 0 14px 30px rgba(59,130,246,.14);
+    }
+    .pill.danger,
+    .pill.danger[aria-current="page"]{
+      border: 1px solid rgba(239,68,68,.55);
+      background: rgba(239,68,68,.92);
+      color:#fff;
+      box-shadow: 0 14px 30px rgba(239,68,68,.20);
+    }
+    .pill.danger:hover{
+      background: rgba(220,38,38,.95);
+      border-color: rgba(252,165,165,.65);
     }
     .pill[aria-current="page"]{
       background: rgba(245,158,11,.20);
@@ -188,7 +195,6 @@
       color:#FDE68A;
     }
 
-    /* ========= Drawer menu (mobile) ========= */
     .backdrop{
       position:fixed;
       inset:0;
@@ -257,6 +263,9 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.5;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
     .drawer-foot .pill{
       width:100%;
@@ -266,12 +275,11 @@
     .menu-open .backdrop{opacity:1; pointer-events:auto}
     .menu-open .drawer{transform: translateX(0)}
 
-    /* ========= MAIN / HERO ========= */
     main{padding: 18px 0 22px}
     .hero{
       border-radius: var(--radius2);
       border:1px solid var(--line);
-      background: rgba(15,23,42,.62); /* ✅ pas de dégradé */
+      background: rgba(15,23,42,.62);
       box-shadow: var(--shadow);
       padding: 18px;
       position:relative;
@@ -328,7 +336,7 @@
       margin-top: 16px;
       display:grid;
       gap: 12px;
-      grid-template-columns: 1fr; /* ✅ mobile-first */
+      grid-template-columns: 1fr;
     }
     @media (min-width: 720px){ .grid{grid-template-columns: repeat(2, 1fr); gap: 14px} }
     @media (min-width: 980px){ .grid{grid-template-columns: repeat(3, 1fr)} }
@@ -380,13 +388,13 @@
       font-weight:900;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
       min-height: var(--tap);
-      width: 100%; /* ✅ mobile-first : full width */
+      width: 100%;
       text-align:center;
     }
     .btn:hover{transform: translateY(-1px); background: rgba(2,6,23,.55); border-color: rgba(255,255,255,.18)}
     .btn.primary{
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(59,130,246,.92); /* ✅ pas de dégradé */
+      background: rgba(59,130,246,.92);
       box-shadow: 0 16px 35px rgba(59,130,246,.14);
     }
     @media (min-width: 720px){
@@ -418,7 +426,6 @@
       flex: 0 0 auto;
     }
 
-    /* ========= FAQ ========= */
     .section{margin-top: 18px}
     .section-title{
       display:flex;
@@ -520,7 +527,6 @@
     .answer a{font-weight:900; color: var(--text); opacity:.95}
     .answer a:hover{opacity:1}
 
-    /* ========= FOOTER ========= */
     footer{
       border-top: 1px solid var(--line);
       background: rgba(11,18,32,.55);
@@ -551,7 +557,6 @@
 <body>
   <a class="skip" href="#main">Aller au contenu principal</a>
 
-  <!-- ===== SVG ICONS (stroke/fill forcés BLANC) ===== -->
   <svg width="0" height="0" style="position:absolute">
     <symbol id="i-menu" viewBox="0 0 24 24">
       <line x1="4" y1="7" x2="20" y2="7" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
@@ -567,6 +572,13 @@
     <symbol id="i-home" viewBox="0 0 24 24">
       <path d="M4 11l8-7 8 7" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M6 10v10h12V10" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-support" viewBox="0 0 24 24">
+      <path d="M4 12a8 8 0 0 1 16 0" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M4 12v4a2 2 0 0 0 2 2h2v-6H6a2 2 0 0 0-2 2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M20 12v4a2 2 0 0 1-2 2h-2v-6h2a2 2 0 0 1 2 2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M12 20h4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
     <symbol id="i-lock" viewBox="0 0 24 24">
@@ -586,7 +598,6 @@
       <path d="M4 8l8 6 8-6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
     </symbol>
 
-    <!-- ✅ AJOUT: App Store (icone "Apple") -->
     <symbol id="i-apple" viewBox="0 0 24 24">
       <path d="M16.5 13.2c0 2.6 2.2 3.5 2.2 3.5s-1.6 4.6-3.8 4.6c-1.1 0-2-.7-3.2-.7s-2.2.7-3.2.7c-2.0 0-4.1-4.2-4.1-7.5 0-3.0 1.9-4.6 3.8-4.6 1.0 0 2.0.8 3.2.8s2.1-.8 3.5-.8c.5 0 2.2.1 3.2 1.7-2.8 1.5-1.6 5.0 1.6 5.0z"
             fill="#FFFFFF" fill-rule="evenodd" clip-rule="evenodd"/>
@@ -628,6 +639,12 @@
       <circle cx="12" cy="12" r="9" fill="none" stroke="#FFFFFF" stroke-width="2"/>
       <path d="M12 10v6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
       <path d="M12 7h.01" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-building" viewBox="0 0 24 24">
+      <path d="M4 21h16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 21V7l6-4 6 4v14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
     </symbol>
   </svg>
 
@@ -680,15 +697,27 @@
         <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
         Confidentialité
       </a>
-      <a class="pill primary" href="https://apps.apple.com/app/idXXXXXXXXX" rel="noopener noreferrer">
+      <a class="pill" href="terms.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Conditions
+      </a>
+      <a class="pill" href="mentions-legales.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Mentions légales
+      </a>
+      <a class="pill primary" href="https://apps.apple.com/app/id6754794588" rel="noopener noreferrer">
          App Store
       </a>
     </nav>
 
     <div class="drawer-foot">
+      <a class="pill danger" href="delete-account.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Supprimer mon compte
+      </a>
       <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
         <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
-        Contact@urbalya.com
+        Contactez-nous
       </a>
     </div>
   </aside>
@@ -823,7 +852,8 @@
           <div class="answer">
             <ul>
               <li>Dans l’app : <strong>Paramètres</strong> → <strong>Compte</strong> → <strong>Supprimer mon compte</strong>.</li>
-              <li>Si besoin : email à <a href="mailto:contact@urbalya.com?subject=Suppression%20de%20compte%20-%20Urbalya">contact@urbalya.com</a>.</li>
+              <li>Via le web : <a href="delete-account.html">page publique de suppression de compte</a>.</li>
+              <li>Pour une demande RGPD spécifique : <a href="mailto:contact@urbalya.com?subject=Demande%20RGPD%20-%20Urbalya">contact@urbalya.com</a>.</li>
             </ul>
           </div>
         </details>
@@ -869,8 +899,11 @@
       <div>© <span id="y"></span> Urbalya — <a href="mailto:contact@urbalya.com">contact@urbalya.com</a></div>
       <div style="display:flex; gap:12px; flex-wrap:wrap">
         <a href="index.html">Accueil</a>
+        <a href="support.html">Support</a>
         <a href="privacy.html">Confidentialité</a>
         <a href="terms.html">Conditions</a>
+        <a href="delete-account.html">Suppression compte</a>
+        <a href="mentions-legales.html">Mentions légales</a>
       </div>
     </div>
   </footer>
@@ -878,7 +911,6 @@
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // ✅ Menu mobile
     const root = document.documentElement;
     const btn = document.getElementById("menuBtn");
     const closeBtn = document.getElementById("closeBtn");
@@ -923,7 +955,6 @@
       });
     }
 
-    // ✅ FAQ search
     const input = document.getElementById("q");
     const items = Array.from(document.querySelectorAll("#faq details"));
 
