@@ -10,6 +10,9 @@
   />
   <meta name="theme-color" content="#0B1220" />
 
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -241,6 +244,39 @@
       border-color: rgba(245, 158, 11, .55);
       color: #FDE68A;
     }
+    .store-link{
+      width: clamp(170px, 42vw, 220px);
+      height: clamp(52px, 13vw, 66px);
+      padding:0;
+      overflow:hidden;
+      border-radius: 12px;
+      border:1px solid rgba(203,213,225,.65) !important;
+      background: transparent !important;
+      box-shadow: 0 6px 16px rgba(2,6,23,.35);
+      min-height: auto;
+    }
+    .store-link:hover{
+      background: rgba(15,23,42,.15) !important;
+      border-color: rgba(226,232,240,.95) !important;
+    }
+    .store-badge{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.33);
+      transform-origin: center;
+    }
+    .drawer .store-link{
+      width: min(78vw, 220px);
+      height: 56px;
+    }
+    .drawer .store-badge{
+      transform: scale(1.28);
+    }
+
+
 
     .backdrop {
       position: fixed;
@@ -620,8 +656,11 @@
         <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
         Mentions légales
       </a>
-      <a class="pill primary" href="https://apps.apple.com/app/id6754794588" rel="noopener noreferrer">
-         App Store
+      <a class="pill primary store-link" href="https://apps.apple.com/app/id6754794588" rel="noopener noreferrer" aria-label="Ouvrir l'App Store">
+        <img class="store-badge" src="apple.png" alt="Télécharger sur l'App Store" loading="lazy" decoding="async" />
+      </a>
+      <a class="pill primary store-link" href="https://play.google.com/store/search?q=Urbalya&c=apps" rel="noopener noreferrer" aria-label="Ouvrir Google Play">
+        <img class="store-badge" src="google.png" alt="Disponible sur Google Play" loading="lazy" decoding="async" />
       </a>
     </nav>
 
@@ -680,7 +719,7 @@
 
           <div class="info-box">
             <strong>Siège social</strong>
-            <span>135 rue de L'Égalité, 59320 Haubourdin, France</span>
+            <span>35 rue de L'Égalité, 59320 Haubourdin, France</span>
           </div>
 
           <div class="info-box">

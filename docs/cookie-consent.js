@@ -135,18 +135,45 @@
       var foot = drawer.querySelector(".drawer-foot");
       if (!foot) return;
 
-      var appStoreLink = nav.querySelector('a[href*="apps.apple.com"]');
-      if (!appStoreLink) {
-        appStoreLink = document.createElement("a");
-        appStoreLink.className = "pill primary";
-        appStoreLink.href = "https://apps.apple.com/app/id6754794588";
-        appStoreLink.rel = "noopener noreferrer";
-        appStoreLink.textContent = " App Store";
-        nav.appendChild(appStoreLink);
-      } else {
-        appStoreLink.classList.add("pill");
-        appStoreLink.classList.add("primary");
-      }
+      var storeLinks = [
+        {
+          selector: 'a[href*="apps.apple.com"]',
+          href: "https://apps.apple.com/app/id6754794588",
+          image: "apple.png",
+          imageAlt: "Télécharger sur l'App Store",
+          ariaLabel: "Ouvrir l'App Store"
+        },
+        {
+          selector: 'a[href*="play.google.com"]',
+          href: "https://play.google.com/store/search?q=Urbalya&c=apps",
+          image: "google.png",
+          imageAlt: "Disponible sur Google Play",
+          ariaLabel: "Ouvrir Google Play"
+        }
+      ];
+
+      storeLinks.forEach(function (store) {
+        var link = nav.querySelector(store.selector);
+        if (!link) {
+          link = document.createElement("a");
+          link.href = store.href;
+          link.rel = "noopener noreferrer";
+          nav.appendChild(link);
+        }
+        link.setAttribute("aria-label", store.ariaLabel);
+        link.classList.add("pill");
+        link.classList.add("primary");
+        link.classList.add("store-link");
+
+        if (!link.querySelector("img.store-badge")) {
+          link.innerHTML =
+            '<img class="store-badge" src="' +
+            store.image +
+            '" alt="' +
+            store.imageAlt +
+            '" loading="lazy" decoding="async" />';
+        }
+      });
 
       var contactLink = foot.querySelector('a[href^="mailto:"]');
       if (!contactLink) {
