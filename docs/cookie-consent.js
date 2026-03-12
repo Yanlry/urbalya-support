@@ -125,6 +125,85 @@
     );
   }
 
+  function injectDeleteAccountLinks() {
+    var path = String(location.pathname || "").toLowerCase();
+
+    document.querySelectorAll("nav.drawer-nav").forEach(function (nav) {
+      if (nav.querySelector('a[href="delete-account.html"]')) return;
+
+      var link = document.createElement("a");
+      link.className = "pill";
+      link.href = "delete-account.html";
+      if (/delete-account\\.html$/.test(path)) {
+        link.setAttribute("aria-current", "page");
+      }
+      link.innerHTML =
+        '<svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>' +
+        "Supprimer mon compte";
+
+      var appStoreLink = nav.querySelector("a.pill.primary");
+      if (appStoreLink && appStoreLink.parentNode === nav) {
+        nav.insertBefore(link, appStoreLink);
+      } else {
+        nav.appendChild(link);
+      }
+    });
+
+    document.querySelectorAll("footer .foot > div:last-child").forEach(function (container) {
+      if (container.querySelector('a[href="delete-account.html"]')) return;
+      var link = document.createElement("a");
+      link.href = "delete-account.html";
+      link.textContent = "Suppression compte";
+
+      var termsLink = container.querySelector('a[href="terms.html"]');
+      if (termsLink && termsLink.parentNode === container) {
+        container.insertBefore(link, termsLink);
+      } else {
+        container.appendChild(link);
+      }
+    });
+
+    if (/support\\.html$/.test(path)) {
+      var heroGrid = document.querySelector("main .hero .grid");
+      if (heroGrid && !heroGrid.querySelector('a[href="delete-account.html"]')) {
+        var card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML =
+          "<h2>" +
+          '<svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>' +
+          "Supprimer mon compte" +
+          "</h2>" +
+          "<p>Demande publique sécurisée par email, sans mot de passe sur le site support.</p>" +
+          '<a class="btn" href="delete-account.html">' +
+          '<svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>' +
+          "Ouvrir la page dédiée" +
+          "</a>";
+        heroGrid.appendChild(card);
+      }
+
+      var faqDeleteAnswer = document.querySelector('#faq details[data-keywords*="supprimer"] .answer ul');
+      if (
+        faqDeleteAnswer &&
+        !faqDeleteAnswer.querySelector('a[href="delete-account.html"]')
+      ) {
+        var liSupport = document.createElement("li");
+        liSupport.innerHTML =
+          'Via le web : <a href="delete-account.html">page publique de suppression de compte</a> (validation email sécurisée).';
+        faqDeleteAnswer.appendChild(liSupport);
+      }
+    }
+
+    if (/privacy\\.html$/.test(path)) {
+      var rightsList = document.querySelector("#droits ul");
+      if (rightsList && !rightsList.querySelector('a[href="delete-account.html"]')) {
+        var liPrivacy = document.createElement("li");
+        liPrivacy.innerHTML =
+          '<strong>Suppression de compte (web) :</strong> via la <a class="link" href="delete-account.html">page publique de suppression</a> avec validation email.';
+        rightsList.appendChild(liPrivacy);
+      }
+    }
+  }
+
   function createUI(storedConsent) {
     var manageBtn = document.createElement("button");
     manageBtn.type = "button";
@@ -252,8 +331,10 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
       createUI(getStoredConsent());
+      injectDeleteAccountLinks();
     });
   } else {
     createUI(getStoredConsent());
+    injectDeleteAccountLinks();
   }
 })();

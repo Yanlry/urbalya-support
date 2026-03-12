@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Suppression de compte — Urbalya</title>
+  <meta name="description" content="Page publique Urbalya pour demander la suppression sécurisée de votre compte sans mot de passe web." />
+  <meta name="theme-color" content="#0B1220" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="cookie-consent.css" />
+
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #0f172a;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --line: rgba(255, 255, 255, 0.1);
+      --line2: rgba(255, 255, 255, 0.14);
+      --ok: #10b981;
+      --okSoft: rgba(16, 185, 129, 0.14);
+      --warn: #f59e0b;
+      --warnSoft: rgba(245, 158, 11, 0.14);
+      --danger: #ef4444;
+      --dangerSoft: rgba(239, 68, 68, 0.14);
+      --focus: 0 0 0 4px rgba(59, 130, 246, 0.25);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+      --shadow2: 0 10px 30px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+      --container: 980px;
+      --navH: 64px;
+      --tap: 44px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: geometricPrecision;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    strong { font-weight: 900; }
+    button, input { font-family: inherit; }
+
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 16px; }
+    @media (min-width: 720px) { .container { padding: 0 20px; } }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(2, 6, 23, 0.95);
+      border: 1px solid var(--line2);
+      transform: translateY(-200%);
+      transition: transform 0.15s ease;
+      z-index: 9999;
+    }
+    .skip:focus { transform: translateY(0); outline: none; box-shadow: var(--focus); }
+    :focus { outline: none; }
+    :focus-visible { box-shadow: var(--focus); border-radius: 12px; }
+
+    .ico { width: 18px; height: 18px; display: inline-block; flex: 0 0 auto; }
+    .ico.sm { width: 16px; height: 16px; }
+    .ico.xl { width: 22px; height: 22px; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 18, 32, 0.82);
+      border-bottom: 1px solid var(--line);
+      padding-top: env(safe-area-inset-top);
+    }
+    .nav-inner {
+      min-height: var(--navH);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+    .logo-img { width: 100%; height: 100%; object-fit: cover; }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+      min-width: 0;
+    }
+    .brand-text strong {
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      font-size: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .brand-text small {
+      display: block;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      font-size: 12px;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-toggle {
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.45);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.45);
+      color: var(--text);
+      font-weight: 900;
+      font-size: 14px;
+      line-height: 1;
+      white-space: nowrap;
+      min-height: 38px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .pill:hover {
+      transform: translateY(-1px);
+      background: rgba(15,23,42,.65);
+      border-color: rgba(255,255,255,.18);
+    }
+    .pill.primary {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(59,130,246,.92);
+      box-shadow: 0 14px 30px rgba(59,130,246,.14);
+    }
+    .pill[aria-current="page"] {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.55);
+      color: #fde68a;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.6);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+      z-index: 80;
+    }
+    .drawer {
+      position: fixed;
+      top: env(safe-area-inset-top);
+      right: 0;
+      width: min(92vw, 360px);
+      height: calc(100vh - env(safe-area-inset-top));
+      background: rgba(15, 23, 42, 0.94);
+      border-left: 1px solid var(--line);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+      transform: translateX(110%);
+      transition: transform 0.22s ease;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      padding: 14px;
+    }
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 6px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .drawer-close {
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(2, 6, 23, 0.35);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+    }
+    .drawer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 6px;
+    }
+    .drawer .pill {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 12px;
+      border-radius: 16px;
+      font-size: 15px;
+      min-height: 46px;
+    }
+    .drawer-foot {
+      margin-top: auto;
+      padding: 12px 6px 6px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .drawer-foot .pill {
+      width: 100%;
+      justify-content: center;
+      border-radius: 14px;
+    }
+
+    html.menu-open body { overflow: hidden; }
+    html.menu-open .backdrop { opacity: 1; pointer-events: auto; }
+    html.menu-open .drawer { transform: translateX(0); }
+
+    main { padding-top: 20px; padding-bottom: 22px; }
+
+    .hero {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.55);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      background: rgba(59, 130, 246, 0.12);
+      color: #bfdbfe;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    h1 {
+      margin: 12px 0 8px;
+      font-size: clamp(24px, 5vw, 34px);
+      line-height: 1.1;
+      letter-spacing: -0.4px;
+    }
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .cards {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 860px) {
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    .card {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.55);
+      box-shadow: var(--shadow2);
+      padding: 16px;
+    }
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    form {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+    }
+    label {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    input {
+      width: 100%;
+      border: 1px solid var(--line2);
+      border-radius: 12px;
+      padding: 12px 12px;
+      background: rgba(2, 6, 23, 0.25);
+      color: var(--text);
+      font-size: 15px;
+      min-height: 44px;
+    }
+    input::placeholder { color: rgba(148, 163, 184, 0.9); }
+
+    .btn {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(59,130,246,.92);
+      color: #fff;
+      border-radius: 12px;
+      min-height: 44px;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      padding: 0 14px;
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+    .status {
+      margin-top: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line2);
+      background: rgba(15, 23, 42, 0.55);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+      padding: 12px;
+      display: none;
+    }
+    .status.show { display: block; }
+    .status.ok {
+      border-color: rgba(16,185,129,.3);
+      background: var(--okSoft);
+      color: #a7f3d0;
+    }
+    .status.error {
+      border-color: rgba(239,68,68,.3);
+      background: var(--dangerSoft);
+      color: #fecaca;
+    }
+
+    .notice {
+      margin-top: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(245,158,11,.3);
+      background: var(--warnSoft);
+      color: #fde68a;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .policy {
+      margin-top: 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.55);
+      box-shadow: var(--shadow2);
+      padding: 16px;
+    }
+    .policy h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .policy ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14px;
+    }
+    .policy li { margin: 6px 0; }
+
+    .link {
+      font-weight: 900;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      background: rgba(11, 18, 32, 0.55);
+      padding: 18px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .foot a { color: var(--text); font-weight: 900; opacity: 0.92; }
+    .foot a:hover { opacity: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; }
+      .pill, .btn, .nav-toggle { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Aller au contenu principal</a>
+
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <line x1="4" y1="7" x2="20" y2="7" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <line x1="4" y1="12" x2="20" y2="12" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <line x1="4" y1="17" x2="20" y2="17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-x" viewBox="0 0 24 24">
+      <line x1="6" y1="6" x2="18" y2="18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <line x1="18" y1="6" x2="6" y2="18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="M4 11l8-7 8 7" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 10v10h12V10" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-support" viewBox="0 0 24 24">
+      <path d="M4 12a8 8 0 0 1 16 0" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M4 12v4a2 2 0 0 0 2 2h2v-6H6a2 2 0 0 0-2 2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M20 12v4a2 2 0 0 1-2 2h-2v-6h2a2 2 0 0 1 2 2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M12 20h4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24">
+      <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2" />
+      <path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-file" viewBox="0 0 24 24">
+      <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M14 2v6h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M9 13h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M9 17h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2" />
+      <path d="M4 8l8 6 8-6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M12 2l8 4v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M9 12l2 2 4-4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="i-info" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+      <path d="M12 10v6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <header class="nav" role="banner">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="Aller à l'accueil Urbalya">
+        <span class="logo" aria-hidden="true">
+          <img class="logo-img" src="logo.png" alt="Urbalya" />
+        </span>
+        <span class="brand-text">
+          <strong>Urbalya</strong>
+          <small>Application citoyenne</small>
+        </span>
+      </a>
+
+      <div class="nav-actions">
+        <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="drawer" aria-expanded="false" id="menuBtn">
+          <svg class="ico xl" aria-hidden="true"><use href="#i-menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer-head">
+      <div class="drawer-title">Navigation</div>
+      <button class="drawer-close" type="button" aria-label="Fermer le menu" id="closeBtn">
+        <svg class="ico xl" aria-hidden="true"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+
+    <nav class="drawer-nav" aria-label="Navigation mobile">
+      <a class="pill" href="index.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
+        Accueil
+      </a>
+      <a class="pill" href="support.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
+        Support
+      </a>
+      <a class="pill" href="privacy.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        Confidentialité
+      </a>
+      <a class="pill" href="delete-account.html" aria-current="page">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Supprimer mon compte
+      </a>
+      <a class="pill primary" href="https://apps.apple.com/app/idXXXXXXXXX" rel="noopener noreferrer">
+         App Store
+      </a>
+    </nav>
+
+    <div class="drawer-foot">
+      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
+        <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+        Contact@urbalya.com
+      </a>
+    </div>
+  </aside>
+
+  <main class="container" role="main" id="main">
+    <section class="hero" aria-label="Suppression de compte">
+      <span class="badge">
+        <svg class="ico sm" aria-hidden="true"><use href="#i-shield"></use></svg>
+        Flux sécurisé par email (sans mot de passe web)
+      </span>
+      <h1>Demande de suppression de compte</h1>
+      <p class="lead">
+        Vous pouvez supprimer votre compte directement dans l’application (
+        <strong>Paramètres → Compte → Supprimer mon compte</strong>
+        ) ou via cette page publique. Cette page ne vous demandera jamais votre mot de passe.
+      </p>
+
+      <div class="notice" role="note" aria-label="Délai de traitement">
+        <svg class="ico sm" aria-hidden="true"><use href="#i-info"></use></svg>
+        <div>
+          Après confirmation par lien/code, la suppression est traitée immédiatement côté compte.
+          Certaines traces techniques ou de sécurité peuvent rester temporairement dans les sauvegardes selon les obligations légales.
+        </div>
+      </div>
+    </section>
+
+    <section class="cards" aria-label="Formulaires de suppression de compte">
+      <article class="card">
+        <h2>
+          <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+          1) Recevoir un lien de confirmation
+        </h2>
+        <p>Entrez l’email du compte. Nous envoyons un lien/code temporaire (expiration courte).</p>
+
+        <form id="requestForm" novalidate>
+          <div>
+            <label for="requestEmail">Email du compte</label>
+            <input id="requestEmail" name="email" type="email" autocomplete="email" placeholder="exemple@domaine.fr" required />
+          </div>
+          <button type="submit" class="btn" id="requestBtn">Envoyer le lien sécurisé</button>
+        </form>
+      </article>
+
+      <article class="card">
+        <h2>
+          <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+          2) Confirmer la suppression
+        </h2>
+        <p>Ouvrez le lien reçu par email, ou collez ici le code temporaire à usage unique.</p>
+
+        <form id="confirmForm" novalidate>
+          <div>
+            <label for="confirmEmail">Email du compte</label>
+            <input id="confirmEmail" name="email" type="email" autocomplete="email" placeholder="exemple@domaine.fr" required />
+          </div>
+          <div>
+            <label for="confirmToken">Code de confirmation</label>
+            <input id="confirmToken" name="token" type="text" autocomplete="one-time-code" placeholder="Code reçu par email" required />
+          </div>
+          <button type="submit" class="btn" id="confirmBtn">Confirmer la suppression</button>
+        </form>
+      </article>
+    </section>
+
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+
+    <section class="policy" aria-label="Informations suppression et conservation">
+      <h2>
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        Ce qui est supprimé et ce qui peut être conservé temporairement
+      </h2>
+      <ul>
+        <li><strong>Supprimé :</strong> profil utilisateur, accès au compte, contenus liés (selon règles de cascade applicatives).</li>
+        <li><strong>Conservation temporaire possible :</strong> logs de sécurité, traces anti-abus/modération, sauvegardes techniques.</li>
+        <li><strong>Motifs :</strong> obligations légales, sécurité, prévention de fraude, gestion des litiges/modération.</li>
+        <li><strong>Délai :</strong> traitement principal immédiat après confirmation ; purge complète des sauvegardes selon cycle technique (jusqu’à 30 jours).</li>
+      </ul>
+      <p class="lead" style="margin-top:10px;font-size:14px;">
+        Pour une demande RGPD spécifique :
+        <a class="link" href="mailto:contact@urbalya.com?subject=Demande%20RGPD%20-%20Urbalya">contact@urbalya.com</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container foot">
+      <div>© <span id="y"></span> Urbalya — <a href="mailto:contact@urbalya.com">contact@urbalya.com</a></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="index.html">Accueil</a>
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Confidentialité</a>
+        <a href="delete-account.html">Suppression compte</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    const root = document.documentElement;
+    const btn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const backdrop = document.getElementById('backdrop');
+    const drawer = document.getElementById('drawer');
+
+    let lastFocus = null;
+
+    function setOpen(open) {
+      if (open) {
+        lastFocus = document.activeElement;
+        root.classList.add('menu-open');
+        btn.setAttribute('aria-expanded', 'true');
+        backdrop.setAttribute('aria-hidden', 'false');
+        const firstLink = drawer.querySelector('a, button');
+        setTimeout(() => firstLink && firstLink.focus(), 50);
+      } else {
+        root.classList.remove('menu-open');
+        btn.setAttribute('aria-expanded', 'false');
+        backdrop.setAttribute('aria-hidden', 'true');
+        if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      }
+      console.log('📝 [AUTH] delete page menu', { open });
+    }
+
+    if (btn) btn.addEventListener('click', () => setOpen(true));
+    if (closeBtn) closeBtn.addEventListener('click', () => setOpen(false));
+    if (backdrop) backdrop.addEventListener('click', () => setOpen(false));
+
+    document.addEventListener('keydown', (e) => {
+      if (!root.classList.contains('menu-open')) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        setOpen(false);
+      }
+    });
+
+    if (drawer) {
+      drawer.addEventListener('click', (e) => {
+        const t = e.target;
+        if (t && t.closest && t.closest('a')) setOpen(false);
+      });
+    }
+
+    const DEFAULT_API_BASE = 'https://api.smartcities.ylapps.com/api';
+    const RUNTIME_API_BASE = String(window.URBALYA_API_BASE_URL || '').trim();
+    const API_BASE = (RUNTIME_API_BASE || DEFAULT_API_BASE).replace(/\/+$/, '');
+
+    const requestForm = document.getElementById('requestForm');
+    const confirmForm = document.getElementById('confirmForm');
+    const requestBtn = document.getElementById('requestBtn');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const requestEmailInput = document.getElementById('requestEmail');
+    const confirmEmailInput = document.getElementById('confirmEmail');
+    const tokenInput = document.getElementById('confirmToken');
+    const statusEl = document.getElementById('status');
+
+    function normalizeEmail(value) {
+      return String(value || '').trim().toLowerCase();
+    }
+
+    function maskEmail(email) {
+      const value = normalizeEmail(email);
+      const at = value.indexOf('@');
+      if (at <= 0) return '***';
+      const local = value.slice(0, at);
+      const domain = value.slice(at + 1);
+      const safeLocal = local.length > 1 ? local[0] + '***' : '***';
+      const safeDomain = domain.length > 1 ? domain[0] + '***' : '***';
+      return safeLocal + '@' + safeDomain;
+    }
+
+    function setStatus(type, message) {
+      statusEl.className = 'status show ' + (type || '');
+      statusEl.textContent = message;
+    }
+
+    function resetStatus() {
+      statusEl.className = 'status';
+      statusEl.textContent = '';
+    }
+
+    function readJsonSafely(response) {
+      return response
+        .json()
+        .catch(() => ({}));
+    }
+
+    async function sendRequest(endpoint, payload) {
+      const response = await fetch(API_BASE + endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await readJsonSafely(response);
+      if (!response.ok) {
+        const err = new Error(data.message || 'Une erreur est survenue.');
+        err.status = response.status;
+        throw err;
+      }
+
+      return data;
+    }
+
+    requestForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      resetStatus();
+
+      const email = normalizeEmail(requestEmailInput.value);
+      if (!email) {
+        setStatus('error', 'Veuillez renseigner un email valide.');
+        return;
+      }
+
+      requestBtn.disabled = true;
+      try {
+        console.log('📝 [AUTH] account deletion web request start', { email: maskEmail(email) });
+        await sendRequest('/auth/account-deletion/request', { email: email });
+        confirmEmailInput.value = email;
+        setStatus('ok', 'Si un compte existe avec cet email, un lien/code de confirmation vient d\'être envoyé. Vérifiez votre boîte mail.');
+        console.log('📝 [AUTH] account deletion web request success', { email: maskEmail(email) });
+      } catch (err) {
+        console.error('❌ [AUTH] account deletion web request failed', err.message, err.stack);
+        setStatus('error', err.message || 'Impossible de traiter la demande pour le moment.');
+      } finally {
+        requestBtn.disabled = false;
+      }
+    });
+
+    confirmForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      resetStatus();
+
+      const email = normalizeEmail(confirmEmailInput.value);
+      const token = String(tokenInput.value || '').trim();
+
+      if (!email || !token) {
+        setStatus('error', 'Veuillez renseigner votre email et le code de confirmation.');
+        return;
+      }
+
+      confirmBtn.disabled = true;
+      try {
+        console.log('📝 [AUTH] account deletion web confirm start', { email: maskEmail(email) });
+        await sendRequest('/auth/account-deletion/confirm', { email: email, token: token });
+        setStatus('ok', 'Votre compte a été supprimé avec succès.');
+        confirmForm.reset();
+        requestEmailInput.value = '';
+        console.log('📝 [AUTH] account deletion web confirm success', { email: maskEmail(email) });
+      } catch (err) {
+        console.error('❌ [AUTH] account deletion web confirm failed', err.message, err.stack);
+        setStatus('error', err.message || 'Code invalide ou expiré. Veuillez refaire une demande.');
+      } finally {
+        confirmBtn.disabled = false;
+      }
+    });
+
+    const params = new URLSearchParams(window.location.search || '');
+    const emailFromUrl = normalizeEmail(params.get('email'));
+    const tokenFromUrl = String(params.get('token') || '').trim();
+
+    if (emailFromUrl) {
+      requestEmailInput.value = emailFromUrl;
+      confirmEmailInput.value = emailFromUrl;
+    }
+    if (tokenFromUrl) {
+      tokenInput.value = tokenFromUrl;
+      setStatus('ok', 'Code détecté dans le lien. Vérifiez votre email puis confirmez la suppression.');
+    }
+
+    console.log('📝 [AUTH] delete page ready', {
+      apiBase: API_BASE,
+      hasTokenFromUrl: Boolean(tokenFromUrl),
+      hasEmailFromUrl: Boolean(emailFromUrl),
+    });
+  </script>
+  <script src="cookie-consent.js"></script>
+</body>
+</html>
