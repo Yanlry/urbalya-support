@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="cookie-consent.css" />
 
   <style>
     :root{
@@ -181,10 +182,10 @@
       background: rgba(59,130,246,.92); /* ✅ pas de dégradé */
       box-shadow: 0 14px 30px rgba(59,130,246,.14);
     }
-
-    @media (min-width: 900px){
-      .nav-toggle{display:none}
-      .links{display:flex}
+    .pill[aria-current="page"]{
+      background: rgba(245,158,11,.20);
+      border-color: rgba(245,158,11,.55);
+      color:#FDE68A;
     }
 
     /* ========= Drawer menu (mobile) ========= */
@@ -256,6 +257,10 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.5;
+    }
+    .drawer-foot .pill{
+      width:100%;
+      min-height: 46px;
     }
 
     .menu-open .backdrop{opacity:1; pointer-events:auto}
@@ -634,37 +639,11 @@
         </span>
         <span class="brand-text">
           <strong>Urbalya</strong>
-          <small>Centre d’assistance</small>
+          <small>Application citoyenne</small>
         </span>
       </a>
 
       <div class="nav-actions">
-        <nav class="links" aria-label="Navigation principale">
-          <a class="pill" href="index.html">
-            <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
-            Accueil
-          </a>
-          <a class="pill" href="privacy.html">
-            <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
-            Confidentialité
-          </a>
-          <a class="pill" href="terms.html">
-            <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
-            Conditions
-          </a>
-
-          <!-- ✅ AJOUT: App Store (desktop) -->
-          <a class="pill" href="https://apps.apple.com/app/idXXXXXXXXX" rel="noopener noreferrer">
-            <svg class="ico" aria-hidden="true"><use href="#i-apple"></use></svg>
-             App Store
-          </a>
-
-          <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
-            <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
-            Contacter
-          </a>
-        </nav>
-
         <button
           class="nav-toggle"
           type="button"
@@ -693,29 +672,24 @@
         <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
         Accueil
       </a>
+      <a class="pill" href="support.html" aria-current="page">
+        <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
+        Support
+      </a>
       <a class="pill" href="privacy.html">
         <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
         Confidentialité
       </a>
-      <a class="pill" href="terms.html">
-        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
-        Conditions
-      </a>
-
-      <!-- ✅ AJOUT: App Store (mobile drawer) -->
-      <a class="pill" href="https://apps.apple.com/app/idXXXXXXXXX" rel="noopener noreferrer">
-        <svg class="ico" aria-hidden="true"><use href="#i-apple"></use></svg>
+      <a class="pill primary" href="https://apps.apple.com/app/idXXXXXXXXX" rel="noopener noreferrer">
          App Store
-      </a>
-
-      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
-        <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
-        Contacter
       </a>
     </nav>
 
     <div class="drawer-foot">
-      Support, FAQ et demandes légales.
+      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
+        <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+        Contact@urbalya.com
+      </a>
     </div>
   </aside>
 
@@ -984,5 +958,6 @@
       });
     }
   </script>
+  <script src="cookie-consent.js"></script>
 </body>
 </html>

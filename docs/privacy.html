@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="cookie-consent.css" />
 
   <style>
     :root{
@@ -197,15 +198,10 @@
       background: rgba(59,130,246,.92);
       box-shadow: 0 14px 30px rgba(59,130,246,.14);
     }
-    /* ✅ Lien actif (page courante) */
     .pill[aria-current="page"]{
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.18);
-    }
-
-    @media (min-width: 900px){
-      .nav-toggle{display:none}
-      .links{display:flex}
+      background: rgba(245,158,11,.20);
+      border-color: rgba(245,158,11,.55);
+      color:#FDE68A;
     }
 
     /* ========= Drawer menu (mobile) ========= */
@@ -279,6 +275,10 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.5;
+    }
+    .drawer-foot .pill{
+      width:100%;
+      min-height: 46px;
     }
 
     .menu-open .backdrop{opacity:1; pointer-events:auto}
@@ -586,6 +586,11 @@
       <path d="M12 20h4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="M4 11l8-7 8 7" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 10v10h12V10" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+
     <symbol id="i-life" viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="9" fill="none" stroke="#FFFFFF" stroke-width="2"/>
       <path d="M12 8v8" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
@@ -666,7 +671,6 @@
     </symbol>
   </svg>
 
-  <!-- ✅ NAV identique à index (Support / Confidentialité / Conditions / App Store) -->
   <header class="nav" role="banner">
     <div class="container nav-inner">
       <a class="brand" href="index.html" aria-label="Aller à l'accueil Urbalya">
@@ -675,29 +679,11 @@
         </span>
         <span class="brand-text">
           <strong>Urbalya</strong>
-          <small>Confidentialité</small>
+          <small>Application citoyenne</small>
         </span>
       </a>
 
       <div class="nav-actions">
-        <nav class="links" aria-label="Navigation principale">
-          <a class="pill" href="support.html">
-            <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
-            Support
-          </a>
-          <a class="pill" href="privacy.html" aria-current="page">
-            <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
-            Confidentialité
-          </a>
-          <a class="pill" href="terms.html">
-            <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
-            Conditions
-          </a>
-          <a class="pill primary" href="https://apps.apple.com/app/idXXXXXXXXX" rel="noopener noreferrer">
-             App Store
-          </a>
-        </nav>
-
         <button
           class="nav-toggle"
           type="button"
@@ -714,7 +700,6 @@
 
   <div class="backdrop" id="backdrop" aria-hidden="true"></div>
 
-  <!-- ✅ Drawer identique à index + “Contacter le support” -->
   <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="drawer-head">
       <div class="drawer-title">Navigation</div>
@@ -724,6 +709,10 @@
     </div>
 
     <nav class="drawer-nav" aria-label="Navigation mobile">
+      <a class="pill" href="index.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
+        Accueil
+      </a>
       <a class="pill" href="support.html">
         <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
         Support
@@ -732,21 +721,16 @@
         <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
         Confidentialité
       </a>
-      <a class="pill" href="terms.html">
-        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
-        Conditions
-      </a>
       <a class="pill primary" href="https://apps.apple.com/app/idXXXXXXXXX" rel="noopener noreferrer">
          App Store
-      </a>
-      <a class="pill" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
-        <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
-        Contacter le support
       </a>
     </nav>
 
     <div class="drawer-foot">
-      Politique de confidentialité et droits RGPD.
+      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
+        <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+        Contact@urbalya.com
+      </a>
     </div>
   </aside>
 
@@ -786,6 +770,10 @@
           <a href="#donnees">
             <svg class="ico sm" aria-hidden="true"><use href="#i-stack"></use></svg>
             2) Données traitées
+          </a>
+          <a href="#cookies">
+            <svg class="ico sm" aria-hidden="true"><use href="#i-lock"></use></svg>
+            Cookies
           </a>
           <a href="#finalites">
             <svg class="ico sm" aria-hidden="true"><use href="#i-target"></use></svg>
@@ -853,6 +841,22 @@
             </div>
             <div><strong>Information :</strong> aucune donnée bancaire n’est stockée par Urbalya.</div>
           </div>
+        </div>
+
+        <div class="section" id="cookies">
+          <h2>
+            <svg class="ico sm" aria-hidden="true"><use href="#i-lock"></use></svg>
+            Cookies et consentement
+          </h2>
+          <p>
+            Conformément aux règles applicables (RGPD/ePrivacy), nous déposons uniquement les cookies strictement nécessaires
+            par défaut. Les cookies optionnels (mesure d’audience et préférences) sont activés uniquement si vous les acceptez.
+          </p>
+          <ul>
+            <li><strong>Durée de conservation du choix :</strong> 6 mois, puis une nouvelle demande de consentement est affichée.</li>
+            <li><strong>Refus aussi simple que l’acceptation :</strong> bouton “Tout refuser” au même niveau que “Tout accepter”.</li>
+            <li><strong>Retrait/modification à tout moment :</strong> bouton “Cookies” visible en bas de page.</li>
+          </ul>
         </div>
 
         <div class="section" id="finalites">
@@ -1035,5 +1039,6 @@
 
     sections.forEach(s => io.observe(s));
   </script>
+  <script src="cookie-consent.js"></script>
 </body>
 </html>
