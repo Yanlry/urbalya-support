@@ -243,16 +243,22 @@
       height:auto;
     }
     .drawer .store-link{
-      width: 100%;
-      max-width: 180px;
+      width: min(100%, 148px);
+      max-width: 148px;
       align-self: center;
+      min-height: auto;
+      border-width: 0;
+      box-shadow: none;
+      margin: 0 auto;
     }
     .drawer .store-badge{
       display:block;
       width:100%;
-      max-width:180px;
+      max-width:148px;
+      max-height:44px;
       height:auto;
       margin:0 auto;
+      object-fit: contain;
     }
 
 

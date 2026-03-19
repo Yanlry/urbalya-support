@@ -694,10 +694,6 @@
             </div>
           </div>
 
-          <div class="banner muted" id="renewalNotice">
-            L'acces deja active reste disponible jusqu'a la fin de la periode en cours.
-          </div>
-
           <div class="meta-grid">
             <div class="meta-item">
               <span class="meta-label">Type de compte</span>
@@ -909,7 +905,6 @@
       const nextRenewalValue = document.getElementById("nextRenewalValue");
       const statusText = document.getElementById("statusText");
       const statusPill = document.getElementById("statusPill");
-      const renewalNotice = document.getElementById("renewalNotice");
       const periodLabel = formatDateLabel(currentPeriodEnd);
       const statusMeta = resolveStatusMeta(billingStatus);
 
@@ -921,7 +916,6 @@
       if (billingExempt) {
         nextRenewalValue.textContent = "Aucun renouvellement automatique";
         statusText.textContent = "Votre acces est actuellement actif sans renouvellement automatique gere depuis le web.";
-        renewalNotice.textContent = "Aucun renouvellement automatique n'est associe a ce compte pour le moment.";
         return;
       }
 
@@ -932,7 +926,6 @@
         statusText.textContent = periodLabel
           ? "Le renouvellement automatique est deja desactive. Votre acces reste actif jusqu'au " + periodLabel + "."
           : "Le renouvellement automatique est deja desactive.";
-        renewalNotice.textContent = "Votre demande de desactivation du renouvellement a deja ete prise en compte.";
         return;
       }
 
@@ -941,13 +934,11 @@
         statusText.textContent = periodLabel
           ? "Votre abonnement est actif. En cas d'arret du renouvellement, l'acces restera disponible jusqu'au " + periodLabel + "."
           : "Votre abonnement est actif et peut etre gere depuis cette page si une action est disponible.";
-        renewalNotice.textContent = "L'arret du renouvellement prend effet a la fin de la periode deja engagee.";
         return;
       }
 
       nextRenewalValue.textContent = "Indisponible";
       statusText.textContent = "Le statut actuel de votre compte ne permet pas forcement une action immediate depuis cette page.";
-      renewalNotice.textContent = "Si besoin, le support peut verifier votre situation et vous orienter.";
     }
 
     function renderActions() {
