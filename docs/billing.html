@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Abonnement — Urbalya</title>
+  <meta
+    name="description"
+    content="Gestion de l'abonnement Urbalya : consulter votre formule, ses avantages et arreter le renouvellement si disponible."
+  />
+  <meta name="theme-color" content="#0B1220" />
+
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="cookie-consent.css" />
+
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #0f172a;
+      --panel-soft: rgba(15, 23, 42, 0.82);
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --line: rgba(255, 255, 255, 0.1);
+      --line2: rgba(255, 255, 255, 0.16);
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.14);
+      --ok: #10b981;
+      --ok-soft: rgba(16, 185, 129, 0.16);
+      --warn: #f59e0b;
+      --warn-soft: rgba(245, 158, 11, 0.16);
+      --danger: #ef4444;
+      --danger-soft: rgba(239, 68, 68, 0.16);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+      --radius: 18px;
+      --container: 1120px;
+      --navH: 64px;
+      --tap: 44px;
+      --focus: 0 0 0 4px rgba(59, 130, 246, 0.25);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent 36%),
+        linear-gradient(180deg, #0b1220 0%, #08101d 100%);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: geometricPrecision;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    strong { font-weight: 900; }
+
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 16px; }
+    @media (min-width: 720px) { .container { padding: 0 20px; } }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(2, 6, 23, 0.96);
+      border: 1px solid var(--line2);
+      transform: translateY(-200%);
+      transition: transform 0.15s ease;
+      z-index: 9999;
+    }
+    .skip:focus { transform: translateY(0); outline: none; box-shadow: var(--focus); }
+    :focus { outline: none; }
+    :focus-visible { box-shadow: var(--focus); border-radius: 12px; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 18, 32, 0.84);
+      border-bottom: 1px solid var(--line);
+      padding-top: env(safe-area-inset-top);
+    }
+    .nav-inner {
+      min-height: var(--navH);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+    .logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+      min-width: 0;
+    }
+    .brand-text strong {
+      font-size: 15px;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .brand-text small {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-toggle {
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.45);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .nav-toggle:hover {
+      transform: translateY(-1px);
+      background: rgba(15, 23, 42, 0.65);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .ico {
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.45);
+      color: var(--text);
+      font-weight: 900;
+      font-size: 14px;
+      line-height: 1;
+      min-height: 38px;
+      white-space: nowrap;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .pill:hover {
+      transform: translateY(-1px);
+      background: rgba(15, 23, 42, 0.65);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+    .pill.primary {
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(59, 130, 246, 0.92);
+      box-shadow: 0 14px 30px rgba(59, 130, 246, 0.14);
+    }
+    .pill[aria-current="page"] {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.55);
+      color: #fde68a;
+    }
+    .pill.danger {
+      border-color: rgba(239, 68, 68, 0.55);
+      background: rgba(239, 68, 68, 0.92);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(239, 68, 68, 0.2);
+    }
+
+    .drawer {
+      position: fixed;
+      inset: 0 0 0 auto;
+      width: min(88vw, 360px);
+      transform: translateX(100%);
+      background: rgba(8, 15, 29, 0.98);
+      border-left: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      z-index: 100;
+      transition: transform .18s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 18px;
+      gap: 18px;
+    }
+    .drawer-open .drawer { transform: translateX(0); }
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .drawer-title { font-weight: 900; font-size: 17px; }
+    .drawer-close {
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.45);
+      color: var(--text);
+      cursor: pointer;
+    }
+    .drawer-nav,
+    .drawer-foot {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.6);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 80;
+    }
+    .drawer-open .backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hero {
+      padding: 34px 0 18px;
+    }
+    .hero-grid {
+      display: grid;
+      gap: 18px;
+    }
+    @media (min-width: 980px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.3fr) minmax(320px, .9fr);
+        align-items: start;
+      }
+    }
+
+    .hero-card,
+    .status-card,
+    .plan-card,
+    .note-card,
+    .action-card {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.82));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+    .hero-card,
+    .status-card,
+    .action-card,
+    .note-card {
+      padding: 22px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #bfdbfe;
+      font-size: 13px;
+      font-weight: 900;
+      border: 1px solid rgba(59, 130, 246, 0.22);
+      margin-bottom: 16px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+
+    .status-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .status-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 900;
+    }
+    .status-subtitle {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      min-width: 96px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .status-pill.active {
+      color: #d1fae5;
+      background: var(--ok-soft);
+      border-color: rgba(16, 185, 129, 0.24);
+    }
+    .status-pill.warning {
+      color: #fde68a;
+      background: var(--warn-soft);
+      border-color: rgba(245, 158, 11, 0.24);
+    }
+    .status-pill.inactive {
+      color: #fecaca;
+      background: var(--danger-soft);
+      border-color: rgba(239, 68, 68, 0.24);
+    }
+
+    .meta-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    @media (min-width: 720px) {
+      .meta-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    .meta-item {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .meta-label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .meta-value {
+      display: block;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .section {
+      padding: 18px 0 28px;
+    }
+    .section-head {
+      margin-bottom: 16px;
+    }
+    .section-head h2 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      font-weight: 900;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .plans {
+      display: grid;
+      gap: 16px;
+    }
+    @media (min-width: 860px) {
+      .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .plan-card {
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .plan-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -70px auto;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+    .plan-card.current {
+      border-color: rgba(59, 130, 246, 0.36);
+      box-shadow: 0 24px 60px rgba(59, 130, 246, 0.12);
+    }
+    .plan-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+    .plan-card.current .plan-label {
+      background: var(--accent-soft);
+      color: #bfdbfe;
+      border-color: rgba(59, 130, 246, 0.24);
+    }
+    .plan-title {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .plan-price {
+      margin: 0 0 10px;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+    .plan-summary {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      min-height: 52px;
+    }
+    .benefits {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .benefits li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .benefits li::before {
+      content: "•";
+      color: #93c5fd;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .grid-two {
+      display: grid;
+      gap: 16px;
+    }
+    @media (min-width: 900px) {
+      .grid-two { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+    }
+    .note-card p,
+    .action-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .note-card h3,
+    .action-card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      font-weight: 900;
+    }
+    .note-card + .note-card,
+    .action-card + .action-card {
+      margin-top: 16px;
+    }
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line2);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 800;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+    .btn.primary {
+      border-color: rgba(59, 130, 246, 0.22);
+      background: rgba(59, 130, 246, 0.92);
+    }
+    .btn.primary:hover {
+      background: rgba(37, 99, 235, 0.95);
+      border-color: rgba(147, 197, 253, 0.4);
+    }
+    .btn.danger {
+      border-color: rgba(239, 68, 68, 0.35);
+      background: rgba(239, 68, 68, 0.92);
+      color: #fff;
+    }
+    .btn.danger:hover {
+      background: rgba(220, 38, 38, 0.95);
+      border-color: rgba(252, 165, 165, 0.5);
+    }
+
+    .banner {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .banner.ok {
+      border-color: rgba(16, 185, 129, 0.24);
+      background: var(--ok-soft);
+    }
+    .banner.warn {
+      border-color: rgba(245, 158, 11, 0.24);
+      background: var(--warn-soft);
+    }
+    .banner.muted {
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: 12px;
+      padding: 22px 0 34px;
+      color: var(--muted);
+    }
+    .foot {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    @media (min-width: 860px) {
+      .foot {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    .foot-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Aller au contenu</a>
+
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="Aller a l'accueil Urbalya">
+        <span class="logo">
+          <img src="logo.png" alt="" />
+        </span>
+        <span class="brand-text">
+          <strong>Urbalya</strong>
+          <small>Abonnement et gestion web</small>
+        </span>
+      </a>
+
+      <div class="nav-actions">
+        <button class="nav-toggle" type="button" id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span class="ico" aria-hidden="true">≡</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer-head">
+      <div class="drawer-title">Navigation</div>
+      <button class="drawer-close" type="button" aria-label="Fermer le menu" id="closeBtn">
+        <span class="ico" aria-hidden="true">×</span>
+      </button>
+    </div>
+
+    <nav class="drawer-nav" aria-label="Navigation mobile">
+      <a class="pill" href="index.html">Accueil</a>
+      <a class="pill" href="support.html">Support</a>
+      <a class="pill" href="billing.html" aria-current="page">Abonnement</a>
+      <a class="pill" href="privacy.html">Confidentialite</a>
+      <a class="pill" href="terms.html">Conditions</a>
+      <a class="pill" href="mentions-legales.html">Mentions legales</a>
+    </nav>
+
+    <div class="drawer-foot">
+      <a class="pill danger" href="delete-account.html">Supprimer mon compte</a>
+      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20abonnement%20Urbalya">Contacter le support</a>
+    </div>
+  </aside>
+
+  <main class="container" role="main" id="main">
+    <section class="hero" aria-label="Gestion de l'abonnement">
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="badge">Gestion de l'abonnement</div>
+          <h1>Gerer votre abonnement Urbalya</h1>
+          <p class="lead">
+            Cette page vous permet de consulter votre formule, ses avantages et, si votre compte dispose
+            d'un renouvellement automatique actif, d'arreter ce renouvellement a echeance.
+          </p>
+          <div class="banner muted" id="renewalNotice">
+            L'acces deja active reste disponible jusqu'a la fin de la periode en cours.
+          </div>
+        </div>
+
+        <div class="status-card" aria-live="polite">
+          <div class="status-head">
+            <div>
+              <h2 class="status-title" id="statusTitle">Statut de votre abonnement</h2>
+              <p class="status-subtitle" id="statusText">
+                Chargement des informations de votre abonnement...
+              </p>
+            </div>
+            <span class="status-pill warning" id="statusPill">Chargement</span>
+          </div>
+
+          <div class="meta-grid">
+            <div class="meta-item">
+              <span class="meta-label">Type de compte</span>
+              <span class="meta-value" id="accountValue">Compte pro</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Renouvellement</span>
+              <span class="meta-value" id="renewalValue">Indisponible</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Periode en cours</span>
+              <span class="meta-value" id="periodValue">Non communiquee</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Formules">
+      <div class="section-head">
+        <h2>Formules et avantages</h2>
+        <p>
+          Les montants affiches correspondent a la grille actuellement utilisee par Urbalya.
+          Certains comptes peuvent beneficier d'un acces administre separement.
+        </p>
+      </div>
+
+      <div class="plans">
+        <article class="plan-card" id="merchantCard">
+          <div class="plan-label" id="merchantLabel">Formule commerce</div>
+          <h3 class="plan-title">Commerce</h3>
+          <p class="plan-price" id="merchantPrice">49 EUR / mois</p>
+          <p class="plan-summary">
+            Une formule pensee pour donner de la visibilite locale a votre activite et garder une presence utile dans l'app.
+          </p>
+          <ul class="benefits">
+            <li>Presence dediee de votre commerce dans l'application.</li>
+            <li>Publication de contenus et informations utiles a votre activite locale.</li>
+            <li>Mise en avant de vos actualites et de votre fiche commerce.</li>
+            <li>Gestion simplifiee depuis votre espace professionnel.</li>
+          </ul>
+        </article>
+
+        <article class="plan-card" id="municipalityCard">
+          <div class="plan-label" id="municipalityLabel">Formule mairie</div>
+          <h3 class="plan-title">Mairie</h3>
+          <p class="plan-price" id="municipalityPrice">199 EUR / mois</p>
+          <p class="plan-summary">
+            Une formule destinee aux collectivites pour centraliser les informations communales et fluidifier la relation avec les habitants.
+          </p>
+          <ul class="benefits">
+            <li>Compte institutionnel municipal dans l'ecosysteme Urbalya.</li>
+            <li>Diffusion d'informations utiles a l'echelle de la commune.</li>
+            <li>Acces aux outils de moderation et de suivi local.</li>
+            <li>Visibilite renforcee des communications municipales.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Actions">
+      <div class="grid-two">
+        <div class="action-card">
+          <h3>Arreter le renouvellement</h3>
+          <p id="manageText">
+            Si votre compte dispose d'un renouvellement automatique actif, vous pouvez l'arreter depuis cette page.
+          </p>
+          <div class="action-row" id="manageActions">
+            <a class="btn" href="support.html">Voir le support</a>
+          </div>
+        </div>
+
+        <div class="note-card">
+          <h3>Bon a savoir</h3>
+          <p>
+            Arreter le renouvellement n'interrompt pas immediatement votre acces. La formule reste active
+            jusqu'a la fin de la periode deja engagee, si une date de fin est disponible pour votre compte.
+          </p>
+          <div class="banner muted" id="supportHint">
+            Si aucune action n'est disponible ci-contre, le support peut verifier votre situation a
+            l'adresse <a href="mailto:contact@urbalya.com">contact@urbalya.com</a>.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container foot">
+      <div>© <span id="y"></span> Urbalya — <a href="mailto:contact@urbalya.com">contact@urbalya.com</a></div>
+      <div class="foot-links">
+        <a href="index.html">Accueil</a>
+        <a href="support.html">Support</a>
+        <a href="billing.html">Abonnement</a>
+        <a href="privacy.html">Confidentialite</a>
+        <a href="terms.html">Conditions</a>
+        <a href="delete-account.html">Suppression compte</a>
+        <a href="mentions-legales.html">Mentions legales</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    const root = document.documentElement;
+    const btn = document.getElementById("menuBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const backdrop = document.getElementById("backdrop");
+    const drawer = document.getElementById("drawer");
+
+    let lastFocus = null;
+
+    function setOpen(open) {
+      if (open) {
+        lastFocus = document.activeElement;
+        root.classList.add("drawer-open");
+        btn.setAttribute("aria-expanded", "true");
+        backdrop.setAttribute("aria-hidden", "false");
+        const firstLink = drawer.querySelector("a, button");
+        setTimeout(function () {
+          if (firstLink) firstLink.focus();
+        }, 50);
+      } else {
+        root.classList.remove("drawer-open");
+        btn.setAttribute("aria-expanded", "false");
+        backdrop.setAttribute("aria-hidden", "true");
+        if (lastFocus && typeof lastFocus.focus === "function") {
+          lastFocus.focus();
+        } else {
+          btn.focus();
+        }
+      }
+    }
+
+    btn.addEventListener("click", function () {
+      setOpen(!root.classList.contains("drawer-open"));
+    });
+    closeBtn.addEventListener("click", function () { setOpen(false); });
+    backdrop.addEventListener("click", function () { setOpen(false); });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && root.classList.contains("drawer-open")) {
+        setOpen(false);
+      }
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const accountTypeRaw = String(params.get("accountType") || "").trim().toLowerCase();
+    const billingStatus = String(params.get("billingStatus") || "").trim().toUpperCase();
+    const billingExempt = params.get("billingExempt") === "1";
+    const cancelAtPeriodEnd = params.get("cancelAtPeriodEnd") === "1";
+    const currentPeriodEnd = String(params.get("currentPeriodEnd") || "").trim();
+
+    function safeUrl(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return "";
+      try {
+        const parsed = new URL(raw);
+        if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+          return parsed.toString();
+        }
+      } catch (error) {
+        console.error("[BILLING] invalid url", error && error.message ? error.message : error);
+      }
+      return "";
+    }
+
+    const unsubscribeUrl = safeUrl(params.get("unsubscribeUrl"));
+
+    function formatDateLabel(value) {
+      if (!value) return "";
+      const date = new Date(value);
+      if (!Number.isFinite(date.getTime())) return "";
+      return new Intl.DateTimeFormat("fr-FR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }).format(date);
+    }
+
+    function formatMoney(value, currency) {
+      const amount = Number(value);
+      if (!Number.isFinite(amount)) return "Tarif indisponible";
+      return new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: currency || "EUR",
+        maximumFractionDigits: 0,
+      }).format(amount);
+    }
+
+    function resolveAccountLabel(type) {
+      if (type === "municipality") return "Mairie";
+      if (type === "merchant") return "Commerce";
+      return "Compte pro";
+    }
+
+    function resolveStatusMeta(status) {
+      if (status === "ACTIVE") {
+        return { label: "Actif", variant: "active" };
+      }
+      if (status === "PENDING_REVIEW" || status === "PENDING_PAYMENT" || status === "PAST_DUE") {
+        return { label: "En cours", variant: "warning" };
+      }
+      return { label: "Inactif", variant: "inactive" };
+    }
+
+    function renderCurrentPlanHighlight(type) {
+      const merchantCard = document.getElementById("merchantCard");
+      const municipalityCard = document.getElementById("municipalityCard");
+      const merchantLabel = document.getElementById("merchantLabel");
+      const municipalityLabel = document.getElementById("municipalityLabel");
+
+      if (type === "merchant") {
+        merchantCard.classList.add("current");
+        merchantLabel.textContent = "Votre formule actuelle";
+      }
+      if (type === "municipality") {
+        municipalityCard.classList.add("current");
+        municipalityLabel.textContent = "Votre formule actuelle";
+      }
+    }
+
+    function renderStatus() {
+      const accountValue = document.getElementById("accountValue");
+      const renewalValue = document.getElementById("renewalValue");
+      const periodValue = document.getElementById("periodValue");
+      const statusText = document.getElementById("statusText");
+      const statusPill = document.getElementById("statusPill");
+      const renewalNotice = document.getElementById("renewalNotice");
+      const periodLabel = formatDateLabel(currentPeriodEnd);
+      const statusMeta = resolveStatusMeta(billingStatus);
+
+      accountValue.textContent = resolveAccountLabel(accountTypeRaw);
+      renewalValue.textContent = billingExempt
+        ? "Pas de renouvellement automatique"
+        : cancelAtPeriodEnd
+          ? "Desactive"
+          : "Actif si abonnement en cours";
+      periodValue.textContent = periodLabel || "Non communiquee";
+
+      statusPill.textContent = statusMeta.label;
+      statusPill.className = "status-pill " + statusMeta.variant;
+
+      if (billingExempt) {
+        statusText.textContent = "Votre acces est actuellement actif sans renouvellement automatique gere depuis le web.";
+        renewalNotice.textContent = "Aucun renouvellement automatique n'est associe a ce compte pour le moment.";
+        return;
+      }
+
+      if (cancelAtPeriodEnd) {
+        statusText.textContent = periodLabel
+          ? "Le renouvellement automatique est deja desactive. Votre acces reste actif jusqu'au " + periodLabel + "."
+          : "Le renouvellement automatique est deja desactive.";
+        renewalNotice.textContent = "Votre demande de desactivation du renouvellement a deja ete prise en compte.";
+        return;
+      }
+
+      if (billingStatus === "ACTIVE") {
+        statusText.textContent = periodLabel
+          ? "Votre abonnement est actif. En cas d'arret du renouvellement, l'acces restera disponible jusqu'au " + periodLabel + "."
+          : "Votre abonnement est actif et peut etre gere depuis cette page si une action est disponible.";
+        renewalNotice.textContent = "L'arret du renouvellement prend effet a la fin de la periode deja engagee.";
+        return;
+      }
+
+      statusText.textContent = "Le statut actuel de votre compte ne permet pas forcement une action immediate depuis cette page.";
+      renewalNotice.textContent = "Si besoin, le support peut verifier votre situation et vous orienter.";
+    }
+
+    function renderActions() {
+      const manageText = document.getElementById("manageText");
+      const manageActions = document.getElementById("manageActions");
+      const periodLabel = formatDateLabel(currentPeriodEnd);
+
+      if (billingExempt) {
+        manageText.textContent = "Ce compte ne dispose pas d'un renouvellement automatique a arreter depuis le web.";
+        manageActions.innerHTML =
+          '<a class="btn" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
+        return;
+      }
+
+      if (cancelAtPeriodEnd) {
+        manageText.textContent = periodLabel
+          ? "Le renouvellement automatique est deja desactive. Votre acces reste actif jusqu'au " + periodLabel + "."
+          : "Le renouvellement automatique est deja desactive pour ce compte.";
+        manageActions.innerHTML =
+          '<a class="btn" href="support.html">Voir le support</a>';
+        return;
+      }
+
+      if (unsubscribeUrl) {
+        manageText.textContent = periodLabel
+          ? "Vous pouvez arreter le renouvellement automatique. L'acces restera actif jusqu'au " + periodLabel + "."
+          : "Vous pouvez arreter le renouvellement automatique. L'acces deja engage reste disponible jusqu'a la fin de periode.";
+        manageActions.innerHTML =
+          '<a class="btn danger" href="' + unsubscribeUrl.replace(/"/g, "&quot;") + '">Arreter le renouvellement</a>' +
+          '<a class="btn" href="mailto:contact@urbalya.com?subject=Question%20abonnement%20Urbalya">Contacter le support</a>';
+        return;
+      }
+
+      manageText.textContent = "Aucune action de desabonnement web n'est disponible pour ce compte actuellement.";
+      manageActions.innerHTML =
+        '<a class="btn" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
+    }
+
+    async function loadPricing() {
+      const merchantPriceNode = document.getElementById("merchantPrice");
+      const municipalityPriceNode = document.getElementById("municipalityPrice");
+      const defaultCurrency = "EUR";
+      const fallbackMerchantMonthly = 49;
+      const fallbackMunicipalityMonthly = 199;
+      const apiUrl = "https://urbalya.com/api/pricing/public";
+
+      merchantPriceNode.textContent = formatMoney(fallbackMerchantMonthly, defaultCurrency) + " / mois";
+      municipalityPriceNode.textContent = formatMoney(fallbackMunicipalityMonthly, defaultCurrency) + " / mois";
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            "Accept": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Pricing request failed with status " + response.status);
+        }
+
+        const data = await response.json();
+        const merchantMonthly = Number(data && data.merchantMonthly);
+        const currency = String(data && data.currency ? data.currency : defaultCurrency).trim() || defaultCurrency;
+
+        if (Number.isFinite(merchantMonthly) && merchantMonthly > 0) {
+          merchantPriceNode.textContent = formatMoney(merchantMonthly, currency) + " / mois";
+        }
+
+        municipalityPriceNode.textContent =
+          formatMoney(fallbackMunicipalityMonthly, currency) + " / mois";
+      } catch (error) {
+        console.error("[BILLING] pricing fetch failed", error && error.message ? error.message : error);
+      }
+    }
+
+    renderCurrentPlanHighlight(accountTypeRaw);
+    renderStatus();
+    renderActions();
+    loadPricing();
+  </script>
+  <script src="cookie-consent.js" defer></script>
+</body>
+</html>
