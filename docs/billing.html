@@ -367,7 +367,7 @@
       margin-top: 16px;
     }
     @media (min-width: 720px) {
-      .meta-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     .meta-item {
       padding: 14px;
@@ -390,6 +390,18 @@
       font-size: 15px;
       font-weight: 700;
       line-height: 1.4;
+    }
+    .status-actions {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .status-actions p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
     }
 
     .section {
@@ -662,18 +674,6 @@
   <main class="container" role="main" id="main">
     <section class="hero" aria-label="Gestion de l'abonnement">
       <div class="hero-grid">
-        <div class="hero-card">
-          <div class="badge">Gestion de l'abonnement</div>
-          <h1>Gerer votre abonnement Urbalya</h1>
-          <p class="lead">
-            Cette page vous permet de consulter votre formule, ses avantages et, si votre compte dispose
-            d'un renouvellement automatique actif, d'arreter ce renouvellement a echeance.
-          </p>
-          <div class="banner muted" id="renewalNotice">
-            L'acces deja active reste disponible jusqu'a la fin de la periode en cours.
-          </div>
-        </div>
-
         <div class="status-card" aria-live="polite">
           <div class="status-head">
             <div>
@@ -685,18 +685,27 @@
             <span class="status-pill warning" id="statusPill">Chargement</span>
           </div>
 
+          <div class="status-actions">
+            <p id="manageText">
+              Si votre compte dispose d'un renouvellement automatique actif, vous pouvez l'arreter depuis cette page.
+            </p>
+            <div class="action-row" id="manageActions">
+              <a class="btn" href="support.html">Voir le support</a>
+            </div>
+          </div>
+
+          <div class="banner muted" id="renewalNotice">
+            L'acces deja active reste disponible jusqu'a la fin de la periode en cours.
+          </div>
+
           <div class="meta-grid">
             <div class="meta-item">
               <span class="meta-label">Type de compte</span>
               <span class="meta-value" id="accountValue">Compte pro</span>
             </div>
             <div class="meta-item">
-              <span class="meta-label">Renouvellement</span>
-              <span class="meta-value" id="renewalValue">Indisponible</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">Periode en cours</span>
-              <span class="meta-value" id="periodValue">Non communiquee</span>
+              <span class="meta-label">Prochain renouvellement</span>
+              <span class="meta-value" id="nextRenewalValue">Indisponible</span>
             </div>
           </div>
         </div>
@@ -745,28 +754,16 @@
       </div>
     </section>
 
-    <section class="section" aria-label="Actions">
-      <div class="grid-two">
-        <div class="action-card">
-          <h3>Arreter le renouvellement</h3>
-          <p id="manageText">
-            Si votre compte dispose d'un renouvellement automatique actif, vous pouvez l'arreter depuis cette page.
-          </p>
-          <div class="action-row" id="manageActions">
-            <a class="btn" href="support.html">Voir le support</a>
-          </div>
-        </div>
-
-        <div class="note-card">
-          <h3>Bon a savoir</h3>
-          <p>
-            Arreter le renouvellement n'interrompt pas immediatement votre acces. La formule reste active
-            jusqu'a la fin de la periode deja engagee, si une date de fin est disponible pour votre compte.
-          </p>
-          <div class="banner muted" id="supportHint">
-            Si aucune action n'est disponible ci-contre, le support peut verifier votre situation a
-            l'adresse <a href="mailto:contact@urbalya.com">contact@urbalya.com</a>.
-          </div>
+    <section class="section" aria-label="Informations utiles">
+      <div class="note-card">
+        <h3>Bon a savoir</h3>
+        <p>
+          Arreter le renouvellement n'interrompt pas immediatement votre acces. La formule reste active
+          jusqu'a la fin de la periode deja engagee, si une date de fin est disponible pour votre compte.
+        </p>
+        <div class="banner muted" id="supportHint">
+          Si aucune action n'est disponible ci-dessus, le support peut verifier votre situation a
+          l'adresse <a href="mailto:contact@urbalya.com">contact@urbalya.com</a>.
         </div>
       </div>
     </section>
@@ -909,8 +906,7 @@
 
     function renderStatus() {
       const accountValue = document.getElementById("accountValue");
-      const renewalValue = document.getElementById("renewalValue");
-      const periodValue = document.getElementById("periodValue");
+      const nextRenewalValue = document.getElementById("nextRenewalValue");
       const statusText = document.getElementById("statusText");
       const statusPill = document.getElementById("statusPill");
       const renewalNotice = document.getElementById("renewalNotice");
@@ -918,23 +914,21 @@
       const statusMeta = resolveStatusMeta(billingStatus);
 
       accountValue.textContent = resolveAccountLabel(accountTypeRaw);
-      renewalValue.textContent = billingExempt
-        ? "Pas de renouvellement automatique"
-        : cancelAtPeriodEnd
-          ? "Desactive"
-          : "Actif si abonnement en cours";
-      periodValue.textContent = periodLabel || "Non communiquee";
 
       statusPill.textContent = statusMeta.label;
       statusPill.className = "status-pill " + statusMeta.variant;
 
       if (billingExempt) {
+        nextRenewalValue.textContent = "Aucun renouvellement automatique";
         statusText.textContent = "Votre acces est actuellement actif sans renouvellement automatique gere depuis le web.";
         renewalNotice.textContent = "Aucun renouvellement automatique n'est associe a ce compte pour le moment.";
         return;
       }
 
       if (cancelAtPeriodEnd) {
+        nextRenewalValue.textContent = periodLabel
+          ? "Aucun. Acces actif jusqu'au " + periodLabel
+          : "Aucun renouvellement programme";
         statusText.textContent = periodLabel
           ? "Le renouvellement automatique est deja desactive. Votre acces reste actif jusqu'au " + periodLabel + "."
           : "Le renouvellement automatique est deja desactive.";
@@ -943,6 +937,7 @@
       }
 
       if (billingStatus === "ACTIVE") {
+        nextRenewalValue.textContent = periodLabel || "Date non communiquee";
         statusText.textContent = periodLabel
           ? "Votre abonnement est actif. En cas d'arret du renouvellement, l'acces restera disponible jusqu'au " + periodLabel + "."
           : "Votre abonnement est actif et peut etre gere depuis cette page si une action est disponible.";
@@ -950,6 +945,7 @@
         return;
       }
 
+      nextRenewalValue.textContent = "Indisponible";
       statusText.textContent = "Le statut actuel de votre compte ne permet pas forcement une action immediate depuis cette page.";
       renewalNotice.textContent = "Si besoin, le support peut verifier votre situation et vous orienter.";
     }
