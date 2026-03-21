@@ -6,7 +6,7 @@
   <title>Abonnement — Urbalya</title>
   <meta
     name="description"
-    content="Gestion de l'abonnement Urbalya : consulter votre formule, ses avantages et arreter le renouvellement si disponible."
+    content="Gestion de l'abonnement Urbalya : consulter votre formule, ses avantages et arrêter le renouvellement si disponible."
   />
   <meta name="theme-color" content="#0B1220" />
 
@@ -22,36 +22,43 @@
   <link rel="stylesheet" href="cookie-consent.css" />
 
   <style>
-    :root {
-      --bg: #0b1220;
-      --panel: #0f172a;
+    :root{
+      --bg:#0B1220;
+      --panel:#0F172A;
       --panel-soft: rgba(15, 23, 42, 0.82);
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --line: rgba(255, 255, 255, 0.1);
-      --line2: rgba(255, 255, 255, 0.16);
-      --accent: #3b82f6;
-      --accent-soft: rgba(59, 130, 246, 0.14);
-      --ok: #10b981;
-      --ok-soft: rgba(16, 185, 129, 0.16);
-      --warn: #f59e0b;
-      --warn-soft: rgba(245, 158, 11, 0.16);
-      --danger: #ef4444;
-      --danger-soft: rgba(239, 68, 68, 0.16);
-      --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+      --text:#E5E7EB;
+      --muted:#94A3B8;
+      --line:rgba(255,255,255,.10);
+      --line2:rgba(255,255,255,.14);
+
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --shadow2: 0 10px 30px rgba(0,0,0,.35);
+
       --radius: 18px;
+      --radius2: 24px;
+
+      --accent:#3B82F6;
+      --accentSoft: rgba(59,130,246,.14);
+
+      --ok:#10B981;
+      --ok-soft: rgba(16, 185, 129, 0.16);
+      --warn:#F59E0B;
+      --warn-soft: rgba(245, 158, 11, 0.16);
+      --danger:#EF4444;
+      --danger-soft: rgba(239, 68, 68, 0.16);
+
       --container: 1120px;
-      --navH: 64px;
       --tap: 44px;
-      --focus: 0 0 0 4px rgba(59, 130, 246, 0.25);
+      --navH: 64px;
+      --focus: 0 0 0 4px rgba(59,130,246,.25);
     }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text);
+      color:var(--text);
       background:
         radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent 36%),
         linear-gradient(180deg, #0b1220 0%, #08101d 100%);
@@ -60,579 +67,665 @@
       text-rendering: geometricPrecision;
     }
 
-    a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; }
-    strong { font-weight: 900; }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; height:auto; display:block}
+    button{font-family:inherit}
+    strong{font-weight:800}
 
-    .container { max-width: var(--container); margin: 0 auto; padding: 0 16px; }
-    @media (min-width: 720px) { .container { padding: 0 20px; } }
+    .container{max-width: var(--container); margin:0 auto; padding:0 16px}
+    @media (min-width: 720px){ .container{padding:0 20px} }
 
-    .skip {
-      position: absolute;
-      left: 12px;
-      top: 12px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(2, 6, 23, 0.96);
-      border: 1px solid var(--line2);
+    .skip{
+      position:absolute;
+      left:12px;
+      top:12px;
+      padding:10px 12px;
+      border-radius:12px;
+      background: rgba(2,6,23,.95);
+      border:1px solid var(--line2);
       transform: translateY(-200%);
-      transition: transform 0.15s ease;
+      transition: transform .15s ease;
       z-index: 9999;
     }
-    .skip:focus { transform: translateY(0); outline: none; box-shadow: var(--focus); }
-    :focus { outline: none; }
-    :focus-visible { box-shadow: var(--focus); border-radius: 12px; }
+    .skip:focus{transform: translateY(0); outline:none; box-shadow: var(--focus)}
+    :focus{outline:none}
+    :focus-visible{box-shadow: var(--focus); border-radius: 12px}
 
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
+    .ico{width:18px;height:18px; display:inline-block; flex:0 0 auto}
+    .ico.sm{width:16px;height:16px}
+    .ico.lg{width:20px;height:20px}
+    .ico.xl{width:22px;height:22px}
+
+    .nav{
+      position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
-      background: rgba(11, 18, 32, 0.84);
+      background: rgba(11,18,32,.82);
       border-bottom: 1px solid var(--line);
       padding-top: env(safe-area-inset-top);
     }
-    .nav-inner {
+    .nav-inner{
       min-height: var(--navH);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
     }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
       min-width: 0;
     }
-    .logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      overflow: hidden;
+
+    .logo{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      overflow:hidden;
       flex: 0 0 auto;
     }
-    .logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.05;
+    .logo-img{width:100%; height:100%; object-fit: cover}
+
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
       min-width: 0;
     }
-    .brand-text strong {
+    .brand-text strong{
+      font-weight:900;
+      letter-spacing:.2px;
       font-size: 15px;
-      letter-spacing: 0.2px;
       white-space: nowrap;
-      overflow: hidden;
+      overflow:hidden;
       text-overflow: ellipsis;
     }
-    .brand-text small {
-      color: var(--muted);
+    .brand-text small{
+      display:block;
+      color:var(--muted);
+      font-weight:600;
+      letter-spacing:.2px;
       font-size: 12px;
-      font-weight: 600;
       margin-top: 2px;
       white-space: nowrap;
-      overflow: hidden;
+      overflow:hidden;
       text-overflow: ellipsis;
     }
 
-    .nav-actions { display: flex; align-items: center; gap: 10px; }
-    .nav-toggle {
+    .nav-actions{display:flex; align-items:center; gap:10px}
+
+    .nav-toggle{
       width: var(--tap);
       height: var(--tap);
       border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(15, 23, 42, 0.45);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: var(--text);
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.45);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .nav-toggle:hover {
-      transform: translateY(-1px);
-      background: rgba(15, 23, 42, 0.65);
-      border-color: rgba(255, 255, 255, 0.18);
-    }
-
-    .ico {
-      width: 18px;
-      height: 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 0 auto;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(15, 23, 42, 0.45);
       color: var(--text);
-      font-weight: 900;
-      font-size: 14px;
+    }
+    .nav-toggle:hover{
+      transform: translateY(-1px);
+      background: rgba(15,23,42,.65);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.45);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      color:var(--text);
+      font-weight:900;
+      font-size:14px;
       line-height: 1;
-      min-height: 38px;
       white-space: nowrap;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      min-height: 38px;
     }
-    .pill:hover {
+    .pill:hover{
       transform: translateY(-1px);
-      background: rgba(15, 23, 42, 0.65);
-      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(15,23,42,.65);
+      border-color: rgba(255,255,255,.18);
     }
-    .pill.primary {
-      border-color: rgba(255, 255, 255, 0.12);
-      background: rgba(59, 130, 246, 0.92);
-      box-shadow: 0 14px 30px rgba(59, 130, 246, 0.14);
+    .pill.primary{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(59,130,246,.92);
+      box-shadow: 0 14px 30px rgba(59,130,246,.14);
     }
-    .pill[aria-current="page"] {
-      background: rgba(245, 158, 11, 0.2);
-      border-color: rgba(245, 158, 11, 0.55);
-      color: #fde68a;
+    .pill.danger,
+    .pill.danger[aria-current="page"]{
+      border: 1px solid rgba(239,68,68,.55);
+      background: rgba(239,68,68,.92);
+      color:#fff;
+      box-shadow: 0 14px 30px rgba(239,68,68,.20);
     }
-    .pill.danger {
-      border-color: rgba(239, 68, 68, 0.55);
-      background: rgba(239, 68, 68, 0.92);
-      color: #fff;
-      box-shadow: 0 14px 30px rgba(239, 68, 68, 0.2);
+    .pill.danger:hover{
+      background: rgba(220,38,38,.95);
+      border-color: rgba(252,165,165,.65);
+    }
+    .pill[aria-current="page"]{
+      background: rgba(245,158,11,.20);
+      border-color: rgba(245,158,11,.55);
+      color:#FDE68A;
     }
 
-    .drawer {
-      position: fixed;
-      inset: 0 0 0 auto;
-      width: min(88vw, 360px);
-      transform: translateX(100%);
-      background: rgba(8, 15, 29, 0.98);
-      border-left: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      z-index: 100;
-      transition: transform .18s ease;
-      display: flex;
-      flex-direction: column;
-      padding: 18px;
-      gap: 18px;
+    .store-link{
+      width: clamp(220px, 50vw, 300px);
+      padding: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      background: transparent !important;
+      box-shadow: 0 6px 16px rgba(2,6,23,.35);
+      min-height: auto;
     }
-    .drawer-open .drawer { transform: translateX(0); }
-    .drawer-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+    .store-link:hover{
+      background: rgba(15,23,42,.15) !important;
+      border-color: rgba(226,232,240,.95) !important;
     }
-    .drawer-title { font-weight: 900; font-size: 17px; }
-    .drawer-close {
-      width: var(--tap);
-      height: var(--tap);
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(15, 23, 42, 0.45);
-      color: var(--text);
-      cursor: pointer;
+    .store-badge{
+      display: block;
+      width: 100%;
+      height: auto;
     }
-    .drawer-nav,
-    .drawer-foot {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(2, 6, 23, 0.6);
+
+    .backdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(2,6,23,.60);
       backdrop-filter: blur(6px);
-      opacity: 0;
-      pointer-events: none;
+      opacity:0;
+      pointer-events:none;
       transition: opacity .18s ease;
       z-index: 80;
     }
-    .drawer-open .backdrop {
-      opacity: 1;
-      pointer-events: auto;
+    .drawer{
+      position:fixed;
+      top: env(safe-area-inset-top);
+      right:0;
+      width: min(92vw, 360px);
+      height: calc(100vh - env(safe-area-inset-top));
+      background: rgba(15,23,42,.94);
+      border-left: 1px solid var(--line);
+      box-shadow: 0 30px 80px rgba(0,0,0,.55);
+      transform: translateX(110%);
+      transition: transform .22s ease;
+      z-index: 90;
+      display:flex;
+      flex-direction:column;
+      padding: 14px;
+    }
+    .drawer-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 8px 6px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .drawer-title{font-weight:900; letter-spacing:.2px}
+    .drawer-close{
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(2,6,23,.35);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      color: var(--text);
+    }
+    .drawer-nav{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding: 14px 6px;
+    }
+    .drawer .pill{
+      width:100%;
+      justify-content:center;
+      padding: 14px 12px;
+      border-radius: 16px;
+      font-size: 15px;
+      min-height: 46px;
+    }
+    .drawer .store-link{
+      display: block;
+      width: 100%;
+      max-width: none;
+      min-height: auto;
+      border-width: 0;
+      box-shadow: none;
+      margin: 0;
+      align-self: stretch;
+    }
+    .drawer .store-badge{
+      display: block;
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      height: auto;
+      margin: 0;
+      object-fit: contain;
+    }
+    .drawer-foot{
+      margin-top:auto;
+      padding: 12px 6px 6px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .drawer-foot .pill{
+      width:100%;
+      min-height: 46px;
     }
 
-    .hero {
-      padding: 34px 0 18px;
-    }
-    .hero-grid {
-      display: grid;
-      gap: 18px;
-    }
-    @media (min-width: 980px) {
-      .hero-grid {
-        grid-template-columns: minmax(0, 1.3fr) minmax(320px, .9fr);
-        align-items: start;
-      }
+    .menu-open .backdrop{opacity:1; pointer-events:auto}
+    .menu-open .drawer{transform: translateX(0)}
+
+    main{padding-bottom: 22px}
+    .hero{padding: 30px 0 16px}
+    .hero-grid{display:grid; grid-template-columns: 1fr; gap: 18px}
+    @media (min-width: 980px){
+      .hero{padding: 34px 0 18px}
+      .hero-grid{grid-template-columns: minmax(0, 1.3fr) minmax(320px, .9fr); align-items:start}
     }
 
-    .hero-card,
     .status-card,
     .plan-card,
     .note-card,
-    .action-card {
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.82));
-      border: 1px solid var(--line);
+    .action-card{
       border-radius: 22px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.82));
       box-shadow: var(--shadow);
     }
-    .hero-card,
+
     .status-card,
-    .action-card,
-    .note-card {
+    .note-card,
+    .action-card{
       padding: 22px;
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: #bfdbfe;
-      font-size: 13px;
-      font-weight: 900;
-      border: 1px solid rgba(59, 130, 246, 0.22);
-      margin-bottom: 16px;
+    .status-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:14px;
     }
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(34px, 5vw, 54px);
-      line-height: 1;
-      letter-spacing: -0.03em;
+    .status-title{
+      margin:0;
+      font-size:20px;
+      font-weight:900;
     }
-    .lead {
-      margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.7;
-      max-width: 760px;
+    .status-subtitle{
+      margin:6px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
     }
 
-    .status-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 14px;
+    .status-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      min-width:96px;
+      border:1px solid transparent;
+      white-space:nowrap;
     }
-    .status-title {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 900;
-    }
-    .status-subtitle {
-      margin: 6px 0 0;
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 14px;
-    }
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 900;
-      min-width: 96px;
-      border: 1px solid transparent;
-      white-space: nowrap;
-    }
-    .status-pill.active {
-      color: #d1fae5;
+    .status-pill.active{
+      color:#d1fae5;
       background: var(--ok-soft);
       border-color: rgba(16, 185, 129, 0.24);
     }
-    .status-pill.warning {
-      color: #fde68a;
+    .status-pill.warning{
+      color:#fde68a;
       background: var(--warn-soft);
       border-color: rgba(245, 158, 11, 0.24);
     }
-    .status-pill.inactive {
-      color: #fecaca;
+    .status-pill.inactive{
+      color:#fecaca;
       background: var(--danger-soft);
       border-color: rgba(239, 68, 68, 0.24);
     }
 
-    .meta-grid {
-      display: grid;
-      gap: 12px;
-      margin-top: 16px;
+    .meta-grid{
+      display:grid;
+      gap:12px;
+      margin-top:16px;
     }
-    @media (min-width: 720px) {
-      .meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (min-width: 720px){
+      .meta-grid{grid-template-columns: repeat(2, minmax(0, 1fr))}
     }
-    .meta-item {
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.02);
+    .meta-item{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
     }
-    .meta-label {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
+    .meta-label{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:6px;
     }
-    .meta-value {
-      display: block;
-      color: var(--text);
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 1.4;
-    }
-    .status-actions {
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.02);
-    }
-    .status-actions p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.65;
+    .meta-value{
+      display:block;
+      color:var(--text);
+      font-size:15px;
+      font-weight:700;
+      line-height:1.4;
     }
 
-    .section {
-      padding: 18px 0 28px;
+    .status-actions{
+      margin-top:18px;
+      padding:16px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
     }
-    .section-head {
-      margin-bottom: 16px;
-    }
-    .section-head h2 {
-      margin: 0 0 8px;
-      font-size: 28px;
-      font-weight: 900;
-    }
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.6;
+    .status-actions p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
     }
 
-    .plans {
-      display: grid;
-      gap: 16px;
+    .section{padding: 18px 0 28px}
+    .section-head{margin-bottom:16px}
+    .section-head h2{
+      margin:0 0 8px;
+      font-size:28px;
+      font-weight:900;
     }
-    @media (min-width: 860px) {
-      .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    .plan-card {
-      padding: 22px;
-      position: relative;
-      overflow: hidden;
-    }
-    .plan-card::after {
-      content: "";
-      position: absolute;
-      inset: auto -40px -70px auto;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.18), transparent 70%);
-      pointer-events: none;
-    }
-    .plan-card.current {
-      border-color: rgba(59, 130, 246, 0.36);
-      box-shadow: 0 24px 60px rgba(59, 130, 246, 0.12);
-    }
-    .plan-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--line);
-      font-size: 13px;
-      font-weight: 900;
-      margin-bottom: 18px;
-    }
-    .plan-card.current .plan-label {
-      background: var(--accent-soft);
-      color: #bfdbfe;
-      border-color: rgba(59, 130, 246, 0.24);
-    }
-    .plan-title {
-      margin: 0 0 8px;
-      font-size: 24px;
-      font-weight: 900;
-    }
-    .plan-price {
-      margin: 0 0 10px;
-      font-size: 32px;
-      font-weight: 900;
-      letter-spacing: -0.03em;
-    }
-    .plan-summary {
-      margin: 0 0 18px;
-      color: var(--muted);
-      line-height: 1.6;
-      min-height: 52px;
-    }
-    .benefits {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 10px;
-    }
-    .benefits li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      color: var(--text);
-      line-height: 1.55;
-    }
-    .benefits li::before {
-      content: "•";
-      color: #93c5fd;
-      font-weight: 900;
-      line-height: 1.2;
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
     }
 
-    .grid-two {
-      display: grid;
-      gap: 16px;
+    .plans{
+      display:grid;
+      gap:16px;
     }
-    @media (min-width: 900px) {
-      .grid-two { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+    @media (min-width: 860px){
+      .plans{grid-template-columns: repeat(2, minmax(0, 1fr))}
     }
+
+    .plan-card{
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .plan-card::after{
+      content:"";
+      position:absolute;
+      inset:auto -40px -70px auto;
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(59,130,246,.18), transparent 70%);
+      pointer-events:none;
+    }
+    .plan-card.current{
+      border-color: rgba(59,130,246,.36);
+      box-shadow: 0 24px 60px rgba(59,130,246,.12);
+    }
+    .plan-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      font-size:13px;
+      font-weight:900;
+      margin-bottom:18px;
+    }
+    .plan-card.current .plan-label{
+      background: var(--accentSoft);
+      color:#bfdbfe;
+      border-color: rgba(59,130,246,.24);
+    }
+    .plan-title{
+      margin:0 0 8px;
+      font-size:24px;
+      font-weight:900;
+    }
+    .plan-price{
+      margin:0 0 10px;
+      font-size:32px;
+      font-weight:900;
+      letter-spacing:-0.03em;
+    }
+    .plan-summary{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.6;
+      min-height:52px;
+    }
+
+    .benefits{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:10px;
+    }
+    .benefits li{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      color:var(--text);
+      line-height:1.55;
+    }
+    .benefits li::before{
+      content:"•";
+      color:#93c5fd;
+      font-weight:900;
+      line-height:1.2;
+    }
+
     .note-card p,
-    .action-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
+    .action-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
     }
     .note-card h3,
-    .action-card h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
-      font-weight: 900;
-    }
-    .note-card + .note-card,
-    .action-card + .action-card {
-      margin-top: 16px;
-    }
-    .action-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 46px;
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 1px solid var(--line2);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text);
-      font-size: 15px;
-      font-weight: 800;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .btn:hover {
-      transform: translateY(-1px);
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.22);
-    }
-    .btn.primary {
-      border-color: rgba(59, 130, 246, 0.22);
-      background: rgba(59, 130, 246, 0.92);
-    }
-    .btn.primary:hover {
-      background: rgba(37, 99, 235, 0.95);
-      border-color: rgba(147, 197, 253, 0.4);
-    }
-    .btn.danger {
-      border-color: rgba(239, 68, 68, 0.35);
-      background: rgba(239, 68, 68, 0.92);
-      color: #fff;
-    }
-    .btn.danger:hover {
-      background: rgba(220, 38, 38, 0.95);
-      border-color: rgba(252, 165, 165, 0.5);
+    .action-card h3{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:900;
     }
 
-    .banner {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text);
-      line-height: 1.65;
+    .action-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
     }
-    .banner.ok {
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border:1px solid var(--line2);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      font-weight:800;
+      font-size:15px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      text-align:center;
+      min-height: 46px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn.primary{
+      border: 1px solid rgba(59,130,246,.22);
+      background: rgba(59,130,246,.92);
+    }
+    .btn.primary:hover{
+      background: rgba(37,99,235,.95);
+      border-color: rgba(147,197,253,.4);
+    }
+    .btn.danger{
+      border: 1px solid rgba(239,68,68,.35);
+      background: rgba(239,68,68,.92);
+      color:#fff;
+    }
+    .btn.danger:hover{
+      background: rgba(220,38,38,.95);
+      border-color: rgba(252,165,165,.5);
+    }
+
+    .banner{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      line-height:1.65;
+    }
+    .banner.ok{
       border-color: rgba(16, 185, 129, 0.24);
       background: var(--ok-soft);
     }
-    .banner.warn {
+    .banner.warn{
       border-color: rgba(245, 158, 11, 0.24);
       background: var(--warn-soft);
     }
-    .banner.muted {
-      color: var(--muted);
+    .banner.muted{
+      color:var(--muted);
     }
 
-    footer {
+    footer{
       border-top: 1px solid var(--line);
       margin-top: 12px;
       padding: 22px 0 34px;
       color: var(--muted);
+      background: rgba(11,18,32,.55);
+      font-size:14px;
     }
-    .foot {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    .foot{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
     }
-    @media (min-width: 860px) {
-      .foot {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+    @media (min-width: 860px){
+      .foot{
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
       }
     }
-    .foot-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+    .foot-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
     }
+    .foot a{
+      color: var(--text);
+      font-weight: 900;
+      opacity: .92;
+    }
+    .foot a:hover{opacity:1}
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
-      }
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto!important}
+      .pill,.btn,.nav-toggle{transition:none !important}
     }
   </style>
 </head>
+
 <body>
-  <a class="skip" href="#main">Aller au contenu</a>
+  <a class="skip" href="#main">Aller au contenu principal</a>
 
-  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <line x1="4" y1="7" x2="20" y2="7" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <line x1="4" y1="12" x2="20" y2="12" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <line x1="4" y1="17" x2="20" y2="17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
 
-  <header class="nav">
+    <symbol id="i-x" viewBox="0 0 24 24">
+      <line x1="6" y1="6" x2="18" y2="18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <line x1="18" y1="6" x2="6" y2="18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="M4 11l8-7 8 7" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 10v10h12V10" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-support" viewBox="0 0 24 24">
+      <path d="M4 12a8 8 0 0 1 16 0" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M4 12v4a2 2 0 0 0 2 2h2v-6H6a2 2 0 0 0-2 2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M20 12v4a2 2 0 0 1-2 2h-2v-6h2a2 2 0 0 1 2 2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M12 20h4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-file" viewBox="0 0 24 24">
+      <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M14 2v6h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M9 13h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M9 17h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-lock" viewBox="0 0 24 24">
+      <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2" />
+      <path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-building" viewBox="0 0 24 24">
+      <rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2" />
+      <path d="M8 7h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M8 11h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M8 15h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M14 7h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M14 11h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M14 15h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2" />
+      <path d="M4 8l8 6 8-6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+    </symbol>
+  </svg>
+
+  <header class="nav" role="banner">
     <div class="container nav-inner">
-      <a class="brand" href="index.html" aria-label="Aller a l'accueil Urbalya">
-        <span class="logo">
-          <img src="logo.png" alt="" />
+      <a class="brand" href="index.html" aria-label="Aller à l'accueil Urbalya">
+        <span class="logo" aria-hidden="true">
+          <img class="logo-img" src="logo.png" alt="Urbalya" />
         </span>
         <span class="brand-text">
           <strong>Urbalya</strong>
@@ -641,33 +734,71 @@
       </a>
 
       <div class="nav-actions">
-        <button class="nav-toggle" type="button" id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span class="ico" aria-hidden="true">≡</span>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Ouvrir le menu"
+          aria-controls="drawer"
+          aria-expanded="false"
+          id="menuBtn"
+        >
+          <svg class="ico xl" aria-hidden="true"><use href="#i-menu"></use></svg>
         </button>
       </div>
     </div>
   </header>
 
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
   <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="drawer-head">
       <div class="drawer-title">Navigation</div>
       <button class="drawer-close" type="button" aria-label="Fermer le menu" id="closeBtn">
-        <span class="ico" aria-hidden="true">×</span>
+        <svg class="ico xl" aria-hidden="true"><use href="#i-x"></use></svg>
       </button>
     </div>
 
     <nav class="drawer-nav" aria-label="Navigation mobile">
-      <a class="pill" href="index.html">Accueil</a>
-      <a class="pill" href="support.html">Support</a>
-      <a class="pill" href="billing.html" aria-current="page">Abonnement</a>
-      <a class="pill" href="privacy.html">Confidentialite</a>
-      <a class="pill" href="terms.html">Conditions</a>
-      <a class="pill" href="mentions-legales.html">Mentions legales</a>
+      <a class="pill" href="index.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
+        Accueil
+      </a>
+      <a class="pill" href="support.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
+        Support
+      </a>
+      <a class="pill" href="billing.html" aria-current="page">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Abonnement
+      </a>
+      <a class="pill" href="privacy.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        Confidentialité
+      </a>
+      <a class="pill" href="terms.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Conditions
+      </a>
+      <a class="pill" href="mentions-legales.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Mentions légales
+      </a>
+      <a class="pill primary store-link" href="https://apps.apple.com/app/id6754794588" rel="noopener noreferrer" aria-label="Ouvrir l'App Store">
+        <img class="store-badge" src="apple.png" alt="Télécharger sur l'App Store" loading="lazy" decoding="async" />
+      </a>
+      <a class="pill primary store-link" href="https://play.google.com/store/search?q=Urbalya&c=apps" rel="noopener noreferrer" aria-label="Ouvrir Google Play">
+        <img class="store-badge" src="google.png" alt="Disponible sur Google Play" loading="lazy" decoding="async" />
+      </a>
     </nav>
 
     <div class="drawer-foot">
-      <a class="pill danger" href="delete-account.html">Supprimer mon compte</a>
-      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20abonnement%20Urbalya">Contacter le support</a>
+      <a class="pill danger" href="delete-account.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Supprimer mon compte
+      </a>
+      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20abonnement%20Urbalya">
+        <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+        Contactez-nous
+      </a>
     </div>
   </aside>
 
@@ -687,7 +818,7 @@
 
           <div class="status-actions">
             <p id="manageText">
-              Si votre compte dispose d'un renouvellement automatique actif, vous pouvez l'arreter depuis cette page.
+              Si votre compte dispose d'un renouvellement automatique actif, vous pouvez l'arrêter depuis cette page.
             </p>
             <div class="action-row" id="manageActions">
               <a class="btn" href="support.html">Voir le support</a>
@@ -712,8 +843,8 @@
       <div class="section-head">
         <h2>Formules et avantages</h2>
         <p>
-          Les montants affiches correspondent a la grille actuellement utilisee par Urbalya.
-          Certains comptes peuvent beneficier d'un acces administre separement.
+          Les montants affichés correspondent à la grille actuellement utilisée par Urbalya.
+          Certains comptes peuvent bénéficier d'un accès administré séparément.
         </p>
       </div>
 
@@ -723,13 +854,13 @@
           <h3 class="plan-title">Commerce</h3>
           <p class="plan-price" id="merchantPrice">49 EUR / mois</p>
           <p class="plan-summary">
-            Une formule pensee pour donner de la visibilite locale a votre activite et garder une presence utile dans l'app.
+            Une formule pensée pour donner de la visibilité locale à votre activité et garder une présence utile dans l'application.
           </p>
           <ul class="benefits">
-            <li>Presence dediee de votre commerce dans l'application.</li>
-            <li>Publication de contenus et informations utiles a votre activite locale.</li>
-            <li>Mise en avant de vos actualites et de votre fiche commerce.</li>
-            <li>Gestion simplifiee depuis votre espace professionnel.</li>
+            <li>Présence dédiée de votre commerce dans l'application.</li>
+            <li>Publication de contenus et informations utiles à votre activité locale.</li>
+            <li>Mise en avant de vos actualités et de votre fiche commerce.</li>
+            <li>Gestion simplifiée depuis votre espace professionnel.</li>
           </ul>
         </article>
 
@@ -738,13 +869,13 @@
           <h3 class="plan-title">Mairie</h3>
           <p class="plan-price" id="municipalityPrice">199 EUR / mois</p>
           <p class="plan-summary">
-            Une formule destinee aux collectivites pour centraliser les informations communales et fluidifier la relation avec les habitants.
+            Une formule destinée aux collectivités pour centraliser les informations communales et fluidifier la relation avec les habitants.
           </p>
           <ul class="benefits">
-            <li>Compte institutionnel municipal dans l'ecosysteme Urbalya.</li>
-            <li>Diffusion d'informations utiles a l'echelle de la commune.</li>
-            <li>Acces aux outils de moderation et de suivi local.</li>
-            <li>Visibilite renforcee des communications municipales.</li>
+            <li>Compte institutionnel municipal dans l'écosystème Urbalya.</li>
+            <li>Diffusion d'informations utiles à l'échelle de la commune.</li>
+            <li>Accès aux outils de modération et de suivi local.</li>
+            <li>Visibilité renforcée des communications municipales.</li>
           </ul>
         </article>
       </div>
@@ -752,13 +883,13 @@
 
     <section class="section" aria-label="Informations utiles">
       <div class="note-card">
-        <h3>Bon a savoir</h3>
+        <h3>Bon à savoir</h3>
         <p>
-          Arreter le renouvellement n'interrompt pas immediatement votre acces. La formule reste active
-          jusqu'a la fin de la periode deja engagee, si une date de fin est disponible pour votre compte.
+          Arrêter le renouvellement n'interrompt pas immédiatement votre accès. La formule reste active
+          jusqu'à la fin de la période déjà engagée, si une date de fin est disponible pour votre compte.
         </p>
         <div class="banner muted" id="supportHint">
-          Si aucune action n'est disponible ci-dessus, le support peut verifier votre situation a
+          Si aucune action n'est disponible ci-dessus, le support peut vérifier votre situation à
           l'adresse <a href="mailto:contact@urbalya.com">contact@urbalya.com</a>.
         </div>
       </div>
@@ -767,15 +898,15 @@
 
   <footer role="contentinfo">
     <div class="container foot">
-      <div>© <span id="y"></span> Urbalya — <a href="mailto:contact@urbalya.com">contact@urbalya.com</a></div>
+      <div>© <span id="y"></span> Urbalya — Contact : <a href="mailto:contact@urbalya.com">contact@urbalya.com</a></div>
       <div class="foot-links">
         <a href="index.html">Accueil</a>
         <a href="support.html">Support</a>
         <a href="billing.html">Abonnement</a>
-        <a href="privacy.html">Confidentialite</a>
+        <a href="privacy.html">Confidentialité</a>
         <a href="terms.html">Conditions</a>
         <a href="delete-account.html">Suppression compte</a>
-        <a href="mentions-legales.html">Mentions legales</a>
+        <a href="mentions-legales.html">Mentions légales</a>
       </div>
     </div>
   </footer>
@@ -794,15 +925,13 @@
     function setOpen(open) {
       if (open) {
         lastFocus = document.activeElement;
-        root.classList.add("drawer-open");
+        root.classList.add("menu-open");
         btn.setAttribute("aria-expanded", "true");
         backdrop.setAttribute("aria-hidden", "false");
         const firstLink = drawer.querySelector("a, button");
-        setTimeout(function () {
-          if (firstLink) firstLink.focus();
-        }, 50);
+        setTimeout(() => firstLink && firstLink.focus(), 50);
       } else {
-        root.classList.remove("drawer-open");
+        root.classList.remove("menu-open");
         btn.setAttribute("aria-expanded", "false");
         backdrop.setAttribute("aria-hidden", "true");
         if (lastFocus && typeof lastFocus.focus === "function") {
@@ -811,15 +940,24 @@
           btn.focus();
         }
       }
+      console.log("📝 [WEB] billing menu", { open });
     }
 
-    btn.addEventListener("click", function () {
-      setOpen(!root.classList.contains("drawer-open"));
+    btn.addEventListener("click", () => setOpen(true));
+    closeBtn.addEventListener("click", () => setOpen(false));
+    backdrop.addEventListener("click", () => setOpen(false));
+
+    document.addEventListener("keydown", (e) => {
+      if (!root.classList.contains("menu-open")) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+      }
     });
-    closeBtn.addEventListener("click", function () { setOpen(false); });
-    backdrop.addEventListener("click", function () { setOpen(false); });
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && root.classList.contains("drawer-open")) {
+
+    drawer.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target && target.closest && target.closest("a")) {
         setOpen(false);
       }
     });
@@ -840,7 +978,7 @@
           return parsed.toString();
         }
       } catch (error) {
-        console.error("[BILLING] invalid url", error && error.message ? error.message : error);
+        console.error("❌ [WEB][BILLING] invalid unsubscribe url", error && error.message ? error.message : error);
       }
       return "";
     }
@@ -894,6 +1032,7 @@
         merchantCard.classList.add("current");
         merchantLabel.textContent = "Votre formule actuelle";
       }
+
       if (type === "municipality") {
         municipalityCard.classList.add("current");
         municipalityLabel.textContent = "Votre formule actuelle";
@@ -915,30 +1054,30 @@
 
       if (billingExempt) {
         nextRenewalValue.textContent = "Aucun renouvellement automatique";
-        statusText.textContent = "Votre acces est actuellement actif sans renouvellement automatique gere depuis le web.";
+        statusText.textContent = "Votre accès est actuellement actif sans renouvellement automatique géré depuis le web.";
         return;
       }
 
       if (cancelAtPeriodEnd) {
         nextRenewalValue.textContent = periodLabel
-          ? "Aucun. Acces actif jusqu'au " + periodLabel
-          : "Aucun renouvellement programme";
+          ? "Aucun. Accès actif jusqu'au " + periodLabel
+          : "Aucun renouvellement programmé";
         statusText.textContent = periodLabel
-          ? "Le renouvellement automatique est deja desactive. Votre acces reste actif jusqu'au " + periodLabel + "."
-          : "Le renouvellement automatique est deja desactive.";
+          ? "Le renouvellement automatique est déjà désactivé. Votre accès reste actif jusqu'au " + periodLabel + "."
+          : "Le renouvellement automatique est déjà désactivé.";
         return;
       }
 
       if (billingStatus === "ACTIVE") {
-        nextRenewalValue.textContent = periodLabel || "Date non communiquee";
+        nextRenewalValue.textContent = periodLabel || "Date non communiquée";
         statusText.textContent = periodLabel
-          ? "Votre abonnement est actif. En cas d'arret du renouvellement, l'acces restera disponible jusqu'au " + periodLabel + "."
-          : "Votre abonnement est actif et peut etre gere depuis cette page si une action est disponible.";
+          ? "Votre abonnement est actif. En cas d'arrêt du renouvellement, l'accès restera disponible jusqu'au " + periodLabel + "."
+          : "Votre abonnement est actif et peut être géré depuis cette page si une action est disponible.";
         return;
       }
 
       nextRenewalValue.textContent = "Indisponible";
-      statusText.textContent = "Le statut actuel de votre compte ne permet pas forcement une action immediate depuis cette page.";
+      statusText.textContent = "Le statut actuel de votre compte ne permet pas forcément une action immédiate depuis cette page.";
     }
 
     function renderActions() {
@@ -947,7 +1086,7 @@
       const periodLabel = formatDateLabel(currentPeriodEnd);
 
       if (billingExempt) {
-        manageText.textContent = "Ce compte ne dispose pas d'un renouvellement automatique a arreter depuis le web.";
+        manageText.textContent = "Ce compte ne dispose pas d'un renouvellement automatique à arrêter depuis le web.";
         manageActions.innerHTML =
           '<a class="btn" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
         return;
@@ -955,8 +1094,8 @@
 
       if (cancelAtPeriodEnd) {
         manageText.textContent = periodLabel
-          ? "Le renouvellement automatique est deja desactive. Votre acces reste actif jusqu'au " + periodLabel + "."
-          : "Le renouvellement automatique est deja desactive pour ce compte.";
+          ? "Le renouvellement automatique est déjà désactivé. Votre accès reste actif jusqu'au " + periodLabel + "."
+          : "Le renouvellement automatique est déjà désactivé pour ce compte.";
         manageActions.innerHTML =
           '<a class="btn" href="support.html">Voir le support</a>';
         return;
@@ -964,15 +1103,15 @@
 
       if (unsubscribeUrl) {
         manageText.textContent = periodLabel
-          ? "Vous pouvez arreter le renouvellement automatique. L'acces restera actif jusqu'au " + periodLabel + "."
-          : "Vous pouvez arreter le renouvellement automatique. L'acces deja engage reste disponible jusqu'a la fin de periode.";
+          ? "Vous pouvez arrêter le renouvellement automatique. L'accès restera actif jusqu'au " + periodLabel + "."
+          : "Vous pouvez arrêter le renouvellement automatique. L'accès déjà engagé reste disponible jusqu'à la fin de période.";
         manageActions.innerHTML =
-          '<a class="btn danger" href="' + unsubscribeUrl.replace(/"/g, "&quot;") + '">Arreter le renouvellement</a>' +
+          '<a class="btn danger" href="' + unsubscribeUrl.replace(/"/g, "&quot;") + '">Arrêter le renouvellement</a>' +
           '<a class="btn" href="mailto:contact@urbalya.com?subject=Question%20abonnement%20Urbalya">Contacter le support</a>';
         return;
       }
 
-      manageText.textContent = "Aucune action de desabonnement web n'est disponible pour ce compte actuellement.";
+      manageText.textContent = "Aucune action de désabonnement web n'est disponible pour ce compte actuellement.";
       manageActions.innerHTML =
         '<a class="btn" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
     }
@@ -989,6 +1128,8 @@
       municipalityPriceNode.textContent = formatMoney(fallbackMunicipalityMonthly, defaultCurrency) + " / mois";
 
       try {
+        console.log("📝 [WEB][BILLING] pricing fetch start", { apiUrl });
+
         const response = await fetch(apiUrl, {
           method: "GET",
           headers: {
@@ -1004,14 +1145,18 @@
         const merchantMonthly = Number(data && data.merchantMonthly);
         const currency = String(data && data.currency ? data.currency : defaultCurrency).trim() || defaultCurrency;
 
+        console.log("📝 [WEB][BILLING] pricing fetch success", {
+          hasMerchantMonthly: Number.isFinite(merchantMonthly),
+          currency,
+        });
+
         if (Number.isFinite(merchantMonthly) && merchantMonthly > 0) {
           merchantPriceNode.textContent = formatMoney(merchantMonthly, currency) + " / mois";
         }
 
-        municipalityPriceNode.textContent =
-          formatMoney(fallbackMunicipalityMonthly, currency) + " / mois";
+        municipalityPriceNode.textContent = formatMoney(fallbackMunicipalityMonthly, currency) + " / mois";
       } catch (error) {
-        console.error("[BILLING] pricing fetch failed", error && error.message ? error.message : error);
+        console.error("❌ [WEB][BILLING] pricing fetch failed", error && error.message ? error.message : error);
       }
     }
 
@@ -1020,6 +1165,6 @@
     renderActions();
     loadPricing();
   </script>
-  <script src="cookie-consent.js" defer></script>
+  <script src="cookie-consent.js"></script>
 </body>
 </html>

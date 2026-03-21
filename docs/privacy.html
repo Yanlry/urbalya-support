@@ -215,40 +215,44 @@
       color:#FDE68A;
     }
     .store-link{
-      width: clamp(180px, 44vw, 240px);
-      padding:0;
-      overflow:hidden;
+      width: clamp(220px, 50vw, 300px);
+      padding: 0;
+      overflow: hidden;
       border-radius: 12px;
-     
       background: transparent !important;
       box-shadow: 0 6px 16px rgba(2,6,23,.35);
       min-height: auto;
     }
+    
     .store-link:hover{
       background: rgba(15,23,42,.15) !important;
       border-color: rgba(226,232,240,.95) !important;
     }
+    
     .store-badge{
-      display:block;
-      width:100%;
-      height:auto;
+      display: block;
+      width: 100%;
+      height: auto;
     }
+    
     .drawer .store-link{
-      width: min(100%, 148px);
-      max-width: 148px;
-      align-self: center;
+      display: block;
+      width: 100%;
+      max-width: none;
       min-height: auto;
       border-width: 0;
       box-shadow: none;
-      margin: 0 auto;
+      margin: 0;
+      align-self: stretch;
     }
+    
     .drawer .store-badge{
-      display:block;
-      width:100%;
-      max-width:148px;
-      max-height:44px;
-      height:auto;
-      margin:0 auto;
+      display: block;
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      height: auto;
+      margin: 0;
       object-fit: contain;
     }
 
@@ -754,13 +758,17 @@
     </div>
 
     <nav class="drawer-nav" aria-label="Navigation mobile">
-      <a class="pill" href="index.html">
+      <a class="pill" href="index.html" >
         <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
         Accueil
       </a>
       <a class="pill" href="support.html">
         <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
         Support
+      </a>
+      <a class="pill" href="billing.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Abonnement
       </a>
       <a class="pill" href="privacy.html" aria-current="page">
         <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
