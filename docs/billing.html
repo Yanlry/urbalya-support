@@ -803,7 +803,7 @@
   </aside>
 
   <main class="container" role="main" id="main">
-    <section class="hero" aria-label="Gestion de l'abonnement">
+    <section class="hero" aria-label="Gestion de l'abonnement" id="subscriptionStatusSection">
       <div class="hero-grid">
         <div class="status-card" aria-live="polite">
           <div class="status-head">
@@ -852,7 +852,7 @@
         <article class="plan-card" id="merchantCard">
           <div class="plan-label" id="merchantLabel">Formule commerce</div>
           <h3 class="plan-title">Commerce</h3>
-          <p class="plan-price" id="merchantPrice">49 EUR / mois</p>
+          <p class="plan-price" id="merchantPrice">29 EUR / mois</p>
           <p class="plan-summary">
             Une formule pensée pour donner de la visibilité locale à votre activité et garder une présence utile dans l'application.
           </p>
@@ -984,6 +984,12 @@
     }
 
     const unsubscribeUrl = safeUrl(params.get("unsubscribeUrl"));
+    const hasAccountContext = Boolean(accountTypeRaw) ||
+      Boolean(billingStatus) ||
+      billingExempt ||
+      cancelAtPeriodEnd ||
+      Boolean(currentPeriodEnd) ||
+      Boolean(unsubscribeUrl);
 
     function formatDateLabel(value) {
       if (!value) return "";
@@ -1020,6 +1026,12 @@
         return { label: "En cours", variant: "warning" };
       }
       return { label: "Inactif", variant: "inactive" };
+    }
+
+    function renderStatusSectionVisibility() {
+      const statusSection = document.getElementById("subscriptionStatusSection");
+      if (!statusSection) return;
+      statusSection.hidden = !hasAccountContext;
     }
 
     function renderCurrentPlanHighlight(type) {
@@ -1120,7 +1132,7 @@
       const merchantPriceNode = document.getElementById("merchantPrice");
       const municipalityPriceNode = document.getElementById("municipalityPrice");
       const defaultCurrency = "EUR";
-      const fallbackMerchantMonthly = 49;
+      const fallbackMerchantMonthly = 29;
       const fallbackMunicipalityMonthly = 199;
       const apiUrl = "https://urbalya.com/api/pricing/public";
 
@@ -1160,9 +1172,12 @@
       }
     }
 
-    renderCurrentPlanHighlight(accountTypeRaw);
-    renderStatus();
-    renderActions();
+    renderStatusSectionVisibility();
+    if (hasAccountContext) {
+      renderCurrentPlanHighlight(accountTypeRaw);
+      renderStatus();
+      renderActions();
+    }
     loadPricing();
   </script>
   <script src="cookie-consent.js"></script>
