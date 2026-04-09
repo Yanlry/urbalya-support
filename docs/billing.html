@@ -803,7 +803,7 @@
   </aside>
 
   <main class="container" role="main" id="main">
-    <section class="hero" aria-label="Gestion de l'abonnement" id="subscriptionStatusSection">
+    <section class="hero" aria-label="Gestion de l'abonnement">
       <div class="hero-grid">
         <div class="status-card" aria-live="polite">
           <div class="status-head">
@@ -984,12 +984,6 @@
     }
 
     const unsubscribeUrl = safeUrl(params.get("unsubscribeUrl"));
-    const hasAccountContext = Boolean(accountTypeRaw) ||
-      Boolean(billingStatus) ||
-      billingExempt ||
-      cancelAtPeriodEnd ||
-      Boolean(currentPeriodEnd) ||
-      Boolean(unsubscribeUrl);
 
     function formatDateLabel(value) {
       if (!value) return "";
@@ -1026,12 +1020,6 @@
         return { label: "En cours", variant: "warning" };
       }
       return { label: "Inactif", variant: "inactive" };
-    }
-
-    function renderStatusSectionVisibility() {
-      const statusSection = document.getElementById("subscriptionStatusSection");
-      if (!statusSection) return;
-      statusSection.hidden = !hasAccountContext;
     }
 
     function renderCurrentPlanHighlight(type) {
@@ -1172,12 +1160,9 @@
       }
     }
 
-    renderStatusSectionVisibility();
-    if (hasAccountContext) {
-      renderCurrentPlanHighlight(accountTypeRaw);
-      renderStatus();
-      renderActions();
-    }
+    renderCurrentPlanHighlight(accountTypeRaw);
+    renderStatus();
+    renderActions();
     loadPricing();
   </script>
   <script src="cookie-consent.js"></script>
