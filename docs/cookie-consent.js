@@ -274,6 +274,32 @@
         rightsList.appendChild(liPrivacy);
       }
     }
+
+    document.querySelectorAll("footer .foot").forEach(function (foot) {
+      var infoBlock = foot.querySelector("div");
+      if (infoBlock) {
+        infoBlock.innerHTML =
+          "© " +
+          new Date().getFullYear() +
+          " Urbalya — Urbalya est une application développée par Lemach Labs. " +
+          'Contact : <a href="mailto:contact@urbalya.com">contact@urbalya.com</a>';
+      }
+
+      var linksContainer = foot.querySelector("div:last-child");
+      if (!linksContainer) return;
+
+      [
+        { href: "privacy.html", label: "Confidentialité" },
+        { href: "terms.html", label: "Conditions" },
+        { href: "mentions-legales.html", label: "Mentions légales" }
+      ].forEach(function (item) {
+        if (linksContainer.querySelector('a[href="' + item.href + '"]')) return;
+        var link = document.createElement("a");
+        link.href = item.href;
+        link.textContent = item.label;
+        linksContainer.appendChild(link);
+      });
+    });
   }
 
   function createUI(storedConsent) {
