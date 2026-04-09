@@ -450,6 +450,57 @@
       color:var(--muted);
       line-height:1.65;
     }
+    .self-serve{
+      margin-top:14px;
+      padding-top:14px;
+      border-top:1px solid var(--line);
+    }
+    .self-serve h4{
+      margin:0;
+      font-size:16px;
+      font-weight:900;
+      color:var(--text);
+    }
+    .self-serve p{
+      margin-top:8px;
+      margin-bottom:0;
+    }
+    .self-serve-form{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .self-serve-input{
+      flex:1 1 260px;
+      min-height:46px;
+      border-radius:14px;
+      border:1px solid var(--line2);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      font-size:15px;
+      padding:0 14px;
+    }
+    .self-serve-input::placeholder{
+      color:#8ea2bd;
+    }
+    .self-serve-input:focus{
+      box-shadow: var(--focus);
+      border-color: rgba(147, 197, 253, 0.5);
+    }
+    .self-serve-feedback{
+      margin-top:10px;
+      font-size:13px;
+      line-height:1.6;
+    }
+    .self-serve-feedback.muted{color:var(--muted)}
+    .self-serve-feedback.ok{color:#86efac}
+    .self-serve-feedback.error{color:#fca5a5}
+    @media (max-width: 560px){
+      .self-serve-form .btn{
+        width:100%;
+      }
+    }
 
     .section{padding: 18px 0 28px}
     .section-head{margin-bottom:16px}
@@ -823,6 +874,27 @@
             <div class="action-row" id="manageActions">
               <a class="btn" href="support.html">Voir le support</a>
             </div>
+            <div class="self-serve" id="selfServeBlock" hidden>
+              <h4>Retrouver mon abonnement par email</h4>
+              <p>
+                Entrez l'adresse email de votre compte pro. Si elle existe, vous recevrez un lien sécurisé pour gérer votre abonnement.
+              </p>
+              <form class="self-serve-form" id="selfServeForm" novalidate>
+                <input
+                  id="selfServeEmail"
+                  class="self-serve-input"
+                  type="email"
+                  inputmode="email"
+                  autocomplete="email"
+                  placeholder="vous@exemple.com"
+                  required
+                />
+                <button class="btn primary" id="selfServeSubmit" type="submit">
+                  Recevoir un lien
+                </button>
+              </form>
+              <p class="self-serve-feedback muted" id="selfServeFeedback" role="status" aria-live="polite"></p>
+            </div>
           </div>
 
           <div class="meta-grid">
@@ -978,12 +1050,120 @@
           return parsed.toString();
         }
       } catch (error) {
-        console.error("❌ [WEB][BILLING] invalid unsubscribe url", error && error.message ? error.message : error);
+        console.error("❌ [WEB][BILLING] invalid action url", error && error.message ? error.message : error);
       }
       return "";
     }
 
     const unsubscribeUrl = safeUrl(params.get("unsubscribeUrl"));
+    const reactivateUrl = safeUrl(params.get("reactivateUrl"));
+    const hasManagementContext =
+      params.has("accountType") ||
+      params.has("billingStatus") ||
+      params.has("billingExempt") ||
+      params.has("cancelAtPeriodEnd") ||
+      params.has("currentPeriodEnd") ||
+      params.has("unsubscribeUrl") ||
+      params.has("reactivateUrl");
+
+    const selfServeBlock = document.getElementById("selfServeBlock");
+    const selfServeForm = document.getElementById("selfServeForm");
+    const selfServeEmailInput = document.getElementById("selfServeEmail");
+    const selfServeSubmit = document.getElementById("selfServeSubmit");
+    const selfServeFeedback = document.getElementById("selfServeFeedback");
+    const selfServeApiUrl = "https://urbalya.com/api/pro/request-management-link";
+
+    function setSelfServeFeedback(message, tone) {
+      if (!selfServeFeedback) return;
+      selfServeFeedback.className = "self-serve-feedback " + (tone || "muted");
+      selfServeFeedback.textContent = message || "";
+    }
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
+    }
+
+    function resolveApiErrorMessage(payload, fallback) {
+      const backendMessage = payload && payload.message;
+      if (Array.isArray(backendMessage)) {
+        const normalized = backendMessage
+          .map((entry) => String(entry || "").trim())
+          .filter(Boolean);
+        if (normalized.length > 0) {
+          return normalized.join(" ");
+        }
+      }
+      if (typeof backendMessage === "string" && backendMessage.trim()) {
+        return backendMessage.trim();
+      }
+      if (payload && typeof payload.error === "string" && payload.error.trim()) {
+        return payload.error.trim();
+      }
+      return fallback;
+    }
+
+    function setupSelfServeForm() {
+      if (!selfServeBlock) return;
+      selfServeBlock.hidden = hasManagementContext;
+      if (hasManagementContext || !selfServeForm || !selfServeEmailInput) {
+        return;
+      }
+
+      setSelfServeFeedback("", "muted");
+
+      selfServeForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = String(selfServeEmailInput.value || "").trim().toLowerCase();
+        if (!isValidEmail(email)) {
+          setSelfServeFeedback("Veuillez entrer une adresse email valide.", "error");
+          selfServeEmailInput.focus();
+          return;
+        }
+
+        try {
+          if (selfServeSubmit) selfServeSubmit.setAttribute("disabled", "disabled");
+          selfServeEmailInput.setAttribute("disabled", "disabled");
+          setSelfServeFeedback("Envoi en cours...", "muted");
+
+          const response = await fetch(selfServeApiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+            body: JSON.stringify({ email }),
+          });
+
+          let payload = null;
+          try {
+            payload = await response.json();
+          } catch (error) {
+            payload = null;
+          }
+
+          if (!response.ok) {
+            const fallbackMessage =
+              response.status >= 500
+                ? "Le service est momentanément indisponible. Réessayez dans quelques instants."
+                : "Impossible d'envoyer le lien pour le moment.";
+            setSelfServeFeedback(resolveApiErrorMessage(payload, fallbackMessage), "error");
+            return;
+          }
+
+          setSelfServeFeedback(
+            "Si un compte professionnel correspond à cette adresse, un lien sécurisé vient d'être envoyé.",
+            "ok"
+          );
+          selfServeForm.reset();
+        } catch (error) {
+          console.error("❌ [WEB][BILLING] self-serve request failed", error && error.message ? error.message : error);
+          setSelfServeFeedback("Impossible d'envoyer le lien pour le moment. Réessayez plus tard.", "error");
+        } finally {
+          if (selfServeSubmit) selfServeSubmit.removeAttribute("disabled");
+          selfServeEmailInput.removeAttribute("disabled");
+        }
+      });
+    }
 
     function formatDateLabel(value) {
       if (!value) return "";
@@ -1047,6 +1227,16 @@
       const periodLabel = formatDateLabel(currentPeriodEnd);
       const statusMeta = resolveStatusMeta(billingStatus);
 
+      if (!hasManagementContext) {
+        accountValue.textContent = "Non détecté";
+        nextRenewalValue.textContent = "À déterminer";
+        statusPill.textContent = "Accès sécurisé";
+        statusPill.className = "status-pill warning";
+        statusText.textContent =
+          "Vous pouvez demander un lien sécurisé par email pour retrouver la gestion de votre abonnement.";
+        return;
+      }
+
       accountValue.textContent = resolveAccountLabel(accountTypeRaw);
 
       statusPill.textContent = statusMeta.label;
@@ -1085,6 +1275,14 @@
       const manageActions = document.getElementById("manageActions");
       const periodLabel = formatDateLabel(currentPeriodEnd);
 
+      if (!hasManagementContext) {
+        manageText.textContent =
+          "Entrez votre adresse email ci-dessous pour recevoir un lien sécurisé de gestion.";
+        manageActions.innerHTML =
+          '<a class="btn" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
+        return;
+      }
+
       if (billingExempt) {
         manageText.textContent = "Ce compte ne dispose pas d'un renouvellement automatique à arrêter depuis le web.";
         manageActions.innerHTML =
@@ -1096,8 +1294,14 @@
         manageText.textContent = periodLabel
           ? "Le renouvellement automatique est déjà désactivé. Votre accès reste actif jusqu'au " + periodLabel + "."
           : "Le renouvellement automatique est déjà désactivé pour ce compte.";
-        manageActions.innerHTML =
-          '<a class="btn" href="support.html">Voir le support</a>';
+        if (reactivateUrl) {
+          manageActions.innerHTML =
+            '<a class="btn" href="' + reactivateUrl.replace(/"/g, "&quot;") + '">Réactiver le renouvellement</a>' +
+            '<a class="btn" href="mailto:contact@urbalya.com?subject=Question%20abonnement%20Urbalya">Contacter le support</a>';
+        } else {
+          manageActions.innerHTML =
+            '<a class="btn" href="support.html">Voir le support</a>';
+        }
         return;
       }
 
@@ -1160,6 +1364,7 @@
       }
     }
 
+    setupSelfServeForm();
     renderCurrentPlanHighlight(accountTypeRaw);
     renderStatus();
     renderActions();
