@@ -1,0 +1,2304 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Comptes professionnels - Urbalya</title>
+  <meta
+    name="description"
+    content="Creer une demande de compte professionnel Urbalya pour un commerce, une mairie, une collectivite ou une association."
+  />
+  <meta name="theme-color" content="#0B1220" />
+
+  <link rel="icon" type="image/png" href="../logo.png" />
+  <link rel="apple-touch-icon" href="../logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../cookie-consent.css" />
+
+  <style>
+    :root {
+      --bg: #0B1220;
+      --panel: #0F172A;
+      --panel2: #111C32;
+      --text: #E5E7EB;
+      --muted: #94A3B8;
+      --line: rgba(255,255,255,.12);
+      --line2: rgba(255,255,255,.18);
+      --accent: #3B82F6;
+      --accent2: #10B981;
+      --danger: #EF4444;
+      --warn: #F59E0B;
+      --container: 1120px;
+      --tap: 44px;
+      --focus: 0 0 0 4px rgba(59,130,246,.25);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 16% 0%, rgba(59,130,246,.24), transparent 28%),
+        radial-gradient(circle at 90% 8%, rgba(16,185,129,.15), transparent 24%),
+        linear-gradient(180deg, #0B1220 0%, #111827 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    label, input, select, textarea, button { font: inherit; }
+    button { cursor: pointer; }
+    :focus { outline: none; }
+    :focus-visible { box-shadow: var(--focus); }
+
+    .ico { width: 18px; height: 18px; display: inline-block; flex: 0 0 auto; }
+    .ico.xl { width: 22px; height: 22px; }
+
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 18px; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11,18,32,.86);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-toggle {
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(15,23,42,.45);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 10px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(15,23,42,.52);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .pill.primary {
+      background: rgba(59,130,246,.92);
+      border-color: rgba(147,197,253,.45);
+    }
+
+    .pill.danger,
+    .pill.danger[aria-current="page"] {
+      border-color: rgba(239,68,68,.55);
+      background: rgba(239,68,68,.92);
+      color: #fff;
+    }
+
+    .store-link {
+      padding: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      background: transparent !important;
+      min-height: auto;
+      border-width: 0;
+    }
+
+    .store-badge {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2,6,23,.60);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 80;
+    }
+
+    .drawer {
+      position: fixed;
+      top: env(safe-area-inset-top);
+      right: 0;
+      width: min(92vw, 360px);
+      height: calc(100vh - env(safe-area-inset-top));
+      background: rgba(15,23,42,.96);
+      border-left: 1px solid var(--line);
+      box-shadow: 0 30px 80px rgba(0,0,0,.55);
+      transform: translateX(110%);
+      transition: transform .22s ease;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      padding: 14px;
+    }
+
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 6px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .drawer-title { font-weight: 900; }
+
+    .drawer-close {
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(2,6,23,.35);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drawer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 6px;
+    }
+
+    .drawer .pill {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 12px;
+      border-radius: 16px;
+      font-size: 15px;
+      min-height: 46px;
+    }
+
+    .drawer-foot {
+      margin-top: auto;
+      padding: 12px 6px 6px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .drawer .store-link {
+      display: block;
+      width: 100%;
+      max-width: none;
+      border-width: 0;
+    }
+
+    html.menu-open body { overflow: hidden; }
+    html.menu-open .backdrop { opacity: 1; pointer-events: auto; }
+    html.menu-open .drawer { transform: translateX(0); }
+
+    main { padding: 52px 0 72px; }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(34px, 6.6vw, 64px);
+      line-height: .98;
+      letter-spacing: 0;
+      max-width: 900px;
+    }
+
+    .lead {
+      margin: 20px 0 0;
+      max-width: 760px;
+      color: #CBD5E1;
+      font-size: clamp(17px, 2.1vw, 21px);
+      line-height: 1.58;
+    }
+
+    .notice {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      max-width: 860px;
+      padding: 16px;
+      border: 1px solid rgba(245,158,11,.35);
+      border-radius: 14px;
+      background: rgba(245,158,11,.10);
+    }
+
+    .notice-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(245,158,11,.18);
+      color: #FDE68A;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .notice p { margin: 0; color: #FDE68A; line-height: 1.5; font-weight: 700; }
+
+    .layout {
+      margin-top: 42px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(15,23,42,.72);
+      box-shadow: 0 24px 70px rgba(0,0,0,.28);
+    }
+
+    .panel-inner { padding: 24px; }
+
+    .panel h2,
+    .panel h3 {
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    .panel h2 { font-size: 24px; }
+    .panel h3 { font-size: 18px; }
+
+    .muted {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .account-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .account-tab {
+      min-height: 96px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      background: rgba(17,28,50,.72);
+      color: var(--text);
+      text-align: left;
+    }
+
+    .account-tab strong,
+    .account-tab span {
+      display: block;
+    }
+
+    .account-tab strong { font-size: 16px; }
+    .account-tab span { margin-top: 7px; color: var(--muted); font-size: 13px; line-height: 1.4; }
+
+    .account-tab[aria-pressed="true"] {
+      border-color: rgba(59,130,246,.78);
+      background: rgba(59,130,246,.20);
+    }
+
+    .form-section {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 16px;
+    }
+
+    .form-section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+
+    .field label {
+      color: #DCE6F4;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid rgba(148,163,184,.38);
+      border-radius: 12px;
+      background: rgba(2,6,23,.52);
+      color: var(--text);
+      padding: 12px 13px;
+      min-height: 46px;
+    }
+
+    select option { color: #0B1220; }
+
+    textarea {
+      min-height: 118px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    .hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .address-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .secondary-button,
+    .submit,
+    .ghost-button {
+      min-height: 46px;
+      border-radius: 12px;
+      font-weight: 900;
+      border: 1px solid var(--line2);
+      color: var(--text);
+    }
+
+    .secondary-button {
+      padding: 0 14px;
+      background: rgba(59,130,246,.22);
+    }
+
+    .ghost-button {
+      padding: 0 13px;
+      background: rgba(15,23,42,.62);
+    }
+
+    .submit {
+      width: 100%;
+      margin-top: 20px;
+      border: 0;
+      background: var(--accent);
+      color: white;
+    }
+
+    .submit:disabled {
+      cursor: not-allowed;
+      opacity: .66;
+    }
+
+    .selected-address {
+      display: none;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(16,185,129,.34);
+      background: rgba(16,185,129,.10);
+      color: #A7F3D0;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .selected-address.is-visible { display: block; }
+
+    .hours-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .hours-row {
+      display: grid;
+      grid-template-columns: 110px minmax(96px, 1fr) minmax(96px, 1fr) 138px 92px;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 12px;
+      background: rgba(2,6,23,.26);
+    }
+
+    .hours-day { font-weight: 900; }
+
+    .hours-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hours-preview {
+      white-space: pre-line;
+      margin-top: 4px;
+    }
+
+    .hours-pause-button {
+      min-height: 40px;
+      padding: 0 10px;
+      font-size: 13px;
+    }
+
+    .pause-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      margin-top: 4px;
+    }
+
+    .check-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #CBD5E1;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .check-row input {
+      width: 18px;
+      height: 18px;
+      min-height: 18px;
+      padding: 0;
+    }
+
+    .file-zone {
+      border: 1px dashed rgba(148,163,184,.48);
+      border-radius: 14px;
+      padding: 16px;
+      background: rgba(2,6,23,.28);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .preview {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(2,6,23,.48);
+    }
+
+    .preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .status {
+      display: none;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line2);
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .status.is-visible { display: block; }
+    .status.success { border-color: rgba(16,185,129,.42); background: rgba(16,185,129,.12); color: #A7F3D0; }
+    .status.error { border-color: rgba(239,68,68,.42); background: rgba(239,68,68,.12); color: #FECACA; }
+
+    .steps {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .steps li {
+      display: flex;
+      gap: 12px;
+      color: #CBD5E1;
+      line-height: 1.55;
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(16,185,129,.16);
+      color: #A7F3D0;
+      font-weight: 900;
+      flex: 0 0 auto;
+      margin-top: 1px;
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 16px;
+      position: sticky;
+      top: 90px;
+    }
+
+    .side-list {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: #CBD5E1;
+      line-height: 1.5;
+    }
+
+    .side-list li {
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .side-list li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent2);
+      position: absolute;
+      left: 0;
+      top: .62em;
+    }
+
+    .billing-section {
+      margin-top: 24px;
+      scroll-margin-top: 90px;
+    }
+
+    .billing-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+      gap: 18px;
+      align-items: start;
+      margin-top: 16px;
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .plan-card,
+    .billing-card {
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      background: rgba(17,28,50,.72);
+      padding: 16px;
+    }
+
+    .plan-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(59,130,246,.18);
+      color: #BFDBFE;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .plan-price {
+      margin: 12px 0 0;
+      font-size: 26px;
+      font-weight: 900;
+      color: #FFFFFF;
+    }
+
+    .benefits {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 9px;
+      color: #CBD5E1;
+      line-height: 1.45;
+    }
+
+    .benefits li {
+      padding-left: 17px;
+      position: relative;
+    }
+
+    .benefits li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .62em;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent2);
+    }
+
+    .billing-card form {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .billing-feedback {
+      min-height: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .billing-feedback.ok { color: #A7F3D0; }
+    .billing-feedback.error { color: #FECACA; }
+
+    .billing-context {
+      display: none;
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid rgba(59,130,246,.34);
+      border-radius: 14px;
+      background: rgba(59,130,246,.10);
+    }
+
+    .billing-context.is-visible { display: block; }
+
+    .billing-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .billing-meta-item {
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(2,6,23,.32);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .billing-meta-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .billing-meta-item strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 15px;
+    }
+
+    .billing-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 26px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(2,6,23,.72);
+    }
+
+    .modal.is-visible { display: flex; }
+
+    .modal-card {
+      width: min(720px, 100%);
+      max-height: min(720px, 92vh);
+      overflow: auto;
+      border: 1px solid var(--line2);
+      border-radius: 18px;
+      background: #0F172A;
+      box-shadow: 0 30px 80px rgba(0,0,0,.42);
+    }
+
+    .modal-head {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(15,23,42,.96);
+    }
+
+    .modal-title { margin: 0; font-size: 20px; }
+    .modal-body { padding: 18px; display: grid; gap: 12px; }
+
+    .suggestion {
+      width: 100%;
+      display: block;
+      text-align: left;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 12px;
+      color: var(--text);
+      background: rgba(17,28,50,.72);
+    }
+
+    .suggestion strong,
+    .suggestion span { display: block; }
+    .suggestion span { margin-top: 6px; color: var(--muted); font-size: 13px; }
+
+    .is-hidden { display: none !important; }
+
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+      .side-stack { position: static; }
+      .account-tabs { grid-template-columns: 1fr; }
+      .billing-hero { grid-template-columns: 1fr; }
+      .plans-grid { grid-template-columns: 1fr; }
+      .billing-meta { grid-template-columns: 1fr; }
+      .hours-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner { align-items: flex-start; padding: 14px 0; flex-direction: column; }
+      .nav-links { justify-content: flex-start; display: none; }
+      main { padding-top: 40px; }
+      .panel-inner { padding: 18px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .address-row { grid-template-columns: 1fr; }
+      .hours-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-x" viewBox="0 0 24 24">
+      <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-8.5z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-support" viewBox="0 0 24 24">
+      <path d="M12 21a8 8 0 1 0-8-8v3a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-2v6h1a2 2 0 0 0 2-2v-3" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24">
+      <rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+      <path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-file" viewBox="0 0 24 24">
+      <path d="M7 3h7l4 4v14H7z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M14 3v5h5M9 13h6M9 17h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+      <path d="m5 8 7 5 7-5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-building" viewBox="0 0 24 24">
+      <path d="M4 21h16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 21V7l6-4 6 4v14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <header class="nav" role="banner">
+    <div class="container nav-inner">
+      <a class="brand" href="../index.html" aria-label="Accueil Urbalya">
+        <img src="../logo.png" alt="" />
+        <span>Urbalya</span>
+      </a>
+      <nav class="nav-links" aria-label="Navigation">
+        <a class="pill" href="../index.html">Accueil</a>
+        <a class="pill" href="../support.html">Support</a>
+        <a class="pill primary" href="./" aria-current="page">Professionnels</a>
+      </nav>
+      <div class="nav-actions">
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Ouvrir le menu"
+          aria-controls="drawer"
+          aria-expanded="false"
+          id="menuBtn"
+        >
+          <svg class="ico xl" aria-hidden="true"><use href="#i-menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer-head">
+      <div class="drawer-title">Navigation</div>
+      <button class="drawer-close" type="button" aria-label="Fermer le menu" id="closeBtn">
+        <svg class="ico xl" aria-hidden="true"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+
+    <nav class="drawer-nav" aria-label="Navigation mobile">
+      <a class="pill" href="../index.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
+        Accueil
+      </a>
+      <a class="pill" href="../support.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
+        Support
+      </a>
+      <a class="pill" href="./" aria-current="page">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Professionnels
+      </a>
+      <a class="pill" href="./#abonnement">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Abonnement pro
+      </a>
+      <a class="pill" href="../privacy.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        Confidentialité
+      </a>
+      <a class="pill" href="../terms.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Conditions
+      </a>
+      <a class="pill" href="../mentions-legales.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Mentions légales
+      </a>
+      <a class="pill primary store-link" href="https://apps.apple.com/app/id6754794588" rel="noopener noreferrer" aria-label="Ouvrir l'App Store">
+        <img class="store-badge" src="../apple.png" alt="Télécharger sur l'App Store" loading="lazy" decoding="async" />
+      </a>
+      <a class="pill primary store-link" href="https://play.google.com/store/search?q=Urbalya&c=apps" rel="noopener noreferrer" aria-label="Ouvrir Google Play">
+        <img class="store-badge" src="../google.png" alt="Disponible sur Google Play" loading="lazy" decoding="async" />
+      </a>
+    </nav>
+
+    <div class="drawer-foot">
+      <a class="pill danger" href="../delete-account.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Supprimer mon compte
+      </a>
+      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
+        <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+        Contactez-nous
+      </a>
+    </div>
+  </aside>
+
+  <main>
+    <div class="container">
+      <section class="hero" aria-label="Comptes professionnels">
+        <h1>Créer une demande de compte professionnel Urbalya</h1>
+        <p class="lead">
+          Les comptes professionnels Urbalya sont créés depuis notre site web.
+          Une fois votre compte activé, vous pouvez vous connecter à l'application mobile.
+        </p>
+        <div class="notice" role="note">
+          <span class="notice-mark">i</span>
+          <p>
+            Pour Apple/iOS, aucune inscription professionnelle ne se fait dans l'application mobile.
+            Ce formulaire web remplace le parcours professionnel mobile.
+          </p>
+        </div>
+      </section>
+
+      <section class="layout" aria-label="Formulaire professionnel">
+        <div class="panel">
+          <div class="panel-inner">
+            <h2>Demande complète</h2>
+            <p class="muted">
+              Remplissez votre dossier en ligne. Le compte sera créé en attente de validation par le support Urbalya.
+            </p>
+
+            <div class="account-tabs" role="group" aria-label="Type de compte professionnel">
+              <button type="button" class="account-tab" data-account-tab="merchant" aria-pressed="true">
+                <strong>Commerçant</strong>
+                <span>Commerce local, artisan, service ou restauration.</span>
+              </button>
+              <button type="button" class="account-tab" data-account-tab="municipality" aria-pressed="false">
+                <strong>Mairie</strong>
+                <span>Mairie, collectivité ou compte institutionnel local.</span>
+              </button>
+              <button type="button" class="account-tab" data-account-tab="social" aria-pressed="false">
+                <strong>Association</strong>
+                <span>Club, association ou organisation locale.</span>
+              </button>
+            </div>
+
+            <form id="professionalSignupForm" novalidate>
+              <input type="hidden" id="accountType" name="accountType" value="merchant" />
+
+              <section class="form-section" aria-label="Accès au compte">
+                <div class="form-section-header">
+                  <h3>Accès au compte</h3>
+                  <p class="hint">Ces identifiants serviront ensuite dans l'application mobile.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="email">Email professionnel</label>
+                    <input id="email" name="email" type="email" autocomplete="email" required />
+                  </div>
+                  <div class="field">
+                    <label for="password">Mot de passe</label>
+                    <input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required />
+                  </div>
+                  <div class="field">
+                    <label for="confirmPassword">Confirmer le mot de passe</label>
+                    <input id="confirmPassword" name="confirmPassword" type="password" minlength="8" autocomplete="new-password" required />
+                  </div>
+                  <div class="field manager-field">
+                    <label for="managerFirstName">Prénom du responsable</label>
+                    <input id="managerFirstName" name="managerFirstName" autocomplete="given-name" required />
+                  </div>
+                  <div class="field manager-field">
+                    <label for="managerLastName">Nom du responsable</label>
+                    <input id="managerLastName" name="managerLastName" autocomplete="family-name" required />
+                  </div>
+                </div>
+              </section>
+
+              <section class="form-section account-section" data-section="merchant" aria-label="Informations commerce">
+                <div class="form-section-header">
+                  <h3>Commerce</h3>
+                  <p class="hint">Nom, activité et description visibles après validation.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="merchantName">Nom du commerce</label>
+                    <input id="merchantName" name="merchantName" autocomplete="organization" />
+                  </div>
+                  <div class="field">
+                    <label for="merchantBusinessTypeKey">Type d'activité</label>
+                    <select id="merchantBusinessTypeKey" name="merchantBusinessTypeKey"></select>
+                  </div>
+                  <div class="field is-hidden" id="merchantCustomWrap">
+                    <label for="merchantBusinessTypeCustom">Activité à préciser</label>
+                    <input id="merchantBusinessTypeCustom" name="merchantBusinessTypeCustom" />
+                  </div>
+                  <div class="field">
+                    <label for="merchantPhone">Téléphone</label>
+                    <input id="merchantPhone" name="merchantPhone" type="tel" autocomplete="tel" />
+                  </div>
+                  <div class="field">
+                    <label for="merchantWebsite">Site web</label>
+                    <input id="merchantWebsite" name="merchantWebsite" type="url" placeholder="https://..." />
+                  </div>
+                  <div class="field full">
+                    <label for="merchantDescription">Description</label>
+                    <textarea id="merchantDescription" name="merchantDescription" placeholder="Présentez votre activité, vos services ou votre spécialité."></textarea>
+                  </div>
+                </div>
+              </section>
+
+              <section class="form-section account-section is-hidden" data-section="municipality" aria-label="Informations mairie">
+                <div class="form-section-header">
+                  <h3>Mairie / collectivité</h3>
+                  <p class="hint">Les informations officielles seront vérifiées avant activation.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="municipalitySIREN">SIREN</label>
+                    <input id="municipalitySIREN" name="municipalitySIREN" inputmode="numeric" maxlength="14" />
+                  </div>
+                  <div class="field">
+                    <label for="municipalityPhone">Téléphone officiel</label>
+                    <input id="municipalityPhone" name="municipalityPhone" type="tel" autocomplete="tel" />
+                  </div>
+                </div>
+              </section>
+
+              <section class="form-section account-section is-hidden" data-section="social" aria-label="Informations association">
+                <div class="form-section-header">
+                  <h3>Association / organisation</h3>
+                  <p class="hint">Le compte sera relié à votre club ou structure locale.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="socialClubName">Nom de la structure</label>
+                    <input id="socialClubName" name="socialClubName" autocomplete="organization" />
+                  </div>
+                  <div class="field">
+                    <label for="socialStructureType">Type de structure</label>
+                    <select id="socialStructureType" name="socialStructureType">
+                      <option value="club">Club</option>
+                      <option value="association">Association</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="socialDomainKey">Domaine</label>
+                    <select id="socialDomainKey" name="socialDomainKey"></select>
+                  </div>
+                  <div class="field is-hidden" id="socialCustomWrap">
+                    <label for="socialDomainCustom">Domaine à préciser</label>
+                    <input id="socialDomainCustom" name="socialDomainCustom" />
+                  </div>
+                  <div class="field">
+                    <label for="socialClubPhone">Téléphone</label>
+                    <input id="socialClubPhone" name="socialClubPhone" type="tel" autocomplete="tel" />
+                  </div>
+                  <div class="field full">
+                    <label for="socialClubDescription">Description</label>
+                    <textarea id="socialClubDescription" name="socialClubDescription" placeholder="Présentez brièvement votre structure."></textarea>
+                  </div>
+                </div>
+              </section>
+
+              <section class="form-section" aria-label="Adresse">
+                <div class="form-section-header">
+                  <h3>Adresse vérifiée</h3>
+                  <p class="hint">Sélectionnez l'adresse proposée pour éviter les erreurs de carte.</p>
+                </div>
+                <div class="field full">
+                  <label for="addressQuery" id="addressLabel">Adresse du commerce</label>
+                  <div class="address-row">
+                    <input id="addressQuery" name="addressQuery" autocomplete="street-address" placeholder="Ex : 12 rue Victor Hugo, Lyon" />
+                    <button type="button" class="secondary-button" id="searchAddressButton">Vérifier l'adresse</button>
+                  </div>
+                  <div class="selected-address" id="selectedAddress"></div>
+                </div>
+              </section>
+
+              <section class="form-section" id="hoursSection" aria-label="Horaires">
+                <div class="form-section-header">
+                  <h3>Horaires</h3>
+                  <div class="hours-actions">
+                    <button type="button" class="ghost-button" id="weekdayPresetButton">Semaine 9h-18h</button>
+                    <button type="button" class="ghost-button" id="copyMondayButton">Copier lundi sur semaine</button>
+                  </div>
+                </div>
+                <div class="hours-grid" id="hoursGrid"></div>
+                <div class="selected-address hours-preview is-visible" id="hoursPreview"></div>
+              </section>
+
+              <section class="form-section" aria-label="Photos">
+                <div class="form-section-header">
+                  <h3>Photo de profil</h3>
+                  <p class="hint">Ajoutez au moins une image. La première photo sera utilisée comme photo principale.</p>
+                </div>
+                <div class="file-zone">
+                  <input id="photos" name="photos" type="file" accept="image/*" multiple />
+                  <p class="hint">Images uniquement, 8 photos maximum, 10 Mo par fichier.</p>
+                  <div class="preview-grid" id="photoPreview"></div>
+                </div>
+              </section>
+
+              <section class="form-section" aria-label="Conditions">
+                <label class="check-row">
+                  <input id="termsAccepted" type="checkbox" required />
+                  <span>J'accepte les <a href="../terms.html" target="_blank" rel="noopener">conditions d'utilisation</a> et la vérification du dossier par Urbalya.</span>
+                </label>
+                <p class="hint">Aucun paiement n'est demandé sur cette page.</p>
+              </section>
+
+              <button class="submit" id="submitButton" type="submit">Envoyer la demande</button>
+              <div class="status" id="formStatus" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+
+        <aside class="side-stack" aria-label="Informations">
+          <div class="panel">
+            <div class="panel-inner">
+              <h2>Validation support</h2>
+              <ol class="steps">
+                <li><span class="step-number">1</span><span>Vous créez le dossier complet depuis le site web.</span></li>
+                <li><span class="step-number">2</span><span>Le support Urbalya vérifie les informations professionnelles.</span></li>
+                <li><span class="step-number">3</span><span>Après activation, vous vous connectez à l'application mobile avec ces identifiants.</span></li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-inner">
+              <h2>Préparez</h2>
+              <ul class="side-list">
+                <li>Une adresse exacte sélectionnée dans la fenêtre de vérification.</li>
+                <li>Une photo de profil du commerce, de la mairie ou de l'association.</li>
+                <li>Les horaires officiels pour les commerces et mairies.</li>
+                <li>Un email professionnel consultable.</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel billing-section" id="abonnement" aria-label="Abonnement professionnel">
+        <div class="panel-inner">
+          <h2>Abonnement et gestion du compte pro</h2>
+          <p class="muted">
+            Les demandes de compte et les informations d'abonnement sont désormais regroupées ici.
+            Aucun paiement n'est lancé depuis cette page : les actions sensibles passent par un lien sécurisé envoyé par email.
+          </p>
+
+          <div class="billing-hero">
+            <div>
+              <div class="plans-grid">
+                <article class="plan-card">
+                  <span class="plan-label">Commerce</span>
+                  <p class="plan-price">29 EUR / mois</p>
+                  <ul class="benefits">
+                    <li>Fiche commerce visible dans Urbalya après validation.</li>
+                    <li>Galerie photos, horaires, adresse et description.</li>
+                    <li>Gestion des informations professionnelles depuis l'espace pro.</li>
+                  </ul>
+                </article>
+                <article class="plan-card">
+                  <span class="plan-label">Mairie</span>
+                  <p class="plan-price">199 EUR / mois</p>
+                  <ul class="benefits">
+                    <li>Compte institutionnel validé par le support Urbalya.</li>
+                    <li>Informations officielles, horaires et coordonnées communales.</li>
+                    <li>Outils de visibilité et de relation locale après activation.</li>
+                  </ul>
+                </article>
+              </div>
+
+              <div class="billing-context" id="billingContextBlock">
+                <h3>Gestion de votre abonnement</h3>
+                <p class="muted" id="billingContextText">
+                  Vérifiez les informations transmises par votre lien sécurisé.
+                </p>
+                <div class="billing-meta">
+                  <div class="billing-meta-item">
+                    <span>Compte</span>
+                    <strong id="billingAccountValue">Compte pro</strong>
+                  </div>
+                  <div class="billing-meta-item">
+                    <span>Statut</span>
+                    <strong id="billingStatusValue">Indisponible</strong>
+                  </div>
+                  <div class="billing-meta-item">
+                    <span>Renouvellement</span>
+                    <strong id="billingRenewalValue">Indisponible</strong>
+                  </div>
+                </div>
+                <div class="billing-actions" id="billingActions"></div>
+              </div>
+            </div>
+
+            <div class="billing-card" id="billingSelfServeBlock">
+              <h3>Recevoir un lien sécurisé</h3>
+              <p class="muted">
+                Saisissez l'email de votre compte professionnel pour recevoir un lien de gestion.
+              </p>
+              <form id="billingSelfServeForm">
+                <div class="field">
+                  <label for="billingSelfServeEmail">Email professionnel</label>
+                  <input id="billingSelfServeEmail" type="email" autocomplete="email" required />
+                </div>
+                <button class="secondary-button" id="billingSelfServeSubmit" type="submit">Envoyer le lien</button>
+                <div class="billing-feedback" id="billingFeedback" role="status" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="modal" id="addressModal" role="dialog" aria-modal="true" aria-labelledby="addressModalTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 class="modal-title" id="addressModalTitle">Sélectionner l'adresse</h2>
+        <button type="button" class="ghost-button" id="closeAddressModal">Fermer</button>
+      </div>
+      <div class="modal-body" id="addressSuggestions"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="pauseModal" role="dialog" aria-modal="true" aria-labelledby="pauseModalTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 class="modal-title" id="pauseModalTitle">Ajouter une pause</h2>
+        <button type="button" class="ghost-button" id="closePauseModal">Fermer</button>
+      </div>
+      <div class="modal-body">
+        <p class="muted" id="pauseModalSubtitle">Sélectionnez le créneau de pause.</p>
+        <div class="pause-fields">
+          <div class="field">
+            <label for="pauseStart">Début de pause</label>
+            <input id="pauseStart" type="time" value="12:00" />
+          </div>
+          <div class="field">
+            <label for="pauseEnd">Fin de pause</label>
+            <input id="pauseEnd" type="time" value="14:00" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="ghost-button" id="removePauseButton">Retirer la pause</button>
+          <button type="button" class="secondary-button" id="savePauseButton">Valider la pause</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container footer-row">
+      <div>© <span id="year"></span> Urbalya - Lemach Labs</div>
+      <div class="footer-links">
+        <a href="../index.html">Accueil</a>
+        <a href="../support.html">Support</a>
+        <a href="./">Professionnels</a>
+        <a href="../privacy.html">Confidentialité</a>
+        <a href="../terms.html">Conditions</a>
+        <a href="../mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var DEFAULT_API_BASE = "https://urbalya.com/api";
+      var RUNTIME_API_BASE = String(window.URBALYA_API_BASE_URL || "").trim();
+      var API_BASE = (RUNTIME_API_BASE || DEFAULT_API_BASE).replace(/\/+$/, "");
+      var TERMS_VERSION = "2026-04-30-web-professional";
+
+      var merchantTypes = [
+        ["BAKERY", "Boulangerie", "BAKERY"],
+        ["PASTRY", "Pâtisserie", "BAKERY"],
+        ["CHOCOLATE", "Chocolatier", "BAKERY"],
+        ["BUTCHER", "Boucherie", "LOCAL_SHOP"],
+        ["CATERER", "Traiteur", "SNACK"],
+        ["FISHMONGER", "Poissonnerie", "LOCAL_SHOP"],
+        ["GREENGROCER", "Primeur", "LOCAL_SHOP"],
+        ["GROCERY", "Épicerie", "LOCAL_SHOP"],
+        ["SUPERMARKET", "Supermarché", "LOCAL_SHOP"],
+        ["WINE", "Caviste", "LOCAL_SHOP"],
+        ["RESTAURANT", "Restaurant", "SNACK"],
+        ["SNACK", "Snack", "SNACK"],
+        ["FAST_FOOD", "Fast-food", "SNACK"],
+        ["PIZZERIA", "Pizzeria", "SNACK"],
+        ["BURGER", "Burger", "SNACK"],
+        ["SUSHI", "Sushi", "SNACK"],
+        ["CREPERIE", "Crêperie", "SNACK"],
+        ["BRASSERIE", "Brasserie", "SNACK"],
+        ["CAFE", "Café", "SNACK"],
+        ["BAR", "Bar", "SNACK"],
+        ["TEA_ROOM", "Salon de thé", "SNACK"],
+        ["ICE_CREAM", "Glacier", "SNACK"],
+        ["FOOD_TRUCK", "Food truck", "SNACK"],
+        ["CLOTHING", "Vêtements", "LOCAL_SHOP"],
+        ["SHOES", "Chaussures", "LOCAL_SHOP"],
+        ["JEWELRY", "Bijouterie", "LOCAL_SHOP"],
+        ["BOOKSTORE", "Librairie", "LOCAL_SHOP"],
+        ["TOY_STORE", "Jouets", "LOCAL_SHOP"],
+        ["PHONE_SHOP", "Téléphonie", "LOCAL_SHOP"],
+        ["ELECTRONICS", "Électronique", "LOCAL_SHOP"],
+        ["FURNITURE", "Meubles", "LOCAL_SHOP"],
+        ["DECORATION", "Décoration", "LOCAL_SHOP"],
+        ["FLOWER_SHOP", "Fleuriste", "LOCAL_SHOP"],
+        ["PET_SHOP", "Animalerie", "LOCAL_SHOP"],
+        ["SPORT_SHOP", "Magasin de sport", "LOCAL_SHOP"],
+        ["BIKE_SHOP", "Vélo", "LOCAL_SHOP"],
+        ["HAIRDRESSER", "Coiffeur", "HAIRDRESSER"],
+        ["BARBER", "Barbier", "HAIRDRESSER"],
+        ["BEAUTY", "Institut de beauté", "HAIRDRESSER"],
+        ["NAILS", "Onglerie", "HAIRDRESSER"],
+        ["SPA", "Spa", "HAIRDRESSER"],
+        ["PHARMACY", "Pharmacie", "SERVICES"],
+        ["DOCTOR", "Cabinet médical", "SERVICES"],
+        ["DENTIST", "Dentiste", "SERVICES"],
+        ["PHYSIO", "Kiné", "SERVICES"],
+        ["OPTICIAN", "Opticien", "LOCAL_SHOP"],
+        ["TAXI", "Taxi", "SERVICES"],
+        ["AMBULANCE", "Ambulance", "SERVICES"],
+        ["DRIVING_SCHOOL", "Auto-école", "SERVICES"],
+        ["GARAGE", "Garage auto", "SERVICES"],
+        ["REPAIR", "Dépannage", "SERVICES"],
+        ["PRESSING", "Pressing", "SERVICES"],
+        ["LAUNDRY", "Laverie", "SERVICES"],
+        ["CLEANING", "Ménage à domicile", "SERVICES"],
+        ["BANK", "Banque", "SERVICES"],
+        ["INSURANCE", "Assurance", "SERVICES"],
+        ["REAL_ESTATE", "Agence immobilière", "SERVICES"],
+        ["NOTARY", "Notaire", "SERVICES"],
+        ["LAWYER", "Avocat", "SERVICES"],
+        ["ACCOUNTANT", "Comptable", "SERVICES"],
+        ["PLUMBER", "Plombier", "ARTISAN"],
+        ["ELECTRICIAN", "Électricien", "ARTISAN"],
+        ["CARPENTER", "Menuisier", "ARTISAN"],
+        ["MASON", "Maçon", "ARTISAN"],
+        ["PAINTER", "Peintre", "ARTISAN"],
+        ["TILER", "Carreleur", "ARTISAN"],
+        ["ROOFER", "Couvreur", "ARTISAN"],
+        ["LOCKSMITH", "Serrurier", "ARTISAN"],
+        ["GLAZIER", "Vitrier", "ARTISAN"],
+        ["HVAC", "Chauffagiste", "ARTISAN"],
+        ["GARDENER", "Jardinier", "ARTISAN"],
+        ["MOVING", "Déménagement", "ARTISAN"],
+        ["OTHER", "Autre (à préciser)", "LOCAL_SHOP"]
+      ];
+
+      var socialDomains = [
+        ["FOOTBALL", "Football"],
+        ["BASKETBALL", "Basketball"],
+        ["HANDBALL", "Handball"],
+        ["VOLLEYBALL", "Volley-ball"],
+        ["RUGBY", "Rugby"],
+        ["TENNIS", "Tennis"],
+        ["BADMINTON", "Badminton"],
+        ["TABLE_TENNIS", "Tennis de table"],
+        ["ATHLETICS", "Athlétisme"],
+        ["CYCLING", "Cyclisme"],
+        ["RUNNING", "Course à pied"],
+        ["SWIMMING", "Natation"],
+        ["TRIATHLON", "Triathlon"],
+        ["MARTIAL_ARTS", "Arts martiaux"],
+        ["BOXING", "Boxe"],
+        ["GYMNASTICS", "Gymnastique"],
+        ["DANCE", "Danse"],
+        ["YOGA", "Yoga"],
+        ["FITNESS_WELLNESS", "Fitness et bien-être"],
+        ["HIKING", "Randonnée"],
+        ["CLIMBING", "Escalade"],
+        ["MUSIC", "Musique"],
+        ["SINGING", "Chorale"],
+        ["THEATRE", "Théâtre"],
+        ["CINEMA", "Cinéma"],
+        ["PHOTOGRAPHY", "Photographie"],
+        ["PLASTIC_ARTS", "Arts plastiques"],
+        ["WRITING", "Écriture"],
+        ["READING", "Lecture"],
+        ["HERITAGE", "Patrimoine"],
+        ["LANGUAGE_EXCHANGE", "Échange linguistique"],
+        ["SCHOOL_SUPPORT", "Soutien scolaire"],
+        ["STUDENT_LIFE", "Vie étudiante"],
+        ["SCIENCE", "Sciences"],
+        ["DIGITAL", "Numérique"],
+        ["ROBOTICS", "Robotique"],
+        ["GAMING", "Jeux vidéo"],
+        ["BOARD_GAMES", "Jeux de société"],
+        ["CREATIVE_HOBBIES", "Loisirs créatifs"],
+        ["TRAVEL_DISCOVERY", "Voyage et découverte"],
+        ["SOLIDARITY", "Solidarité"],
+        ["HUMANITARIAN", "Humanitaire"],
+        ["CHARITY", "Caritatif"],
+        ["HEALTH_PREVENTION", "Santé et prévention"],
+        ["DISABILITY_INCLUSION", "Handicap et inclusion"],
+        ["SENIORS", "Seniors"],
+        ["YOUTH", "Jeunesse"],
+        ["PARENTS", "Parents et familles"],
+        ["ENVIRONMENT", "Environnement"],
+        ["ANIMAL_WELFARE", "Protection animale"],
+        ["URBAN_GARDEN", "Jardin partagé"],
+        ["LOCAL_FOOD", "Alimentation locale"],
+        ["CITIZENSHIP", "Citoyenneté"],
+        ["NEIGHBORHOOD_LIFE", "Vie de quartier"],
+        ["CIVIL_SECURITY", "Sécurité civile"],
+        ["CONSUMER_DEFENSE", "Défense des consommateurs"],
+        ["PROFESSIONAL_NETWORK", "Réseau professionnel"],
+        ["EMPLOYMENT_SUPPORT", "Insertion et emploi"],
+        ["ENTREPRENEURSHIP", "Entrepreneuriat"],
+        ["RELIGIOUS_CULTURAL", "Culture et spiritualité"],
+        ["OTHER", "Autre (à préciser)"]
+      ];
+
+      var days = [
+        ["mon", "Lundi", "Lun"],
+        ["tue", "Mardi", "Mar"],
+        ["wed", "Mercredi", "Mer"],
+        ["thu", "Jeudi", "Jeu"],
+        ["fri", "Vendredi", "Ven"],
+        ["sat", "Samedi", "Sam"],
+        ["sun", "Dimanche", "Dim"]
+      ];
+
+      var selectedAddress = null;
+      var currentAccountType = "merchant";
+      var activePauseRow = null;
+
+      var $ = function (id) { return document.getElementById(id); };
+
+      function escapeHtml(value) {
+        return String(value || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function optionHtml(value, label, dataCategory) {
+        var category = dataCategory ? ' data-category="' + escapeHtml(dataCategory) + '"' : "";
+        return '<option value="' + escapeHtml(value) + '"' + category + '>' + escapeHtml(label) + '</option>';
+      }
+
+      function populateSelects() {
+        $("merchantBusinessTypeKey").innerHTML = merchantTypes
+          .map(function (item) { return optionHtml(item[0], item[1], item[2]); })
+          .join("");
+        $("socialDomainKey").innerHTML = socialDomains
+          .map(function (item) { return optionHtml(item[0], item[1]); })
+          .join("");
+      }
+
+      function renderHours() {
+        $("hoursGrid").innerHTML = days.map(function (day, index) {
+          var defaultOpen = index < 5 ? "09:00" : "10:00";
+          var defaultClose = index < 5 ? "18:00" : "12:00";
+          var closed = index === 6 ? " checked" : "";
+          return [
+            '<div class="hours-row" data-day="' + day[0] + '">',
+            '<div class="hours-day">' + day[1] + '</div>',
+            '<input aria-label="Ouverture ' + day[1] + '" type="time" data-hour="open" value="' + defaultOpen + '" />',
+            '<input aria-label="Fermeture ' + day[1] + '" type="time" data-hour="close" value="' + defaultClose + '" />',
+            '<button type="button" class="ghost-button hours-pause-button" data-hour="pauseButton">Ajouter une pause</button>',
+            '<label class="check-row"><input type="checkbox" data-hour="closed"' + closed + ' /> Fermé</label>',
+            '</div>'
+          ].join("");
+        }).join("");
+
+        Array.prototype.forEach.call(document.querySelectorAll("[data-hour='closed']"), function (checkbox) {
+          checkbox.addEventListener("change", function () {
+            var row = checkbox.closest(".hours-row");
+            Array.prototype.forEach.call(row.querySelectorAll("input[type='time']"), function (input) {
+              input.disabled = checkbox.checked;
+            });
+            row.querySelector("[data-hour='pauseButton']").disabled = checkbox.checked;
+            updateHoursPreview();
+          });
+          checkbox.dispatchEvent(new Event("change"));
+        });
+
+        Array.prototype.forEach.call(document.querySelectorAll(".hours-row input[type='time']"), function (input) {
+          input.addEventListener("change", updateHoursPreview);
+        });
+        Array.prototype.forEach.call(document.querySelectorAll("[data-hour='pauseButton']"), function (button) {
+          button.addEventListener("click", function () {
+            openPauseModal(button.closest(".hours-row"));
+          });
+        });
+        updateHoursPreview();
+      }
+
+      function formatHourLabel(value) {
+        var parts = String(value || "").split(":");
+        var hours = Number(parts[0]);
+        var minutes = Number(parts[1]);
+        if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return "";
+        return String(hours) + "h" + String(minutes).padStart(2, "0");
+      }
+
+      function buildHoursString() {
+        var grouped = [];
+        Array.prototype.forEach.call(document.querySelectorAll(".hours-row"), function (row, index) {
+          var label = days[index][2];
+          var closed = row.querySelector("[data-hour='closed']").checked;
+          var schedule = "Fermé";
+          if (closed) {
+            schedule = "Fermé";
+          } else {
+            var open = formatHourLabel(row.querySelector("[data-hour='open']").value);
+            var close = formatHourLabel(row.querySelector("[data-hour='close']").value);
+            if (!open || !close) return;
+            schedule = open + "-" + close;
+            if (row.dataset.pauseStart && row.dataset.pauseEnd) {
+              schedule +=
+                " (pause " +
+                formatHourLabel(row.dataset.pauseStart) +
+                "-" +
+                formatHourLabel(row.dataset.pauseEnd) +
+                ")";
+            }
+          }
+
+          var existing = grouped.find(function (entry) {
+            return entry.schedule === schedule;
+          });
+          if (existing) {
+            existing.days.push(label);
+          } else {
+            grouped.push({ schedule: schedule, days: [label] });
+          }
+        });
+        return grouped.map(function (entry) {
+          return entry.days.join(", ") + " : " + entry.schedule;
+        }).join("\n");
+      }
+
+      function updateHoursPreview() {
+        var preview = $("hoursPreview");
+        if (!preview) return;
+        var value = buildHoursString();
+        preview.textContent = value ? "Aperçu\n" + value : "Aucun horaire renseigné.";
+      }
+
+      function setAccountType(nextType) {
+        currentAccountType = nextType;
+        $("accountType").value = nextType;
+
+        Array.prototype.forEach.call(document.querySelectorAll("[data-account-tab]"), function (button) {
+          button.setAttribute("aria-pressed", button.dataset.accountTab === nextType ? "true" : "false");
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(".account-section"), function (section) {
+          section.classList.toggle("is-hidden", section.dataset.section !== nextType);
+        });
+
+        var isMunicipality = nextType === "municipality";
+        var isSocial = nextType === "social";
+        Array.prototype.forEach.call(document.querySelectorAll(".manager-field"), function (field) {
+          field.classList.toggle("is-hidden", isMunicipality);
+        });
+        $("hoursSection").classList.toggle("is-hidden", isSocial);
+        $("addressLabel").textContent = isMunicipality
+          ? "Adresse officielle de la mairie"
+          : isSocial
+          ? "Adresse de la structure"
+          : "Adresse du commerce";
+
+        selectedAddress = null;
+        $("addressQuery").value = "";
+        updateSelectedAddress();
+      }
+
+      function updateSelectedAddress() {
+        var box = $("selectedAddress");
+        if (!selectedAddress) {
+          box.classList.remove("is-visible");
+          box.textContent = "";
+          return;
+        }
+        box.classList.add("is-visible");
+        box.innerHTML =
+          "<strong>Adresse sélectionnée</strong><br>" +
+          escapeHtml(selectedAddress.label) +
+          "<br>" +
+          escapeHtml(selectedAddress.postcode + " " + selectedAddress.city);
+      }
+
+      function setStatus(type, message) {
+        var node = $("formStatus");
+        node.className = "status is-visible " + type;
+        node.textContent = message;
+      }
+
+      function clearStatus() {
+        var node = $("formStatus");
+        node.className = "status";
+        node.textContent = "";
+      }
+
+      function showAddressModal() {
+        $("addressModal").classList.add("is-visible");
+      }
+
+      function closeAddressModal() {
+        $("addressModal").classList.remove("is-visible");
+      }
+
+      function updatePauseButton(row) {
+        if (!row) return;
+        var button = row.querySelector("[data-hour='pauseButton']");
+        if (!button) return;
+        if (row.dataset.pauseStart && row.dataset.pauseEnd) {
+          button.textContent =
+            formatHourLabel(row.dataset.pauseStart) +
+            "-" +
+            formatHourLabel(row.dataset.pauseEnd);
+        } else {
+          button.textContent = "Ajouter une pause";
+        }
+      }
+
+      function showPauseModal() {
+        $("pauseModal").classList.add("is-visible");
+      }
+
+      function closePauseModal() {
+        $("pauseModal").classList.remove("is-visible");
+        activePauseRow = null;
+      }
+
+      function openPauseModal(row) {
+        if (!row || row.querySelector("[data-hour='closed']").checked) return;
+        activePauseRow = row;
+        var dayIndex = Array.prototype.indexOf.call(
+          document.querySelectorAll(".hours-row"),
+          row
+        );
+        var dayLabel = days[dayIndex] ? days[dayIndex][1] : "ce jour";
+        $("pauseModalTitle").textContent = "Pause - " + dayLabel;
+        $("pauseModalSubtitle").textContent =
+          "Choisissez le créneau de pause pour " + dayLabel.toLowerCase() + ".";
+        $("pauseStart").value = row.dataset.pauseStart || "12:00";
+        $("pauseEnd").value = row.dataset.pauseEnd || "14:00";
+        showPauseModal();
+      }
+
+      function savePause() {
+        if (!activePauseRow) return;
+        var start = $("pauseStart").value;
+        var end = $("pauseEnd").value;
+        if (!start || !end || start >= end) {
+          setStatus("error", "La fin de pause doit être après le début de pause.");
+          return;
+        }
+        activePauseRow.dataset.pauseStart = start;
+        activePauseRow.dataset.pauseEnd = end;
+        updatePauseButton(activePauseRow);
+        updateHoursPreview();
+        closePauseModal();
+      }
+
+      function removePause() {
+        if (!activePauseRow) return;
+        delete activePauseRow.dataset.pauseStart;
+        delete activePauseRow.dataset.pauseEnd;
+        updatePauseButton(activePauseRow);
+        updateHoursPreview();
+        closePauseModal();
+      }
+
+      async function searchAddress() {
+        var query = $("addressQuery").value.trim();
+        if (query.length < 4) {
+          setStatus("error", "Saisissez une adresse plus précise avant de lancer la vérification.");
+          return;
+        }
+
+        clearStatus();
+        $("addressSuggestions").innerHTML = '<p class="muted">Recherche des adresses...</p>';
+        showAddressModal();
+
+        try {
+          var url = "https://api-adresse.data.gouv.fr/search/?limit=8&q=" + encodeURIComponent(query);
+          var response = await fetch(url);
+          var json = await response.json();
+          var features = Array.isArray(json.features) ? json.features : [];
+
+          if (features.length === 0) {
+            $("addressSuggestions").innerHTML = '<p class="muted">Aucune adresse trouvée. Essayez avec le numéro, la rue et la ville.</p>';
+            return;
+          }
+
+          $("addressSuggestions").innerHTML = features.map(function (feature, index) {
+            var props = feature.properties || {};
+            return [
+              '<button type="button" class="suggestion" data-address-index="' + index + '">',
+              '<strong>' + escapeHtml(props.label || props.name || "Adresse") + '</strong>',
+              '<span>' + escapeHtml([props.postcode, props.city].filter(Boolean).join(" ")) + '</span>',
+              '</button>'
+            ].join("");
+          }).join("");
+
+          Array.prototype.forEach.call(document.querySelectorAll("[data-address-index]"), function (button) {
+            button.addEventListener("click", function () {
+              var feature = features[Number(button.dataset.addressIndex)];
+              var props = feature.properties || {};
+              var coordinates = feature.geometry && Array.isArray(feature.geometry.coordinates)
+                ? feature.geometry.coordinates
+                : [];
+              selectedAddress = {
+                label: props.label || props.name || query,
+                city: props.city || "",
+                postcode: props.postcode || "",
+                longitude: Number(coordinates[0]),
+                latitude: Number(coordinates[1])
+              };
+              $("addressQuery").value = selectedAddress.label;
+              updateSelectedAddress();
+              closeAddressModal();
+            });
+          });
+        } catch (error) {
+          $("addressSuggestions").innerHTML = '<p class="muted">La vérification d\'adresse est indisponible pour le moment. Réessayez dans quelques instants.</p>';
+        }
+      }
+
+      function validatePhotos(files) {
+        if (!files || files.length === 0) {
+          throw new Error("Ajoutez au moins une photo.");
+        }
+        if (files.length > 8) {
+          throw new Error("Vous pouvez ajouter 8 photos maximum.");
+        }
+        Array.prototype.forEach.call(files, function (file) {
+          if (!/^image\//.test(file.type || "")) {
+            throw new Error("Les fichiers ajoutés doivent être des images.");
+          }
+          if (file.size > 10 * 1024 * 1024) {
+            throw new Error("Chaque photo doit faire moins de 10 Mo.");
+          }
+        });
+      }
+
+      function appendCommonFormData(fd) {
+        var email = $("email").value.trim().toLowerCase();
+        var password = $("password").value;
+        var confirmPassword = $("confirmPassword").value;
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          throw new Error("Saisissez un email professionnel valide.");
+        }
+        if (!password || password.length < 8) {
+          throw new Error("Le mot de passe doit contenir au moins 8 caractères.");
+        }
+        if (password !== confirmPassword) {
+          throw new Error("Les mots de passe ne correspondent pas.");
+        }
+        if (!$("termsAccepted").checked) {
+          throw new Error("Vous devez accepter les conditions d'utilisation.");
+        }
+        if (!selectedAddress || !selectedAddress.city || !selectedAddress.postcode || !Number.isFinite(selectedAddress.latitude) || !Number.isFinite(selectedAddress.longitude)) {
+          throw new Error("Sélectionnez une adresse depuis la fenêtre de vérification.");
+        }
+
+        fd.append("email", email);
+        fd.append("password", password);
+        fd.append("accountType", currentAccountType);
+        fd.append("nom_commune", selectedAddress.city);
+        fd.append("code_postal", selectedAddress.postcode);
+        fd.append("latitude", String(selectedAddress.latitude));
+        fd.append("longitude", String(selectedAddress.longitude));
+        fd.append("acceptedTermsAt", new Date().toISOString());
+        fd.append("acceptedTermsVersion", TERMS_VERSION);
+
+        var photos = $("photos").files;
+        validatePhotos(photos);
+        Array.prototype.forEach.call(photos, function (file) {
+          fd.append("photos", file, file.name);
+        });
+      }
+
+      function appendMerchantFormData(fd) {
+        var typeSelect = $("merchantBusinessTypeKey");
+        var selectedOption = typeSelect.options[typeSelect.selectedIndex];
+        var merchantName = $("merchantName").value.trim();
+        var managerFirstName = $("managerFirstName").value.trim();
+        var managerLastName = $("managerLastName").value.trim();
+        var businessTypeKey = typeSelect.value;
+        var custom = $("merchantBusinessTypeCustom").value.trim();
+        var hours = buildHoursString();
+
+        if (!merchantName) throw new Error("Le nom du commerce est obligatoire.");
+        if (!managerFirstName || !managerLastName) throw new Error("Le prénom et le nom du responsable sont obligatoires.");
+        if (!businessTypeKey) throw new Error("Sélectionnez un type d'activité.");
+        if (businessTypeKey === "OTHER" && custom.length < 2) throw new Error("Précisez l'activité du commerce.");
+        if (!hours.trim()) throw new Error("Renseignez les horaires du commerce.");
+
+        fd.append("isMunicipality", "false");
+        fd.append("lastName", merchantName);
+        fd.append("firstName", "Commercant");
+        fd.append("username", "");
+        fd.append("merchantName", merchantName);
+        fd.append("merchantManagerFirstName", managerFirstName);
+        fd.append("merchantManagerLastName", managerLastName);
+        fd.append("merchantAddress", selectedAddress.label);
+        fd.append("merchantHours", hours);
+        fd.append("merchantPhone", $("merchantPhone").value.trim());
+        fd.append("merchantWebsite", $("merchantWebsite").value.trim());
+        fd.append("merchantDescription", $("merchantDescription").value.trim());
+        fd.append("merchantCategory", selectedOption ? selectedOption.dataset.category || "" : "");
+        fd.append("merchantBusinessTypeKey", businessTypeKey);
+        fd.append("merchantBusinessTypeCustom", businessTypeKey === "OTHER" ? custom : "");
+      }
+
+      function appendMunicipalityFormData(fd) {
+        var siren = $("municipalitySIREN").value.replace(/\D/g, "");
+        var phone = $("municipalityPhone").value.trim();
+        var hours = buildHoursString();
+        var municipalityName = "Mairie de " + selectedAddress.city;
+
+        if (!siren || siren.length < 9) throw new Error("Le SIREN de la mairie est obligatoire.");
+        if (!phone) throw new Error("Le téléphone officiel de la mairie est obligatoire.");
+        if (!hours.trim()) throw new Error("Renseignez les horaires de la mairie.");
+
+        fd.append("isMunicipality", "true");
+        fd.append("lastName", municipalityName);
+        fd.append("firstName", "");
+        fd.append("username", "");
+        fd.append("municipalityName", municipalityName);
+        fd.append("municipalitySIREN", siren);
+        fd.append("municipalityPhone", phone);
+        fd.append("municipalityAddress", selectedAddress.label);
+        fd.append("municipalityHours", hours);
+      }
+
+      function appendSocialFormData(fd) {
+        var clubName = $("socialClubName").value.trim();
+        var managerFirstName = $("managerFirstName").value.trim();
+        var managerLastName = $("managerLastName").value.trim();
+        var phone = $("socialClubPhone").value.trim();
+        var domainKey = $("socialDomainKey").value;
+        var domainCustom = $("socialDomainCustom").value.trim();
+
+        if (!clubName) throw new Error("Le nom de la structure est obligatoire.");
+        if (!managerFirstName || !managerLastName) throw new Error("Le prénom et le nom du responsable sont obligatoires.");
+        if (!phone) throw new Error("Le téléphone de la structure est obligatoire.");
+        if (!domainKey) throw new Error("Sélectionnez un domaine.");
+        if (domainKey === "OTHER" && domainCustom.length < 2) throw new Error("Précisez le domaine de la structure.");
+
+        fd.append("isMunicipality", "false");
+        fd.append("lastName", managerLastName);
+        fd.append("firstName", managerFirstName);
+        fd.append("username", "");
+        fd.append("socialClubName", clubName);
+        fd.append("socialClubDescription", $("socialClubDescription").value.trim());
+        fd.append("socialClubAddress", selectedAddress.label);
+        fd.append("socialClubPhone", phone);
+        fd.append("socialStructureType", $("socialStructureType").value);
+        fd.append("socialDomainKey", domainKey);
+        fd.append("socialDomainCustom", domainKey === "OTHER" ? domainCustom : "");
+      }
+
+      async function submitForm(event) {
+        event.preventDefault();
+        clearStatus();
+
+        var button = $("submitButton");
+        button.disabled = true;
+        button.textContent = "Envoi en cours...";
+
+        try {
+          var fd = new FormData();
+          appendCommonFormData(fd);
+          if (currentAccountType === "merchant") appendMerchantFormData(fd);
+          if (currentAccountType === "municipality") appendMunicipalityFormData(fd);
+          if (currentAccountType === "social") appendSocialFormData(fd);
+
+          var response = await fetch(API_BASE + "/auth/register", {
+            method: "POST",
+            headers: { Accept: "application/json" },
+            body: fd
+          });
+          var text = await response.text();
+          var data = null;
+          try {
+            data = text ? JSON.parse(text) : null;
+          } catch (_) {
+            data = text;
+          }
+
+          if (!response.ok) {
+            var apiMessage = data && data.message;
+            if (Array.isArray(apiMessage)) apiMessage = apiMessage.join("\n");
+            throw new Error(apiMessage || (typeof data === "string" ? data : "Impossible d'envoyer la demande."));
+          }
+
+          $("professionalSignupForm").reset();
+          selectedAddress = null;
+          updateSelectedAddress();
+          $("photoPreview").innerHTML = "";
+          renderHours();
+          setAccountType(currentAccountType);
+          setStatus("success", "Demande envoyée. Votre compte est en attente de validation par le support Urbalya.");
+        } catch (error) {
+          setStatus("error", error && error.message ? error.message : "Impossible d'envoyer la demande.");
+        } finally {
+          button.disabled = false;
+          button.textContent = "Envoyer la demande";
+        }
+      }
+
+      function setupMenu() {
+        var root = document.documentElement;
+        var btn = $("menuBtn");
+        var closeBtn = $("closeBtn");
+        var backdrop = $("backdrop");
+        var drawer = $("drawer");
+        if (!btn || !closeBtn || !backdrop || !drawer) return;
+
+        var lastFocus = null;
+        function setOpen(open) {
+          if (open) {
+            lastFocus = document.activeElement;
+            root.classList.add("menu-open");
+            btn.setAttribute("aria-expanded", "true");
+            backdrop.setAttribute("aria-hidden", "false");
+            var firstLink = drawer.querySelector("a, button");
+            setTimeout(function () {
+              if (firstLink) firstLink.focus();
+            }, 50);
+          } else {
+            root.classList.remove("menu-open");
+            btn.setAttribute("aria-expanded", "false");
+            backdrop.setAttribute("aria-hidden", "true");
+            if (lastFocus && typeof lastFocus.focus === "function") {
+              lastFocus.focus();
+            }
+          }
+        }
+
+        btn.addEventListener("click", function () { setOpen(true); });
+        closeBtn.addEventListener("click", function () { setOpen(false); });
+        backdrop.addEventListener("click", function () { setOpen(false); });
+        document.addEventListener("keydown", function (event) {
+          if ($("pauseModal").classList.contains("is-visible")) {
+            if (event.key === "Escape") {
+              event.preventDefault();
+              closePauseModal();
+            }
+            return;
+          }
+          if ($("addressModal").classList.contains("is-visible")) {
+            if (event.key === "Escape") {
+              event.preventDefault();
+              closeAddressModal();
+            }
+            return;
+          }
+          if (!root.classList.contains("menu-open")) return;
+          if (event.key === "Escape") {
+            event.preventDefault();
+            setOpen(false);
+          }
+        });
+        drawer.addEventListener("click", function (event) {
+          var target = event.target;
+          if (target && target.closest && target.closest("a")) {
+            setOpen(false);
+          }
+        });
+      }
+
+      function safeUrl(value) {
+        var raw = String(value || "").trim();
+        if (!raw) return "";
+        try {
+          var parsed = new URL(raw);
+          if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+            return parsed.toString();
+          }
+        } catch (error) {}
+        return "";
+      }
+
+      function formatBillingDate(value) {
+        var raw = String(value || "").trim();
+        if (!raw) return "Indisponible";
+        var date = new Date(raw);
+        if (Number.isNaN(date.getTime())) return "Indisponible";
+        return date.toLocaleDateString("fr-FR", {
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        });
+      }
+
+      function resolveAccountLabel(value) {
+        var normalized = String(value || "").trim().toLowerCase();
+        if (normalized === "merchant") return "Commerce";
+        if (normalized === "municipality") return "Mairie";
+        if (normalized === "social") return "Association";
+        return "Compte pro";
+      }
+
+      function resolveBillingStatusLabel(status, exempt, cancelAtPeriodEnd) {
+        if (exempt) return "Accès administré";
+        if (cancelAtPeriodEnd) return "Renouvellement arrêté";
+        if (status === "ACTIVE") return "Actif";
+        if (status === "PAST_DUE") return "Paiement à régulariser";
+        if (status === "CANCELED") return "Annulé";
+        if (status === "INCOMPLETE") return "À finaliser";
+        return status || "Indisponible";
+      }
+
+      function setBillingFeedback(message, tone) {
+        var node = $("billingFeedback");
+        if (!node) return;
+        node.className = "billing-feedback" + (tone ? " " + tone : "");
+        node.textContent = message || "";
+      }
+
+      function isValidEmail(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
+      }
+
+      function setupBillingSection() {
+        var params = new URLSearchParams(window.location.search);
+        var hasBillingContext =
+          params.has("accountType") ||
+          params.has("billingStatus") ||
+          params.has("billingExempt") ||
+          params.has("cancelAtPeriodEnd") ||
+          params.has("currentPeriodEnd") ||
+          params.has("unsubscribeUrl") ||
+          params.has("reactivateUrl");
+
+        if (hasBillingContext) {
+          var accountType = params.get("accountType");
+          var billingStatus = String(params.get("billingStatus") || "").trim().toUpperCase();
+          var billingExempt = params.get("billingExempt") === "1";
+          var cancelAtPeriodEnd = params.get("cancelAtPeriodEnd") === "1";
+          var unsubscribeUrl = safeUrl(params.get("unsubscribeUrl"));
+          var reactivateUrl = safeUrl(params.get("reactivateUrl"));
+          var contextBlock = $("billingContextBlock");
+          var actions = $("billingActions");
+
+          if (contextBlock) contextBlock.classList.add("is-visible");
+          $("billingAccountValue").textContent = resolveAccountLabel(accountType);
+          $("billingStatusValue").textContent = resolveBillingStatusLabel(
+            billingStatus,
+            billingExempt,
+            cancelAtPeriodEnd
+          );
+          $("billingRenewalValue").textContent = cancelAtPeriodEnd
+            ? "Arrêt demandé"
+            : formatBillingDate(params.get("currentPeriodEnd"));
+
+          if (actions) {
+            var html = "";
+            if (reactivateUrl) {
+              html += '<a class="pill primary" href="' + escapeHtml(reactivateUrl) + '">Réactiver le renouvellement</a>';
+            }
+            if (unsubscribeUrl) {
+              html += '<a class="pill danger" href="' + escapeHtml(unsubscribeUrl) + '">Arrêter le renouvellement</a>';
+            }
+            html += '<a class="pill" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
+            actions.innerHTML = html;
+          }
+        }
+
+        var form = $("billingSelfServeForm");
+        var input = $("billingSelfServeEmail");
+        var submit = $("billingSelfServeSubmit");
+        if (!form || !input) return;
+
+        form.addEventListener("submit", async function (event) {
+          event.preventDefault();
+          var email = input.value.trim().toLowerCase();
+          if (!isValidEmail(email)) {
+            setBillingFeedback("Veuillez entrer une adresse email valide.", "error");
+            input.focus();
+            return;
+          }
+
+          try {
+            if (submit) submit.disabled = true;
+            input.disabled = true;
+            setBillingFeedback("Envoi du lien sécurisé...", "");
+
+            var response = await fetch(API_BASE + "/pro/request-management-link", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: JSON.stringify({ email: email })
+            });
+
+            var payload = null;
+            try {
+              payload = await response.json();
+            } catch (error) {
+              payload = null;
+            }
+
+            if (!response.ok) {
+              var message = payload && payload.message;
+              if (Array.isArray(message)) message = message.join(" ");
+              throw new Error(message || "Impossible d'envoyer le lien pour le moment.");
+            }
+
+            setBillingFeedback(
+              "Si un compte professionnel correspond à cette adresse, un lien sécurisé vient d'être envoyé.",
+              "ok"
+            );
+            form.reset();
+          } catch (error) {
+            setBillingFeedback(
+              error && error.message ? error.message : "Impossible d'envoyer le lien pour le moment.",
+              "error"
+            );
+          } finally {
+            if (submit) submit.disabled = false;
+            input.disabled = false;
+          }
+        });
+      }
+
+      function bindEvents() {
+        $("year").textContent = new Date().getFullYear();
+        setupMenu();
+        setupBillingSection();
+
+        Array.prototype.forEach.call(document.querySelectorAll("[data-account-tab]"), function (button) {
+          button.addEventListener("click", function () {
+            setAccountType(button.dataset.accountTab);
+          });
+        });
+
+        $("merchantBusinessTypeKey").addEventListener("change", function () {
+          $("merchantCustomWrap").classList.toggle("is-hidden", $("merchantBusinessTypeKey").value !== "OTHER");
+        });
+
+        $("socialDomainKey").addEventListener("change", function () {
+          $("socialCustomWrap").classList.toggle("is-hidden", $("socialDomainKey").value !== "OTHER");
+        });
+
+        $("searchAddressButton").addEventListener("click", searchAddress);
+        $("addressQuery").addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            searchAddress();
+          }
+        });
+        $("closeAddressModal").addEventListener("click", closeAddressModal);
+        $("addressModal").addEventListener("click", function (event) {
+          if (event.target === $("addressModal")) closeAddressModal();
+        });
+        $("closePauseModal").addEventListener("click", closePauseModal);
+        $("savePauseButton").addEventListener("click", savePause);
+        $("removePauseButton").addEventListener("click", removePause);
+        $("pauseModal").addEventListener("click", function (event) {
+          if (event.target === $("pauseModal")) closePauseModal();
+        });
+
+        $("copyMondayButton").addEventListener("click", function () {
+          var rows = Array.prototype.slice.call(document.querySelectorAll(".hours-row"));
+          var monday = rows[0];
+          if (!monday) return;
+          rows.slice(1, 5).forEach(function (row) {
+            ["open", "close"].forEach(function (key) {
+              row.querySelector("[data-hour='" + key + "']").value = monday.querySelector("[data-hour='" + key + "']").value;
+            });
+            row.querySelector("[data-hour='closed']").checked = false;
+            row.querySelector("[data-hour='closed']").dispatchEvent(new Event("change"));
+            if (monday.dataset.pauseStart && monday.dataset.pauseEnd) {
+              row.dataset.pauseStart = monday.dataset.pauseStart;
+              row.dataset.pauseEnd = monday.dataset.pauseEnd;
+            } else {
+              delete row.dataset.pauseStart;
+              delete row.dataset.pauseEnd;
+            }
+            updatePauseButton(row);
+          });
+          updateHoursPreview();
+        });
+
+        $("weekdayPresetButton").addEventListener("click", function () {
+          var rows = Array.prototype.slice.call(document.querySelectorAll(".hours-row"));
+          rows.forEach(function (row, index) {
+            row.querySelector("[data-hour='open']").value = index < 5 ? "09:00" : "10:00";
+            row.querySelector("[data-hour='close']").value = index < 5 ? "18:00" : "12:00";
+            row.querySelector("[data-hour='closed']").checked = index === 6;
+            row.querySelector("[data-hour='closed']").dispatchEvent(new Event("change"));
+            delete row.dataset.pauseStart;
+            delete row.dataset.pauseEnd;
+            updatePauseButton(row);
+          });
+          updateHoursPreview();
+        });
+
+        $("photos").addEventListener("change", function () {
+          var preview = $("photoPreview");
+          preview.innerHTML = "";
+          Array.prototype.slice.call($("photos").files || [], 0, 8).forEach(function (file) {
+            if (!/^image\//.test(file.type || "")) return;
+            var reader = new FileReader();
+            reader.onload = function () {
+              var card = document.createElement("div");
+              card.className = "preview";
+              card.innerHTML = '<img alt="" src="' + String(reader.result || "") + '" />';
+              preview.appendChild(card);
+            };
+            reader.readAsDataURL(file);
+          });
+        });
+
+        $("professionalSignupForm").addEventListener("submit", submitForm);
+      }
+
+      populateSelects();
+      renderHours();
+      bindEvents();
+      setAccountType("merchant");
+    })();
+  </script>
+  <script src="../cookie-consent.js"></script>
+</body>
+</html>
