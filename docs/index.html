@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Urbalya — La ville entre vos mains</title>
   <meta name="description" content="Urbalya : signalez les incidents, suivez l’avancement, et participez à la vie locale de votre ville." />
-  <meta name="theme-color" content="#0B1220" />
+  <meta name="theme-color" content="#ffffff" />
 
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="apple-touch-icon" href="logo.png" />
@@ -526,6 +526,7 @@
       .pill,.btn,.nav-toggle{transition:none}
     }
   </style>
+  <link rel="stylesheet" href="site.css" />
 </head>
 
 <body>
@@ -533,99 +534,107 @@
 
   <svg width="0" height="0" style="position:absolute">
     <symbol id="i-menu" viewBox="0 0 24 24">
-      <line x1="4" y1="7" x2="20" y2="7" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <line x1="4" y1="12" x2="20" y2="12" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <line x1="4" y1="17" x2="20" y2="17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <line x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
     <symbol id="i-x" viewBox="0 0 24 24">
-      <line x1="6" y1="6" x2="18" y2="18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <line x1="18" y1="6" x2="6" y2="18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-arrow-left" viewBox="0 0 24 24">
+      <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+
+    <symbol id="i-arrow-right" viewBox="0 0 24 24">
+      <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </symbol>
 
     <symbol id="i-bolt" viewBox="0 0 24 24">
-      <path d="M13 2L3 14h7l-1 8 12-14h-7l-1-6z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <path d="M13 2L3 14h7l-1 8 12-14h-7l-1-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
     </symbol>
 
     <symbol id="i-support" viewBox="0 0 24 24">
-      <path d="M4 12a8 8 0 0 1 16 0" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M4 12v4a2 2 0 0 0 2 2h2v-6H6a2 2 0 0 0-2 2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
-      <path d="M20 12v4a2 2 0 0 1-2 2h-2v-6h2a2 2 0 0 1 2 2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
-      <path d="M12 20h4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M4 12a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M4 12v4a2 2 0 0 0 2 2h2v-6H6a2 2 0 0 0-2 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M20 12v4a2 2 0 0 1-2 2h-2v-6h2a2 2 0 0 1 2 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M12 20h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
     <symbol id="i-home" viewBox="0 0 24 24">
-      <path d="M4 11l8-7 8 7" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M6 10v10h12V10" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M4 11l8-7 8 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 10v10h12V10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
     </symbol>
 
     <symbol id="i-lock" viewBox="0 0 24 24">
-      <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2" />
-      <path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
     <symbol id="i-file" viewBox="0 0 24 24">
-      <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
-      <path d="M14 2v6h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
-      <path d="M9 13h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M9 17h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M14 2v6h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M9 13h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M9 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
     <symbol id="i-mail" viewBox="0 0 24 24">
-      <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2" />
-      <path d="M4 8l8 6 8-6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+      <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M4 8l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
     </symbol>
 
     <symbol id="i-life" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="9" fill="none" stroke="#FFFFFF" stroke-width="2" />
-      <path d="M12 7v10" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M7 12h10" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M12 7v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M7 12h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
     <symbol id="i-map" viewBox="0 0 24 24">
-      <path d="M10 20l-6 2V6l6-2 4 2 6-2v16l-6 2-4-2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
-      <path d="M10 4v16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M14 6v16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M10 20l-6 2V6l6-2 4 2 6-2v16l-6 2-4-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M10 4v16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M14 6v16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
     <symbol id="i-bell" viewBox="0 0 24 24">
-      <path d="M18 16H6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M8 16V10a4 4 0 0 1 8 0v6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
-      <path d="M10 18a2 2 0 0 0 4 0" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M18 16H6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M8 16V10a4 4 0 0 1 8 0v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M10 18a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
     <symbol id="i-building" viewBox="0 0 24 24">
-      <rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2" />
-      <path d="M8 7h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M8 11h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M8 15h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M14 7h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M14 11h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M14 15h2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M8 7h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M8 11h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M8 15h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M14 7h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M14 11h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M14 15h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
     <symbol id="i-camera" viewBox="0 0 24 24">
-      <path d="M4 7h4l2-2h4l2 2h4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
-      <circle cx="12" cy="13" r="3" fill="none" stroke="#FFFFFF" stroke-width="2" />
+      <path d="M4 7h4l2-2h4l2 2h4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <circle cx="12" cy="13" r="3" fill="none" stroke="currentColor" stroke-width="2" />
     </symbol>
 
     <symbol id="i-calendar" viewBox="0 0 24 24">
-      <rect x="4" y="5" width="16" height="16" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2" />
-      <path d="M16 3v4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M8 3v4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M4 10h16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <rect x="4" y="5" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M8 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M4 10h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
     <symbol id="i-users" viewBox="0 0 24 24">
-      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
-      <circle cx="9" cy="7" r="3" fill="none" stroke="#FFFFFF" stroke-width="2" />
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-      <path d="M16 3.13a3 3 0 0 1 0 5.74" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <circle cx="9" cy="7" r="3" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M16 3.13a3 3 0 0 1 0 5.74" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </symbol>
 
     <symbol id="i-shield" viewBox="0 0 24 24">
-      <path d="M12 2l8 4v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
-      <path d="M9 12l2 2 4-4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M12 2l8 4v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </symbol>
   </svg>
 
@@ -711,22 +720,24 @@
   </aside>
 
   <main class="container" role="main" id="main">
-    <section class="hero" aria-label="Présentation Urbalya">
-      <div class="hero-grid">
-        <div class="hero-card">
-          <span class="badge" aria-label="Plateforme">
-            <svg class="ico sm" aria-hidden="true"><use href="#i-bolt"></use></svg>
-            Plateforme citoyenne · Signalements · Événements
-          </span>
-
-          <h1>Une ville plus réactive, une expérience plus simple.</h1>
+    <section class="hero home-hero" aria-label="Présentation Urbalya">
+      <div class="hero-grid home-hero-grid">
+        <div class="hero-card home-hero-content">
+          <p class="home-hero-kicker">Application locale pour villes connectées</p>
+          <h1>La plateforme locale des villes connectées.</h1>
 
           <p class="lead">
-            Urbalya permet de <strong>signaler</strong> un problème (voirie, éclairage, propreté…),
-            de <strong>suivre</strong> l’avancement, et de <strong>participer</strong> à la vie locale.
+            Urbalya connecte habitants, mairies, commerces et associations autour des
+            <strong>signalements</strong>, informations de proximité et
+            <strong>comptes professionnels vérifiés</strong>.
           </p>
 
-          <div class="cta-row" aria-label="Actions rapides">
+          <div class="cta-row home-hero-actions" aria-label="Actions rapides">
+            <a class="btn primary" href="professionnels/">Créer un compte professionnel</a>
+            <a class="btn" href="mailto:contact@urbalya.com?subject=Présentation%20Urbalya">Demander une présentation</a>
+          </div>
+
+          <div class="app-download-row home-download-row" aria-label="Télécharger Urbalya">
             <a class="btn primary store-link" href="https://apps.apple.com/app/id6754794588" rel="noopener noreferrer" aria-label="Ouvrir l'App Store">
               <img class="store-badge" src="apple.png" alt="Télécharger sur l'App Store" loading="lazy" decoding="async" />
             </a>
@@ -735,121 +746,256 @@
               <img class="store-badge" src="google.png" alt="Disponible sur Google Play" loading="lazy" decoding="async" />
             </a>
           </div>
+
+          <div class="home-stats home-hero-proof" aria-label="Repères Urbalya">
+            <div class="home-stat">
+              <strong>Vérifié</strong>
+              <span>comptes professionnels contrôlés avant activation</span>
+            </div>
+            <div class="home-stat">
+              <strong>Terrain</strong>
+              <span>signalements, événements et informations locales regroupés</span>
+            </div>
+            <div class="home-stat">
+              <strong>Encadré</strong>
+              <span>support, RGPD et suppression de compte accessibles</span>
+            </div>
+          </div>
         </div>
-
-        <aside class="side" aria-label="Encarts d'information">
-          <div class="mini">
-            <h3>Fonctionnalités principales</h3>
-            <p>Signalements, carte, suivi des événements et interactions avec la communauté.</p>
-            <div class="row" aria-label="Mots-clés">
-              <span class="tag">
-                <svg class="ico sm" aria-hidden="true"><use href="#i-map"></use></svg>
-                Carte
-              </span>
-              <span class="tag">
-                <svg class="ico sm" aria-hidden="true"><use href="#i-bell"></use></svg>
-                Notifications
-              </span>
-              <span class="tag">
-                <svg class="ico sm" aria-hidden="true"><use href="#i-building"></use></svg>
-                Mairie
-              </span>
-            </div>
-          </div>
-
-          <div class="mini">
-            <h3>Support</h3>
-            <p>Signaler un bug, un problème ou un contenu inapproprié. Réponse centralisée.</p>
-            <div class="row">
-              <a class="pill" href="support.html" style="font-size:13px">
-                <svg class="ico sm" aria-hidden="true"><use href="#i-support"></use></svg>
-                Accéder au support
-              </a>
-              <a class="pill" href="mailto:contact@urbalya.com?subject=Support%20Urbalya" style="font-size:13px">
-                <svg class="ico sm" aria-hidden="true"><use href="#i-mail"></use></svg>
-                Email
-              </a>
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
 
-    <section class="section" aria-label="À propos de Urbalya et Lemach Labs">
-      <div class="section-title">
-        <h2>À propos</h2>
-        <span>Produit et entité légale</span>
+    <section class="section feature-carousel-section" aria-label="Fonctionnalités">
+      <div class="section-title feature-carousel-heading">
+        <div>
+          <h2>Fonctionnalités clés</h2>
+          <span>Chaque écran répond à un usage concret du territoire.</span>
+        </div>
+        <div class="feature-controls" aria-label="Navigation des fonctionnalités">
+          <button class="feature-nav-btn" type="button" data-feature-prev aria-controls="featureTrack" aria-label="Voir la fonctionnalité précédente">
+            <svg class="ico sm" aria-hidden="true"><use href="#i-arrow-left"></use></svg>
+            <span>Précédent</span>
+          </button>
+          <span class="feature-status" data-feature-status aria-live="polite">01 / 06</span>
+          <button class="feature-nav-btn is-next" type="button" data-feature-next aria-controls="featureTrack" aria-label="Voir la fonctionnalité suivante">
+            <span>Suivant</span>
+            <svg class="ico sm" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </button>
+        </div>
       </div>
 
-      <article class="card">
-        <p>
-          <strong>Urbalya</strong> est une application éditée, développée et exploitée par
-          <strong>Lemach Labs</strong>.
-        </p>
-        <p>
-          <strong>Lemach Labs</strong> est l’entité légale derrière le service Urbalya.
-        </p>
-        <p>
-          Le site <strong>support.urbalya.com</strong> est le site de support officiel du produit Urbalya.
-          Les informations juridiques de l’éditeur sont disponibles sur la
-          <a href="mentions-legales.html">page Mentions légales</a>.
-        </p>
-      </article>
+      <div class="feature-carousel">
+        <div class="feature-track" id="featureTrack" data-feature-track tabindex="0" aria-label="Carousel des fonctionnalités Urbalya">
+        <article class="feature-card" aria-label="Fonctionnalité 1 sur 6">
+          <div class="feature-copy">
+            <span class="feature-number">01</span>
+            <h3>Une page d'accueil pour une vue d'ensemble.</h3>
+            <p>
+              L’utilisateur retrouve les accès importants de sa ville dans une interface claire :
+              signalements, actualités, commerces, événements, recherche et statistiques locales.
+            </p>
+          </div>
+          <figure class="feature-screen">
+            <img src="assets/Accueil.png" alt="Écran d'accueil Urbalya avec les informations locales principales" loading="lazy" decoding="async" />
+          </figure>
+        </article>
+
+        <article class="feature-card" aria-label="Fonctionnalité 2 sur 6">
+          <div class="feature-copy">
+            <span class="feature-number">02</span>
+            <h3>Des signalements structurés, utiles et exploitables.</h3>
+            <p>
+              Photo, description, adresse et confirmations terrain permettent de documenter un problème
+              sans perdre l’information essentielle au traitement.
+            </p>
+          </div>
+          <figure class="feature-screen">
+            <img src="assets/Singalement.png" alt="Écran de signalement Urbalya avec photo, description et confirmations" loading="lazy" decoding="async" />
+          </figure>
+        </article>
+
+        <article class="feature-card" aria-label="Fonctionnalité 3 sur 6">
+          <div class="feature-copy">
+            <span class="feature-number">03</span>
+            <h3>Une carte locale pour comprendre le terrain.</h3>
+            <p>
+              La carte regroupe signalements, lieux et activités autour de l’utilisateur, pour visualiser
+              rapidement ce qui se passe à proximité.
+            </p>
+          </div>
+          <figure class="feature-screen">
+            <img src="assets/Carte.png" alt="Écran carte locale Urbalya avec points d'intérêt et signalements" loading="lazy" decoding="async" />
+          </figure>
+        </article>
+
+        <article class="feature-card" aria-label="Fonctionnalité 4 sur 6">
+          <div class="feature-copy">
+            <span class="feature-number">04</span>
+            <h3>Une messagerie simple pour communiquer.</h3>
+            <p>
+              Les échanges restent accessibles dans une messagerie dédiée, utile pour les discussions
+              privées, les suivis et les retours entre habitants.
+            </p>
+          </div>
+          <figure class="feature-screen">
+            <img src="assets/Message.png" alt="Écran messages Urbalya avec conversations entre utilisateurs" loading="lazy" decoding="async" />
+          </figure>
+        </article>
+
+        <article class="feature-card" aria-label="Fonctionnalité 5 sur 6">
+          <div class="feature-copy">
+            <span class="feature-number">05</span>
+            <h3>Un mur commun pour partager les informations.</h3>
+            <p>
+              Actualités, annonces et idées peuvent être partagées dans un espace local lisible,
+              pensé pour garder la vie de quartier au même endroit.
+            </p>
+          </div>
+          <figure class="feature-screen">
+            <img src="assets/Social.png" alt="Écran social Urbalya avec publications locales de la ville" loading="lazy" decoding="async" />
+          </figure>
+        </article>
+
+        <article class="feature-card" aria-label="Fonctionnalité 6 sur 6">
+          <div class="feature-copy">
+            <span class="feature-number">06</span>
+            <h3>Un classement pour valoriser l’engagement local.</h3>
+            <p>
+              Le classement rend visibles les contributions utiles et encourage une participation
+              régulière, sans complexifier l’expérience principale.
+            </p>
+          </div>
+          <figure class="feature-screen">
+            <img src="assets/Classement.png" alt="Écran classement Urbalya avec podium et progression locale" loading="lazy" decoding="async" />
+          </figure>
+        </article>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" aria-label="Acteurs locaux">
+      <div class="section-title">
+        <h2>Un espace clair pour chaque acteur local.</h2>
+        <span>Le même territoire, des usages différents.</span>
+      </div>
+
+      <div class="audience-grid">
+        <article class="audience-card">
+          <span class="audience-icon">
+            <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+          </span>
+          <h3>Mairies et collectivités</h3>
+          <p>Un compte institutionnel vérifié pour présenter les informations utiles, centraliser les coordonnées officielles et rendre la relation locale plus lisible.</p>
+        </article>
+
+        <article class="audience-card">
+          <span class="audience-icon">
+            <svg class="ico" aria-hidden="true"><use href="#i-life"></use></svg>
+          </span>
+          <h3>Commerçants</h3>
+          <p>Une fiche locale propre avec adresse, horaires, description et photos pour être identifié par les habitants de proximité.</p>
+        </article>
+
+        <article class="audience-card">
+          <span class="audience-icon">
+            <svg class="ico" aria-hidden="true"><use href="#i-users"></use></svg>
+          </span>
+          <h3>Associations</h3>
+          <p>Une présence vérifiée pour présenter la structure, relayer ses informations et garder un lien simple avec la vie locale.</p>
+        </article>
+      </div>
     </section>
 
-    <section class="section" aria-label="Fonctionnalités">
+    <section class="section" aria-label="Parcours Urbalya">
       <div class="section-title">
-        <h2>Fonctionnalités clés</h2>
-        <span>Interface rapide, claire, centrée sur l’action.</span>
+        <h2>Un parcours simple, sans surcharge.</h2>
+        <span>Chaque écran sert une action concrète.</span>
       </div>
 
       <div class="grid">
         <article class="card">
           <h3>
             <svg class="ico" aria-hidden="true"><use href="#i-camera"></use></svg>
-            Signalements avec photo
+            Signaler précisément
           </h3>
-          <p>Créez un signalement précis (description + photo) et retrouvez-le facilement dans vos suivis.</p>
-        </article>
-
-        <article class="card">
-          <h3>
-            <svg class="ico" aria-hidden="true"><use href="#i-map"></use></svg>
-            Carte interactive
-          </h3>
-          <p>Visualisez ce qui se passe dans votre ville et filtrez par catégories et zones.</p>
+          <p>Photo, position, catégorie et description : les informations utiles sont regroupées dès le départ.</p>
         </article>
 
         <article class="card">
           <h3>
             <svg class="ico" aria-hidden="true"><use href="#i-bell"></use></svg>
-            Notifications utiles
+            Suivre sans relancer
           </h3>
-          <p>Recevez les mises à jour importantes : statut, réponses, actualités, activité locale.</p>
-        </article>
-
-        <article class="card">
-          <h3>
-            <svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>
-            Événements
-          </h3>
-          <p>Consultez les événements à venir et gardez une vision claire des rendez-vous de votre ville.</p>
+          <p>Les notifications et statuts permettent de comprendre l’évolution d’un sujet local.</p>
         </article>
 
         <article class="card">
           <h3>
             <svg class="ico" aria-hidden="true"><use href="#i-users"></use></svg>
-            Communauté
+            Participer localement
           </h3>
-          <p>Échangez, suivez des profils, et restez informé des publications pertinentes.</p>
+          <p>Événements, échanges et informations de proximité gardent la commune lisible au quotidien.</p>
+        </article>
+      </div>
+    </section>
+
+
+
+    <section class="section" aria-label="À propos de Urbalya et Lemach Labs">
+      <div class="section-title">
+        <h2>Un service officiel, une base claire.</h2>
+        <span>Produit, support et informations légales au même endroit.</span>
+      </div>
+
+      <div class="premium-band" aria-label="Cadre de confiance">
+        <div>
+          <h2>Une présence locale sérieuse commence par des comptes vérifiés.</h2>
+          <p>
+            Urbalya sépare les usages publics, professionnels et citoyens pour éviter les profils flous.
+            Les comptes sensibles passent par une demande web, une vérification support et des informations légales accessibles.
+          </p>
+        </div>
+        <div class="premium-proof-grid">
+          <article>
+            <strong>Validation support</strong>
+            <span>Les dossiers professionnels sont examinés avant activation.</span>
+          </article>
+          <article>
+            <strong>Données encadrées</strong>
+            <span>Confidentialité, conditions et suppression de compte restent visibles.</span>
+          </article>
+          <article>
+            <strong>Identité claire</strong>
+            <span>Chaque commerce, mairie ou association dispose d’un contexte dédié.</span>
+          </article>
+          <article>
+            <strong>Contact direct</strong>
+            <span>Le support Urbalya reste joignable depuis le site officiel.</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="about-split">
+        <article class="card">
+          <h3>Édité par Lemach Labs</h3>
+          <p>
+            <strong>Urbalya</strong> est une application éditée, développée et exploitée par
+            <strong>Lemach Labs</strong>. Le site <strong>support.urbalya.com</strong> centralise
+            l’aide, les demandes liées au compte et les informations juridiques du service.
+          </p>
+          <p>
+            Les informations de l’éditeur sont disponibles sur la
+            <a href="mentions-legales.html">page Mentions légales</a>.
+          </p>
         </article>
 
-        <article class="card">
-          <h3>
-            <svg class="ico" aria-hidden="true"><use href="#i-shield"></use></svg>
-            Sécurité & modération
-          </h3>
-          <p>Signalement et blocage intégrés. Traitement prioritaire du contenu illicite.</p>
+        <article class="card about-proof">
+          <h3>Points de confiance</h3>
+          <ul>
+            <li><span class="proof-dot">1</span><span>Support officiel avec contact direct.</span></li>
+            <li><span class="proof-dot">2</span><span>Pages RGPD et suppression de compte accessibles publiquement.</span></li>
+            <li><span class="proof-dot">3</span><span>Parcours professionnels séparés et vérifiés.</span></li>
+          </ul>
         </article>
       </div>
     </section>
@@ -916,6 +1062,60 @@
       const t = e.target;
       if (t && t.closest && t.closest("a")) setOpen(false);
     });
+
+    const featureTrack = document.querySelector("[data-feature-track]");
+    const featurePrev = document.querySelector("[data-feature-prev]");
+    const featureNext = document.querySelector("[data-feature-next]");
+    const featureStatus = document.querySelector("[data-feature-status]");
+
+    if (featureTrack && featurePrev && featureNext && featureStatus) {
+      const featureCards = Array.from(featureTrack.querySelectorAll(".feature-card"));
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let featureScrollTimer = null;
+
+      function featureCardLeft(card) {
+        return card.offsetLeft - featureTrack.offsetLeft;
+      }
+
+      function getFeatureIndex() {
+        return featureCards.reduce((closestIndex, card, index) => {
+          const distance = Math.abs(featureCardLeft(card) - featureTrack.scrollLeft);
+          const closestDistance = Math.abs(featureCardLeft(featureCards[closestIndex]) - featureTrack.scrollLeft);
+          return distance < closestDistance ? index : closestIndex;
+        }, 0);
+      }
+
+      function updateFeatureControls() {
+        const index = getFeatureIndex();
+        const current = String(index + 1).padStart(2, "0");
+        const total = String(featureCards.length).padStart(2, "0");
+        featureStatus.textContent = `${current} / ${total}`;
+        featurePrev.disabled = index === 0;
+        featureNext.disabled = index === featureCards.length - 1;
+      }
+
+      function goToFeature(index) {
+        const nextIndex = Math.max(0, Math.min(featureCards.length - 1, index));
+        featureTrack.scrollTo({
+          left: featureCardLeft(featureCards[nextIndex]),
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+        });
+        featureStatus.textContent = `${String(nextIndex + 1).padStart(2, "0")} / ${String(featureCards.length).padStart(2, "0")}`;
+        featurePrev.disabled = nextIndex === 0;
+        featureNext.disabled = nextIndex === featureCards.length - 1;
+      }
+
+      featurePrev.addEventListener("click", () => goToFeature(getFeatureIndex() - 1));
+      featureNext.addEventListener("click", () => goToFeature(getFeatureIndex() + 1));
+
+      featureTrack.addEventListener("scroll", () => {
+        window.clearTimeout(featureScrollTimer);
+        featureScrollTimer = window.setTimeout(updateFeatureControls, 80);
+      }, { passive: true });
+
+      window.addEventListener("resize", updateFeatureControls);
+      updateFeatureControls();
+    }
   </script>
   <script src="cookie-consent.js"></script>
 </body>

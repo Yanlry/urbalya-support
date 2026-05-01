@@ -8,7 +8,7 @@
     name="description"
     content="Creer une demande de compte professionnel Urbalya pour un commerce, une mairie, une collectivite ou une association."
   />
-  <meta name="theme-color" content="#0B1220" />
+  <meta name="theme-color" content="#ffffff" />
 
   <link rel="icon" type="image/png" href="../logo.png" />
   <link rel="apple-touch-icon" href="../logo.png" />
@@ -863,37 +863,38 @@
       .hours-row { grid-template-columns: 1fr; }
     }
   </style>
+  <link rel="stylesheet" href="../site.css" />
 </head>
 <body>
   <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
     <symbol id="i-menu" viewBox="0 0 24 24">
-      <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </symbol>
     <symbol id="i-x" viewBox="0 0 24 24">
-      <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </symbol>
     <symbol id="i-home" viewBox="0 0 24 24">
-      <path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-8.5z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-8.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
     </symbol>
     <symbol id="i-support" viewBox="0 0 24 24">
-      <path d="M12 21a8 8 0 1 0-8-8v3a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-2v6h1a2 2 0 0 0 2-2v-3" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M12 21a8 8 0 1 0-8-8v3a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-2v6h1a2 2 0 0 0 2-2v-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
     </symbol>
     <symbol id="i-lock" viewBox="0 0 24 24">
-      <rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2"/>
-      <path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </symbol>
     <symbol id="i-file" viewBox="0 0 24 24">
-      <path d="M7 3h7l4 4v14H7z" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M14 3v5h5M9 13h6M9 17h6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <path d="M7 3h7l4 4v14H7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M14 3v5h5M9 13h6M9 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </symbol>
     <symbol id="i-mail" viewBox="0 0 24 24">
-      <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2"/>
-      <path d="m5 8 7 5 7-5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="m5 8 7 5 7-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
     <symbol id="i-building" viewBox="0 0 24 24">
-      <path d="M4 21h16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
-      <path d="M6 21V7l6-4 6 4v14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <path d="M4 21h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 21V7l6-4 6 4v14" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </symbol>
   </svg>
 
@@ -901,12 +902,18 @@
     <div class="container nav-inner">
       <a class="brand" href="../index.html" aria-label="Accueil Urbalya">
         <img src="../logo.png" alt="" />
-        <span>Urbalya</span>
+        <span class="brand-text">
+          <strong>Urbalya</strong>
+          <small>La ville entre vos mains</small>
+        </span>
       </a>
       <nav class="nav-links" aria-label="Navigation">
         <a class="pill" href="../index.html">Accueil</a>
         <a class="pill" href="../support.html">Support</a>
         <a class="pill primary" href="./" aria-current="page">Professionnels</a>
+        <a class="pill" href="../privacy.html">Confidentialité</a>
+        <a class="pill" href="../terms.html">Conditions</a>
+        <a class="pill" href="../mentions-legales.html">Mentions légales</a>
       </nav>
       <div class="nav-actions">
         <button
@@ -945,10 +952,6 @@
         <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
         Professionnels
       </a>
-      <a class="pill" href="./#abonnement">
-        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
-        Abonnement pro
-      </a>
       <a class="pill" href="../privacy.html">
         <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
         Confidentialité
@@ -981,24 +984,170 @@
     </div>
   </aside>
 
-  <main>
+  <main class="pro-main">
     <div class="container">
-      <section class="hero" aria-label="Comptes professionnels">
-        <h1>Créer une demande de compte professionnel Urbalya</h1>
-        <p class="lead">
-          Les comptes professionnels Urbalya sont créés depuis notre site web.
-          Une fois votre compte activé, vous pouvez vous connecter à l'application mobile.
-        </p>
-        <div class="notice" role="note">
-          <span class="notice-mark">i</span>
-          <p>
-            Pour Apple/iOS, aucune inscription professionnelle ne se fait dans l'application mobile.
-            Ce formulaire web remplace le parcours professionnel mobile.
-          </p>
+      <section class="hero pro-hero" aria-label="Comptes professionnels">
+        <div class="pro-hero-grid">
+          <div class="pro-hero-content">
+            <p class="pro-hero-kicker">Comptes vérifiés pour acteurs locaux</p>
+            <h1>Un compte professionnel crédible pour votre présence locale.</h1>
+            <p class="lead">
+              Un parcours clair pour les mairies, commerces et associations :
+              identité vérifiée, informations structurées et activation après contrôle du dossier.
+            </p>
+            <div class="cta-row pro-hero-actions">
+              <a class="btn primary" href="#professionalSignupForm">Créer mon dossier</a>
+              <a class="btn" href="mailto:contact@urbalya.com?subject=Présentation%20compte%20professionnel%20Urbalya">Demander une présentation</a>
+            </div>
+
+            <div class="pro-hero-proof" aria-label="Garanties du compte professionnel">
+              <div>
+                <strong>Dossier contrôlé</strong>
+                <span>SIREN, adresse, responsable et informations clés vérifiés.</span>
+              </div>
+              <div>
+                <strong>Présence locale lisible</strong>
+                <span>Fiche structurée pour être identifié par les habitants.</span>
+              </div>
+              <div>
+                <strong>Activation encadrée</strong>
+                <span>Validation support avant accès aux outils professionnels.</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="layout" aria-label="Formulaire professionnel">
+
+
+      <section class="premium-band pro-confidence" aria-label="Garanties professionnelles">
+        <div>
+          <h2>Pas d’inscription approximative : chaque demande passe par une vérification.</h2>
+          <p>
+            Le formulaire collecte les éléments nécessaires pour éviter les profils incomplets :
+            adresse vérifiée ou saisie manuelle, photos, horaires, responsable et informations officielles.
+          </p>
+        </div>
+        <div class="premium-proof-grid">
+          <article>
+            <strong>1. Dossier complet</strong>
+            <span>Vous renseignez l’identité, l’adresse et les informations utiles.</span>
+          </article>
+          <article>
+            <strong>2. Vérification</strong>
+            <span>Le support contrôle la cohérence avant activation.</span>
+          </article>
+          <article>
+            <strong>3. Activation</strong>
+            <span>Le compte devient utilisable dans l’application mobile.</span>
+          </article>
+          <article>
+            <strong>4. Gestion</strong>
+            <span>Les liens sensibles sont envoyés par email sécurisé.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel billing-section" id="abonnement" aria-label="Abonnement professionnel">
+        <div class="panel-inner">
+          <h2>Abonnements professionnels</h2>
+          <p class="muted">
+            Les tarifs sont présentés clairement avant validation du dossier. Aucun paiement n'est lancé
+            depuis cette page : les actions sensibles passent par un lien sécurisé envoyé par email.
+          </p>
+
+          <div class="billing-hero">
+            <div>
+              <div class="plans-grid pro-pricing-grid">
+                <article class="plan-card pricing-card is-commerce">
+                  <span class="plan-label">Commerce</span>
+                  <p class="plan-price">29 EUR / mois</p>
+                  <p class="plan-note">Pour une présence locale simple, visible et administrable.</p>
+                  <ul class="benefits">
+                    <li>Fiche commerce visible dans Urbalya après validation.</li>
+                    <li>Galerie photos, horaires, adresse et description.</li>
+                    <li>Gestion des informations professionnelles depuis l'espace pro.</li>
+                  </ul>
+                </article>
+
+                <article class="plan-card pricing-card is-municipality">
+                  <span class="plan-label">Mairies et collectivités</span>
+                  <p class="plan-price">À partir de 79 EUR / mois</p>
+                  <p class="plan-note">Un tarif adapté à la taille réelle de la commune.</p>
+
+                  <div class="municipality-tiers" aria-label="Tarifs mairie par nombre d'habitants">
+                    <div class="municipality-tier">
+                      <strong>Moins de 2 000 habitants</strong>
+                      <span>79 EUR / mois</span>
+                    </div>
+                    <div class="municipality-tier">
+                      <strong>2 001 à 10 000 habitants</strong>
+                      <span>149 EUR / mois</span>
+                    </div>
+                    <div class="municipality-tier">
+                      <strong>10 001 à 50 000 habitants</strong>
+                      <span>249 EUR / mois</span>
+                    </div>
+                    <div class="municipality-tier">
+                      <strong>Plus de 50 000 habitants</strong>
+                      <span>Sur devis</span>
+                    </div>
+                  </div>
+
+                  <ul class="benefits">
+                    <li>Compte institutionnel validé par le support Urbalya.</li>
+                    <li>Informations officielles, horaires, coordonnées et communications communales.</li>
+                    <li>Outils de visibilité locale et accompagnement selon le volume d'habitants.</li>
+                  </ul>
+                </article>
+              </div>
+
+              <p class="pricing-note">
+                Le palier mairie est confirmé après vérification du dossier, sur la base de la population municipale de référence.
+              </p>
+
+              <div class="billing-context" id="billingContextBlock">
+                <h3>Gestion de votre abonnement</h3>
+                <p class="muted" id="billingContextText">
+                  Vérifiez les informations transmises par votre lien sécurisé.
+                </p>
+                <div class="billing-meta">
+                  <div class="billing-meta-item">
+                    <span>Compte</span>
+                    <strong id="billingAccountValue">Compte pro</strong>
+                  </div>
+                  <div class="billing-meta-item">
+                    <span>Statut</span>
+                    <strong id="billingStatusValue">Indisponible</strong>
+                  </div>
+                  <div class="billing-meta-item">
+                    <span>Renouvellement</span>
+                    <strong id="billingRenewalValue">Indisponible</strong>
+                  </div>
+                </div>
+                <div class="billing-actions" id="billingActions"></div>
+              </div>
+            </div>
+
+            <div class="billing-card" id="billingSelfServeBlock">
+              <h3>Recevoir un lien sécurisé</h3>
+              <p class="muted">
+                Saisissez l'email de votre compte professionnel pour recevoir un lien de gestion.
+              </p>
+              <form id="billingSelfServeForm">
+                <div class="field">
+                  <label for="billingSelfServeEmail">Email professionnel</label>
+                  <input id="billingSelfServeEmail" type="email" autocomplete="email" required />
+                </div>
+                <button class="secondary-button" id="billingSelfServeSubmit" type="submit">Envoyer le lien</button>
+                <div class="billing-feedback" id="billingFeedback" role="status" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="layout pro-layout" aria-label="Formulaire professionnel">
         <div class="panel">
           <div class="panel-inner">
             <h2>Demande complète</h2>
@@ -1064,6 +1213,11 @@
                     <input id="merchantName" name="merchantName" autocomplete="organization" />
                   </div>
                   <div class="field">
+                    <label for="merchantSIREN">SIREN du commerce</label>
+                    <input id="merchantSIREN" name="merchantSIREN" inputmode="numeric" maxlength="14" placeholder="9 chiffres" required />
+                    <p class="hint">Obligatoire pour vérifier l'inscription au registre du commerce.</p>
+                  </div>
+                  <div class="field">
                     <label for="merchantBusinessTypeKey">Type d'activité</label>
                     <select id="merchantBusinessTypeKey" name="merchantBusinessTypeKey"></select>
                   </div>
@@ -1112,6 +1266,11 @@
                   <div class="field">
                     <label for="socialClubName">Nom de la structure</label>
                     <input id="socialClubName" name="socialClubName" autocomplete="organization" />
+                  </div>
+                  <div class="field">
+                    <label for="socialSIREN">SIREN de l'association <span class="optional-label">facultatif</span></label>
+                    <input id="socialSIREN" name="socialSIREN" inputmode="numeric" maxlength="14" placeholder="9 chiffres si disponible" />
+                    <p class="hint">Si votre association possède un SIREN, ajoutez-le pour accélérer la vérification.</p>
                   </div>
                   <div class="field">
                     <label for="socialStructureType">Type de structure</label>
@@ -1217,78 +1376,6 @@
           </div>
         </aside>
       </section>
-
-      <section class="panel billing-section" id="abonnement" aria-label="Abonnement professionnel">
-        <div class="panel-inner">
-          <h2>Abonnement et gestion du compte pro</h2>
-          <p class="muted">
-            Les demandes de compte et les informations d'abonnement sont désormais regroupées ici.
-            Aucun paiement n'est lancé depuis cette page : les actions sensibles passent par un lien sécurisé envoyé par email.
-          </p>
-
-          <div class="billing-hero">
-            <div>
-              <div class="plans-grid">
-                <article class="plan-card">
-                  <span class="plan-label">Commerce</span>
-                  <p class="plan-price">29 EUR / mois</p>
-                  <ul class="benefits">
-                    <li>Fiche commerce visible dans Urbalya après validation.</li>
-                    <li>Galerie photos, horaires, adresse et description.</li>
-                    <li>Gestion des informations professionnelles depuis l'espace pro.</li>
-                  </ul>
-                </article>
-                <article class="plan-card">
-                  <span class="plan-label">Mairie</span>
-                  <p class="plan-price">199 EUR / mois</p>
-                  <ul class="benefits">
-                    <li>Compte institutionnel validé par le support Urbalya.</li>
-                    <li>Informations officielles, horaires et coordonnées communales.</li>
-                    <li>Outils de visibilité et de relation locale après activation.</li>
-                  </ul>
-                </article>
-              </div>
-
-              <div class="billing-context" id="billingContextBlock">
-                <h3>Gestion de votre abonnement</h3>
-                <p class="muted" id="billingContextText">
-                  Vérifiez les informations transmises par votre lien sécurisé.
-                </p>
-                <div class="billing-meta">
-                  <div class="billing-meta-item">
-                    <span>Compte</span>
-                    <strong id="billingAccountValue">Compte pro</strong>
-                  </div>
-                  <div class="billing-meta-item">
-                    <span>Statut</span>
-                    <strong id="billingStatusValue">Indisponible</strong>
-                  </div>
-                  <div class="billing-meta-item">
-                    <span>Renouvellement</span>
-                    <strong id="billingRenewalValue">Indisponible</strong>
-                  </div>
-                </div>
-                <div class="billing-actions" id="billingActions"></div>
-              </div>
-            </div>
-
-            <div class="billing-card" id="billingSelfServeBlock">
-              <h3>Recevoir un lien sécurisé</h3>
-              <p class="muted">
-                Saisissez l'email de votre compte professionnel pour recevoir un lien de gestion.
-              </p>
-              <form id="billingSelfServeForm">
-                <div class="field">
-                  <label for="billingSelfServeEmail">Email professionnel</label>
-                  <input id="billingSelfServeEmail" type="email" autocomplete="email" required />
-                </div>
-                <button class="secondary-button" id="billingSelfServeSubmit" type="submit">Envoyer le lien</button>
-                <div class="billing-feedback" id="billingFeedback" role="status" aria-live="polite"></div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   </main>
 
@@ -1296,7 +1383,12 @@
     <div class="modal-card">
       <div class="modal-head">
         <h2 class="modal-title" id="addressModalTitle">Sélectionner l'adresse</h2>
-        <button type="button" class="ghost-button" id="closeAddressModal">Fermer</button>
+        <div class="modal-head-actions">
+          <button type="button" class="manual-address-trigger" id="manualAddressButton">
+            Adresse introuvable ? Saisie manuelle
+          </button>
+          <button type="button" class="ghost-button" id="closeAddressModal">Fermer</button>
+        </div>
       </div>
       <div class="modal-body" id="addressSuggestions"></div>
     </div>
@@ -1655,10 +1747,15 @@
         }
         box.classList.add("is-visible");
         box.innerHTML =
-          "<strong>Adresse sélectionnée</strong><br>" +
+          "<strong>" +
+          (selectedAddress.isManual ? "Adresse saisie manuellement" : "Adresse sélectionnée") +
+          "</strong><br>" +
           escapeHtml(selectedAddress.label) +
           "<br>" +
-          escapeHtml(selectedAddress.postcode + " " + selectedAddress.city);
+          escapeHtml(selectedAddress.postcode + " " + selectedAddress.city) +
+          (selectedAddress.isManual
+            ? '<span class="address-note">Position approximative sur la commune, l’adresse exacte sera contrôlée lors de la validation.</span>'
+            : "");
       }
 
       function setStatus(type, message) {
@@ -1679,6 +1776,136 @@
 
       function closeAddressModal() {
         $("addressModal").classList.remove("is-visible");
+      }
+
+      function buildManualAddressLabel(line, postcode, city) {
+        return [
+          line,
+          [postcode, city].filter(Boolean).join(" ")
+        ].filter(Boolean).join(", ");
+      }
+
+      function setManualAddressFeedback(message, type) {
+        var node = $("manualAddressFeedback");
+        if (!node) return;
+        node.className = "manual-address-feedback is-visible " + (type || "");
+        node.textContent = message;
+      }
+
+      function renderManualAddressForm() {
+        var currentQuery = $("addressQuery").value.trim();
+        $("addressSuggestions").innerHTML = [
+          '<div class="manual-address-panel">',
+          '<div class="manual-address-callout">',
+          '<span>Alternative</span>',
+          '<strong>Votre adresse n’apparait pas dans les résultats ?</strong>',
+          '<p>Saisissez-la ici. La demande sera positionnée sur la commune, puis l’adresse exacte sera vérifiée pendant la validation.</p>',
+          '</div>',
+          '<form class="manual-address-form" id="manualAddressForm">',
+          '<div class="field full">',
+          '<label for="manualAddressLine">Adresse exacte</label>',
+          '<input id="manualAddressLine" autocomplete="street-address" placeholder="Ex : 12 rue Victor Hugo" value="' + escapeHtml(currentQuery) + '" />',
+          '</div>',
+          '<div class="manual-address-grid">',
+          '<div class="field">',
+          '<label for="manualPostalCode">Code postal</label>',
+          '<input id="manualPostalCode" inputmode="numeric" autocomplete="postal-code" placeholder="Ex : 69002" />',
+          '</div>',
+          '<div class="field">',
+          '<label for="manualCity">Ville</label>',
+          '<input id="manualCity" autocomplete="address-level2" placeholder="Ex : Lyon" />',
+          '</div>',
+          '</div>',
+          '<div class="manual-address-feedback" id="manualAddressFeedback" role="status" aria-live="polite"></div>',
+          '<div class="modal-actions manual-address-actions">',
+          '<button type="button" class="ghost-button" id="manualAddressSearchAgain">Relancer la recherche</button>',
+          '<button type="submit" class="secondary-button" id="manualAddressSubmit">Utiliser cette adresse</button>',
+          '</div>',
+          '</form>',
+          '</div>'
+        ].join("");
+        showAddressModal();
+        setTimeout(function () {
+          var input = $("manualAddressLine");
+          if (input) input.focus();
+        }, 0);
+      }
+
+      async function resolveManualAddressCoordinates(line, postcode, city) {
+        var cityQuery = [postcode, city].filter(Boolean).join(" ");
+        var preciseQuery = [line, postcode, city].filter(Boolean).join(" ");
+        var urls = [
+          "https://api-adresse.data.gouv.fr/search/?limit=1&type=municipality&q=" + encodeURIComponent(cityQuery),
+          "https://api-adresse.data.gouv.fr/search/?limit=1&q=" + encodeURIComponent(preciseQuery)
+        ];
+
+        for (var index = 0; index < urls.length; index += 1) {
+          var response = await fetch(urls[index]);
+          var json = await response.json();
+          var feature = Array.isArray(json.features) ? json.features[0] : null;
+          var coordinates = feature && feature.geometry && Array.isArray(feature.geometry.coordinates)
+            ? feature.geometry.coordinates
+            : [];
+          var longitude = Number(coordinates[0]);
+          var latitude = Number(coordinates[1]);
+          if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
+            return { latitude: latitude, longitude: longitude };
+          }
+        }
+
+        throw new Error("Impossible de positionner cette commune pour le moment.");
+      }
+
+      async function useManualAddress() {
+        var line = $("manualAddressLine") ? $("manualAddressLine").value.trim() : "";
+        var postcode = $("manualPostalCode") ? $("manualPostalCode").value.replace(/\s+/g, "").trim() : "";
+        var city = $("manualCity") ? $("manualCity").value.trim() : "";
+        var submit = $("manualAddressSubmit");
+
+        if (line.length < 5) {
+          setManualAddressFeedback("Ajoutez une adresse plus complète.", "error");
+          return;
+        }
+        if (!/^\d{5}$/.test(postcode)) {
+          setManualAddressFeedback("Indiquez un code postal français à 5 chiffres.", "error");
+          return;
+        }
+        if (city.length < 2) {
+          setManualAddressFeedback("Indiquez la ville associée à l’adresse.", "error");
+          return;
+        }
+
+        if (submit) {
+          submit.disabled = true;
+          submit.textContent = "Validation...";
+        }
+
+        try {
+          var coordinates = await resolveManualAddressCoordinates(line, postcode, city);
+          selectedAddress = {
+            label: buildManualAddressLabel(line, postcode, city),
+            city: city,
+            postcode: postcode,
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude,
+            isManual: true
+          };
+          $("addressQuery").value = selectedAddress.label;
+          updateSelectedAddress();
+          closeAddressModal();
+        } catch (error) {
+          setManualAddressFeedback(
+            error && error.message
+              ? error.message
+              : "Impossible de valider cette adresse. Vérifiez la ville et le code postal.",
+            "error"
+          );
+        } finally {
+          if (submit) {
+            submit.disabled = false;
+            submit.textContent = "Utiliser cette adresse";
+          }
+        }
       }
 
       function updatePauseButton(row) {
@@ -1762,7 +1989,12 @@
           var features = Array.isArray(json.features) ? json.features : [];
 
           if (features.length === 0) {
-            $("addressSuggestions").innerHTML = '<p class="muted">Aucune adresse trouvée. Essayez avec le numéro, la rue et la ville.</p>';
+            $("addressSuggestions").innerHTML = [
+              '<div class="empty-address-results">',
+              '<p class="muted">Aucune adresse trouvée. Essayez avec le numéro, la rue et la ville.</p>',
+              '<button type="button" class="manual-address-inline" id="manualAddressInlineButton">Saisir l’adresse manuellement</button>',
+              '</div>'
+            ].join("");
             return;
           }
 
@@ -1834,7 +2066,7 @@
           throw new Error("Vous devez accepter les conditions d'utilisation.");
         }
         if (!selectedAddress || !selectedAddress.city || !selectedAddress.postcode || !Number.isFinite(selectedAddress.latitude) || !Number.isFinite(selectedAddress.longitude)) {
-          throw new Error("Sélectionnez une adresse depuis la fenêtre de vérification.");
+          throw new Error("Sélectionnez une adresse proposée ou utilisez la saisie manuelle.");
         }
 
         fd.append("email", email);
@@ -1844,6 +2076,7 @@
         fd.append("code_postal", selectedAddress.postcode);
         fd.append("latitude", String(selectedAddress.latitude));
         fd.append("longitude", String(selectedAddress.longitude));
+        fd.append("addressVerificationMode", selectedAddress.isManual ? "manual" : "api-adresse");
         fd.append("acceptedTermsAt", new Date().toISOString());
         fd.append("acceptedTermsVersion", TERMS_VERSION);
 
@@ -1858,6 +2091,7 @@
         var typeSelect = $("merchantBusinessTypeKey");
         var selectedOption = typeSelect.options[typeSelect.selectedIndex];
         var merchantName = $("merchantName").value.trim();
+        var merchantSIREN = $("merchantSIREN").value.replace(/\D/g, "");
         var managerFirstName = $("managerFirstName").value.trim();
         var managerLastName = $("managerLastName").value.trim();
         var businessTypeKey = typeSelect.value;
@@ -1865,6 +2099,7 @@
         var hours = buildHoursString();
 
         if (!merchantName) throw new Error("Le nom du commerce est obligatoire.");
+        if (merchantSIREN.length !== 9) throw new Error("Le SIREN du commerce est obligatoire et doit contenir 9 chiffres.");
         if (!managerFirstName || !managerLastName) throw new Error("Le prénom et le nom du responsable sont obligatoires.");
         if (!businessTypeKey) throw new Error("Sélectionnez un type d'activité.");
         if (businessTypeKey === "OTHER" && custom.length < 2) throw new Error("Précisez l'activité du commerce.");
@@ -1877,6 +2112,7 @@
         fd.append("merchantName", merchantName);
         fd.append("merchantManagerFirstName", managerFirstName);
         fd.append("merchantManagerLastName", managerLastName);
+        fd.append("merchantSIREN", merchantSIREN);
         fd.append("merchantAddress", selectedAddress.label);
         fd.append("merchantHours", hours);
         fd.append("merchantPhone", $("merchantPhone").value.trim());
@@ -1910,6 +2146,7 @@
 
       function appendSocialFormData(fd) {
         var clubName = $("socialClubName").value.trim();
+        var socialSIREN = $("socialSIREN").value.replace(/\D/g, "");
         var managerFirstName = $("managerFirstName").value.trim();
         var managerLastName = $("managerLastName").value.trim();
         var phone = $("socialClubPhone").value.trim();
@@ -1917,6 +2154,7 @@
         var domainCustom = $("socialDomainCustom").value.trim();
 
         if (!clubName) throw new Error("Le nom de la structure est obligatoire.");
+        if (socialSIREN && socialSIREN.length !== 9) throw new Error("Le SIREN de l'association doit contenir 9 chiffres.");
         if (!managerFirstName || !managerLastName) throw new Error("Le prénom et le nom du responsable sont obligatoires.");
         if (!phone) throw new Error("Le téléphone de la structure est obligatoire.");
         if (!domainKey) throw new Error("Sélectionnez un domaine.");
@@ -1926,6 +2164,7 @@
         fd.append("lastName", managerLastName);
         fd.append("firstName", managerFirstName);
         fd.append("username", "");
+        fd.append("socialSIREN", socialSIREN);
         fd.append("socialClubName", clubName);
         fd.append("socialClubDescription", $("socialClubDescription").value.trim());
         fd.append("socialClubAddress", selectedAddress.label);
@@ -2221,6 +2460,22 @@
         });
 
         $("searchAddressButton").addEventListener("click", searchAddress);
+        $("manualAddressButton").addEventListener("click", renderManualAddressForm);
+        $("addressSuggestions").addEventListener("click", function (event) {
+          if (event.target.closest("#manualAddressInlineButton")) {
+            renderManualAddressForm();
+            return;
+          }
+          if (event.target.closest("#manualAddressSearchAgain")) {
+            searchAddress();
+          }
+        });
+        $("addressSuggestions").addEventListener("submit", function (event) {
+          if (event.target && event.target.id === "manualAddressForm") {
+            event.preventDefault();
+            useManualAddress();
+          }
+        });
         $("addressQuery").addEventListener("keydown", function (event) {
           if (event.key === "Enter") {
             event.preventDefault();

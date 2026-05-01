@@ -139,14 +139,14 @@
         {
           selector: 'a[href*="apps.apple.com"]',
           href: "https://apps.apple.com/app/id6754794588",
-          image: "apple.png",
+          image: /\/professionnels\//.test(path) ? "../apple.png" : "apple.png",
           imageAlt: "Télécharger sur l'App Store",
           ariaLabel: "Ouvrir l'App Store"
         },
         {
           selector: 'a[href*="play.google.com"]',
           href: "https://play.google.com/store/search?q=Urbalya&c=apps",
-          image: "google.png",
+          image: /\/professionnels\//.test(path) ? "../google.png" : "google.png",
           imageAlt: "Disponible sur Google Play",
           ariaLabel: "Ouvrir Google Play"
         }
@@ -175,6 +175,35 @@
         }
       });
 
+      var storeCard = nav.querySelector(".drawer-store");
+      if (!storeCard) {
+        storeCard = document.createElement("div");
+        storeCard.className = "drawer-store";
+        storeCard.innerHTML =
+          '<div class="drawer-store-head">' +
+          '<span class="drawer-store-icon" aria-hidden="true">' +
+          '<svg viewBox="0 0 24 24" focusable="false">' +
+          '<rect x="7" y="2.8" width="10" height="18.4" rx="2.4" fill="none" stroke="currentColor" stroke-width="2"/>' +
+          '<path d="M10 6h4M11 18h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
+          "</svg>" +
+          "</span>" +
+          "<strong>App mobile</strong>" +
+          '<span class="drawer-store-platforms">iOS · Android</span>' +
+          "</div>" +
+          '<div class="drawer-store-actions"></div>';
+        nav.appendChild(storeCard);
+      }
+
+      var storeActions = storeCard.querySelector(".drawer-store-actions");
+      if (storeActions) {
+        storeLinks.forEach(function (store) {
+          var link = nav.querySelector(store.selector);
+          if (link && link.parentNode !== storeActions) {
+            storeActions.appendChild(link);
+          }
+        });
+      }
+
       var contactLink = foot.querySelector('a[href^="mailto:"]');
       if (!contactLink) {
         contactLink = document.createElement("a");
@@ -193,10 +222,12 @@
           "Contactez-nous";
       }
 
-      var deleteLink = drawer.querySelector('a[href="delete-account.html"]');
+      var deleteLink = drawer.querySelector('a[href$="delete-account.html"]');
       if (!deleteLink) {
         deleteLink = document.createElement("a");
-        deleteLink.href = "delete-account.html";
+        deleteLink.href = /\/professionnels\//.test(path)
+          ? "../delete-account.html"
+          : "delete-account.html";
         deleteLink.innerHTML =
           '<svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>' +
           "Supprimer mon compte";
@@ -299,6 +330,41 @@
         link.textContent = item.label;
         linksContainer.appendChild(link);
       });
+    });
+  }
+
+  function injectDesktopNavigation() {
+    document.querySelectorAll(".nav-inner").forEach(function (navInner) {
+      if (navInner.querySelector(".links, .nav-links")) return;
+
+      var drawerNav = document.querySelector(".drawer-nav");
+      if (!drawerNav) return;
+
+      var desktopNav = document.createElement("nav");
+      desktopNav.className = "links";
+      desktopNav.setAttribute("aria-label", "Navigation principale");
+
+      Array.prototype.forEach.call(drawerNav.querySelectorAll("a.pill"), function (sourceLink) {
+        var label = (sourceLink.textContent || "").replace(/\s+/g, " ").trim();
+        if (!label) return;
+        if (sourceLink.classList.contains("store-link")) return;
+
+        var link = document.createElement("a");
+        link.className = "pill";
+        link.href = sourceLink.getAttribute("href") || "#";
+        link.textContent = label;
+        if (sourceLink.getAttribute("aria-current") === "page") {
+          link.setAttribute("aria-current", "page");
+        }
+        desktopNav.appendChild(link);
+      });
+
+      var actions = navInner.querySelector(".nav-actions");
+      if (actions) {
+        navInner.insertBefore(desktopNav, actions);
+      } else {
+        navInner.appendChild(desktopNav);
+      }
     });
   }
 
@@ -430,9 +496,11 @@
     document.addEventListener("DOMContentLoaded", function () {
       createUI(getStoredConsent());
       injectDeleteAccountLinks();
+      injectDesktopNavigation();
     });
   } else {
     createUI(getStoredConsent());
     injectDeleteAccountLinks();
+    injectDesktopNavigation();
   }
 })();
