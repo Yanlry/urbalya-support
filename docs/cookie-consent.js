@@ -188,7 +188,6 @@
           "</svg>" +
           "</span>" +
           "<strong>App mobile</strong>" +
-          '<span class="drawer-store-platforms">iOS · Android</span>' +
           "</div>" +
           '<div class="drawer-store-actions"></div>';
         nav.appendChild(storeCard);

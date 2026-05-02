@@ -2,17 +2,11 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="refresh" content="0; url=professionnels/#abonnement" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Abonnement — Urbalya</title>
-  <script>
-    window.location.replace(
-      'professionnels/' + window.location.search + (window.location.hash || '#abonnement')
-    );
-  </script>
+  <title>Gerer mon compte — Urbalya</title>
   <meta
     name="description"
-    content="Gestion de l'abonnement Urbalya : consulter votre formule, ses avantages et arrêter le renouvellement si disponible."
+    content="Page de gestion du compte professionnel Urbalya : recevoir un lien sécurisé, gérer l'abonnement Pro et accéder aux actions de suppression de compte."
   />
   <meta name="theme-color" content="#ffffff" />
 
@@ -26,25 +20,27 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="cookie-consent.css" />
+  <link rel="stylesheet" href="site.css" />
 
   <style>
     :root{
-      --bg:#0B1220;
-      --panel:#0F172A;
-      --panel-soft: rgba(15, 23, 42, 0.82);
-      --text:#E5E7EB;
-      --muted:#94A3B8;
-      --line:rgba(255,255,255,.10);
-      --line2:rgba(255,255,255,.14);
+      --bg:#F4F7FC;
+      --panel:#FFFFFF;
+      --panel-soft:#FFFFFF;
+      --text:#0F172A;
+      --muted:#475569;
+      --line:rgba(15,23,42,.12);
+      --line2:rgba(15,23,42,.20);
 
-      --shadow: 0 18px 50px rgba(0,0,0,.45);
-      --shadow2: 0 10px 30px rgba(0,0,0,.35);
+      --shadow: 0 16px 36px rgba(15,23,42,.08);
+      --shadow2: 0 8px 20px rgba(15,23,42,.08);
 
       --radius: 18px;
       --radius2: 24px;
 
-      --accent:#3B82F6;
-      --accentSoft: rgba(59,130,246,.14);
+      --accent:#1D4ED8;
+      --accentSoft: rgba(29,78,216,.10);
+      --accent2:#0F766E;
 
       --ok:#10B981;
       --ok-soft: rgba(16, 185, 129, 0.16);
@@ -66,8 +62,9 @@
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent 36%),
-        linear-gradient(180deg, #0b1220 0%, #08101d 100%);
+        radial-gradient(circle at 12% 0%, rgba(37,99,235,.12), transparent 30%),
+        radial-gradient(circle at 88% 10%, rgba(15,118,110,.10), transparent 26%),
+        linear-gradient(180deg, #F8FBFF 0%, #EEF3FA 100%);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: geometricPrecision;
@@ -87,7 +84,7 @@
       top:12px;
       padding:10px 12px;
       border-radius:12px;
-      background: rgba(2,6,23,.95);
+      background: #FFFFFF;
       border:1px solid var(--line2);
       transform: translateY(-200%);
       transition: transform .15s ease;
@@ -105,7 +102,7 @@
     .nav{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
-      background: rgba(11,18,32,.82);
+      background: rgba(255,255,255,.86);
       border-bottom: 1px solid var(--line);
       padding-top: env(safe-area-inset-top);
     }
@@ -166,7 +163,7 @@
       height: var(--tap);
       border-radius: 14px;
       border:1px solid var(--line);
-      background: rgba(15,23,42,.45);
+      background: #FFFFFF;
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -176,8 +173,8 @@
     }
     .nav-toggle:hover{
       transform: translateY(-1px);
-      background: rgba(15,23,42,.65);
-      border-color: rgba(255,255,255,.18);
+      background: #F8FAFC;
+      border-color: rgba(15,23,42,.24);
     }
 
     .pill{
@@ -188,7 +185,7 @@
       padding:10px 12px;
       border-radius:999px;
       border:1px solid var(--line);
-      background: rgba(15,23,42,.45);
+      background: #FFFFFF;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
       color:var(--text);
       font-weight:900;
@@ -199,13 +196,14 @@
     }
     .pill:hover{
       transform: translateY(-1px);
-      background: rgba(15,23,42,.65);
-      border-color: rgba(255,255,255,.18);
+      background: #F8FAFC;
+      border-color: rgba(15,23,42,.22);
     }
     .pill.primary{
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(59,130,246,.92);
-      box-shadow: 0 14px 30px rgba(59,130,246,.14);
+      border: 1px solid rgba(29,78,216,.24);
+      background: rgba(29,78,216,.96);
+      color: #FFFFFF;
+      box-shadow: 0 10px 20px rgba(29,78,216,.20);
     }
     .pill.danger,
     .pill.danger[aria-current="page"]{
@@ -219,9 +217,9 @@
       border-color: rgba(252,165,165,.65);
     }
     .pill[aria-current="page"]{
-      background: rgba(245,158,11,.20);
-      border-color: rgba(245,158,11,.55);
-      color:#FDE68A;
+      background: #E2E8F0;
+      border-color: #CBD5E1;
+      color:#0F172A;
     }
 
     .store-link{
@@ -230,12 +228,12 @@
       overflow: hidden;
       border-radius: 12px;
       background: transparent !important;
-      box-shadow: 0 6px 16px rgba(2,6,23,.35);
+      box-shadow: 0 6px 14px rgba(15,23,42,.12);
       min-height: auto;
     }
     .store-link:hover{
-      background: rgba(15,23,42,.15) !important;
-      border-color: rgba(226,232,240,.95) !important;
+      background: rgba(248,250,252,.8) !important;
+      border-color: rgba(15,23,42,.20) !important;
     }
     .store-badge{
       display: block;
@@ -246,7 +244,7 @@
     .backdrop{
       position:fixed;
       inset:0;
-      background: rgba(2,6,23,.60);
+      background: rgba(15,23,42,.32);
       backdrop-filter: blur(6px);
       opacity:0;
       pointer-events:none;
@@ -259,15 +257,16 @@
       right:0;
       width: min(92vw, 360px);
       height: calc(100vh - env(safe-area-inset-top));
-      background: rgba(15,23,42,.94);
+      background: rgba(255,255,255,.98);
       border-left: 1px solid var(--line);
-      box-shadow: 0 30px 80px rgba(0,0,0,.55);
+      box-shadow: 0 26px 50px rgba(15,23,42,.18);
       transform: translateX(110%);
       transition: transform .22s ease;
       z-index: 90;
       display:flex;
       flex-direction:column;
       padding: 14px;
+      overflow-y: auto;
     }
     .drawer-head{
       display:flex;
@@ -283,7 +282,7 @@
       height: var(--tap);
       border-radius: 14px;
       border:1px solid var(--line);
-      background: rgba(2,6,23,.35);
+      background: #FFFFFF;
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -344,19 +343,43 @@
 
     main{padding-bottom: 22px}
     .hero{padding: 30px 0 16px}
+    .hero-intro{
+      max-width: 100%;
+      margin-bottom: 16px;
+    }
+    .page-kicker{
+      margin:0;
+      color:#1D4ED8;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .hero h1{
+      margin:10px 0 0;
+      font-size: clamp(30px, 5.6vw, 48px);
+      line-height:1.04;
+      letter-spacing: -0.01em;
+      max-width: 100%;
+    }
+    .lead{
+      margin:14px 0 0;
+      color:#334155;
+      font-size: clamp(16px, 2.1vw, 20px);
+      line-height:1.58;
+    }
     .hero-grid{display:grid; grid-template-columns: 1fr; gap: 18px}
     @media (min-width: 980px){
       .hero{padding: 34px 0 18px}
-      .hero-grid{grid-template-columns: minmax(0, 1.3fr) minmax(320px, .9fr); align-items:start}
     }
 
     .status-card,
     .plan-card,
     .note-card,
     .action-card{
-      border-radius: 22px;
+      border-radius: 18px;
       border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.82));
+      background: var(--panel-soft);
       box-shadow: var(--shadow);
     }
 
@@ -398,17 +421,17 @@
       white-space:nowrap;
     }
     .status-pill.active{
-      color:#d1fae5;
+      color:#065F46;
       background: var(--ok-soft);
       border-color: rgba(16, 185, 129, 0.24);
     }
     .status-pill.warning{
-      color:#fde68a;
+      color:#92400E;
       background: var(--warn-soft);
       border-color: rgba(245, 158, 11, 0.24);
     }
     .status-pill.inactive{
-      color:#fecaca;
+      color:#991B1B;
       background: var(--danger-soft);
       border-color: rgba(239, 68, 68, 0.24);
     }
@@ -425,7 +448,7 @@
       padding:14px;
       border-radius:16px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
+      background: #F8FAFC;
     }
     .meta-label{
       display:block;
@@ -448,12 +471,12 @@
       margin-top:18px;
       padding:16px;
       border-radius:16px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
+      border:1px solid #DBEAFE;
+      background: #F8FBFF;
     }
     .status-actions p{
       margin:0;
-      color:var(--muted);
+      color:#334155;
       line-height:1.65;
     }
     .self-serve{
@@ -482,13 +505,13 @@
       min-height:46px;
       border-radius:14px;
       border:1px solid var(--line2);
-      background: rgba(255,255,255,.03);
+      background: #FFFFFF;
       color:var(--text);
       font-size:15px;
       padding:0 14px;
     }
     .self-serve-input::placeholder{
-      color:#8ea2bd;
+      color:#64748B;
     }
     .self-serve-input:focus{
       box-shadow: var(--focus);
@@ -500,8 +523,8 @@
       line-height:1.6;
     }
     .self-serve-feedback.muted{color:var(--muted)}
-    .self-serve-feedback.ok{color:#86efac}
-    .self-serve-feedback.error{color:#fca5a5}
+    .self-serve-feedback.ok{color:#047857}
+    .self-serve-feedback.error{color:#B91C1C}
     @media (max-width: 560px){
       .self-serve-form .btn{
         width:100%;
@@ -534,19 +557,9 @@
       position:relative;
       overflow:hidden;
     }
-    .plan-card::after{
-      content:"";
-      position:absolute;
-      inset:auto -40px -70px auto;
-      width:160px;
-      height:160px;
-      border-radius:50%;
-      background: radial-gradient(circle, rgba(59,130,246,.18), transparent 70%);
-      pointer-events:none;
-    }
     .plan-card.current{
       border-color: rgba(59,130,246,.36);
-      box-shadow: 0 24px 60px rgba(59,130,246,.12);
+      box-shadow: 0 16px 32px rgba(29,78,216,.14);
     }
     .plan-label{
       display:inline-flex;
@@ -554,7 +567,7 @@
       gap:8px;
       padding:8px 12px;
       border-radius:999px;
-      background: rgba(255,255,255,.04);
+      background: #EFF6FF;
       border:1px solid var(--line);
       font-size:13px;
       font-weight:900;
@@ -562,7 +575,7 @@
     }
     .plan-card.current .plan-label{
       background: var(--accentSoft);
-      color:#bfdbfe;
+      color:#1D4ED8;
       border-color: rgba(59,130,246,.24);
     }
     .plan-title{
@@ -599,7 +612,7 @@
     }
     .benefits li::before{
       content:"•";
-      color:#93c5fd;
+      color:#2563EB;
       font-weight:900;
       line-height:1.2;
     }
@@ -632,7 +645,7 @@
       padding: 12px 16px;
       border-radius: 14px;
       border:1px solid var(--line2);
-      background: rgba(255,255,255,.03);
+      background: #FFFFFF;
       color:var(--text);
       font-weight:800;
       font-size:15px;
@@ -642,15 +655,16 @@
     }
     .btn:hover{
       transform: translateY(-1px);
-      background: rgba(255,255,255,.06);
+      background: #F8FAFC;
       border-color: rgba(255,255,255,.22);
     }
     .btn.primary{
       border: 1px solid rgba(59,130,246,.22);
-      background: rgba(59,130,246,.92);
+      background: rgba(29,78,216,.96);
+      color: #FFFFFF;
     }
     .btn.primary:hover{
-      background: rgba(37,99,235,.95);
+      background: rgba(30,64,175,.98);
       border-color: rgba(147,197,253,.4);
     }
     .btn.danger{
@@ -668,7 +682,7 @@
       padding:14px 16px;
       border-radius:14px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      background: #F8FAFC;
       color:var(--text);
       line-height:1.65;
     }
@@ -681,7 +695,7 @@
       background: var(--warn-soft);
     }
     .banner.muted{
-      color:var(--muted);
+      color:#334155;
     }
 
     footer{
@@ -689,7 +703,7 @@
       margin-top: 12px;
       padding: 22px 0 34px;
       color: var(--muted);
-      background: rgba(11,18,32,.55);
+      background: #F8FAFC;
       font-size:14px;
     }
     .foot{
@@ -721,7 +735,6 @@
       .pill,.btn,.nav-toggle{transition:none !important}
     }
   </style>
-  <link rel="stylesheet" href="site.css" />
 </head>
 
 <body>
@@ -849,6 +862,10 @@
     </nav>
 
     <div class="drawer-foot">
+      <a class="pill primary" href="billing.html" aria-current="page">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        Gerer mon compte
+      </a>
       <a class="pill danger" href="delete-account.html">
         <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
         Supprimer mon compte
@@ -862,11 +879,18 @@
 
   <main class="container" role="main" id="main">
     <section class="hero" aria-label="Gestion de l'abonnement">
+      <div class="hero-intro">
+        <p class="page-kicker">Gestion de compte professionnel</p>
+        <h1>Gerer votre compte Pro simplement et en sécurité</h1>
+        <p class="lead">
+          Demandez un lien sécurisé pour accéder à votre espace de gestion, suivre votre abonnement Pro et accéder aux actions de compte.
+        </p>
+      </div>
       <div class="hero-grid">
         <div class="status-card" aria-live="polite">
           <div class="status-head">
             <div>
-              <h2 class="status-title" id="statusTitle">Statut de votre abonnement</h2>
+              <h2 class="status-title" id="statusTitle">Gerer mon compte professionnel</h2>
               <p class="status-subtitle" id="statusText">
                 Chargement des informations de votre abonnement...
               </p>
@@ -876,15 +900,15 @@
 
           <div class="status-actions">
             <p id="manageText">
-              Si votre compte dispose d'un renouvellement automatique actif, vous pouvez l'arrêter depuis cette page.
+              Cette page vous permet de recevoir un lien sécurisé, gérer l'abonnement Pro et accéder aux actions de compte.
             </p>
             <div class="action-row" id="manageActions">
               <a class="btn" href="support.html">Voir le support</a>
             </div>
             <div class="self-serve" id="selfServeBlock" hidden>
-              <h4>Retrouver mon abonnement par email</h4>
+              <h4>Recevoir un lien sécurisé</h4>
               <p>
-                Entrez l'adresse email de votre compte pro. Si elle existe, vous recevrez un lien sécurisé pour gérer votre abonnement.
+                Entrez l'adresse email de votre compte pro. Si elle existe, vous recevrez un lien sécurisé pour vous connecter, gérer l'abonnement Pro et accéder à la suppression du compte.
               </p>
               <form class="self-serve-form" id="selfServeForm" novalidate>
                 <input
@@ -915,6 +939,17 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Étapes de gestion du compte">
+      <div class="note-card">
+        <h3>Ce qu'il faut faire</h3>
+        <ul class="benefits">
+          <li>Saisissez votre email professionnel et demandez le lien sécurisé.</li>
+          <li>Ouvrez le lien reçu par email pour accéder à votre espace de gestion.</li>
+          <li>Depuis cet espace, gérez l'abonnement Pro ou demandez la suppression du compte.</li>
+        </ul>
       </div>
     </section>
 
@@ -1176,7 +1211,7 @@
           }
 
           setSelfServeFeedback(
-            "Si un compte professionnel correspond à cette adresse, un lien sécurisé vient d'être envoyé.",
+            "Si un compte professionnel correspond à cette adresse, vous recevrez un lien sécurisé pour vous connecter, gérer l'abonnement Pro ou demander la suppression du compte.",
             "ok"
           );
           selfServeForm.reset();

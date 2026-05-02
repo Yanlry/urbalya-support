@@ -183,6 +183,7 @@
       display: flex;
       flex-direction: column;
       padding: 14px;
+      overflow-y: auto;
     }
 
     .drawer-head {
@@ -637,7 +638,7 @@
 
     .billing-hero {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+      grid-template-columns: minmax(0, 1fr);
       gap: 18px;
       align-items: start;
       margin-top: 16px;
@@ -973,6 +974,10 @@
     </nav>
 
     <div class="drawer-foot">
+      <a class="pill primary" href="../billing.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        Gerer mon compte
+      </a>
       <a class="pill danger" href="../delete-account.html">
         <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
         Supprimer mon compte
@@ -1057,91 +1062,74 @@
           </p>
 
           <div class="billing-hero">
-            <div>
-              <div class="plans-grid pro-pricing-grid">
-                <article class="plan-card pricing-card is-commerce">
-                  <span class="plan-label">Commerce</span>
-                  <p class="plan-price">29 EUR / mois</p>
-                  <p class="plan-note">Pour une présence locale simple, visible et administrable.</p>
-                  <ul class="benefits">
-                    <li>Fiche commerce visible dans Urbalya après validation.</li>
-                    <li>Galerie photos, horaires, adresse et description.</li>
-                    <li>Gestion des informations professionnelles depuis l'espace pro.</li>
-                  </ul>
-                </article>
+            <div class="plans-grid pro-pricing-grid">
+              <article class="plan-card pricing-card is-commerce">
+                <span class="plan-label">Commerce</span>
+                <p class="plan-price">29 EUR / mois</p>
+                <p class="plan-note">Pour une présence locale simple, visible et administrable.</p>
+                <ul class="benefits">
+                  <li>Fiche commerce visible dans Urbalya après validation.</li>
+                  <li>Galerie photos, horaires, adresse et description.</li>
+                  <li>Gestion des informations professionnelles depuis l'espace pro.</li>
+                </ul>
+              </article>
 
-                <article class="plan-card pricing-card is-municipality">
-                  <span class="plan-label">Mairies et collectivités</span>
-                  <p class="plan-price">À partir de 79 EUR / mois</p>
-                  <p class="plan-note">Un tarif adapté à la taille réelle de la commune.</p>
+              <article class="plan-card pricing-card is-municipality">
+                <span class="plan-label">Mairies et collectivités</span>
+                <p class="plan-price">À partir de 79 EUR / mois</p>
+                <p class="plan-note">Un tarif adapté à la taille réelle de la commune.</p>
 
-                  <div class="municipality-tiers" aria-label="Tarifs mairie par nombre d'habitants">
-                    <div class="municipality-tier">
-                      <strong>Moins de 2 000 habitants</strong>
-                      <span>79 EUR / mois</span>
-                    </div>
-                    <div class="municipality-tier">
-                      <strong>2 001 à 10 000 habitants</strong>
-                      <span>149 EUR / mois</span>
-                    </div>
-                    <div class="municipality-tier">
-                      <strong>10 001 à 50 000 habitants</strong>
-                      <span>249 EUR / mois</span>
-                    </div>
-                    <div class="municipality-tier">
-                      <strong>Plus de 50 000 habitants</strong>
-                      <span>Sur devis</span>
-                    </div>
+                <div class="municipality-tiers" aria-label="Tarifs mairie par nombre d'habitants">
+                  <div class="municipality-tier">
+                    <strong>Moins de 2 000 habitants</strong>
+                    <span>79 EUR / mois</span>
                   </div>
-
-                  <ul class="benefits">
-                    <li>Compte institutionnel validé par le support Urbalya.</li>
-                    <li>Informations officielles, horaires, coordonnées et communications communales.</li>
-                    <li>Outils de visibilité locale et accompagnement selon le volume d'habitants.</li>
-                  </ul>
-                </article>
-              </div>
-
-              <p class="pricing-note">
-                Le palier mairie est confirmé après vérification du dossier, sur la base de la population municipale de référence.
-              </p>
-
-              <div class="billing-context" id="billingContextBlock">
-                <h3>Gestion de votre abonnement</h3>
-                <p class="muted" id="billingContextText">
-                  Vérifiez les informations transmises par votre lien sécurisé.
-                </p>
-                <div class="billing-meta">
-                  <div class="billing-meta-item">
-                    <span>Compte</span>
-                    <strong id="billingAccountValue">Compte pro</strong>
+                  <div class="municipality-tier">
+                    <strong>2 001 à 10 000 habitants</strong>
+                    <span>149 EUR / mois</span>
                   </div>
-                  <div class="billing-meta-item">
-                    <span>Statut</span>
-                    <strong id="billingStatusValue">Indisponible</strong>
+                  <div class="municipality-tier">
+                    <strong>10 001 à 50 000 habitants</strong>
+                    <span>249 EUR / mois</span>
                   </div>
-                  <div class="billing-meta-item">
-                    <span>Renouvellement</span>
-                    <strong id="billingRenewalValue">Indisponible</strong>
+                  <div class="municipality-tier">
+                    <strong>Plus de 50 000 habitants</strong>
+                    <span>Sur devis</span>
                   </div>
                 </div>
-                <div class="billing-actions" id="billingActions"></div>
-              </div>
+
+                <ul class="benefits">
+                  <li>Compte institutionnel validé par le support Urbalya.</li>
+                  <li>Informations officielles, horaires, coordonnées et communications communales.</li>
+                  <li>Outils de visibilité locale et accompagnement selon le volume d'habitants.</li>
+                </ul>
+              </article>
             </div>
 
-            <div class="billing-card" id="billingSelfServeBlock">
-              <h3>Recevoir un lien sécurisé</h3>
-              <p class="muted">
-                Saisissez l'email de votre compte professionnel pour recevoir un lien de gestion.
+            <p class="pricing-note">
+              Le palier mairie est confirmé après vérification du dossier, sur la base de la population municipale de référence.
+            </p>
+
+            <div class="billing-context" id="billingContextBlock">
+              <h3>Gestion de votre abonnement</h3>
+              <p class="muted" id="billingContextText">
+                Vérifiez les informations transmises par votre lien sécurisé.
               </p>
-              <form id="billingSelfServeForm">
-                <div class="field">
-                  <label for="billingSelfServeEmail">Email professionnel</label>
-                  <input id="billingSelfServeEmail" type="email" autocomplete="email" required />
+              <div class="billing-meta">
+                <div class="billing-meta-item">
+                  <span>Compte</span>
+                  <strong id="billingAccountValue">Compte pro</strong>
                 </div>
-                <button class="secondary-button" id="billingSelfServeSubmit" type="submit">Envoyer le lien</button>
-                <div class="billing-feedback" id="billingFeedback" role="status" aria-live="polite"></div>
-              </form>
+                <div class="billing-meta-item">
+                  <span>Statut</span>
+                  <strong id="billingStatusValue">Indisponible</strong>
+                </div>
+                <div class="billing-meta-item">
+                  <span>Renouvellement</span>
+                  <strong id="billingRenewalValue">Indisponible</strong>
+                </div>
+              </div>
+              <div class="billing-actions" id="billingActions"></div>
             </div>
           </div>
         </div>
@@ -2424,7 +2412,7 @@
             }
 
             setBillingFeedback(
-              "Si un compte professionnel correspond à cette adresse, un lien sécurisé vient d'être envoyé.",
+              "Si un compte professionnel correspond à cette adresse, vous recevrez un lien sécurisé pour vous connecter, gérer l'abonnement Pro ou demander la suppression du compte.",
               "ok"
             );
             form.reset();

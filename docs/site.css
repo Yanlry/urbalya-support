@@ -306,6 +306,8 @@ symbol [fill="#FFFFFF"] {
   border-left: 1px solid var(--site-border) !important;
   box-shadow: -24px 0 60px rgba(16, 32, 51, 0.18) !important;
   backdrop-filter: blur(18px);
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
 }
 
@@ -328,6 +330,9 @@ symbol [fill="#FFFFFF"] {
 .drawer-nav {
   gap: 7px !important;
   padding: 10px 2px !important;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .drawer-nav .pill,
@@ -356,7 +361,7 @@ symbol [fill="#FFFFFF"] {
 }
 
 .drawer-foot {
-  margin-top: 10px !important;
+  margin-top: auto !important;
   display: grid;
   gap: 8px;
   padding: 10px 2px 2px;
