@@ -905,7 +905,7 @@
         <img src="../logo.png" alt="" />
         <span class="brand-text">
           <strong>Urbalya</strong>
-          <small>La ville entre vos mains</small>
+          <small>Abonnement et compte pro</small>
         </span>
       </a>
       <nav class="nav-links" aria-label="Navigation">
@@ -2296,6 +2296,14 @@
         });
       }
 
+      function isExpiredBillingDate(value) {
+        var raw = String(value || "").trim();
+        if (!raw) return false;
+        var date = new Date(raw);
+        if (Number.isNaN(date.getTime())) return false;
+        return date.getTime() <= Date.now();
+      }
+
       function resolveAccountLabel(value) {
         var normalized = String(value || "").trim().toLowerCase();
         if (normalized === "merchant") return "Commerce";
@@ -2341,6 +2349,8 @@
           var billingStatus = String(params.get("billingStatus") || "").trim().toUpperCase();
           var billingExempt = params.get("billingExempt") === "1";
           var cancelAtPeriodEnd = params.get("cancelAtPeriodEnd") === "1";
+          var currentPeriodEnd = params.get("currentPeriodEnd");
+          var hasExpiredPeriod = isExpiredBillingDate(currentPeriodEnd);
           var unsubscribeUrl = safeUrl(params.get("unsubscribeUrl"));
           var reactivateUrl = safeUrl(params.get("reactivateUrl"));
           var contextBlock = $("billingContextBlock");
@@ -2353,17 +2363,25 @@
             billingExempt,
             cancelAtPeriodEnd
           );
-          $("billingRenewalValue").textContent = cancelAtPeriodEnd
-            ? "Arrêt demandé"
-            : formatBillingDate(params.get("currentPeriodEnd"));
+          if (hasExpiredPeriod) {
+            $("billingStatusValue").textContent = "Expiré";
+            $("billingRenewalValue").textContent = "Acces expire le " + formatBillingDate(currentPeriodEnd);
+          } else {
+            $("billingRenewalValue").textContent = cancelAtPeriodEnd
+              ? "Arrêt demandé"
+              : formatBillingDate(currentPeriodEnd);
+          }
 
           if (actions) {
             var html = "";
-            if (reactivateUrl) {
+            if (!hasExpiredPeriod && reactivateUrl) {
               html += '<a class="pill primary" href="' + escapeHtml(reactivateUrl) + '">Réactiver le renouvellement</a>';
             }
-            if (unsubscribeUrl) {
+            if (!hasExpiredPeriod && unsubscribeUrl) {
               html += '<a class="pill danger" href="' + escapeHtml(unsubscribeUrl) + '">Arrêter le renouvellement</a>';
+            }
+            if (hasExpiredPeriod) {
+              html += '<a class="pill primary" href="mailto:contact@urbalya.com?subject=Renouvellement%20abonnement%20Urbalya">Demander un nouveau lien de paiement</a>';
             }
             html += '<a class="pill" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
             actions.innerHTML = html;

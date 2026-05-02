@@ -344,8 +344,9 @@
     main{padding-bottom: 22px}
     .hero{padding: 30px 0 16px}
     .hero-intro{
-      max-width: 100%;
-      margin-bottom: 16px;
+      max-width: 980px;
+      margin: 0 auto 16px;
+      text-align: center;
     }
     .page-kicker{
       margin:0;
@@ -354,21 +355,38 @@
       font-weight:900;
       letter-spacing:.12em;
       text-transform:uppercase;
+      display:block;
+      width:100%;
+      text-align:center;
     }
     .hero h1{
-      margin:10px 0 0;
+      margin:10px auto 0;
       font-size: clamp(30px, 5.6vw, 48px);
       line-height:1.04;
       letter-spacing: -0.01em;
-      max-width: 100%;
+      max-width: 920px;
     }
     .lead{
-      margin:14px 0 0;
+      margin:14px auto 0;
       color:#334155;
       font-size: clamp(16px, 2.1vw, 20px);
       line-height:1.58;
+      max-width: 860px;
+      text-align: center;
     }
     .hero-grid{display:grid; grid-template-columns: 1fr; gap: 18px}
+    .hero-intro,
+    .hero-grid,
+    .section-head,
+    .plans,
+    .section .note-card{
+      max-width: 980px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-grid .status-card{
+      width: 100%;
+    }
     @media (min-width: 980px){
       .hero{padding: 34px 0 18px}
     }
@@ -800,7 +818,7 @@
         </span>
         <span class="brand-text">
           <strong>Urbalya</strong>
-          <small>Abonnement et gestion web</small>
+          <small>Gestion de compte</small>
         </span>
       </a>
 
@@ -880,7 +898,7 @@
   <main class="container" role="main" id="main">
     <section class="hero" aria-label="Gestion de l'abonnement">
       <div class="hero-intro">
-        <p class="page-kicker">Gestion de compte professionnel</p>
+        <p class="page-kicker">Gestion du compte professionnel</p>
         <h1>Gerer votre compte Pro simplement et en sécurité</h1>
         <p class="lead">
           Demandez un lien sécurisé pour accéder à votre espace de gestion, suivre votre abonnement Pro et accéder aux actions de compte.
@@ -1236,6 +1254,19 @@
       }).format(date);
     }
 
+    function parseDateValue(value) {
+      if (!value) return null;
+      const parsed = new Date(value);
+      if (!Number.isFinite(parsed.getTime())) return null;
+      return parsed;
+    }
+
+    function isPastDateValue(value) {
+      const parsed = parseDateValue(value);
+      if (!parsed) return false;
+      return parsed.getTime() <= Date.now();
+    }
+
     function formatMoney(value, currency) {
       const amount = Number(value);
       if (!Number.isFinite(amount)) return "Tarif indisponible";
@@ -1285,6 +1316,7 @@
       const statusText = document.getElementById("statusText");
       const statusPill = document.getElementById("statusPill");
       const periodLabel = formatDateLabel(currentPeriodEnd);
+      const hasExpiredPeriod = isPastDateValue(currentPeriodEnd);
       const statusMeta = resolveStatusMeta(billingStatus);
 
       if (!hasManagementContext) {
@@ -1309,6 +1341,17 @@
       }
 
       if (cancelAtPeriodEnd) {
+        if (hasExpiredPeriod) {
+          nextRenewalValue.textContent = periodLabel
+            ? "Acces expire le " + periodLabel
+            : "Acces expire";
+          statusPill.textContent = "Inactif";
+          statusPill.className = "status-pill inactive";
+          statusText.textContent = periodLabel
+            ? "Le renouvellement automatique est desactive et l'acces a expire le " + periodLabel + "."
+            : "Le renouvellement automatique est desactive et l'acces est expire.";
+          return;
+        }
         nextRenewalValue.textContent = periodLabel
           ? "Aucun. Accès actif jusqu'au " + periodLabel
           : "Aucun renouvellement programmé";
@@ -1319,6 +1362,17 @@
       }
 
       if (billingStatus === "ACTIVE") {
+        if (hasExpiredPeriod) {
+          nextRenewalValue.textContent = periodLabel
+            ? "Acces expire le " + periodLabel
+            : "Acces expire";
+          statusPill.textContent = "Inactif";
+          statusPill.className = "status-pill inactive";
+          statusText.textContent = periodLabel
+            ? "L'acces associe a cet abonnement a expire le " + periodLabel + "."
+            : "L'acces associe a cet abonnement est expire.";
+          return;
+        }
         nextRenewalValue.textContent = periodLabel || "Date non communiquée";
         statusText.textContent = periodLabel
           ? "Votre abonnement est actif. En cas d'arrêt du renouvellement, l'accès restera disponible jusqu'au " + periodLabel + "."
@@ -1334,6 +1388,7 @@
       const manageText = document.getElementById("manageText");
       const manageActions = document.getElementById("manageActions");
       const periodLabel = formatDateLabel(currentPeriodEnd);
+      const hasExpiredPeriod = isPastDateValue(currentPeriodEnd);
 
       if (!hasManagementContext) {
         manageText.textContent =
@@ -1347,6 +1402,16 @@
         manageText.textContent = "Ce compte ne dispose pas d'un renouvellement automatique à arrêter depuis le web.";
         manageActions.innerHTML =
           '<a class="btn" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
+        return;
+      }
+
+      if (hasExpiredPeriod) {
+        manageText.textContent = periodLabel
+          ? "L'acces a expire le " + periodLabel + ". Un nouveau paiement est necessaire pour relancer l'abonnement."
+          : "L'acces est expire. Un nouveau paiement est necessaire pour relancer l'abonnement.";
+        manageActions.innerHTML =
+          '<a class="btn" href="mailto:contact@urbalya.com?subject=Renouvellement%20abonnement%20Urbalya">Demander un nouveau lien de paiement</a>' +
+          '<a class="btn" href="mailto:contact@urbalya.com?subject=Question%20abonnement%20Urbalya">Contacter le support</a>';
         return;
       }
 
