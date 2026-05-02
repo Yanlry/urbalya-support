@@ -74,10 +74,17 @@
       margin:0;
       font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(circle at 18% 0%, rgba(15,118,110,.10), transparent 26%),
-        radial-gradient(circle at 88% 10%, rgba(37,99,235,.08), transparent 24%),
-        linear-gradient(180deg, #FFFFFF 0%, #F7FAFD 46%, #EEF5FA 100%);
+      background-color:#0B1220;
+      background-image:
+        radial-gradient(circle at 16% 0%, rgba(59,130,246,.20), transparent 30%),
+        radial-gradient(circle at 88% 8%, rgba(16,185,129,.12), transparent 26%),
+        radial-gradient(circle at 50% 92%, rgba(59,130,246,.26), transparent 52%),
+        linear-gradient(180deg, rgba(8,20,40,.62) 0%, rgba(9,24,46,.56) 50%, rgba(10,28,54,.54) 100%),
+        url("assets/background.png");
+      background-repeat:no-repeat,no-repeat,no-repeat,no-repeat,no-repeat;
+      background-position:center top,center top,center 92%,center top,center bottom;
+      background-size:cover,cover,130% 62%,cover,cover;
+      background-attachment:scroll,scroll,scroll,scroll,fixed;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       text-rendering:geometricPrecision;
@@ -443,7 +450,10 @@
       transform:translateX(0);
     }
 
-    main{padding-bottom:22px}
+    main{
+      padding-bottom:22px;
+      background:transparent !important;
+    }
 
     .hero{
       padding:54px 0 22px;
@@ -722,6 +732,11 @@
 
     .section{
       padding:18px 0 34px;
+      background:transparent !important;
+    }
+
+    .feature-carousel-section{
+      background:transparent !important;
     }
 
     @media (min-width:900px){
@@ -1462,34 +1477,34 @@
             <div class="home-stat">
               <div class="home-stat-top">
                 <span class="home-stat-icon" aria-hidden="true">
-                  <svg class="ico lg" viewBox="0 0 24 24"><use href="#i-shield"></use></svg>
+                  <svg class="ico lg" viewBox="0 0 24 24"><use href="#i-bell"></use></svg>
                 </span>
-                <span class="home-stat-chip">Sécurité</span>
+                <span class="home-stat-chip">Actualité</span>
               </div>
-              <strong>Comptes vérifiés</strong>
-              <span>Les profils professionnels sont contrôlés avant activation pour limiter les comptes flous ou non officiels.</span>
+              <strong>Vie locale en direct</strong>
+              <span>Retrouvez toute l’actualité locale : événements, clubs, commerces, associations et informations utiles de votre ville au même endroit.</span>
             </div>
 
             <div class="home-stat">
               <div class="home-stat-top">
                 <span class="home-stat-icon" aria-hidden="true">
-                  <svg class="ico lg" viewBox="0 0 24 24"><use href="#i-map"></use></svg>
+                  <svg class="ico lg" viewBox="0 0 24 24"><use href="#i-camera"></use></svg>
                 </span>
-                <span class="home-stat-chip">Terrain</span>
+                <span class="home-stat-chip">Signalement</span>
               </div>
-              <strong>Informations regroupées</strong>
-              <span>Signalements, événements, commerces et informations locales sont centralisés dans un même espace de ville.</span>
+              <strong>Agir sur le terrain</strong>
+              <span>Signalez des problèmes dans la ville, lancez des sondages, créez des pétitions, et suivez une carte locale avec signalements, événements, commerces et mairies.</span>
             </div>
 
             <div class="home-stat">
               <div class="home-stat-top">
                 <span class="home-stat-icon" aria-hidden="true">
-                  <svg class="ico lg" viewBox="0 0 24 24"><use href="#i-check"></use></svg>
+                  <svg class="ico lg" viewBox="0 0 24 24"><use href="#i-users"></use></svg>
                 </span>
-                <span class="home-stat-chip">Cadre clair</span>
+                <span class="home-stat-chip">Classement</span>
               </div>
-              <strong>Support accessible</strong>
-              <span>Support, confidentialité, RGPD et suppression de compte restent visibles depuis le site officiel.</span>
+              <strong>Progression locale</strong>
+              <span>En participant à la vie locale, vous gagnez des points pour monter au classement, et vous faites aussi progresser votre ville dans le top des villes de France.</span>
             </div>
           </div>
         </div>
