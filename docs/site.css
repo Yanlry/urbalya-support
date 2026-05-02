@@ -205,6 +205,14 @@ symbol [fill="#FFFFFF"] {
   margin-left: auto;
 }
 
+.header-create-btn {
+  min-height: 42px !important;
+  padding: 0 14px !important;
+  font-size: 13px !important;
+  font-weight: 860 !important;
+  white-space: nowrap;
+}
+
 .links,
 .nav-links {
   display: none !important;
@@ -2796,6 +2804,19 @@ footer {
     min-height: 66px !important;
   }
 
+  .header-create-btn {
+    display: none !important;
+  }
+
+  .nav-toggle {
+    width: 42px !important;
+    padding: 0 !important;
+  }
+
+  .nav-toggle::after {
+    content: none;
+  }
+
   .hero {
     padding: 46px 0 30px !important;
   }
@@ -4077,6 +4098,87 @@ h2 {
   color: #f2fbff !important;
 }
 
+.drawer-store {
+  display: grid !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 10px 12px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(151, 191, 225, 0.26) !important;
+  background: rgba(11, 35, 60, 0.74) !important;
+  box-shadow: none !important;
+}
+
+.drawer-store-head {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 36px !important;
+}
+
+.drawer-store-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  flex: 0 0 auto !important;
+  padding: 6px !important;
+  border-radius: 9px !important;
+  border: 1px solid rgba(156, 197, 231, 0.26) !important;
+  background: rgba(105, 178, 224, 0.14) !important;
+  color: #cdeaff !important;
+  box-shadow: none !important;
+}
+
+.drawer-store-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.drawer-store-head strong {
+  color: #e6f2ff !important;
+  font-size: 1rem !important;
+  font-weight: 740 !important;
+  line-height: 1.2 !important;
+}
+
+.drawer-store-platforms {
+  display: none !important;
+}
+
+.drawer-store-actions {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  align-items: center !important;
+}
+
+.drawer-store .store-link,
+.drawer-store .pill.store-link,
+.drawer-store .pill.primary.store-link {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 2px !important;
+  border: 1px solid rgba(151, 191, 225, 0.24) !important;
+  border-radius: 10px !important;
+  background: rgba(7, 24, 43, 0.58) !important;
+}
+
+.drawer-store .store-link:hover,
+.drawer-store .pill.store-link:hover,
+.drawer-store .pill.primary.store-link:hover {
+  border-color: rgba(180, 216, 243, 0.42) !important;
+  background: rgba(10, 30, 52, 0.74) !important;
+}
+
+.drawer-store .store-badge {
+  width: 100% !important;
+  max-width: none !important;
+  border-radius: 7px !important;
+}
+
 .drawer-nav .pill .ico,
 .drawer-foot .pill .ico {
   width: 30px !important;
@@ -4152,17 +4254,46 @@ h2 {
   .drawer {
     width: 100vw !important;
     max-width: none !important;
-    padding: 12px 10px 10px !important;
+    top: env(safe-area-inset-top) !important;
+    height: calc(100vh - env(safe-area-inset-top)) !important;
+    height: calc(100dvh - env(safe-area-inset-top)) !important;
+    padding: 10px 10px max(10px, env(safe-area-inset-bottom)) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
   }
 
   .drawer-title {
     font-size: 1.2rem !important;
   }
 
+  .drawer-nav {
+    flex: 0 0 auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    gap: 7px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .drawer-store {
+    margin: 0 !important;
+    padding: 8px 10px !important;
+  }
+
+  .drawer-store-head strong {
+    font-size: 0.97rem !important;
+  }
+
   .drawer-nav .pill,
   .drawer-foot .pill {
-    min-height: 48px !important;
+    min-height: 46px !important;
     font-size: .97rem !important;
+  }
+
+  .drawer-foot {
+    margin-top: 8px !important;
+    padding-top: 8px !important;
+    padding-bottom: max(2px, env(safe-area-inset-bottom)) !important;
   }
 }
 
@@ -4815,6 +4946,11 @@ footer > .container.footer-row a {
 .home-journey-icon .ico {
   width: 24px !important;
   height: 24px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: currentColor !important;
+  box-shadow: none !important;
   display: block !important;
   stroke-linecap: round !important;
   stroke-linejoin: round !important;
@@ -4897,10 +5033,212 @@ footer > .container.footer-row a {
   .home-journey-icon .ico {
     width: 21px !important;
     height: 21px !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: currentColor !important;
+    box-shadow: none !important;
   }
 
   .home-journey-card p {
     font-size: 15px !important;
     line-height: 1.65 !important;
+  }
+}
+
+/* Final menu toggle redesign (minimal luxury desktop + mobile) */
+.nav-toggle {
+  min-height: 43px !important;
+  width: auto !important;
+  padding: 0 14px 0 10px !important;
+  gap: 9px !important;
+  border-radius: 999px !important;
+  border: 0 !important;
+  background: rgba(8, 27, 48, 0.66) !important;
+  backdrop-filter: blur(9px) saturate(120%);
+  box-shadow: inset 0 1px 0 rgba(242, 249, 255, 0.1), 0 8px 18px rgba(1, 8, 16, 0.32) !important;
+  color: #eef6ff !important;
+}
+
+.nav-toggle::after {
+  content: "Menu" !important;
+  color: #eef6ff !important;
+  font-size: 12px !important;
+  font-weight: 760 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+}
+
+.nav-toggle .ico {
+  width: 19px !important;
+  height: 19px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: rgba(229, 242, 255, 0.96) !important;
+  box-shadow: none !important;
+}
+
+.nav-toggle:hover {
+  border-color: transparent !important;
+  background: rgba(11, 33, 58, 0.8) !important;
+  box-shadow: inset 0 1px 0 rgba(247, 251, 255, 0.16), 0 10px 20px rgba(1, 8, 16, 0.38) !important;
+}
+
+.menu-open .nav-toggle {
+  border-color: transparent !important;
+  background: rgba(234, 243, 251, 0.94) !important;
+  color: #0d2844 !important;
+}
+
+.menu-open .nav-toggle::after {
+  color: #0d2844 !important;
+}
+
+.menu-open .nav-toggle .ico {
+  color: #173a5b !important;
+}
+
+@media (max-width: 720px) {
+  .nav-toggle {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(188, 211, 232, 0.38) !important;
+  }
+
+  .nav-toggle::after {
+    content: none !important;
+  }
+
+  .nav-toggle .ico {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+
+/* Delete-account: enforce centered content layout */
+main#main.delete-account-page {
+  max-width: min(100%, 1240px) !important;
+  margin-inline: auto !important;
+}
+
+main#main.delete-account-page .hero,
+main#main.delete-account-page .cards,
+main#main.delete-account-page .status,
+main#main.delete-account-page .policy {
+  width: min(100%, 1140px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+main#main.delete-account-page .hero-intro {
+  width: min(100%, 980px) !important;
+  margin: 0 auto 16px !important;
+  text-align: center !important;
+}
+
+main#main.delete-account-page .hero-intro h1 {
+  margin: 12px auto 0 !important;
+  max-width: min(100%, 920px) !important;
+  text-align: center !important;
+}
+
+main#main.delete-account-page .hero-intro .lead {
+  margin: 14px auto 0 !important;
+  max-width: min(100%, 900px) !important;
+  text-align: center !important;
+}
+
+/* Home trust section: simplified modern layout */
+.premium-band.premium-band-minimal {
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr) !important;
+  align-items: center !important;
+  gap: clamp(18px, 2.6vw, 32px) !important;
+  padding: clamp(22px, 2.6vw, 34px) !important;
+}
+
+.premium-band.premium-band-minimal .trust-summary {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  max-width: 64ch;
+}
+
+.premium-band.premium-band-minimal .trust-kicker {
+  margin: 0 !important;
+  color: rgba(151, 224, 239, 0.96) !important;
+  font-size: 11px !important;
+  font-weight: 860 !important;
+  letter-spacing: 0.11em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+}
+
+.premium-band.premium-band-minimal h2 {
+  margin: 0 !important;
+  font-size: clamp(30px, 3.1vw, 44px) !important;
+  line-height: 1.06 !important;
+}
+
+.premium-band.premium-band-minimal p {
+  margin: 0 !important;
+  max-width: 60ch !important;
+  font-size: 16px !important;
+  line-height: 1.68 !important;
+  color: rgba(206, 224, 244, 0.92) !important;
+}
+
+.premium-band.premium-band-minimal .trust-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  display: grid !important;
+  gap: 10px !important;
+}
+
+.premium-band.premium-band-minimal .trust-list li {
+  margin: 0 !important;
+  padding: 12px 0 !important;
+  border-top: 1px solid rgba(164, 198, 230, 0.24) !important;
+}
+
+.premium-band.premium-band-minimal .trust-list li:first-child {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.premium-band.premium-band-minimal .trust-list strong {
+  display: block !important;
+  margin: 0 0 6px !important;
+  color: #f2f9ff !important;
+  font-size: 16px !important;
+  font-weight: 780 !important;
+  letter-spacing: -0.004em !important;
+  line-height: 1.3 !important;
+}
+
+.premium-band.premium-band-minimal .trust-list span {
+  display: block !important;
+  margin: 0 !important;
+  color: rgba(196, 216, 238, 0.92) !important;
+  font-size: 14px !important;
+  line-height: 1.58 !important;
+}
+
+@media (max-width: 960px) {
+  .premium-band.premium-band-minimal {
+    grid-template-columns: 1fr !important;
+  }
+
+  .premium-band.premium-band-minimal .trust-summary,
+  .premium-band.premium-band-minimal p {
+    max-width: 100% !important;
   }
 }
