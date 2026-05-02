@@ -101,6 +101,15 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      margin-left: auto;
+    }
+
+    .header-create-btn {
+      min-height: var(--tap);
+      padding: 0 15px;
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
     }
 
     .nav-toggle {
@@ -296,6 +305,10 @@
       grid-template-columns: minmax(0, 1fr) 340px;
       gap: 24px;
       align-items: start;
+    }
+
+    #pro-signup-section {
+      scroll-margin-top: calc(94px + env(safe-area-inset-top));
     }
 
     .panel {
@@ -857,6 +870,8 @@
     @media (max-width: 640px) {
       .nav-inner { align-items: flex-start; padding: 14px 0; flex-direction: column; }
       .nav-links { justify-content: flex-start; display: none; }
+      .nav-actions { width: 100%; justify-content: flex-end; }
+      .header-create-btn { min-height: 40px; padding: 0 13px; font-size: 12px; }
       main { padding-top: 40px; }
       .panel-inner { padding: 18px; }
       .form-grid { grid-template-columns: 1fr; }
@@ -869,33 +884,38 @@
 <body>
   <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
     <symbol id="i-menu" viewBox="0 0 24 24">
-      <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M4 7.5h16M4 12h16M4 16.5h16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
     </symbol>
     <symbol id="i-x" viewBox="0 0 24 24">
-      <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
     </symbol>
     <symbol id="i-home" viewBox="0 0 24 24">
-      <path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-8.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M3.8 10.6 12 4l8.2 6.6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6.5 9.8V20h11V9.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M10 20v-5h4v5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
     </symbol>
     <symbol id="i-support" viewBox="0 0 24 24">
-      <path d="M12 21a8 8 0 1 0-8-8v3a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-2v6h1a2 2 0 0 0 2-2v-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M4 12a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+      <rect x="3" y="12" width="4.5" height="7" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <rect x="16.5" y="12" width="4.5" height="7" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="M18.8 19.5A2.4 2.4 0 0 1 16.6 21H12" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
     </symbol>
     <symbol id="i-lock" viewBox="0 0 24 24">
-      <rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
-      <path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <rect x="5" y="10.5" width="14" height="10" rx="2.4" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="M8 10.5V8a4 4 0 1 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
     </symbol>
     <symbol id="i-file" viewBox="0 0 24 24">
-      <path d="M7 3h7l4 4v14H7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M14 3v5h5M9 13h6M9 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.7.7L19.3 6.3A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M14 2v5a1 1 0 0 0 1 1h5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M9.5 13h5M9.5 17h5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
     </symbol>
     <symbol id="i-mail" viewBox="0 0 24 24">
-      <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
-      <path d="m5 8 7 5 7-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="3.5" y="5.5" width="17" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="m4.5 8 7.5 5.2L19.5 8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
     </symbol>
     <symbol id="i-building" viewBox="0 0 24 24">
-      <path d="M4 21h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      <path d="M6 21V7l6-4 6 4v14" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <rect x="4.5" y="3.5" width="15" height="17" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="M8 8h1.4M8 11.6h1.4M8 15.2h1.4M14.6 8H16M14.6 11.6H16M14.6 15.2H16M11.3 20.5v-3h1.4v3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
     </symbol>
   </svg>
 
@@ -910,13 +930,14 @@
       </a>
       <nav class="nav-links" aria-label="Navigation">
         <a class="pill" href="../index.html">Accueil</a>
+        <a class="pill primary" href="./" aria-current="page">Compte Pro</a>
         <a class="pill" href="../support.html">Support</a>
-        <a class="pill primary" href="./" aria-current="page">Professionnels</a>
         <a class="pill" href="../privacy.html">Confidentialité</a>
         <a class="pill" href="../terms.html">Conditions</a>
         <a class="pill" href="../mentions-legales.html">Mentions légales</a>
       </nav>
       <div class="nav-actions">
+        <a class="pill primary header-create-btn" href="#pro-signup-section">Créer un dossier</a>
         <button
           class="nav-toggle"
           type="button"
@@ -945,13 +966,13 @@
         <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
         Accueil
       </a>
+      <a class="pill" href="./" aria-current="page">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Compte Pro
+      </a>
       <a class="pill" href="../support.html">
         <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
         Support
-      </a>
-      <a class="pill" href="./" aria-current="page">
-        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
-        Professionnels
       </a>
       <a class="pill" href="../privacy.html">
         <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
@@ -1001,7 +1022,7 @@
               identité vérifiée, informations structurées et activation après contrôle du dossier.
             </p>
             <div class="cta-row pro-hero-actions">
-              <a class="btn primary" href="#professionalSignupForm">Créer mon dossier</a>
+              <a class="btn primary" href="#pro-signup-section">Créer mon dossier</a>
               <a class="btn" href="mailto:contact@urbalya.com?subject=Présentation%20compte%20professionnel%20Urbalya">Demander une présentation</a>
             </div>
 
@@ -1064,7 +1085,7 @@
           <div class="billing-hero">
             <div class="plans-grid pro-pricing-grid">
               <article class="plan-card pricing-card is-commerce">
-                <span class="plan-label">Commerce</span>
+                <span class="plan-label">Commerçants</span>
                 <p class="plan-price">29 EUR / mois</p>
                 <p class="plan-note">Pour une présence locale simple, visible et administrable.</p>
                 <ul class="benefits">
@@ -1075,7 +1096,7 @@
               </article>
 
               <article class="plan-card pricing-card is-municipality">
-                <span class="plan-label">Mairies et collectivités</span>
+                <span class="plan-label">Mairies</span>
                 <p class="plan-price">À partir de 79 EUR / mois</p>
                 <p class="plan-note">Un tarif adapté à la taille réelle de la commune.</p>
 
@@ -1135,7 +1156,7 @@
         </div>
       </section>
 
-      <section class="layout pro-layout" aria-label="Formulaire professionnel">
+      <section class="layout pro-layout" id="pro-signup-section" aria-label="Formulaire professionnel">
         <div class="panel">
           <div class="panel-inner">
             <h2>Demande complète</h2>
