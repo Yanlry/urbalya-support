@@ -5242,3 +5242,228 @@ main#main.delete-account-page .hero-intro .lead {
     max-width: 100% !important;
   }
 }
+
+/* Drawer menu alternative: minimalist list style (no boxed items) */
+.drawer-nav {
+  gap: 0 !important;
+  padding: 6px 2px 10px !important;
+}
+
+.drawer-nav .pill {
+  width: 100% !important;
+  min-height: 48px !important;
+  padding: 10px 6px !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: rgba(226, 241, 255, 0.94) !important;
+  font-size: 0.99rem !important;
+  font-weight: 700 !important;
+  position: relative;
+}
+
+.drawer-nav .pill::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(157, 193, 226, 0.2);
+}
+
+.drawer-nav .pill::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  width: 2px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(148, 227, 242, 0.94);
+  transform: translateY(-50%) scaleY(0);
+  transform-origin: center;
+  opacity: 0;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.drawer-nav .pill:hover {
+  transform: none !important;
+  border-color: transparent !important;
+  background: linear-gradient(90deg, rgba(94, 166, 219, 0.16), transparent 74%) !important;
+}
+
+.drawer-nav .pill:hover::before,
+.drawer-nav .pill[aria-current="page"]::before {
+  transform: translateY(-50%) scaleY(1);
+  opacity: 1;
+}
+
+.drawer-nav .pill[aria-current="page"] {
+  border: 0 !important;
+  background: linear-gradient(90deg, rgba(111, 188, 231, 0.2), transparent 78%) !important;
+  color: #f3faff !important;
+}
+
+.drawer-nav .pill .ico {
+  width: 20px !important;
+  height: 20px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #cce8ff !important;
+  box-shadow: none !important;
+}
+
+.drawer-store {
+  margin: 8px 0 2px !important;
+  padding: 10px 0 6px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-top: 1px solid rgba(157, 193, 226, 0.2) !important;
+  border-bottom: 1px solid rgba(157, 193, 226, 0.2) !important;
+}
+
+.drawer-store-head {
+  padding: 0 6px !important;
+  min-height: 36px !important;
+}
+
+.drawer-store-icon {
+  width: 20px !important;
+  height: 20px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #cce8ff !important;
+  box-shadow: none !important;
+}
+
+.drawer-store-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.drawer-store-head strong {
+  font-size: 0.95rem !important;
+  font-weight: 720 !important;
+  color: rgba(226, 241, 255, 0.94) !important;
+}
+
+.drawer-store .store-link,
+.drawer-store .pill.store-link,
+.drawer-store .pill.primary.store-link {
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.drawer-store .store-badge {
+  border-radius: 8px !important;
+}
+
+.drawer-foot {
+  gap: 0 !important;
+  padding: 10px 2px 2px !important;
+}
+
+.drawer-foot .pill {
+  width: 100% !important;
+  min-height: 48px !important;
+  padding: 10px 6px !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: rgba(226, 241, 255, 0.94) !important;
+  font-size: 0.99rem !important;
+  font-weight: 700 !important;
+  position: relative;
+}
+
+.drawer-foot .pill::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(157, 193, 226, 0.2);
+}
+
+.drawer-foot .pill::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  width: 2px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(148, 227, 242, 0.94);
+  transform: translateY(-50%) scaleY(0);
+  transform-origin: center;
+  opacity: 0;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.drawer-foot .pill:hover {
+  transform: none !important;
+  border-color: transparent !important;
+  background: linear-gradient(90deg, rgba(94, 166, 219, 0.16), transparent 74%) !important;
+}
+
+.drawer-foot .pill:hover::before {
+  transform: translateY(-50%) scaleY(1);
+  opacity: 1;
+}
+
+.drawer-foot .pill .ico {
+  width: 20px !important;
+  height: 20px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #cce8ff !important;
+  box-shadow: none !important;
+}
+
+.drawer-foot .pill.primary,
+.drawer-foot .pill.primary[href*="billing"],
+.drawer-foot .pill.primary[href^="mailto"] {
+  background: transparent !important;
+  border: 0 !important;
+  color: rgba(226, 241, 255, 0.94) !important;
+}
+
+.drawer-foot .pill.danger {
+  background: transparent !important;
+  border: 0 !important;
+  color: #ff8d98 !important;
+}
+
+.drawer-foot .pill.danger .ico {
+  color: #ff95a0 !important;
+}
+
+@media (max-width: 640px) {
+  .drawer-nav .pill,
+  .drawer-foot .pill {
+    min-height: 46px !important;
+    font-size: 0.97rem !important;
+  }
+
+  .drawer-store-actions {
+    gap: 8px !important;
+  }
+}

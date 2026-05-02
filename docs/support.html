@@ -606,7 +606,173 @@
       *{scroll-behavior:auto!important}
       .pill,.btn,.nav-toggle,.chev{transition:none}
     }
-  </style>
+    /* Menu variant: list minimal (sans cartes) */
+    .drawer{
+      background: rgba(7,18,38,.92);
+      backdrop-filter: blur(16px);
+      color:#E6EEF8;
+    }
+
+    .drawer-title,
+    .drawer-close{
+      color:#E6EEF8;
+    }
+
+    .drawer-nav{
+      gap:0;
+      padding:12px 2px 8px;
+    }
+
+    .drawer .pill{
+      position:relative;
+      width:100%;
+      justify-content:flex-start;
+      gap:12px;
+      padding:13px 4px;
+      min-height:52px;
+      border:0;
+      border-radius:0;
+      background:transparent !important;
+      color:inherit;
+      box-shadow:none;
+      transform:none;
+    }
+
+    .drawer .pill::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:1px;
+      background:linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
+      pointer-events:none;
+    }
+
+    .drawer .pill::before{
+      content:"";
+      position:absolute;
+      left:-4px;
+      top:50%;
+      width:2px;
+      height:0;
+      border-radius:999px;
+      background:linear-gradient(180deg,#7DD3FC,#38BDF8);
+      transform:translateY(-50%);
+      transition:height .18s ease, opacity .18s ease;
+      opacity:0;
+    }
+
+    .drawer .pill:hover,
+    .drawer .pill[aria-current="page"]{
+      background:linear-gradient(90deg, rgba(56,189,248,.12), rgba(56,189,248,.03)) !important;
+    }
+
+    .drawer .pill:hover::before,
+    .drawer .pill[aria-current="page"]::before{
+      height:28px;
+      opacity:1;
+    }
+
+    .drawer .pill[aria-current="page"]{
+      color:#F2F8FF;
+      border-color:transparent;
+    }
+
+    .drawer .pill .ico{
+      width:18px;
+      height:18px;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent !important;
+      box-shadow:none;
+      opacity:.95;
+      flex:0 0 18px;
+      color:#BFD2E6;
+    }
+
+    .drawer .pill.primary,
+    .drawer .pill.danger{
+      color:inherit;
+    }
+
+    .drawer .pill.danger{
+      color:#FF8D98;
+    }
+
+    .drawer-nav > .store-link:nth-last-child(2){
+      margin-top:16px;
+      position:relative;
+    }
+
+    .drawer-nav > .store-link:nth-last-child(2)::before{
+      content:"App mobile";
+      position:absolute;
+      left:0;
+      top:-10px;
+      transform:translateY(-100%);
+      font-size:11px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      color:#9FB3CC;
+      font-weight:800;
+      pointer-events:none;
+    }
+
+    .drawer .store-link{
+      padding:0;
+      margin-top:10px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:12px;
+      overflow:hidden;
+      background:rgba(10,24,45,.55) !important;
+      min-height:auto;
+    }
+
+    .drawer .store-link::before,
+    .drawer .store-link::after{
+      display:none;
+    }
+
+    .drawer .store-link .ico{
+      display:none;
+    }
+
+    .drawer .store-link .store-badge{
+      width:100%;
+      display:block;
+    }
+
+    .drawer-foot{
+      padding:10px 2px 0;
+      gap:0;
+      border-top:1px solid rgba(255,255,255,.12);
+    }
+
+    .drawer-foot .pill{
+      min-height:52px;
+    }
+
+    .drawer-foot .pill.primary,
+    .drawer-foot .pill.primary[href*="billing"],
+    .drawer-foot .pill.primary[href^="mailto"]{
+      background:transparent !important;
+      color:inherit;
+    }
+
+    @media (max-width:640px){
+      .drawer{
+        width:min(94vw, 350px);
+      }
+
+      .drawer .pill{
+        min-height:50px;
+        padding:12px 3px;
+      }
+    }
+
+</style>
   <link rel="stylesheet" href="site.css" />
 </head>
 
