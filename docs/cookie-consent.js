@@ -138,14 +138,14 @@
       var storeLinks = [
         {
           selector: 'a[href*="apps.apple.com"]',
-          href: "https://apps.apple.com/app/id6754794588",
+          href: "https://apps.apple.com/app/urbalya/id6754794588",
           image: /\/professionnels\//.test(path) ? "../apple.png" : "apple.png",
           imageAlt: "Télécharger sur l'App Store",
           ariaLabel: "Ouvrir l'App Store"
         },
         {
           selector: 'a[href*="play.google.com"]',
-          href: "https://play.google.com/store/search?q=Urbalya&c=apps",
+          href: "https://play.google.com/store/apps/details?id=com.urbalya.app&pcampaignid=web_share",
           image: /\/professionnels\//.test(path) ? "../google.png" : "google.png",
           imageAlt: "Disponible sur Google Play",
           ariaLabel: "Ouvrir Google Play"
