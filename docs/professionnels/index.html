@@ -82,9 +82,10 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(255,255,255,.86);
-      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+      background: rgba(255,255,255,.88);
+      border-bottom: 1px solid rgba(216,225,236,.82);
+      box-shadow: 0 10px 30px rgba(16,32,51,.045);
       padding-top: env(safe-area-inset-top);
     }
     .nav-inner {
@@ -134,23 +135,46 @@
       text-overflow: ellipsis;
     }
     .nav-actions { display: flex; align-items: center; gap: 10px; }
-    .nav-toggle {
-      width: var(--tap);
-      height: var(--tap);
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: #FFFFFF;
+    .nav .brand-text strong { color: #0F172A; }
+    .nav .brand-text small { color: #64748B; }
+    .nav-cta {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
+      height: var(--tap);
+      padding: 0 18px;
+      border-radius: 999px;
+      background: rgba(29,78,216,.92);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      white-space: nowrap;
+      border: 1px solid rgba(29,78,216,.24);
+      box-shadow: 0 6px 16px rgba(29,78,216,.20);
+      transition: background .12s ease;
+    }
+    .nav-cta:hover { background: rgba(29,78,216,1); }
+    .nav-toggle {
+      width: auto;
+      height: var(--tap);
+      padding: 0 14px 0 10px;
+      gap: 8px;
+      border-radius: 14px;
+      border: 1px solid rgba(15,23,42,.12);
+      background: transparent;
+      display: inline-flex;
+      align-items: center;
       cursor: pointer;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
-      color: var(--text);
+      color: #0F172A;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
     }
     .nav-toggle:hover {
       transform: translateY(-1px);
-      background: #F8FAFC;
-      border-color: rgba(15,23,42,.24);
+      background: #F1F5F9;
+      border-color: rgba(15,23,42,.20);
     }
     .pill {
       display: inline-flex;
@@ -215,7 +239,7 @@
     .backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(15,23,42,.32);
+      background: rgba(2,6,23,.60);
       backdrop-filter: blur(6px);
       opacity: 0;
       pointer-events: none;
@@ -223,21 +247,20 @@
       z-index: 80;
     }
     .drawer {
+      display: none;
       position: fixed;
       top: env(safe-area-inset-top);
       right: 0;
       width: min(92vw, 360px);
       height: calc(100vh - env(safe-area-inset-top));
-      background: rgba(255,255,255,.98);
-      border-left: 1px solid var(--line);
-      box-shadow: 0 26px 50px rgba(15,23,42,.18);
-      transform: translateX(110%);
-      transition: transform .22s ease;
+      background: rgba(7,18,38,.92);
+      backdrop-filter: blur(16px);
+      border-left: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 30px 80px rgba(0,0,0,.55);
       z-index: 90;
-      display: flex;
       flex-direction: column;
       padding: 14px;
-      overflow-y: auto;
+      color: #E6EEF8;
     }
     .drawer-head {
       display: flex;
@@ -245,74 +268,121 @@
       justify-content: space-between;
       gap: 10px;
       padding: 8px 6px 12px;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid rgba(255,255,255,.10);
     }
-    .drawer-title { font-weight: 900; letter-spacing: .2px; }
+    .drawer-title { font-weight: 900; letter-spacing: .2px; color: #E6EEF8; }
     .drawer-close {
       width: var(--tap);
       height: var(--tap);
       border-radius: 14px;
-      border: 1px solid var(--line);
-      background: #FFFFFF;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(2,6,23,.35);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      color: var(--text);
+      color: #E6EEF8;
     }
     .drawer-nav {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      padding: 14px 6px;
+      gap: 0;
+      padding: 12px 2px 8px;
     }
     .drawer .pill {
+      position: relative;
       width: 100%;
-      justify-content: center;
-      padding: 14px 12px;
-      border-radius: 16px;
-      font-size: 15px;
-      min-height: 46px;
+      justify-content: flex-start;
+      gap: 12px;
+      padding: 13px 4px;
+      min-height: 52px;
+      border: 0;
+      border-radius: 0;
+      background: transparent !important;
+      color: inherit;
+      box-shadow: none;
+      transform: none;
+    }
+    .drawer .pill::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
+      pointer-events: none;
+    }
+    .drawer .pill::before {
+      content: "";
+      position: absolute;
+      left: -4px; top: 50%;
+      width: 2px; height: 0;
+      border-radius: 999px;
+      background: linear-gradient(180deg,#7DD3FC,#38BDF8);
+      transform: translateY(-50%);
+      transition: height .18s ease, opacity .18s ease;
+      opacity: 0;
+    }
+    .drawer .pill:hover,
+    .drawer .pill[aria-current="page"] {
+      background: linear-gradient(90deg, rgba(56,189,248,.12), rgba(56,189,248,.03)) !important;
+    }
+    .drawer .pill:hover::before,
+    .drawer .pill[aria-current="page"]::before { height: 28px; opacity: 1; }
+    .drawer .pill[aria-current="page"] { color: #F2F8FF; border-color: transparent; }
+    .drawer .pill .ico {
+      width: 18px; height: 18px;
+      padding: 0; border: 0; border-radius: 0;
+      background: transparent !important;
+      box-shadow: none; opacity: .95;
+      flex: 0 0 18px;
+      color: #BFD2E6;
+    }
+    .drawer .pill.primary,
+    .drawer .pill.danger { color: inherit; }
+    .drawer .pill.danger { color: #FF8D98; }
+    .drawer-nav > .store-link:nth-last-child(2) { margin-top: 16px; position: relative; }
+    .drawer-nav > .store-link:nth-last-child(2)::before {
+      content: "App mobile";
+      position: absolute; left: 0; top: -10px;
+      transform: translateY(-100%);
+      font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+      color: #9FB3CC; font-weight: 800; pointer-events: none;
     }
     .drawer .store-link {
-      display: block;
-      width: 100%;
-      max-width: none;
+      padding: 0; margin-top: 10px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 12px; overflow: hidden;
+      background: rgba(10,24,45,.55) !important;
       min-height: auto;
-      border-width: 0;
-      box-shadow: none;
-      margin: 0;
-      align-self: stretch;
     }
-    .drawer .store-badge {
-      display: block;
-      width: 100%;
-      max-width: none;
-      max-height: none;
-      height: auto;
-      margin: 0;
-      object-fit: contain;
-    }
+    .drawer .store-link::before,
+    .drawer .store-link::after { display: none; }
+    .drawer .store-link .ico { display: none; }
+    .drawer .store-link .store-badge { width: 100%; display: block; }
     .drawer-foot {
       margin-top: auto;
-      padding: 12px 6px 6px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      padding: 10px 2px 0;
+      border-top: 1px solid rgba(255,255,255,.12);
+      color: rgba(230,238,248,.70);
+      font-size: 13px; line-height: 1.5;
+      display: flex; flex-direction: column; gap: 0;
     }
-    .drawer-foot .pill {
-      width: 100%;
-      min-height: 46px;
+    .drawer-foot .pill { min-height: 52px; }
+    .drawer-foot .pill.primary { background: transparent !important; color: inherit; }
+    @media (max-width: 640px) {
+      .drawer { width: min(94vw, 350px); }
+      .drawer .pill { min-height: 50px; padding: 12px 3px; }
+    }
+    @keyframes drawerSlideIn {
+      from { transform: translateX(110%); }
+      to   { transform: translateX(0); }
     }
     html.menu-open body { overflow: hidden; }
-    html.menu-open .backdrop,
     .menu-open .backdrop { opacity: 1; pointer-events: auto; }
-    html.menu-open .drawer,
-    .menu-open .drawer { transform: translateX(0); }
+    .menu-open .drawer {
+      display: flex;
+      animation: drawerSlideIn .22s ease forwards;
+    }
 
     /* MAIN */
     main { padding: 44px 0 80px; }
@@ -695,100 +765,12 @@
     </a>
 
     <div class="nav-actions">
-      <a class="pill primary header-create-btn" href="#professionalSignupForm">Créer un dossier</a>
-      <button
-        class="nav-toggle"
-        type="button"
-        aria-label="Ouvrir le menu"
-        aria-controls="drawer"
-        aria-expanded="false"
-        id="menuBtn"
-      >
-        <svg class="ico xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true">
-          <path d="M4 7.5h16M4 12h16M4 16.5h16" />
-        </svg>
-      </button>
+      <a class="nav-cta" href="../index.html">Accueil</a>
     </div>
   </div>
 </header>
 
 <div class="backdrop" id="backdrop" aria-hidden="true"></div>
-<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
-  <div class="drawer-head">
-    <div class="drawer-title">Navigation</div>
-    <button class="drawer-close" type="button" aria-label="Fermer le menu" id="closeBtn">
-      <svg class="ico xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true">
-        <path d="M6 6l12 12M18 6L6 18" />
-      </svg>
-    </button>
-  </div>
-
-  <nav class="drawer-nav" aria-label="Navigation mobile">
-    <a class="pill" href="../index.html">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 11.5L12 5l8 6.5V20H5v-8.5" />
-      </svg>
-      Accueil
-    </a>
-    <a class="pill" href="./" aria-current="page">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 20V7l8-3 8 3v13M9 20v-6h6v6M8 9h.01M12 9h.01M16 9h.01" />
-      </svg>
-      Compte Pro
-    </a>
-    <a class="pill" href="../support.html">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 18h.01M9.5 9a2.5 2.5 0 1 1 4.3 1.7c-.9.8-1.8 1.4-1.8 2.8M4.8 19.2A10 10 0 1 1 19.2 4.8 10 10 0 0 1 4.8 19.2" />
-      </svg>
-      Support
-    </a>
-    <a class="pill" href="../privacy.html">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z" />
-      </svg>
-      Confidentialité
-    </a>
-    <a class="pill" href="../terms.html">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M7 3h7l4 4v14H7zM14 3v5h5M9 13h6M9 17h6" />
-      </svg>
-      Conditions
-    </a>
-    <a class="pill" href="../mentions-legales.html">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 20h16M6 20V8l6-4 6 4v12M9 12h.01M12 12h.01M15 12h.01" />
-      </svg>
-      Mentions légales
-    </a>
-    <a class="pill primary store-link" href="https://apps.apple.com/app/urbalya/id6754794588" rel="noopener noreferrer" aria-label="Ouvrir l'App Store">
-      <img class="store-badge" src="../apple.png" alt="Télécharger sur l'App Store" loading="lazy" decoding="async" />
-    </a>
-    <a class="pill primary store-link" href="https://play.google.com/store/apps/details?id=com.urbalya.app&pcampaignid=web_share" rel="noopener noreferrer" aria-label="Ouvrir Google Play">
-      <img class="store-badge" src="../google.png" alt="Disponible sur Google Play" loading="lazy" decoding="async" />
-    </a>
-  </nav>
-
-  <div class="drawer-foot">
-    <a class="pill primary" href="#professionalSignupForm">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 5v14M5 12h14" />
-      </svg>
-      Créer mon compte
-    </a>
-    <a class="pill primary" href="../billing.html">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z" />
-      </svg>
-      Gérer mon compte
-    </a>
-    <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 6h16v12H4zM4 7l8 6 8-6" />
-      </svg>
-      Contactez-nous
-    </a>
-  </div>
-</aside>
 
 <main id="main" role="main">
   <div class="container">
@@ -1102,41 +1084,6 @@
 
       </div><!-- /wizard-card -->
     </form>
-
-    <!-- BILLING SECTION -->
-    <div class="billing-section">
-      <div class="billing-card">
-        <h2 class="billing-card-title">Gerer mon abonnement</h2>
-        <p class="billing-card-sub">Entrez votre adresse email pour recevoir un lien securise de gestion.</p>
-        <div class="billing-context" id="billingContextBlock">
-          <div class="billing-meta">
-            <div class="billing-meta-item">
-              <span>Type</span>
-              <strong id="billingAccountValue">—</strong>
-            </div>
-            <div class="billing-meta-item">
-              <span>Statut</span>
-              <strong id="billingStatusValue">—</strong>
-            </div>
-            <div class="billing-meta-item">
-              <span>Renouvellement</span>
-              <strong id="billingRenewalValue">—</strong>
-            </div>
-          </div>
-          <div class="billing-actions" id="billingActions"></div>
-        </div>
-        <form class="billing-form" id="billingSelfServeForm">
-          <div class="field">
-            <label for="billingSelfServeEmail">Email du compte professionnel</label>
-            <input type="email" id="billingSelfServeEmail" autocomplete="email" placeholder="votre-email@exemple.fr" />
-          </div>
-          <button type="submit" class="btn btn-secondary" id="billingSelfServeSubmit" style="align-self:flex-start;">
-            Recevoir le lien de gestion
-          </button>
-          <div class="billing-feedback" id="billingFeedback" role="status" aria-live="polite"></div>
-        </form>
-      </div>
-    </div>
 
   </div>
 </main>
@@ -2291,6 +2238,16 @@
     bindEvents();
     setAccountType("merchant");
   })();
+</script>
+<script>
+  console.log("✅ FICHIER PROFESSIONNELS INDEX CHARGÉ");
+  console.log("URL réelle :", window.location.href);
+  document.addEventListener("DOMContentLoaded", function () {
+    var navInner = document.querySelector(".nav-inner");
+    console.log("Navbar réelle :", navInner ? navInner.innerHTML : "NAV INTROUVABLE");
+    var drawer = document.getElementById("drawer");
+    console.log("Drawer display:", drawer ? window.getComputedStyle(drawer).display : "DRAWER INTROUVABLE");
+  });
 </script>
 <script src="../cookie-consent.js"></script>
 </body>
