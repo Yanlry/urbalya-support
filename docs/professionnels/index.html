@@ -4,188 +4,233 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Comptes professionnels - Urbalya</title>
-  <meta
-    name="description"
-    content="Creer une demande de compte professionnel Urbalya pour un commerce, une mairie, une collectivite ou une association."
-  />
-  <meta name="theme-color" content="#ffffff" />
-
+  <meta name="description" content="Creez votre compte professionnel Urbalya : commerce, mairie ou association." />
+  <meta name="theme-color" content="#3B82F6" />
   <link rel="icon" type="image/png" href="../logo.png" />
   <link rel="apple-touch-icon" href="../logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../cookie-consent.css" />
-
   <style>
     :root {
-      --bg: #0B1220;
-      --panel: #0F172A;
-      --panel2: #111C32;
-      --text: #E5E7EB;
-      --muted: #94A3B8;
-      --line: rgba(255,255,255,.12);
-      --line2: rgba(255,255,255,.18);
+      --bg: #F1F5F9;
+      --panel: #FFFFFF;
+      --text: #0F172A;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --border-focus: #3B82F6;
       --accent: #3B82F6;
+      --accent-light: #EFF6FF;
       --accent2: #10B981;
       --danger: #EF4444;
       --warn: #F59E0B;
-      --container: 1120px;
       --tap: 44px;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+      --shadow-lg: 0 4px 32px rgba(0,0,0,.10);
+      --line: rgba(15,23,42,.12);
+      --line2: rgba(15,23,42,.20);
+      --container: 1120px;
+      --navH: 64px;
       --focus: 0 0 0 4px rgba(59,130,246,.25);
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
       color: var(--text);
-      background:
-        radial-gradient(circle at 16% 0%, rgba(59,130,246,.24), transparent 28%),
-        radial-gradient(circle at 90% 8%, rgba(16,185,129,.15), transparent 24%),
-        linear-gradient(180deg, #0B1220 0%, #111827 100%);
       -webkit-font-smoothing: antialiased;
     }
-
     a { color: inherit; text-decoration: none; }
     label, input, select, textarea, button { font: inherit; }
     button { cursor: pointer; }
     :focus { outline: none; }
-    :focus-visible { box-shadow: var(--focus); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+    /* NAV */
+    .container {
+      max-width: var(--container);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    @media (min-width: 720px) {
+      .container { padding: 0 20px; }
+    }
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #FFFFFF;
+      border: 1px solid var(--line2);
+      transform: translateY(-200%);
+      transition: transform .15s ease;
+      z-index: 9999;
+    }
+    .skip:focus { transform: translateY(0); outline: none; box-shadow: var(--focus); }
     .ico { width: 18px; height: 18px; display: inline-block; flex: 0 0 auto; }
+    .ico.sm { width: 16px; height: 16px; }
+    .ico.lg { width: 20px; height: 20px; }
     .ico.xl { width: 22px; height: 22px; }
-
-    .container { max-width: var(--container); margin: 0 auto; padding: 0 18px; }
 
     .nav {
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: rgba(11,18,32,.86);
-      backdrop-filter: blur(12px);
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.86);
       border-bottom: 1px solid var(--line);
+      padding-top: env(safe-area-inset-top);
     }
-
     .nav-inner {
-      min-height: 68px;
+      min-height: var(--navH);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
     }
-
     .brand {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 900;
+      min-width: 0;
     }
-
-    .brand img {
+    .logo {
       width: 38px;
       height: 38px;
       border-radius: 12px;
+      overflow: hidden;
+      flex: 0 0 auto;
     }
-
-    .nav-links {
+    .logo-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .brand-text {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+      flex-direction: column;
+      line-height: 1.05;
+      min-width: 0;
     }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-left: auto;
-    }
-
-    .header-create-btn {
-      min-height: var(--tap);
-      padding: 0 15px;
-      font-size: 13px;
+    .brand-text strong {
       font-weight: 900;
+      letter-spacing: .2px;
+      font-size: 15px;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-
+    .brand-text small {
+      display: block;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: .2px;
+      font-size: 12px;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
     .nav-toggle {
       width: var(--tap);
       height: var(--tap);
       border-radius: 14px;
       border: 1px solid var(--line);
-      background: rgba(15,23,42,.45);
+      background: #FFFFFF;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
       color: var(--text);
     }
-
+    .nav-toggle:hover {
+      transform: translateY(-1px);
+      background: #F8FAFC;
+      border-color: rgba(15,23,42,.24);
+    }
     .pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      min-height: 38px;
-      padding: 10px 13px;
-      border: 1px solid var(--line);
+      padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(15,23,42,.52);
+      border: 1px solid var(--line);
+      background: #FFFFFF;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
       color: var(--text);
+      font-weight: 900;
       font-size: 14px;
-      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+      min-height: 38px;
     }
-
+    .pill:hover {
+      transform: translateY(-1px);
+      background: #F8FAFC;
+      border-color: rgba(15,23,42,.22);
+    }
     .pill.primary {
-      background: rgba(59,130,246,.92);
-      border-color: rgba(147,197,253,.45);
+      border: 1px solid rgba(29,78,216,.24);
+      background: rgba(29,78,216,.96);
+      color: #FFFFFF;
+      box-shadow: 0 10px 20px rgba(29,78,216,.20);
     }
-
     .pill.danger,
     .pill.danger[aria-current="page"] {
-      border-color: rgba(239,68,68,.55);
+      border: 1px solid rgba(239,68,68,.55);
       background: rgba(239,68,68,.92);
       color: #fff;
+      box-shadow: 0 14px 30px rgba(239,68,68,.20);
     }
-
+    .pill.danger:hover {
+      background: rgba(220,38,38,.95);
+      border-color: rgba(252,165,165,.65);
+    }
+    .pill[aria-current="page"] {
+      background: #E2E8F0;
+      border-color: #CBD5E1;
+      color: #0F172A;
+    }
     .store-link {
+      width: clamp(220px, 50vw, 300px);
       padding: 0;
       overflow: hidden;
       border-radius: 12px;
       background: transparent !important;
+      box-shadow: 0 6px 14px rgba(15,23,42,.12);
       min-height: auto;
-      border-width: 0;
     }
-
-    .store-badge {
-      display: block;
-      width: 100%;
-      height: auto;
+    .store-link:hover {
+      background: rgba(248,250,252,.8) !important;
+      border-color: rgba(15,23,42,.20) !important;
     }
+    .store-badge { display: block; width: 100%; height: auto; }
 
+    /* DRAWER */
     .backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(2,6,23,.60);
+      background: rgba(15,23,42,.32);
       backdrop-filter: blur(6px);
       opacity: 0;
       pointer-events: none;
       transition: opacity .18s ease;
       z-index: 80;
     }
-
     .drawer {
       position: fixed;
       top: env(safe-area-inset-top);
       right: 0;
       width: min(92vw, 360px);
       height: calc(100vh - env(safe-area-inset-top));
-      background: rgba(15,23,42,.96);
+      background: rgba(255,255,255,.98);
       border-left: 1px solid var(--line);
-      box-shadow: 0 30px 80px rgba(0,0,0,.55);
+      box-shadow: 0 26px 50px rgba(15,23,42,.18);
       transform: translateX(110%);
       transition: transform .22s ease;
       z-index: 90;
@@ -194,7 +239,6 @@
       padding: 14px;
       overflow-y: auto;
     }
-
     .drawer-head {
       display: flex;
       align-items: center;
@@ -203,28 +247,25 @@
       padding: 8px 6px 12px;
       border-bottom: 1px solid var(--line);
     }
-
-    .drawer-title { font-weight: 900; }
-
+    .drawer-title { font-weight: 900; letter-spacing: .2px; }
     .drawer-close {
       width: var(--tap);
       height: var(--tap);
       border-radius: 14px;
       border: 1px solid var(--line);
-      background: rgba(2,6,23,.35);
-      color: var(--text);
+      background: #FFFFFF;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      color: var(--text);
     }
-
     .drawer-nav {
       display: flex;
       flex-direction: column;
       gap: 10px;
       padding: 14px 6px;
     }
-
     .drawer .pill {
       width: 100%;
       justify-content: center;
@@ -233,2520 +274,2024 @@
       font-size: 15px;
       min-height: 46px;
     }
-
-    .drawer-foot {
-      margin-top: auto;
-      padding: 12px 6px 6px;
-      border-top: 1px solid var(--line);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
     .drawer .store-link {
       display: block;
       width: 100%;
       max-width: none;
+      min-height: auto;
       border-width: 0;
-    }
-
-    html.menu-open body { overflow: hidden; }
-    html.menu-open .backdrop { opacity: 1; pointer-events: auto; }
-    html.menu-open .drawer { transform: translateX(0); }
-
-    main { padding: 52px 0 72px; }
-
-    .hero h1 {
+      box-shadow: none;
       margin: 0;
-      font-size: clamp(34px, 6.6vw, 64px);
-      line-height: .98;
-      letter-spacing: 0;
-      max-width: 900px;
+      align-self: stretch;
     }
-
-    .lead {
-      margin: 20px 0 0;
-      max-width: 760px;
-      color: #CBD5E1;
-      font-size: clamp(17px, 2.1vw, 21px);
-      line-height: 1.58;
-    }
-
-    .notice {
-      margin-top: 24px;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      max-width: 860px;
-      padding: 16px;
-      border: 1px solid rgba(245,158,11,.35);
-      border-radius: 14px;
-      background: rgba(245,158,11,.10);
-    }
-
-    .notice-mark {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(245,158,11,.18);
-      color: #FDE68A;
-      font-weight: 900;
-      flex: 0 0 auto;
-    }
-
-    .notice p { margin: 0; color: #FDE68A; line-height: 1.5; font-weight: 700; }
-
-    .layout {
-      margin-top: 42px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 340px;
-      gap: 24px;
-      align-items: start;
-    }
-
-    #pro-signup-section {
-      scroll-margin-top: calc(94px + env(safe-area-inset-top));
-    }
-
-    .panel {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(15,23,42,.72);
-      box-shadow: 0 24px 70px rgba(0,0,0,.28);
-    }
-
-    .panel-inner { padding: 24px; }
-
-    .panel h2,
-    .panel h3 {
-      margin: 0;
-      letter-spacing: 0;
-    }
-
-    .panel h2 { font-size: 24px; }
-    .panel h3 { font-size: 18px; }
-
-    .muted {
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .account-tabs {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .account-tab {
-      min-height: 96px;
-      padding: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      background: rgba(17,28,50,.72);
-      color: var(--text);
-      text-align: left;
-    }
-
-    .account-tab strong,
-    .account-tab span {
+    .drawer .store-badge {
       display: block;
-    }
-
-    .account-tab strong { font-size: 16px; }
-    .account-tab span { margin-top: 7px; color: var(--muted); font-size: 13px; line-height: 1.4; }
-
-    .account-tab[aria-pressed="true"] {
-      border-color: rgba(59,130,246,.78);
-      background: rgba(59,130,246,.20);
-    }
-
-    .form-section {
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 1px solid var(--line);
-      display: grid;
-      gap: 16px;
-    }
-
-    .form-section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .field { display: grid; gap: 7px; }
-    .field.full { grid-column: 1 / -1; }
-
-    .field label {
-      color: #DCE6F4;
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    input, select, textarea {
       width: 100%;
-      border: 1px solid rgba(148,163,184,.38);
-      border-radius: 12px;
-      background: rgba(2,6,23,.52);
-      color: var(--text);
-      padding: 12px 13px;
-      min-height: 46px;
-    }
-
-    select option { color: #0B1220; }
-
-    textarea {
-      min-height: 118px;
-      resize: vertical;
-      line-height: 1.45;
-    }
-
-    .hint {
+      max-width: none;
+      max-height: none;
+      height: auto;
       margin: 0;
+      object-fit: contain;
+    }
+    .drawer-foot {
+      margin-top: auto;
+      padding: 12px 6px 6px;
+      border-top: 1px solid var(--line);
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .address-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
       gap: 10px;
-      align-items: end;
     }
-
-    .secondary-button,
-    .submit,
-    .ghost-button {
-      min-height: 46px;
-      border-radius: 12px;
-      font-weight: 900;
-      border: 1px solid var(--line2);
-      color: var(--text);
-    }
-
-    .secondary-button {
-      padding: 0 14px;
-      background: rgba(59,130,246,.22);
-    }
-
-    .ghost-button {
-      padding: 0 13px;
-      background: rgba(15,23,42,.62);
-    }
-
-    .submit {
+    .drawer-foot .pill {
       width: 100%;
-      margin-top: 20px;
-      border: 0;
-      background: var(--accent);
-      color: white;
+      min-height: 46px;
+    }
+    html.menu-open body { overflow: hidden; }
+    html.menu-open .backdrop,
+    .menu-open .backdrop { opacity: 1; pointer-events: auto; }
+    html.menu-open .drawer,
+    .menu-open .drawer { transform: translateX(0); }
+
+    /* MAIN */
+    main { padding: 44px 0 80px; }
+    .hero { text-align: center; margin-bottom: 36px; }
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(26px, 5vw, 44px);
+      font-weight: 900; line-height: 1.1; letter-spacing: -.5px;
+    }
+    .hero p {
+      margin: 0 auto; max-width: 540px;
+      color: var(--muted); font-size: 16px; line-height: 1.6;
     }
 
-    .submit:disabled {
-      cursor: not-allowed;
-      opacity: .66;
+    /* WIZARD */
+    .wizard-card {
+      background: var(--panel);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      overflow: visible;
+      max-width: 700px;
+      margin: 0 auto;
     }
-
-    .selected-address {
-      display: none;
-      margin-top: 10px;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(16,185,129,.34);
-      background: rgba(16,185,129,.10);
-      color: #A7F3D0;
-      font-size: 14px;
-      line-height: 1.4;
+    .step-header { padding: 24px 28px 0; }
+    .step-progress { display: flex; gap: 6px; margin-bottom: 8px; }
+    .step-bar {
+      flex: 1; height: 4px; border-radius: 99px;
+      background: var(--border); transition: background .3s;
     }
-
-    .selected-address.is-visible { display: block; }
-
-    .hours-grid {
-      display: grid;
-      gap: 10px;
+    .step-bar.active { background: var(--accent); }
+    .step-bar.done { background: var(--accent2); }
+    .step-labels { display: flex; justify-content: space-between; margin-bottom: 24px; }
+    .step-label {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .5px;
+      color: var(--muted); transition: color .3s;
     }
+    .step-label.active { color: var(--accent); }
+    .step-label.done { color: var(--accent2); }
 
+    /* STEPS */
+    .step { display: none; padding: 0 28px 28px; }
+    .step.is-active { display: block; }
+    .step-title { margin: 0 0 6px; font-size: 21px; font-weight: 800; }
+    .step-subtitle { margin: 0 0 24px; color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+    /* TYPE CARDS */
+    .type-cards { display: grid; gap: 10px; margin-bottom: 24px; }
+    .type-card {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 18px; border: 2px solid var(--border);
+      border-radius: 16px; background: var(--panel);
+      cursor: pointer; transition: border-color .15s, background .15s, box-shadow .15s;
+      text-align: left; width: 100%;
+    }
+    .type-card:hover { border-color: #93C5FD; background: var(--accent-light); }
+    .type-card.selected {
+      border-color: var(--accent); background: var(--accent-light);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.12);
+    }
+    .type-card-icon {
+      width: 46px; height: 46px; border-radius: 13px;
+      background: var(--bg); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 20px; flex: 0 0 auto;
+    }
+    .type-card.selected .type-card-icon { background: rgba(59,130,246,.15); }
+    .type-card-body { flex: 1; }
+    .type-card-body strong { display: block; font-size: 15px; font-weight: 800; margin-bottom: 3px; }
+    .type-card-body span { display: block; font-size: 13px; color: var(--muted); line-height: 1.45; }
+    .type-card-check {
+      width: 20px; height: 20px; border-radius: 999px;
+      border: 2px solid var(--border); flex: 0 0 auto; margin-top: 3px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .15s, background .15s;
+    }
+    .type-card.selected .type-card-check { border-color: var(--accent); background: var(--accent); }
+    .type-card-check::after {
+      content: ""; display: none;
+      width: 8px; height: 8px; border-radius: 999px; background: #fff;
+    }
+    .type-card.selected .type-card-check::after { display: block; }
+
+    /* FIELDS */
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label { font-size: 14px; font-weight: 700; }
+    .field-opt { font-weight: 400; color: var(--muted); font-size: 13px; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="time"],
+    select,
+    textarea {
+      width: 100%; padding: 11px 14px;
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+      background: #FAFBFC; color: var(--text); font-size: 15px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--border-focus); background: #fff;
+      box-shadow: 0 0 0 3px rgba(59,130,246,.12);
+    }
+    textarea { resize: vertical; min-height: 90px; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-grid .full { grid-column: 1 / -1; }
+    .field-group { display: grid; gap: 14px; margin-bottom: 14px; }
+
+    /* Password toggle */
+    .input-wrap { position: relative; }
+    .input-wrap input { padding-right: 44px; }
+    .input-toggle {
+      position: absolute; right: 11px; top: 50%; transform: translateY(-50%);
+      border: none; background: none; color: var(--muted);
+      padding: 4px; display: flex; align-items: center; justify-content: center;
+    }
+    .input-toggle:hover { color: var(--text); }
+
+    /* Email status */
+    .email-status { font-size: 12px; font-weight: 600; min-height: 16px; }
+    .email-status.ok { color: var(--accent2); }
+    .email-status.error { color: var(--danger); }
+    .email-status.checking { color: var(--muted); }
+
+    /* ADDRESS */
+    .addr-results {
+      display: none; margin-top: 6px;
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+      background: #fff; box-shadow: var(--shadow-lg);
+      overflow: hidden; z-index: 10; position: relative;
+    }
+    .addr-results.is-visible { display: block; }
+    .addr-suggestion {
+      display: flex; flex-direction: column; gap: 2px;
+      width: 100%; text-align: left; padding: 11px 14px;
+      border: none; border-bottom: 1px solid var(--border);
+      background: transparent; color: var(--text);
+      cursor: pointer; transition: background .12s;
+    }
+    .addr-suggestion:last-of-type { border-bottom: none; }
+    .addr-suggestion:hover { background: var(--accent-light); }
+    .addr-suggestion strong { font-size: 14px; font-weight: 700; }
+    .addr-suggestion span { font-size: 12px; color: var(--muted); }
+    .addr-manual-link {
+      display: block; width: 100%; text-align: center;
+      padding: 10px 14px; font-size: 13px; font-weight: 600;
+      color: var(--accent); background: var(--accent-light);
+      border: none; border-top: 1px solid var(--border);
+      cursor: pointer; transition: background .12s;
+    }
+    .addr-manual-link:hover { background: #DBEAFE; }
+    .addr-searching { padding: 12px 14px; font-size: 13px; color: var(--muted); }
+
+    .selected-addr-box {
+      display: none; margin-top: 10px; padding: 12px 14px;
+      border-radius: var(--radius); background: #F0FDF4;
+      border: 1.5px solid #86EFAC; font-size: 14px; line-height: 1.5;
+    }
+    .selected-addr-box.is-visible { display: block; }
+    .selected-addr-box strong { display: block; color: #15803D; margin-bottom: 3px; font-weight: 700; }
+    .addr-note { display: block; margin-top: 5px; font-size: 12px; color: var(--muted); font-style: italic; }
+
+    /* Manual address panel */
+    .manual-addr-panel {
+      display: none; margin-top: 10px; padding: 16px;
+      border: 1.5px solid #FDE68A; border-radius: var(--radius);
+      background: #FFFBEB;
+    }
+    .manual-addr-panel.is-visible { display: grid; gap: 12px; }
+    .manual-addr-panel h4 { margin: 0 0 2px; font-size: 14px; font-weight: 800; }
+    .manual-addr-panel p { margin: 0 0 4px; font-size: 13px; color: var(--muted); }
+    .manual-addr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .manual-addr-feedback { font-size: 13px; font-weight: 600; min-height: 16px; }
+    .manual-addr-feedback.error { color: var(--danger); }
+    .manual-addr-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* HOURS */
+    .hours-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px; gap: 10px;
+    }
+    .hours-header h3 { margin: 0; font-size: 16px; font-weight: 800; }
+    .hours-header-actions { display: flex; gap: 8px; }
+    .hours-grid { display: grid; gap: 8px; margin-bottom: 12px; }
     .hours-row {
       display: grid;
-      grid-template-columns: 110px minmax(96px, 1fr) minmax(96px, 1fr) 138px 92px;
-      gap: 10px;
-      align-items: center;
-      padding: 10px;
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 12px;
-      background: rgba(2,6,23,.26);
+      grid-template-columns: 96px 1fr 1fr auto auto;
+      align-items: center; gap: 8px;
+      padding: 10px 12px; border: 1.5px solid var(--border);
+      border-radius: var(--radius); background: #FAFBFC;
     }
-
-    .hours-day { font-weight: 900; }
-
-    .hours-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .hours-preview {
-      white-space: pre-line;
-      margin-top: 4px;
-    }
-
+    .hours-day { font-size: 14px; font-weight: 700; }
+    .hours-row input[type="time"] { font-size: 14px; padding: 7px 9px; }
     .hours-pause-button {
-      min-height: 40px;
-      padding: 0 10px;
-      font-size: 13px;
+      font-size: 12px; padding: 6px 10px;
+      border-radius: 8px; border: 1.5px solid var(--border);
+      background: transparent; color: var(--muted); white-space: nowrap;
+      transition: border-color .12s, color .12s;
     }
-
-    .pause-fields {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      margin-top: 4px;
-    }
-
+    .hours-pause-button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
     .check-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #CBD5E1;
-      font-size: 13px;
-      font-weight: 700;
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      white-space: nowrap; cursor: pointer;
+    }
+    .check-row input[type="checkbox"] { accent-color: var(--accent); width: 15px; height: 15px; }
+    .hours-preview {
+      padding: 12px 14px; border-radius: var(--radius);
+      background: var(--bg); font-size: 13px; color: var(--muted);
+      white-space: pre-wrap; line-height: 1.6;
     }
 
-    .check-row input {
-      width: 18px;
-      height: 18px;
-      min-height: 18px;
-      padding: 0;
+    /* PHOTOS */
+    .photo-drop {
+      border: 2px dashed var(--border); border-radius: 16px;
+      padding: 32px 20px; text-align: center; cursor: pointer;
+      background: var(--bg); transition: border-color .15s, background .15s;
+    }
+    .photo-drop:hover, .photo-drop.drag-over {
+      border-color: var(--accent); background: var(--accent-light);
+    }
+    .photo-drop-icon { font-size: 34px; margin-bottom: 10px; }
+    .photo-drop strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+    .photo-drop span { font-size: 13px; color: var(--muted); }
+    .photo-drop input[type="file"] { display: none; }
+    .photo-preview-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
+      gap: 10px; margin-top: 14px;
+    }
+    .photo-thumb { aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; border: 1.5px solid var(--border); }
+    .photo-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* TERMS */
+    .terms-check {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; border: 1.5px solid var(--border);
+      border-radius: var(--radius); background: var(--bg);
+      cursor: pointer; margin-top: 18px;
+    }
+    .terms-check input[type="checkbox"] { width: 17px; height: 17px; flex: 0 0 auto; margin-top: 2px; accent-color: var(--accent); }
+    .terms-text { font-size: 14px; line-height: 1.55; }
+    .terms-text a { color: var(--accent); text-decoration: underline; }
+
+    /* STATUS */
+    .form-status {
+      display: none; padding: 13px 16px; border-radius: var(--radius);
+      font-size: 14px; font-weight: 600; line-height: 1.5; margin-top: 16px;
+    }
+    .form-status.is-visible { display: block; }
+    .form-status.success { background: #F0FDF4; border: 1.5px solid #86EFAC; color: #15803D; }
+    .form-status.error { background: #FEF2F2; border: 1.5px solid #FECACA; color: #DC2626; }
+
+    /* STEP ERROR */
+    .step-err {
+      font-size: 13px; font-weight: 600; color: var(--danger);
+      min-height: 18px; flex: 1;
     }
 
-    .file-zone {
-      border: 1px dashed rgba(148,163,184,.48);
-      border-radius: 14px;
-      padding: 16px;
-      background: rgba(2,6,23,.28);
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; min-height: 46px; padding: 11px 22px;
+      border-radius: var(--radius); font-size: 15px; font-weight: 700;
+      border: none; cursor: pointer; transition: background .15s, opacity .15s;
+      white-space: nowrap;
+    }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: #2563EB; }
+    .btn-secondary {
+      background: #fff; color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-secondary:hover:not(:disabled) { background: var(--bg); }
+    .btn-ghost {
+      background: transparent; color: var(--muted);
+      border: 1.5px solid var(--border);
+    }
+    .btn-ghost:hover:not(:disabled) { color: var(--text); border-color: #CBD5E1; }
+
+    .step-nav {
+      display: flex; align-items: center;
+      margin-top: 24px; padding-top: 18px;
+      border-top: 1px solid var(--border); gap: 10px;
     }
 
-    .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .preview {
-      aspect-ratio: 1;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(2,6,23,.48);
-    }
-
-    .preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .status {
-      display: none;
-      margin-top: 16px;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid var(--line2);
-      line-height: 1.5;
-      font-weight: 700;
-    }
-
-    .status.is-visible { display: block; }
-    .status.success { border-color: rgba(16,185,129,.42); background: rgba(16,185,129,.12); color: #A7F3D0; }
-    .status.error { border-color: rgba(239,68,68,.42); background: rgba(239,68,68,.12); color: #FECACA; }
-
-    .steps {
-      margin: 18px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 12px;
-    }
-
-    .steps li {
-      display: flex;
-      gap: 12px;
-      color: #CBD5E1;
-      line-height: 1.55;
-    }
-
-    .step-number {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(16,185,129,.16);
-      color: #A7F3D0;
-      font-weight: 900;
-      flex: 0 0 auto;
-      margin-top: 1px;
-    }
-
-    .side-stack {
-      display: grid;
-      gap: 16px;
-      position: sticky;
-      top: 90px;
-    }
-
-    .side-list {
-      margin: 14px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 10px;
-      color: #CBD5E1;
-      line-height: 1.5;
-    }
-
-    .side-list li {
-      padding-left: 18px;
-      position: relative;
-    }
-
-    .side-list li::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent2);
-      position: absolute;
-      left: 0;
-      top: .62em;
-    }
-
-    .billing-section {
-      margin-top: 24px;
-      scroll-margin-top: 90px;
-    }
-
-    .billing-hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 18px;
-      align-items: start;
-      margin-top: 16px;
-    }
-
-    .plans-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .plan-card,
+    /* BILLING */
+    .billing-section { max-width: 700px; margin: 40px auto 0; }
     .billing-card {
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 14px;
-      background: rgba(17,28,50,.72);
-      padding: 16px;
+      background: var(--panel); border-radius: 16px;
+      box-shadow: var(--shadow); padding: 24px;
     }
-
-    .plan-label {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(59,130,246,.18);
-      color: #BFDBFE;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .plan-price {
-      margin: 12px 0 0;
-      font-size: 26px;
-      font-weight: 900;
-      color: #FFFFFF;
-    }
-
-    .benefits {
-      margin: 14px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 9px;
-      color: #CBD5E1;
-      line-height: 1.45;
-    }
-
-    .benefits li {
-      padding-left: 17px;
-      position: relative;
-    }
-
-    .benefits li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: .62em;
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent2);
-    }
-
-    .billing-card form {
-      display: grid;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .billing-feedback {
-      min-height: 20px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-      font-weight: 700;
-    }
-
-    .billing-feedback.ok { color: #A7F3D0; }
-    .billing-feedback.error { color: #FECACA; }
-
-    .billing-context {
-      display: none;
-      margin-top: 18px;
-      padding: 16px;
-      border: 1px solid rgba(59,130,246,.34);
-      border-radius: 14px;
-      background: rgba(59,130,246,.10);
-    }
-
+    .billing-card-title { font-size: 17px; font-weight: 800; margin: 0 0 4px; }
+    .billing-card-sub { font-size: 14px; color: var(--muted); margin: 0 0 16px; }
+    .billing-context { display: none; margin-top: 14px; }
     .billing-context.is-visible { display: block; }
+    .billing-meta { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 12px; }
+    .billing-meta-item { padding: 12px 14px; border-radius: var(--radius); background: var(--bg); border: 1px solid var(--border); }
+    .billing-meta-item span { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+    .billing-meta-item strong { display: block; font-size: 14px; font-weight: 700; }
+    .billing-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .billing-pill { display: inline-flex; align-items: center; padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 700; text-decoration: none; }
+    .billing-pill.primary { background: var(--accent); color: #fff; }
+    .billing-pill.danger { background: var(--danger); color: #fff; }
+    .billing-pill.outline { border: 1.5px solid var(--border); color: var(--text); }
+    .billing-form { display: grid; gap: 12px; margin-top: 14px; }
+    .billing-feedback { font-size: 13px; font-weight: 600; min-height: 18px; color: var(--muted); }
+    .billing-feedback.ok { color: var(--accent2); }
+    .billing-feedback.error { color: var(--danger); }
 
-    .billing-meta {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .billing-meta-item {
-      padding: 12px;
-      border-radius: 12px;
-      background: rgba(2,6,23,.32);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-
-    .billing-meta-item span {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .billing-meta-item strong {
-      display: block;
-      margin-top: 5px;
-      font-size: 15px;
-    }
-
-    .billing-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 26px 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .footer-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
+    /* MODAL (pause only) */
     .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(2,6,23,.72);
+      position: fixed; inset: 0; z-index: 50;
+      display: none; align-items: center; justify-content: center;
+      padding: 20px; background: rgba(15,23,42,.48);
+      backdrop-filter: blur(4px);
     }
-
     .modal.is-visible { display: flex; }
-
     .modal-card {
-      width: min(720px, 100%);
-      max-height: min(720px, 92vh);
-      overflow: auto;
-      border: 1px solid var(--line2);
-      border-radius: 18px;
-      background: #0F172A;
-      box-shadow: 0 30px 80px rgba(0,0,0,.42);
+      width: min(460px, 100%); border-radius: 20px;
+      background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,.18);
     }
-
     .modal-head {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 18px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(15,23,42,.96);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 18px 20px; border-bottom: 1px solid var(--border);
     }
-
-    .modal-title { margin: 0; font-size: 20px; }
-    .modal-body { padding: 18px; display: grid; gap: 12px; }
-
-    .suggestion {
-      width: 100%;
-      display: block;
-      text-align: left;
-      padding: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 12px;
-      color: var(--text);
-      background: rgba(17,28,50,.72);
+    .modal-title { margin: 0; font-size: 18px; font-weight: 800; }
+    .modal-subtitle { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+    .modal-close {
+      width: 36px; height: 36px; border-radius: 10px;
+      border: 1.5px solid var(--border); background: transparent;
+      color: var(--muted); display: flex; align-items: center; justify-content: center;
     }
+    .modal-body { padding: 20px; display: grid; gap: 14px; }
+    .modal-footer { display: flex; gap: 10px; justify-content: flex-end; padding: 0 20px 20px; }
 
-    .suggestion strong,
-    .suggestion span { display: block; }
-    .suggestion span { margin-top: 6px; color: var(--muted); font-size: 13px; }
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 24px 0; color: var(--muted); font-size: 14px; }
+    .footer-row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 14px; flex-wrap: wrap; }
+    .footer-links a:hover { color: var(--text); }
 
     .is-hidden { display: none !important; }
 
-    @media (max-width: 960px) {
-      .layout { grid-template-columns: 1fr; }
-      .side-stack { position: static; }
-      .account-tabs { grid-template-columns: 1fr; }
-      .billing-hero { grid-template-columns: 1fr; }
-      .plans-grid { grid-template-columns: 1fr; }
-      .billing-meta { grid-template-columns: 1fr; }
-      .hours-row {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
     @media (max-width: 640px) {
-      .nav-inner { align-items: flex-start; padding: 14px 0; flex-direction: column; }
-      .nav-links { justify-content: flex-start; display: none; }
-      .nav-actions { width: 100%; justify-content: flex-end; }
-      .header-create-btn { min-height: 40px; padding: 0 13px; font-size: 12px; }
-      main { padding-top: 40px; }
-      .panel-inner { padding: 18px; }
+      .nav-links { display: none; }
       .form-grid { grid-template-columns: 1fr; }
-      .address-row { grid-template-columns: 1fr; }
+      .form-grid .full { grid-column: 1; }
+      .hours-row { grid-template-columns: 1fr 1fr; }
+      .manual-addr-grid { grid-template-columns: 1fr; }
+      .billing-meta { grid-template-columns: 1fr; }
+      .step { padding: 0 16px 22px; }
+      .step-header { padding: 18px 16px 0; }
+      .wizard-card { border-radius: 16px; }
+      .type-card { flex-direction: column; gap: 10px; }
+    }
+    @media (max-width: 420px) {
       .hours-row { grid-template-columns: 1fr; }
     }
-    /* Menu variant: list minimal (sans cartes) */
-    .drawer{
-      background: rgba(7,18,38,.92);
-      backdrop-filter: blur(16px);
-      color:#E6EEF8;
-    }
-
-    .drawer-title,
-    .drawer-close{
-      color:#E6EEF8;
-    }
-
-    .drawer-nav{
-      gap:0;
-      padding:12px 2px 8px;
-    }
-
-    .drawer .pill{
-      position:relative;
-      width:100%;
-      justify-content:flex-start;
-      gap:12px;
-      padding:13px 4px;
-      min-height:52px;
-      border:0;
-      border-radius:0;
-      background:transparent !important;
-      color:inherit;
-      box-shadow:none;
-      transform:none;
-    }
-
-    .drawer .pill::after{
-      content:"";
-      position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
-      height:1px;
-      background:linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
-      pointer-events:none;
-    }
-
-    .drawer .pill::before{
-      content:"";
-      position:absolute;
-      left:-4px;
-      top:50%;
-      width:2px;
-      height:0;
-      border-radius:999px;
-      background:linear-gradient(180deg,#7DD3FC,#38BDF8);
-      transform:translateY(-50%);
-      transition:height .18s ease, opacity .18s ease;
-      opacity:0;
-    }
-
-    .drawer .pill:hover,
-    .drawer .pill[aria-current="page"]{
-      background:linear-gradient(90deg, rgba(56,189,248,.12), rgba(56,189,248,.03)) !important;
-    }
-
-    .drawer .pill:hover::before,
-    .drawer .pill[aria-current="page"]::before{
-      height:28px;
-      opacity:1;
-    }
-
-    .drawer .pill[aria-current="page"]{
-      color:#F2F8FF;
-      border-color:transparent;
-    }
-
-    .drawer .pill .ico{
-      width:18px;
-      height:18px;
-      padding:0;
-      border:0;
-      border-radius:0;
-      background:transparent !important;
-      box-shadow:none;
-      opacity:.95;
-      flex:0 0 18px;
-      color:#BFD2E6;
-    }
-
-    .drawer .pill.primary,
-    .drawer .pill.danger{
-      color:inherit;
-    }
-
-    .drawer .pill.danger{
-      color:#FF8D98;
-    }
-
-    .drawer-nav > .store-link:nth-last-child(2){
-      margin-top:16px;
-      position:relative;
-    }
-
-    .drawer-nav > .store-link:nth-last-child(2)::before{
-      content:"App mobile";
-      position:absolute;
-      left:0;
-      top:-10px;
-      transform:translateY(-100%);
-      font-size:11px;
-      letter-spacing:.15em;
-      text-transform:uppercase;
-      color:#9FB3CC;
-      font-weight:800;
-      pointer-events:none;
-    }
-
-    .drawer .store-link{
-      padding:0;
-      margin-top:10px;
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:12px;
-      overflow:hidden;
-      background:rgba(10,24,45,.55) !important;
-      min-height:auto;
-    }
-
-    .drawer .store-link::before,
-    .drawer .store-link::after{
-      display:none;
-    }
-
-    .drawer .store-link .ico{
-      display:none;
-    }
-
-    .drawer .store-link .store-badge{
-      width:100%;
-      display:block;
-    }
-
-    .drawer-foot{
-      padding:10px 2px 0;
-      gap:0;
-      border-top:1px solid rgba(255,255,255,.12);
-    }
-
-    .drawer-foot .pill{
-      min-height:52px;
-    }
-
-    .drawer-foot .pill.primary,
-    .drawer-foot .pill.primary[href*="billing"],
-    .drawer-foot .pill.primary[href^="mailto"]{
-      background:transparent !important;
-      color:inherit;
-    }
-
-    @media (max-width:640px){
-      .drawer{
-        width:min(94vw, 350px);
-      }
-
-      .drawer .pill{
-        min-height:50px;
-        padding:12px 3px;
-      }
-    }
-
-</style>
-  <link rel="stylesheet" href="../site.css" />
+  </style>
 </head>
 <body>
-  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
-    <symbol id="i-menu" viewBox="0 0 24 24">
-      <path d="M4 7.5h16M4 12h16M4 16.5h16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
-    </symbol>
-    <symbol id="i-x" viewBox="0 0 24 24">
-      <path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
-    </symbol>
-    <symbol id="i-home" viewBox="0 0 24 24">
-      <path d="M3.8 10.6 12 4l8.2 6.6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M6.5 9.8V20h11V9.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
-      <path d="M10 20v-5h4v5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="i-support" viewBox="0 0 24 24">
-      <path d="M4 12a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
-      <rect x="3" y="12" width="4.5" height="7" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
-      <rect x="16.5" y="12" width="4.5" height="7" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
-      <path d="M18.8 19.5A2.4 2.4 0 0 1 16.6 21H12" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
-    </symbol>
-    <symbol id="i-lock" viewBox="0 0 24 24">
-      <rect x="5" y="10.5" width="14" height="10" rx="2.4" fill="none" stroke="currentColor" stroke-width="2.1" />
-      <path d="M8 10.5V8a4 4 0 1 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
-    </symbol>
-    <symbol id="i-file" viewBox="0 0 24 24">
-      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.7.7L19.3 6.3A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
-      <path d="M14 2v5a1 1 0 0 0 1 1h5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
-      <path d="M9.5 13h5M9.5 17h5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
-    </symbol>
-    <symbol id="i-mail" viewBox="0 0 24 24">
-      <rect x="3.5" y="5.5" width="17" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
-      <path d="m4.5 8 7.5 5.2L19.5 8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
-    </symbol>
-    <symbol id="i-building" viewBox="0 0 24 24">
-      <rect x="4.5" y="3.5" width="15" height="17" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
-      <path d="M8 8h1.4M8 11.6h1.4M8 15.2h1.4M14.6 8H16M14.6 11.6H16M14.6 15.2H16M11.3 20.5v-3h1.4v3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
-    </symbol>
-  </svg>
 
-  <header class="nav" role="banner">
-    <div class="container nav-inner">
-      <a class="brand" href="../index.html" aria-label="Accueil Urbalya">
-        <img src="../logo.png" alt="" />
-        <span class="brand-text">
-          <strong>Urbalya</strong>
-          <small>Abonnement et compte pro</small>
-        </span>
-      </a>
-      <nav class="nav-links" aria-label="Navigation">
-        <a class="pill" href="../index.html">Accueil</a>
-        <a class="pill primary" href="./" aria-current="page">Compte Pro</a>
-        <a class="pill" href="../support.html">Support</a>
-        <a class="pill" href="../privacy.html">Confidentialité</a>
-        <a class="pill" href="../terms.html">Conditions</a>
-        <a class="pill" href="../mentions-legales.html">Mentions légales</a>
-      </nav>
-      <div class="nav-actions">
-        <a class="pill primary header-create-btn" href="#pro-signup-section">Créer un dossier</a>
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-label="Ouvrir le menu"
-          aria-controls="drawer"
-          aria-expanded="false"
-          id="menuBtn"
-        >
-          <svg class="ico xl" aria-hidden="true"><use href="#i-menu"></use></svg>
-        </button>
-      </div>
-    </div>
-  </header>
+<a class="skip" href="#main">Aller au contenu principal</a>
 
-  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
-  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
-    <div class="drawer-head">
-      <div class="drawer-title">Navigation</div>
-      <button class="drawer-close" type="button" aria-label="Fermer le menu" id="closeBtn">
-        <svg class="ico xl" aria-hidden="true"><use href="#i-x"></use></svg>
+<!-- NAV -->
+<header class="nav" role="banner">
+  <div class="container nav-inner">
+    <a class="brand" href="../index.html" aria-label="Aller à l'accueil Urbalya">
+      <span class="logo" aria-hidden="true">
+        <img class="logo-img" src="../logo.png" alt="Urbalya" />
+      </span>
+      <span class="brand-text">
+        <strong>Urbalya</strong>
+        <small>Compte professionnel</small>
+      </span>
+    </a>
+
+    <div class="nav-actions">
+      <a class="pill primary header-create-btn" href="#professionalSignupForm">Créer un dossier</a>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Ouvrir le menu"
+        aria-controls="drawer"
+        aria-expanded="false"
+        id="menuBtn"
+      >
+        <svg class="ico xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7.5h16M4 12h16M4 16.5h16" />
+        </svg>
       </button>
     </div>
+  </div>
+</header>
 
-    <nav class="drawer-nav" aria-label="Navigation mobile">
-      <a class="pill" href="../index.html">
-        <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
-        Accueil
-      </a>
-      <a class="pill" href="./" aria-current="page">
-        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
-        Compte Pro
-      </a>
-      <a class="pill" href="../support.html">
-        <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
-        Support
-      </a>
-      <a class="pill" href="../privacy.html">
-        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
-        Confidentialité
-      </a>
-      <a class="pill" href="../terms.html">
-        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
-        Conditions
-      </a>
-      <a class="pill" href="../mentions-legales.html">
-        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
-        Mentions légales
-      </a>
-      <a class="pill primary store-link" href="https://apps.apple.com/app/urbalya/id6754794588" rel="noopener noreferrer" aria-label="Ouvrir l'App Store">
-        <img class="store-badge" src="../apple.png" alt="Télécharger sur l'App Store" loading="lazy" decoding="async" />
-      </a>
-      <a class="pill primary store-link" href="https://play.google.com/store/apps/details?id=com.urbalya.app&pcampaignid=web_share" rel="noopener noreferrer" aria-label="Ouvrir Google Play">
-        <img class="store-badge" src="../google.png" alt="Disponible sur Google Play" loading="lazy" decoding="async" />
-      </a>
-    </nav>
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer-head">
+    <div class="drawer-title">Navigation</div>
+    <button class="drawer-close" type="button" aria-label="Fermer le menu" id="closeBtn">
+      <svg class="ico xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+  </div>
 
-    <div class="drawer-foot">
-      <a class="pill primary" href="../billing.html">
-        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
-        Gerer mon compte
-      </a>
-      <a class="pill danger" href="../delete-account.html">
-        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
-        Supprimer mon compte
-      </a>
-      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
-        <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
-        Contactez-nous
-      </a>
+  <nav class="drawer-nav" aria-label="Navigation mobile">
+    <a class="pill" href="../index.html">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 11.5L12 5l8 6.5V20H5v-8.5" />
+      </svg>
+      Accueil
+    </a>
+    <a class="pill" href="./" aria-current="page">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 20V7l8-3 8 3v13M9 20v-6h6v6M8 9h.01M12 9h.01M16 9h.01" />
+      </svg>
+      Compte Pro
+    </a>
+    <a class="pill" href="../support.html">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 18h.01M9.5 9a2.5 2.5 0 1 1 4.3 1.7c-.9.8-1.8 1.4-1.8 2.8M4.8 19.2A10 10 0 1 1 19.2 4.8 10 10 0 0 1 4.8 19.2" />
+      </svg>
+      Support
+    </a>
+    <a class="pill" href="../privacy.html">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z" />
+      </svg>
+      Confidentialité
+    </a>
+    <a class="pill" href="../terms.html">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 3h7l4 4v14H7zM14 3v5h5M9 13h6M9 17h6" />
+      </svg>
+      Conditions
+    </a>
+    <a class="pill" href="../mentions-legales.html">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 20h16M6 20V8l6-4 6 4v12M9 12h.01M12 12h.01M15 12h.01" />
+      </svg>
+      Mentions légales
+    </a>
+    <a class="pill primary store-link" href="https://apps.apple.com/app/urbalya/id6754794588" rel="noopener noreferrer" aria-label="Ouvrir l'App Store">
+      <img class="store-badge" src="../apple.png" alt="Télécharger sur l'App Store" loading="lazy" decoding="async" />
+    </a>
+    <a class="pill primary store-link" href="https://play.google.com/store/apps/details?id=com.urbalya.app&pcampaignid=web_share" rel="noopener noreferrer" aria-label="Ouvrir Google Play">
+      <img class="store-badge" src="../google.png" alt="Disponible sur Google Play" loading="lazy" decoding="async" />
+    </a>
+  </nav>
+
+  <div class="drawer-foot">
+    <a class="pill primary" href="#professionalSignupForm">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 5v14M5 12h14" />
+      </svg>
+      Créer mon compte
+    </a>
+    <a class="pill primary" href="../billing.html">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z" />
+      </svg>
+      Gérer mon compte
+    </a>
+    <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 6h16v12H4zM4 7l8 6 8-6" />
+      </svg>
+      Contactez-nous
+    </a>
+  </div>
+</aside>
+
+<main id="main" role="main">
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Creez votre compte professionnel</h1>
+      <p>Rejoignez Urbalya et donnez de la visibilite a votre commerce, mairie ou association.</p>
     </div>
-  </aside>
 
-  <main class="pro-main">
-    <div class="container">
-      <section class="hero pro-hero" aria-label="Comptes professionnels">
-        <div class="pro-hero-grid">
-          <div class="pro-hero-content">
-            <p class="pro-hero-kicker">Comptes vérifiés pour acteurs locaux</p>
-            <h1>Un compte professionnel crédible pour votre présence locale.</h1>
-            <p class="lead">
-              Un parcours clair pour les mairies, commerces et associations :
-              identité vérifiée, informations structurées et activation après contrôle du dossier.
-            </p>
-            <div class="cta-row pro-hero-actions">
-              <a class="btn primary" href="#pro-signup-section">Créer mon dossier</a>
-              <a class="btn" href="mailto:contact@urbalya.com?subject=Présentation%20compte%20professionnel%20Urbalya">Demander une présentation</a>
-            </div>
+    <!-- WIZARD FORM -->
+    <form id="professionalSignupForm" novalidate>
+      <input type="hidden" id="accountType" value="merchant" />
 
-            <div class="pro-hero-proof" aria-label="Garanties du compte professionnel">
-              <div>
-                <strong>Dossier contrôlé</strong>
-                <span>SIREN, adresse, responsable et informations clés vérifiés.</span>
+      <div class="wizard-card">
+
+        <!-- PROGRESS -->
+        <div class="step-header" id="wizardHeader">
+          <div class="step-progress">
+            <div class="step-bar active" data-bar="1"></div>
+            <div class="step-bar" data-bar="2"></div>
+            <div class="step-bar" data-bar="3"></div>
+            <div class="step-bar" data-bar="4"></div>
+          </div>
+          <div class="step-labels">
+            <span class="step-label active" data-label="1">Type</span>
+            <span class="step-label" data-label="2">Informations</span>
+            <span class="step-label" data-label="3">Adresse</span>
+            <span class="step-label" data-label="4">Photos</span>
+          </div>
+        </div>
+
+        <!-- STEP 1 : TYPE DE COMPTE -->
+        <div class="step is-active" id="step1">
+          <h2 class="step-title">Quel type de compte ?</h2>
+          <p class="step-subtitle">Choisissez la categorie qui correspond a votre structure.</p>
+
+          <div class="type-cards">
+            <button type="button" class="type-card selected" data-account-tab="merchant">
+              <div class="type-card-icon">&#x1F3EA;</div>
+              <div class="type-card-body">
+                <strong>Commerce local</strong>
+                <span>Restaurant, boutique, artisan, service... Mettez en avant votre etablissement et vos horaires.</span>
               </div>
-              <div>
-                <strong>Présence locale lisible</strong>
-                <span>Fiche structurée pour être identifié par les habitants.</span>
+              <div class="type-card-check"></div>
+            </button>
+            <button type="button" class="type-card" data-account-tab="municipality">
+              <div class="type-card-icon">&#x1F3DB;&#xFE0F;</div>
+              <div class="type-card-body">
+                <strong>Mairie / Collectivite</strong>
+                <span>Communiquez les informations officielles, evenements et actualites de votre commune.</span>
               </div>
-              <div>
-                <strong>Activation encadrée</strong>
-                <span>Validation support avant accès aux outils professionnels.</span>
+              <div class="type-card-check"></div>
+            </button>
+            <button type="button" class="type-card" data-account-tab="social">
+              <div class="type-card-icon">&#x1F91D;</div>
+              <div class="type-card-body">
+                <strong>Association / Club</strong>
+                <span>Faites connaitre vos activites, recrutez des membres et informez vos adherents.</span>
+              </div>
+              <div class="type-card-check"></div>
+            </button>
+          </div>
+
+          <div class="step-nav">
+            <span class="step-err" id="stepErr1"></span>
+            <button type="button" class="btn btn-primary" id="nextBtn1">
+              Continuer
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2 : INFORMATIONS -->
+        <div class="step" id="step2">
+          <h2 class="step-title">Vos informations</h2>
+          <p class="step-subtitle">Creez votre compte et renseignez les informations de votre structure.</p>
+
+          <!-- Email + password (communs) -->
+          <div class="field-group">
+            <div class="field">
+              <label for="email">Adresse email</label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="contact@votre-structure.fr" />
+              <div class="email-status" id="emailStatus" role="status" aria-live="polite"></div>
+            </div>
+            <div class="field">
+              <label for="password">Mot de passe</label>
+              <div class="input-wrap">
+                <input type="password" id="password" name="password" autocomplete="new-password" placeholder="8 caracteres minimum" />
+                <button type="button" class="input-toggle" id="passwordToggle" aria-label="Afficher/masquer le mot de passe">
+                  <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="confirmPassword">Confirmer le mot de passe</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" placeholder="Repetez le mot de passe" />
+            </div>
+          </div>
+
+          <!-- MERCHANT fields -->
+          <div class="account-section" data-section="merchant">
+            <div class="form-grid field-group">
+              <div class="field full">
+                <label for="merchantName">Nom du commerce</label>
+                <input type="text" id="merchantName" autocomplete="organization" placeholder="Ex : Boulangerie Martin" />
+              </div>
+              <div class="field">
+                <label for="merchantSIREN">SIREN <span class="field-opt">(9 chiffres)</span></label>
+                <input type="text" id="merchantSIREN" inputmode="numeric" maxlength="11" placeholder="Ex : 123 456 789" />
+              </div>
+              <div class="field">
+                <label for="merchantBusinessTypeKey">Type d'activite</label>
+                <select id="merchantBusinessTypeKey"></select>
+              </div>
+              <div class="field full is-hidden" id="merchantCustomWrap">
+                <label for="merchantBusinessTypeCustom">Precisez l'activite</label>
+                <input type="text" id="merchantBusinessTypeCustom" placeholder="Ex : Fromagerie artisanale" />
+              </div>
+              <div class="field">
+                <label for="merchantPhone">Telephone <span class="field-opt">(optionnel)</span></label>
+                <input type="tel" id="merchantPhone" autocomplete="tel" placeholder="Ex : 06 12 34 56 78" />
+              </div>
+              <div class="field">
+                <label for="merchantWebsite">Site web <span class="field-opt">(optionnel)</span></label>
+                <input type="url" id="merchantWebsite" autocomplete="url" placeholder="https://..." />
+              </div>
+              <div class="field full">
+                <label for="merchantDescription">Description <span class="field-opt">(optionnelle)</span></label>
+                <textarea id="merchantDescription" rows="3" placeholder="Decrivez votre commerce en quelques mots..."></textarea>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-
-
-      <section class="premium-band pro-confidence" aria-label="Garanties professionnelles">
-        <div>
-          <h2>Pas d’inscription approximative : chaque demande passe par une vérification.</h2>
-          <p>
-            Le formulaire collecte les éléments nécessaires pour éviter les profils incomplets :
-            adresse vérifiée ou saisie manuelle, photos, horaires, responsable et informations officielles.
-          </p>
-        </div>
-        <div class="premium-proof-grid">
-          <article>
-            <strong>1. Dossier complet</strong>
-            <span>Vous renseignez l’identité, l’adresse et les informations utiles.</span>
-          </article>
-          <article>
-            <strong>2. Vérification</strong>
-            <span>Le support contrôle la cohérence avant activation.</span>
-          </article>
-          <article>
-            <strong>3. Activation</strong>
-            <span>Le compte devient utilisable dans l’application mobile.</span>
-          </article>
-          <article>
-            <strong>4. Gestion</strong>
-            <span>Les liens sensibles sont envoyés par email sécurisé.</span>
-          </article>
-        </div>
-      </section>
-
-      <section class="panel billing-section" id="abonnement" aria-label="Abonnement professionnel">
-        <div class="panel-inner">
-          <h2>Abonnements professionnels</h2>
-          <p class="muted">
-            Les tarifs sont présentés clairement avant validation du dossier. Aucun paiement n'est lancé
-            depuis cette page : les actions sensibles passent par un lien sécurisé envoyé par email.
-          </p>
-
-          <div class="billing-hero">
-            <div class="plans-grid pro-pricing-grid">
-              <article class="plan-card pricing-card is-commerce">
-                <span class="plan-label">Commerçants</span>
-                <p class="plan-price">29 EUR / mois</p>
-                <p class="plan-note">Pour une présence locale simple, visible et administrable.</p>
-                <ul class="benefits">
-                  <li>Fiche commerce visible dans Urbalya après validation.</li>
-                  <li>Galerie photos, horaires, adresse et description.</li>
-                  <li>Gestion des informations professionnelles depuis l'espace pro.</li>
-                </ul>
-              </article>
-
-              <article class="plan-card pricing-card is-municipality">
-                <span class="plan-label">Mairies</span>
-                <p class="plan-price">À partir de 79 EUR / mois</p>
-                <p class="plan-note">Un tarif adapté à la taille réelle de la commune.</p>
-
-                <div class="municipality-tiers" aria-label="Tarifs mairie par nombre d'habitants">
-                  <div class="municipality-tier">
-                    <strong>Moins de 2 000 habitants</strong>
-                    <span>79 EUR / mois</span>
-                  </div>
-                  <div class="municipality-tier">
-                    <strong>2 001 à 10 000 habitants</strong>
-                    <span>149 EUR / mois</span>
-                  </div>
-                  <div class="municipality-tier">
-                    <strong>10 001 à 50 000 habitants</strong>
-                    <span>249 EUR / mois</span>
-                  </div>
-                  <div class="municipality-tier">
-                    <strong>Plus de 50 000 habitants</strong>
-                    <span>Sur devis</span>
-                  </div>
-                </div>
-
-                <ul class="benefits">
-                  <li>Compte institutionnel validé par le support Urbalya.</li>
-                  <li>Informations officielles, horaires, coordonnées et communications communales.</li>
-                  <li>Outils de visibilité locale et accompagnement selon le volume d'habitants.</li>
-                </ul>
-              </article>
+          <!-- MUNICIPALITY fields -->
+          <div class="account-section is-hidden" data-section="municipality">
+            <div class="form-grid field-group">
+              <div class="field">
+                <label for="municipalitySIREN">SIREN de la mairie <span class="field-opt">(9 chiffres)</span></label>
+                <input type="text" id="municipalitySIREN" inputmode="numeric" maxlength="11" placeholder="Ex : 213 500 016" />
+              </div>
+              <div class="field">
+                <label for="municipalityPhone">Telephone officiel</label>
+                <input type="tel" id="municipalityPhone" autocomplete="tel" placeholder="Ex : 03 20 12 34 56" />
+              </div>
             </div>
+          </div>
 
-            <p class="pricing-note">
-              Le palier mairie est confirmé après vérification du dossier, sur la base de la population municipale de référence.
-            </p>
+          <!-- SOCIAL fields -->
+          <div class="account-section is-hidden" data-section="social">
+            <div class="form-grid field-group">
+              <div class="field full">
+                <label for="socialClubName">Nom de la structure</label>
+                <input type="text" id="socialClubName" autocomplete="organization" placeholder="Ex : Club de Football de Haubourdin" />
+              </div>
+              <div class="field">
+                <label for="socialSIREN">SIREN / RNA <span class="field-opt">(optionnel)</span></label>
+                <input type="text" id="socialSIREN" inputmode="numeric" maxlength="11" placeholder="Ex : 123 456 789" />
+              </div>
+              <div class="field">
+                <label for="socialStructureType">Type de structure</label>
+                <select id="socialStructureType">
+                  <option value="association">Association loi 1901</option>
+                  <option value="club">Club sportif</option>
+                  <option value="other">Autre structure</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="socialDomainKey">Domaine / Activite</label>
+                <select id="socialDomainKey"></select>
+              </div>
+              <div class="field full is-hidden" id="socialCustomWrap">
+                <label for="socialDomainCustom">Precisez le domaine</label>
+                <input type="text" id="socialDomainCustom" placeholder="Ex : Course a pied urbaine" />
+              </div>
+              <div class="field">
+                <label for="socialClubPhone">Telephone de la structure</label>
+                <input type="tel" id="socialClubPhone" autocomplete="tel" placeholder="Ex : 03 20 12 34 56" />
+              </div>
+              <div class="field full">
+                <label for="socialClubDescription">Description <span class="field-opt">(optionnelle)</span></label>
+                <textarea id="socialClubDescription" rows="3" placeholder="Decrivez votre structure en quelques mots..."></textarea>
+              </div>
+            </div>
+          </div>
 
-            <div class="billing-context" id="billingContextBlock">
-              <h3>Gestion de votre abonnement</h3>
-              <p class="muted" id="billingContextText">
-                Vérifiez les informations transmises par votre lien sécurisé.
-              </p>
-              <div class="billing-meta">
-                <div class="billing-meta-item">
-                  <span>Compte</span>
-                  <strong id="billingAccountValue">Compte pro</strong>
+          <!-- Manager fields (commun merchant + social, masque pour municipality) -->
+          <div class="form-grid field-group manager-field">
+            <div class="field">
+              <label for="managerFirstName">Prenom du responsable</label>
+              <input type="text" id="managerFirstName" autocomplete="given-name" placeholder="Ex : Marie" />
+            </div>
+            <div class="field">
+              <label for="managerLastName">Nom du responsable</label>
+              <input type="text" id="managerLastName" autocomplete="family-name" placeholder="Ex : Dupont" />
+            </div>
+          </div>
+
+          <div class="step-nav">
+            <button type="button" class="btn btn-secondary" id="prevBtn2">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+              Retour
+            </button>
+            <span class="step-err" id="stepErr2"></span>
+            <button type="button" class="btn btn-primary" id="nextBtn2">
+              Continuer
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3 : ADRESSE & HORAIRES -->
+        <div class="step" id="step3">
+          <h2 class="step-title">Adresse et horaires</h2>
+          <p class="step-subtitle" id="addressLabel">Indiquez l'adresse precise de votre commerce, puis renseignez vos horaires d'ouverture.</p>
+
+          <div class="field-group">
+            <div class="field">
+              <label for="addressQuery">Rechercher une adresse</label>
+              <input type="text" id="addressQuery" autocomplete="off" placeholder="Ex : 12 rue Sadi Carnot Haubourdin" />
+              <div class="addr-results" id="addrResults"></div>
+              <div class="selected-addr-box" id="selectedAddress"></div>
+              <div class="manual-addr-panel" id="manualAddrPanel">
+                <div>
+                  <h4>Saisie manuelle</h4>
+                  <p>Votre adresse n'apparait pas ? La position sera approximative et verifiee lors de la validation.</p>
                 </div>
-                <div class="billing-meta-item">
-                  <span>Statut</span>
-                  <strong id="billingStatusValue">Indisponible</strong>
+                <div class="field">
+                  <label for="manualAddressLine">Adresse exacte</label>
+                  <input type="text" id="manualAddressLine" autocomplete="street-address" placeholder="Ex : 12 rue Victor Hugo" />
                 </div>
-                <div class="billing-meta-item">
-                  <span>Renouvellement</span>
-                  <strong id="billingRenewalValue">Indisponible</strong>
+                <div class="manual-addr-grid">
+                  <div class="field">
+                    <label for="manualPostalCode">Code postal</label>
+                    <input type="text" id="manualPostalCode" inputmode="numeric" autocomplete="postal-code" placeholder="Ex : 59320" />
+                  </div>
+                  <div class="field">
+                    <label for="manualCity">Ville</label>
+                    <input type="text" id="manualCity" autocomplete="address-level2" placeholder="Ex : Haubourdin" />
+                  </div>
+                </div>
+                <div class="manual-addr-feedback" id="manualAddressFeedback" role="status" aria-live="polite"></div>
+                <div class="manual-addr-actions">
+                  <button type="button" class="btn btn-ghost" id="manualAddrCancel" style="min-height:38px;padding:8px 14px;font-size:13px;">Annuler</button>
+                  <button type="button" class="btn btn-secondary" id="manualAddrSubmit" style="min-height:38px;padding:8px 14px;font-size:13px;">Utiliser cette adresse</button>
                 </div>
               </div>
-              <div class="billing-actions" id="billingActions"></div>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section class="layout pro-layout" id="pro-signup-section" aria-label="Formulaire professionnel">
-        <div class="panel">
-          <div class="panel-inner">
-            <h2>Demande complète</h2>
-            <p class="muted">
-              Remplissez votre dossier en ligne. Le compte sera créé en attente de validation par le support Urbalya.
-            </p>
-
-            <div class="account-tabs" role="group" aria-label="Type de compte professionnel">
-              <button type="button" class="account-tab" data-account-tab="merchant" aria-pressed="true">
-                <strong>Commerçant</strong>
-                <span>Commerce local, artisan, service ou restauration.</span>
-              </button>
-              <button type="button" class="account-tab" data-account-tab="municipality" aria-pressed="false">
-                <strong>Mairie</strong>
-                <span>Mairie, collectivité ou compte institutionnel local.</span>
-              </button>
-              <button type="button" class="account-tab" data-account-tab="social" aria-pressed="false">
-                <strong>Club & Association</strong>
-                <span>Club, association ou organisation locale.</span>
-              </button>
+          <!-- HORAIRES -->
+          <div id="hoursSection">
+            <div class="hours-header">
+              <h3>Horaires d'ouverture</h3>
+              <div class="hours-header-actions">
+                <button type="button" class="btn btn-ghost" id="weekdayPresetButton" style="min-height:36px;padding:7px 12px;font-size:13px;">Horaires type</button>
+                <button type="button" class="btn btn-ghost" id="copyMondayButton" style="min-height:36px;padding:7px 12px;font-size:13px;">Copier lundi</button>
+              </div>
             </div>
+            <div class="hours-grid" id="hoursGrid"></div>
+            <div class="hours-preview" id="hoursPreview"></div>
+          </div>
 
-            <form id="professionalSignupForm" novalidate>
-              <input type="hidden" id="accountType" name="accountType" value="merchant" />
-
-              <section class="form-section" aria-label="Accès au compte">
-                <div class="form-section-header">
-                  <h3>Accès au compte</h3>
-                  <p class="hint">Ces identifiants serviront ensuite dans l'application mobile.</p>
-                </div>
-                <div class="form-grid">
-                  <div class="field">
-                    <label for="email">Email professionnel</label>
-                    <input id="email" name="email" type="email" autocomplete="email" required />
-                  </div>
-                  <div class="field">
-                    <label for="password">Mot de passe</label>
-                    <input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required />
-                  </div>
-                  <div class="field">
-                    <label for="confirmPassword">Confirmer le mot de passe</label>
-                    <input id="confirmPassword" name="confirmPassword" type="password" minlength="8" autocomplete="new-password" required />
-                  </div>
-                  <div class="field manager-field">
-                    <label for="managerFirstName">Prénom du responsable</label>
-                    <input id="managerFirstName" name="managerFirstName" autocomplete="given-name" required />
-                  </div>
-                  <div class="field manager-field">
-                    <label for="managerLastName">Nom du responsable</label>
-                    <input id="managerLastName" name="managerLastName" autocomplete="family-name" required />
-                  </div>
-                </div>
-              </section>
-
-              <section class="form-section account-section" data-section="merchant" aria-label="Informations commerce">
-                <div class="form-section-header">
-                  <h3>Commerce</h3>
-                  <p class="hint">Nom, activité et description visibles après validation.</p>
-                </div>
-                <div class="form-grid">
-                  <div class="field">
-                    <label for="merchantName">Nom du commerce</label>
-                    <input id="merchantName" name="merchantName" autocomplete="organization" />
-                  </div>
-                  <div class="field">
-                    <label for="merchantSIREN">SIREN du commerce</label>
-                    <input id="merchantSIREN" name="merchantSIREN" inputmode="numeric" maxlength="14" placeholder="9 chiffres" required />
-                    <p class="hint">Obligatoire pour vérifier l'inscription au registre du commerce.</p>
-                  </div>
-                  <div class="field">
-                    <label for="merchantBusinessTypeKey">Type d'activité</label>
-                    <select id="merchantBusinessTypeKey" name="merchantBusinessTypeKey"></select>
-                  </div>
-                  <div class="field is-hidden" id="merchantCustomWrap">
-                    <label for="merchantBusinessTypeCustom">Activité à préciser</label>
-                    <input id="merchantBusinessTypeCustom" name="merchantBusinessTypeCustom" />
-                  </div>
-                  <div class="field">
-                    <label for="merchantPhone">Téléphone</label>
-                    <input id="merchantPhone" name="merchantPhone" type="tel" autocomplete="tel" />
-                  </div>
-                  <div class="field">
-                    <label for="merchantWebsite">Site web</label>
-                    <input id="merchantWebsite" name="merchantWebsite" type="url" placeholder="https://..." />
-                  </div>
-                  <div class="field full">
-                    <label for="merchantDescription">Description</label>
-                    <textarea id="merchantDescription" name="merchantDescription" placeholder="Présentez votre activité, vos services ou votre spécialité."></textarea>
-                  </div>
-                </div>
-              </section>
-
-              <section class="form-section account-section is-hidden" data-section="municipality" aria-label="Informations mairie">
-                <div class="form-section-header">
-                  <h3>Mairie / collectivité</h3>
-                  <p class="hint">Les informations officielles seront vérifiées avant activation.</p>
-                </div>
-                <div class="form-grid">
-                  <div class="field">
-                    <label for="municipalitySIREN">SIREN</label>
-                    <input id="municipalitySIREN" name="municipalitySIREN" inputmode="numeric" maxlength="14" />
-                  </div>
-                  <div class="field">
-                    <label for="municipalityPhone">Téléphone officiel</label>
-                    <input id="municipalityPhone" name="municipalityPhone" type="tel" autocomplete="tel" />
-                  </div>
-                </div>
-              </section>
-
-              <section class="form-section account-section is-hidden" data-section="social" aria-label="Informations association">
-                <div class="form-section-header">
-                  <h3>Association / organisation</h3>
-                  <p class="hint">Le compte sera relié à votre club ou structure locale.</p>
-                </div>
-                <div class="form-grid">
-                  <div class="field">
-                    <label for="socialClubName">Nom de la structure</label>
-                    <input id="socialClubName" name="socialClubName" autocomplete="organization" />
-                  </div>
-                  <div class="field">
-                    <label for="socialSIREN">SIREN de l'association <span class="optional-label">facultatif</span></label>
-                    <input id="socialSIREN" name="socialSIREN" inputmode="numeric" maxlength="14" placeholder="9 chiffres si disponible" />
-                    <p class="hint">Si votre association possède un SIREN, ajoutez-le pour accélérer la vérification.</p>
-                  </div>
-                  <div class="field">
-                    <label for="socialStructureType">Type de structure</label>
-                    <select id="socialStructureType" name="socialStructureType">
-                      <option value="club">Club</option>
-                      <option value="association">Association</option>
-                    </select>
-                  </div>
-                  <div class="field">
-                    <label for="socialDomainKey">Domaine</label>
-                    <select id="socialDomainKey" name="socialDomainKey"></select>
-                  </div>
-                  <div class="field is-hidden" id="socialCustomWrap">
-                    <label for="socialDomainCustom">Domaine à préciser</label>
-                    <input id="socialDomainCustom" name="socialDomainCustom" />
-                  </div>
-                  <div class="field">
-                    <label for="socialClubPhone">Téléphone</label>
-                    <input id="socialClubPhone" name="socialClubPhone" type="tel" autocomplete="tel" />
-                  </div>
-                  <div class="field full">
-                    <label for="socialClubDescription">Description</label>
-                    <textarea id="socialClubDescription" name="socialClubDescription" placeholder="Présentez brièvement votre structure."></textarea>
-                  </div>
-                </div>
-              </section>
-
-              <section class="form-section" aria-label="Adresse">
-                <div class="form-section-header">
-                  <h3>Adresse vérifiée</h3>
-                  <p class="hint">Sélectionnez l'adresse proposée pour éviter les erreurs de carte.</p>
-                </div>
-                <div class="field full">
-                  <label for="addressQuery" id="addressLabel">Adresse du commerce</label>
-                  <div class="address-row">
-                    <input id="addressQuery" name="addressQuery" autocomplete="street-address" placeholder="Ex : 12 rue Victor Hugo, Lyon" />
-                    <button type="button" class="secondary-button" id="searchAddressButton">Vérifier l'adresse</button>
-                  </div>
-                  <div class="selected-address" id="selectedAddress"></div>
-                </div>
-              </section>
-
-              <section class="form-section" id="hoursSection" aria-label="Horaires">
-                <div class="form-section-header">
-                  <h3>Horaires</h3>
-                  <div class="hours-actions">
-                    <button type="button" class="ghost-button" id="weekdayPresetButton">Semaine 9h-18h</button>
-                    <button type="button" class="ghost-button" id="copyMondayButton">Copier lundi sur semaine</button>
-                  </div>
-                </div>
-                <div class="hours-grid" id="hoursGrid"></div>
-                <div class="selected-address hours-preview is-visible" id="hoursPreview"></div>
-              </section>
-
-              <section class="form-section" aria-label="Photos">
-                <div class="form-section-header">
-                  <h3>Photo de profil</h3>
-                  <p class="hint">Ajoutez au moins une image. La première photo sera utilisée comme photo principale.</p>
-                </div>
-                <div class="file-zone">
-                  <input id="photos" name="photos" type="file" accept="image/*" multiple />
-                  <p class="hint">Images uniquement, 8 photos maximum, 10 Mo par fichier.</p>
-                  <div class="preview-grid" id="photoPreview"></div>
-                </div>
-              </section>
-
-              <section class="form-section" aria-label="Conditions">
-                <label class="check-row">
-                  <input id="termsAccepted" type="checkbox" required />
-                  <span>J'accepte les <a href="../terms.html" target="_blank" rel="noopener">conditions d'utilisation</a> et la vérification du dossier par Urbalya.</span>
-                </label>
-                <p class="hint">Aucun paiement n'est demandé sur cette page.</p>
-              </section>
-
-              <button class="submit" id="submitButton" type="submit">Envoyer la demande</button>
-              <div class="status" id="formStatus" role="status" aria-live="polite"></div>
-            </form>
+          <div class="step-nav">
+            <button type="button" class="btn btn-secondary" id="prevBtn3">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+              Retour
+            </button>
+            <span class="step-err" id="stepErr3"></span>
+            <button type="button" class="btn btn-primary" id="nextBtn3">
+              Continuer
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
           </div>
         </div>
 
-        <aside class="side-stack" aria-label="Informations">
-          <div class="panel">
-            <div class="panel-inner">
-              <h2>Validation support</h2>
-              <ol class="steps">
-                <li><span class="step-number">1</span><span>Vous créez le dossier complet depuis le site web.</span></li>
-                <li><span class="step-number">2</span><span>Le support Urbalya vérifie les informations professionnelles.</span></li>
-                <li><span class="step-number">3</span><span>Après activation, vous vous connectez à l'application mobile avec ces identifiants.</span></li>
-              </ol>
+        <!-- STEP 4 : PHOTOS & ENVOI -->
+        <div class="step" id="step4">
+          <h2 class="step-title">Photos et envoi</h2>
+          <p class="step-subtitle">Ajoutez des photos de votre structure (1 a 8 photos, 10 Mo max chacune).</p>
+
+          <div class="photo-drop" id="photoDropZone" role="button" tabindex="0" aria-label="Zone de depot de photos">
+            <div class="photo-drop-icon">&#x1F4F7;</div>
+            <strong>Glissez vos photos ici</strong>
+            <span>ou cliquez pour les selectionner</span>
+            <input type="file" id="photos" name="photos" accept="image/*" multiple />
+          </div>
+          <div class="photo-preview-grid" id="photoPreview"></div>
+
+          <label class="terms-check">
+            <input type="checkbox" id="termsAccepted" />
+            <span class="terms-text">
+              J'ai lu et j'accepte les <a href="../terms.html" target="_blank" rel="noopener">conditions d'utilisation</a> et la <a href="../privacy.html" target="_blank" rel="noopener">politique de confidentialite</a> d'Urbalya (version du 30 avril 2026).
+            </span>
+          </label>
+
+          <div class="form-status" id="formStatus" role="alert" aria-live="polite"></div>
+
+          <div class="step-nav">
+            <button type="button" class="btn btn-secondary" id="prevBtn4">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+              Retour
+            </button>
+            <span class="step-err" id="stepErr4"></span>
+            <button type="submit" class="btn btn-primary" id="submitButton">
+              Envoyer la demande
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /wizard-card -->
+    </form>
+
+    <!-- BILLING SECTION -->
+    <div class="billing-section">
+      <div class="billing-card">
+        <h2 class="billing-card-title">Gerer mon abonnement</h2>
+        <p class="billing-card-sub">Entrez votre adresse email pour recevoir un lien securise de gestion.</p>
+        <div class="billing-context" id="billingContextBlock">
+          <div class="billing-meta">
+            <div class="billing-meta-item">
+              <span>Type</span>
+              <strong id="billingAccountValue">—</strong>
+            </div>
+            <div class="billing-meta-item">
+              <span>Statut</span>
+              <strong id="billingStatusValue">—</strong>
+            </div>
+            <div class="billing-meta-item">
+              <span>Renouvellement</span>
+              <strong id="billingRenewalValue">—</strong>
             </div>
           </div>
-
-          <div class="panel">
-            <div class="panel-inner">
-              <h2>Préparez</h2>
-              <ul class="side-list">
-                <li>Une adresse exacte sélectionnée dans la fenêtre de vérification.</li>
-                <li>Une photo de profil du commerce, de la mairie ou de l'association.</li>
-                <li>Les horaires officiels pour les commerces et mairies.</li>
-                <li>Un email professionnel consultable.</li>
-              </ul>
-            </div>
+          <div class="billing-actions" id="billingActions"></div>
+        </div>
+        <form class="billing-form" id="billingSelfServeForm">
+          <div class="field">
+            <label for="billingSelfServeEmail">Email du compte professionnel</label>
+            <input type="email" id="billingSelfServeEmail" autocomplete="email" placeholder="votre-email@exemple.fr" />
           </div>
-        </aside>
-      </section>
-    </div>
-  </main>
-
-  <div class="modal" id="addressModal" role="dialog" aria-modal="true" aria-labelledby="addressModalTitle">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h2 class="modal-title" id="addressModalTitle">Sélectionner l'adresse</h2>
-        <div class="modal-head-actions">
-          <button type="button" class="manual-address-trigger" id="manualAddressButton">
-            Adresse introuvable ? Saisie manuelle
+          <button type="submit" class="btn btn-secondary" id="billingSelfServeSubmit" style="align-self:flex-start;">
+            Recevoir le lien de gestion
           </button>
-          <button type="button" class="ghost-button" id="closeAddressModal">Fermer</button>
-        </div>
+          <div class="billing-feedback" id="billingFeedback" role="status" aria-live="polite"></div>
+        </form>
       </div>
-      <div class="modal-body" id="addressSuggestions"></div>
     </div>
-  </div>
 
-  <div class="modal" id="pauseModal" role="dialog" aria-modal="true" aria-labelledby="pauseModalTitle">
-    <div class="modal-card">
-      <div class="modal-head">
+  </div>
+</main>
+
+<!-- PAUSE MODAL -->
+<div class="modal" id="pauseModal" role="dialog" aria-modal="true" aria-labelledby="pauseModalTitle">
+  <div class="modal-card">
+    <div class="modal-head">
+      <div>
         <h2 class="modal-title" id="pauseModalTitle">Ajouter une pause</h2>
-        <button type="button" class="ghost-button" id="closePauseModal">Fermer</button>
+        <p class="modal-subtitle" id="pauseModalSubtitle">Choisissez le creneau de pause.</p>
       </div>
-      <div class="modal-body">
-        <p class="muted" id="pauseModalSubtitle">Sélectionnez le créneau de pause.</p>
-        <div class="pause-fields">
-          <div class="field">
-            <label for="pauseStart">Début de pause</label>
-            <input id="pauseStart" type="time" value="12:00" />
-          </div>
-          <div class="field">
-            <label for="pauseEnd">Fin de pause</label>
-            <input id="pauseEnd" type="time" value="14:00" />
-          </div>
-        </div>
-        <div class="modal-actions">
-          <button type="button" class="ghost-button" id="removePauseButton">Retirer la pause</button>
-          <button type="button" class="secondary-button" id="savePauseButton">Valider la pause</button>
-        </div>
+      <button type="button" class="modal-close" id="closePauseModal" aria-label="Fermer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="pauseStart">Debut de pause</label>
+        <input type="time" id="pauseStart" value="12:00" />
+      </div>
+      <div class="field">
+        <label for="pauseEnd">Fin de pause</label>
+        <input type="time" id="pauseEnd" value="14:00" />
       </div>
     </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-ghost" id="removePauseButton" style="min-height:40px;padding:9px 16px;font-size:14px;">Supprimer</button>
+      <button type="button" class="btn btn-primary" id="savePauseButton" style="min-height:40px;padding:9px 16px;font-size:14px;">Enregistrer</button>
+    </div>
   </div>
+</div>
 
-  <footer>
-    <div class="container footer-row">
-      <div>© <span id="year"></span> Urbalya - Lemach Labs</div>
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <div>&copy; <span id="year"></span> Urbalya - Lemach Labs</div>
       <div class="footer-links">
         <a href="../index.html">Accueil</a>
         <a href="../support.html">Support</a>
         <a href="./">Professionnels</a>
-        <a href="../privacy.html">Confidentialité</a>
+        <a href="../privacy.html">Confidentialite</a>
         <a href="../terms.html">Conditions</a>
-        <a href="../mentions-legales.html">Mentions légales</a>
+        <a href="../mentions-legales.html">Mentions legales</a>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script>
-    (function () {
-      var DEFAULT_API_BASE = "https://urbalya.com/api";
-      var RUNTIME_API_BASE = String(window.URBALYA_API_BASE_URL || "").trim();
-      var API_BASE = (RUNTIME_API_BASE || DEFAULT_API_BASE).replace(/\/+$/, "");
-      var TERMS_VERSION = "2026-04-30-web-professional";
+<script>
+  (function () {
+    var DEFAULT_API_BASE = "https://urbalya.com/api";
+    var RUNTIME_API_BASE = String(window.URBALYA_API_BASE_URL || "").trim();
+    var API_BASE = (RUNTIME_API_BASE || DEFAULT_API_BASE).replace(/\/+$/, "");
+    var TERMS_VERSION = "2026-04-30-web-professional";
 
-      var merchantTypes = [
-        ["BAKERY", "Boulangerie", "BAKERY"],
-        ["PASTRY", "Pâtisserie", "BAKERY"],
-        ["CHOCOLATE", "Chocolatier", "BAKERY"],
-        ["BUTCHER", "Boucherie", "LOCAL_SHOP"],
-        ["CATERER", "Traiteur", "SNACK"],
-        ["FISHMONGER", "Poissonnerie", "LOCAL_SHOP"],
-        ["GREENGROCER", "Primeur", "LOCAL_SHOP"],
-        ["GROCERY", "Épicerie", "LOCAL_SHOP"],
-        ["SUPERMARKET", "Supermarché", "LOCAL_SHOP"],
-        ["WINE", "Caviste", "LOCAL_SHOP"],
-        ["RESTAURANT", "Restaurant", "SNACK"],
-        ["SNACK", "Snack", "SNACK"],
-        ["FAST_FOOD", "Fast-food", "SNACK"],
-        ["PIZZERIA", "Pizzeria", "SNACK"],
-        ["BURGER", "Burger", "SNACK"],
-        ["SUSHI", "Sushi", "SNACK"],
-        ["CREPERIE", "Crêperie", "SNACK"],
-        ["BRASSERIE", "Brasserie", "SNACK"],
-        ["CAFE", "Café", "SNACK"],
-        ["BAR", "Bar", "SNACK"],
-        ["TEA_ROOM", "Salon de thé", "SNACK"],
-        ["ICE_CREAM", "Glacier", "SNACK"],
-        ["FOOD_TRUCK", "Food truck", "SNACK"],
-        ["CLOTHING", "Vêtements", "LOCAL_SHOP"],
-        ["SHOES", "Chaussures", "LOCAL_SHOP"],
-        ["JEWELRY", "Bijouterie", "LOCAL_SHOP"],
-        ["BOOKSTORE", "Librairie", "LOCAL_SHOP"],
-        ["TOY_STORE", "Jouets", "LOCAL_SHOP"],
-        ["PHONE_SHOP", "Téléphonie", "LOCAL_SHOP"],
-        ["ELECTRONICS", "Électronique", "LOCAL_SHOP"],
-        ["FURNITURE", "Meubles", "LOCAL_SHOP"],
-        ["DECORATION", "Décoration", "LOCAL_SHOP"],
-        ["FLOWER_SHOP", "Fleuriste", "LOCAL_SHOP"],
-        ["PET_SHOP", "Animalerie", "LOCAL_SHOP"],
-        ["SPORT_SHOP", "Magasin de sport", "LOCAL_SHOP"],
-        ["BIKE_SHOP", "Vélo", "LOCAL_SHOP"],
-        ["HAIRDRESSER", "Coiffeur", "HAIRDRESSER"],
-        ["BARBER", "Barbier", "HAIRDRESSER"],
-        ["BEAUTY", "Institut de beauté", "HAIRDRESSER"],
-        ["NAILS", "Onglerie", "HAIRDRESSER"],
-        ["SPA", "Spa", "HAIRDRESSER"],
-        ["PHARMACY", "Pharmacie", "SERVICES"],
-        ["DOCTOR", "Cabinet médical", "SERVICES"],
-        ["DENTIST", "Dentiste", "SERVICES"],
-        ["PHYSIO", "Kiné", "SERVICES"],
-        ["OPTICIAN", "Opticien", "LOCAL_SHOP"],
-        ["TAXI", "Taxi", "SERVICES"],
-        ["AMBULANCE", "Ambulance", "SERVICES"],
-        ["DRIVING_SCHOOL", "Auto-école", "SERVICES"],
-        ["GARAGE", "Garage auto", "SERVICES"],
-        ["REPAIR", "Dépannage", "SERVICES"],
-        ["PRESSING", "Pressing", "SERVICES"],
-        ["LAUNDRY", "Laverie", "SERVICES"],
-        ["CLEANING", "Ménage à domicile", "SERVICES"],
-        ["BANK", "Banque", "SERVICES"],
-        ["INSURANCE", "Assurance", "SERVICES"],
-        ["REAL_ESTATE", "Agence immobilière", "SERVICES"],
-        ["NOTARY", "Notaire", "SERVICES"],
-        ["LAWYER", "Avocat", "SERVICES"],
-        ["ACCOUNTANT", "Comptable", "SERVICES"],
-        ["PLUMBER", "Plombier", "ARTISAN"],
-        ["ELECTRICIAN", "Électricien", "ARTISAN"],
-        ["CARPENTER", "Menuisier", "ARTISAN"],
-        ["MASON", "Maçon", "ARTISAN"],
-        ["PAINTER", "Peintre", "ARTISAN"],
-        ["TILER", "Carreleur", "ARTISAN"],
-        ["ROOFER", "Couvreur", "ARTISAN"],
-        ["LOCKSMITH", "Serrurier", "ARTISAN"],
-        ["GLAZIER", "Vitrier", "ARTISAN"],
-        ["HVAC", "Chauffagiste", "ARTISAN"],
-        ["GARDENER", "Jardinier", "ARTISAN"],
-        ["MOVING", "Déménagement", "ARTISAN"],
-        ["OTHER", "Autre (à préciser)", "LOCAL_SHOP"]
-      ];
+    var merchantTypes = [
+      ["BAKERY","Boulangerie","BAKERY"],["PASTRY","Patisserie","BAKERY"],["CHOCOLATE","Chocolatier","BAKERY"],
+      ["BUTCHER","Boucherie","LOCAL_SHOP"],["CATERER","Traiteur","SNACK"],["FISHMONGER","Poissonnerie","LOCAL_SHOP"],
+      ["GREENGROCER","Primeur","LOCAL_SHOP"],["GROCERY","Epicerie","LOCAL_SHOP"],["SUPERMARKET","Supermarche","LOCAL_SHOP"],
+      ["WINE","Caviste","LOCAL_SHOP"],["RESTAURANT","Restaurant","SNACK"],["SNACK","Snack","SNACK"],
+      ["FAST_FOOD","Fast-food","SNACK"],["PIZZERIA","Pizzeria","SNACK"],["BURGER","Burger","SNACK"],
+      ["SUSHI","Sushi","SNACK"],["CREPERIE","Creperie","SNACK"],["BRASSERIE","Brasserie","SNACK"],
+      ["CAFE","Cafe","SNACK"],["BAR","Bar","SNACK"],["TEA_ROOM","Salon de the","SNACK"],
+      ["ICE_CREAM","Glacier","SNACK"],["FOOD_TRUCK","Food truck","SNACK"],
+      ["CLOTHING","Vetements","LOCAL_SHOP"],["SHOES","Chaussures","LOCAL_SHOP"],["JEWELRY","Bijouterie","LOCAL_SHOP"],
+      ["BOOKSTORE","Librairie","LOCAL_SHOP"],["TOY_STORE","Jouets","LOCAL_SHOP"],["PHONE_SHOP","Telephonie","LOCAL_SHOP"],
+      ["ELECTRONICS","Electronique","LOCAL_SHOP"],["FURNITURE","Meubles","LOCAL_SHOP"],["DECORATION","Decoration","LOCAL_SHOP"],
+      ["FLOWER_SHOP","Fleuriste","LOCAL_SHOP"],["PET_SHOP","Animalerie","LOCAL_SHOP"],["SPORT_SHOP","Magasin de sport","LOCAL_SHOP"],
+      ["BIKE_SHOP","Velo","LOCAL_SHOP"],["HAIRDRESSER","Coiffeur","HAIRDRESSER"],["BARBER","Barbier","HAIRDRESSER"],
+      ["BEAUTY","Institut de beaute","HAIRDRESSER"],["NAILS","Onglerie","HAIRDRESSER"],["SPA","Spa","HAIRDRESSER"],
+      ["PHARMACY","Pharmacie","SERVICES"],["DOCTOR","Cabinet medical","SERVICES"],["DENTIST","Dentiste","SERVICES"],
+      ["PHYSIO","Kine","SERVICES"],["OPTICIAN","Opticien","LOCAL_SHOP"],["TAXI","Taxi","SERVICES"],
+      ["AMBULANCE","Ambulance","SERVICES"],["DRIVING_SCHOOL","Auto-ecole","SERVICES"],["GARAGE","Garage auto","SERVICES"],
+      ["REPAIR","Depannage","SERVICES"],["PRESSING","Pressing","SERVICES"],["LAUNDRY","Laverie","SERVICES"],
+      ["CLEANING","Menage a domicile","SERVICES"],["BANK","Banque","SERVICES"],["INSURANCE","Assurance","SERVICES"],
+      ["REAL_ESTATE","Agence immobiliere","SERVICES"],["NOTARY","Notaire","SERVICES"],["LAWYER","Avocat","SERVICES"],
+      ["ACCOUNTANT","Comptable","SERVICES"],["PLUMBER","Plombier","ARTISAN"],["ELECTRICIAN","Electricien","ARTISAN"],
+      ["CARPENTER","Menuisier","ARTISAN"],["MASON","Macon","ARTISAN"],["PAINTER","Peintre","ARTISAN"],
+      ["TILER","Carreleur","ARTISAN"],["ROOFER","Couvreur","ARTISAN"],["LOCKSMITH","Serrurier","ARTISAN"],
+      ["GLAZIER","Vitrier","ARTISAN"],["HVAC","Chauffagiste","ARTISAN"],["GARDENER","Jardinier","ARTISAN"],
+      ["MOVING","Demenagement","ARTISAN"],["OTHER","Autre (a preciser)","LOCAL_SHOP"]
+    ];
 
-      var socialDomains = [
-        ["FOOTBALL", "Football"],
-        ["BASKETBALL", "Basketball"],
-        ["HANDBALL", "Handball"],
-        ["VOLLEYBALL", "Volley-ball"],
-        ["RUGBY", "Rugby"],
-        ["TENNIS", "Tennis"],
-        ["BADMINTON", "Badminton"],
-        ["TABLE_TENNIS", "Tennis de table"],
-        ["ATHLETICS", "Athlétisme"],
-        ["CYCLING", "Cyclisme"],
-        ["RUNNING", "Course à pied"],
-        ["SWIMMING", "Natation"],
-        ["TRIATHLON", "Triathlon"],
-        ["MARTIAL_ARTS", "Arts martiaux"],
-        ["BOXING", "Boxe"],
-        ["GYMNASTICS", "Gymnastique"],
-        ["DANCE", "Danse"],
-        ["YOGA", "Yoga"],
-        ["FITNESS_WELLNESS", "Fitness et bien-être"],
-        ["HIKING", "Randonnée"],
-        ["CLIMBING", "Escalade"],
-        ["MUSIC", "Musique"],
-        ["SINGING", "Chorale"],
-        ["THEATRE", "Théâtre"],
-        ["CINEMA", "Cinéma"],
-        ["PHOTOGRAPHY", "Photographie"],
-        ["PLASTIC_ARTS", "Arts plastiques"],
-        ["WRITING", "Écriture"],
-        ["READING", "Lecture"],
-        ["HERITAGE", "Patrimoine"],
-        ["LANGUAGE_EXCHANGE", "Échange linguistique"],
-        ["SCHOOL_SUPPORT", "Soutien scolaire"],
-        ["STUDENT_LIFE", "Vie étudiante"],
-        ["SCIENCE", "Sciences"],
-        ["DIGITAL", "Numérique"],
-        ["ROBOTICS", "Robotique"],
-        ["GAMING", "Jeux vidéo"],
-        ["BOARD_GAMES", "Jeux de société"],
-        ["CREATIVE_HOBBIES", "Loisirs créatifs"],
-        ["TRAVEL_DISCOVERY", "Voyage et découverte"],
-        ["SOLIDARITY", "Solidarité"],
-        ["HUMANITARIAN", "Humanitaire"],
-        ["CHARITY", "Caritatif"],
-        ["HEALTH_PREVENTION", "Santé et prévention"],
-        ["DISABILITY_INCLUSION", "Handicap et inclusion"],
-        ["SENIORS", "Seniors"],
-        ["YOUTH", "Jeunesse"],
-        ["PARENTS", "Parents et familles"],
-        ["ENVIRONMENT", "Environnement"],
-        ["ANIMAL_WELFARE", "Protection animale"],
-        ["URBAN_GARDEN", "Jardin partagé"],
-        ["LOCAL_FOOD", "Alimentation locale"],
-        ["CITIZENSHIP", "Citoyenneté"],
-        ["NEIGHBORHOOD_LIFE", "Vie de quartier"],
-        ["CIVIL_SECURITY", "Sécurité civile"],
-        ["CONSUMER_DEFENSE", "Défense des consommateurs"],
-        ["PROFESSIONAL_NETWORK", "Réseau professionnel"],
-        ["EMPLOYMENT_SUPPORT", "Insertion et emploi"],
-        ["ENTREPRENEURSHIP", "Entrepreneuriat"],
-        ["RELIGIOUS_CULTURAL", "Culture et spiritualité"],
-        ["OTHER", "Autre (à préciser)"]
-      ];
+    var socialDomains = [
+      ["FOOTBALL","Football"],["BASKETBALL","Basketball"],["HANDBALL","Handball"],["VOLLEYBALL","Volley-ball"],
+      ["RUGBY","Rugby"],["TENNIS","Tennis"],["BADMINTON","Badminton"],["TABLE_TENNIS","Tennis de table"],
+      ["ATHLETICS","Athletisme"],["CYCLING","Cyclisme"],["RUNNING","Course a pied"],["SWIMMING","Natation"],
+      ["TRIATHLON","Triathlon"],["MARTIAL_ARTS","Arts martiaux"],["BOXING","Boxe"],["GYMNASTICS","Gymnastique"],
+      ["DANCE","Danse"],["YOGA","Yoga"],["FITNESS_WELLNESS","Fitness et bien-etre"],["HIKING","Randonnee"],
+      ["CLIMBING","Escalade"],["MUSIC","Musique"],["SINGING","Chorale"],["THEATRE","Theatre"],["CINEMA","Cinema"],
+      ["PHOTOGRAPHY","Photographie"],["PLASTIC_ARTS","Arts plastiques"],["WRITING","Ecriture"],["READING","Lecture"],
+      ["HERITAGE","Patrimoine"],["LANGUAGE_EXCHANGE","Echange linguistique"],["SCHOOL_SUPPORT","Soutien scolaire"],
+      ["STUDENT_LIFE","Vie etudiante"],["SCIENCE","Sciences"],["DIGITAL","Numerique"],["ROBOTICS","Robotique"],
+      ["GAMING","Jeux video"],["BOARD_GAMES","Jeux de societe"],["CREATIVE_HOBBIES","Loisirs creatifs"],
+      ["TRAVEL_DISCOVERY","Voyage et decouverte"],["SOLIDARITY","Solidarite"],["HUMANITARIAN","Humanitaire"],
+      ["CHARITY","Caritatif"],["HEALTH_PREVENTION","Sante et prevention"],["DISABILITY_INCLUSION","Handicap et inclusion"],
+      ["SENIORS","Seniors"],["YOUTH","Jeunesse"],["PARENTS","Parents et familles"],["ENVIRONMENT","Environnement"],
+      ["ANIMAL_WELFARE","Protection animale"],["URBAN_GARDEN","Jardin partage"],["LOCAL_FOOD","Alimentation locale"],
+      ["CITIZENSHIP","Citoyennete"],["NEIGHBORHOOD_LIFE","Vie de quartier"],["CIVIL_SECURITY","Securite civile"],
+      ["CONSUMER_DEFENSE","Defense des consommateurs"],["PROFESSIONAL_NETWORK","Reseau professionnel"],
+      ["EMPLOYMENT_SUPPORT","Insertion et emploi"],["ENTREPRENEURSHIP","Entrepreneuriat"],
+      ["RELIGIOUS_CULTURAL","Culture et spiritualite"],["OTHER","Autre (a preciser)"]
+    ];
 
-      var days = [
-        ["mon", "Lundi", "Lun"],
-        ["tue", "Mardi", "Mar"],
-        ["wed", "Mercredi", "Mer"],
-        ["thu", "Jeudi", "Jeu"],
-        ["fri", "Vendredi", "Ven"],
-        ["sat", "Samedi", "Sam"],
-        ["sun", "Dimanche", "Dim"]
-      ];
+    var days = [
+      ["mon","Lundi","Lun"],["tue","Mardi","Mar"],["wed","Mercredi","Mer"],
+      ["thu","Jeudi","Jeu"],["fri","Vendredi","Ven"],["sat","Samedi","Sam"],["sun","Dimanche","Dim"]
+    ];
 
-      var selectedAddress = null;
-      var currentAccountType = "merchant";
-      var activePauseRow = null;
+    var selectedAddress = null;
+    var currentAccountType = "merchant";
+    var activePauseRow = null;
+    var currentStep = 1;
+    var emailCheckTimer = null;
+    var addrSearchTimer = null;
+    var emailAvailable = null;
 
-      var $ = function (id) { return document.getElementById(id); };
+    var $ = function (id) { return document.getElementById(id); };
 
-      function escapeHtml(value) {
-        return String(value || "")
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;");
-      }
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
 
-      function optionHtml(value, label, dataCategory) {
-        var category = dataCategory ? ' data-category="' + escapeHtml(dataCategory) + '"' : "";
-        return '<option value="' + escapeHtml(value) + '"' + category + '>' + escapeHtml(label) + '</option>';
-      }
+    function optionHtml(value, label, dataCategory) {
+      var cat = dataCategory ? ' data-category="' + escapeHtml(dataCategory) + '"' : "";
+      return '<option value="' + escapeHtml(value) + '"' + cat + '>' + escapeHtml(label) + '</option>';
+    }
 
-      function populateSelects() {
-        $("merchantBusinessTypeKey").innerHTML = merchantTypes
-          .map(function (item) { return optionHtml(item[0], item[1], item[2]); })
-          .join("");
-        $("socialDomainKey").innerHTML = socialDomains
-          .map(function (item) { return optionHtml(item[0], item[1]); })
-          .join("");
-      }
+    function populateSelects() {
+      $("merchantBusinessTypeKey").innerHTML = merchantTypes
+        .map(function (item) { return optionHtml(item[0], item[1], item[2]); }).join("");
+      $("socialDomainKey").innerHTML = socialDomains
+        .map(function (item) { return optionHtml(item[0], item[1]); }).join("");
+    }
 
-      function renderHours() {
-        $("hoursGrid").innerHTML = days.map(function (day, index) {
-          var defaultOpen = index < 5 ? "09:00" : "10:00";
-          var defaultClose = index < 5 ? "18:00" : "12:00";
-          var closed = index === 6 ? " checked" : "";
-          return [
-            '<div class="hours-row" data-day="' + day[0] + '">',
-            '<div class="hours-day">' + day[1] + '</div>',
-            '<input aria-label="Ouverture ' + day[1] + '" type="time" data-hour="open" value="' + defaultOpen + '" />',
-            '<input aria-label="Fermeture ' + day[1] + '" type="time" data-hour="close" value="' + defaultClose + '" />',
-            '<button type="button" class="ghost-button hours-pause-button" data-hour="pauseButton">Ajouter une pause</button>',
-            '<label class="check-row"><input type="checkbox" data-hour="closed"' + closed + ' /> Fermé</label>',
-            '</div>'
-          ].join("");
-        }).join("");
-
-        Array.prototype.forEach.call(document.querySelectorAll("[data-hour='closed']"), function (checkbox) {
-          checkbox.addEventListener("change", function () {
-            var row = checkbox.closest(".hours-row");
-            Array.prototype.forEach.call(row.querySelectorAll("input[type='time']"), function (input) {
-              input.disabled = checkbox.checked;
-            });
-            row.querySelector("[data-hour='pauseButton']").disabled = checkbox.checked;
-            updateHoursPreview();
-          });
-          checkbox.dispatchEvent(new Event("change"));
-        });
-
-        Array.prototype.forEach.call(document.querySelectorAll(".hours-row input[type='time']"), function (input) {
-          input.addEventListener("change", updateHoursPreview);
-        });
-        Array.prototype.forEach.call(document.querySelectorAll("[data-hour='pauseButton']"), function (button) {
-          button.addEventListener("click", function () {
-            openPauseModal(button.closest(".hours-row"));
-          });
-        });
-        updateHoursPreview();
-      }
-
-      function formatHourLabel(value) {
-        var parts = String(value || "").split(":");
-        var hours = Number(parts[0]);
-        var minutes = Number(parts[1]);
-        if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return "";
-        return String(hours) + "h" + String(minutes).padStart(2, "0");
-      }
-
-      function buildHoursString() {
-        var grouped = [];
-        Array.prototype.forEach.call(document.querySelectorAll(".hours-row"), function (row, index) {
-          var label = days[index][2];
-          var closed = row.querySelector("[data-hour='closed']").checked;
-          var schedule = "Fermé";
-          if (closed) {
-            schedule = "Fermé";
-          } else {
-            var open = formatHourLabel(row.querySelector("[data-hour='open']").value);
-            var close = formatHourLabel(row.querySelector("[data-hour='close']").value);
-            if (!open || !close) return;
-            schedule = open + "-" + close;
-            if (row.dataset.pauseStart && row.dataset.pauseEnd) {
-              schedule +=
-                " (pause " +
-                formatHourLabel(row.dataset.pauseStart) +
-                "-" +
-                formatHourLabel(row.dataset.pauseEnd) +
-                ")";
-            }
-          }
-
-          var existing = grouped.find(function (entry) {
-            return entry.schedule === schedule;
-          });
-          if (existing) {
-            existing.days.push(label);
-          } else {
-            grouped.push({ schedule: schedule, days: [label] });
-          }
-        });
-        return grouped.map(function (entry) {
-          return entry.days.join(", ") + " : " + entry.schedule;
-        }).join("\n");
-      }
-
-      function updateHoursPreview() {
-        var preview = $("hoursPreview");
-        if (!preview) return;
-        var value = buildHoursString();
-        preview.textContent = value ? "Aperçu\n" + value : "Aucun horaire renseigné.";
-      }
-
-      function setAccountType(nextType) {
-        currentAccountType = nextType;
-        $("accountType").value = nextType;
-
-        Array.prototype.forEach.call(document.querySelectorAll("[data-account-tab]"), function (button) {
-          button.setAttribute("aria-pressed", button.dataset.accountTab === nextType ? "true" : "false");
-        });
-        Array.prototype.forEach.call(document.querySelectorAll(".account-section"), function (section) {
-          section.classList.toggle("is-hidden", section.dataset.section !== nextType);
-        });
-
-        var isMunicipality = nextType === "municipality";
-        var isSocial = nextType === "social";
-        Array.prototype.forEach.call(document.querySelectorAll(".manager-field"), function (field) {
-          field.classList.toggle("is-hidden", isMunicipality);
-        });
-        $("hoursSection").classList.toggle("is-hidden", isSocial);
-        $("addressLabel").textContent = isMunicipality
-          ? "Adresse officielle de la mairie"
-          : isSocial
-          ? "Adresse de la structure"
-          : "Adresse du commerce";
-
-        selectedAddress = null;
-        $("addressQuery").value = "";
-        updateSelectedAddress();
-      }
-
-      function updateSelectedAddress() {
-        var box = $("selectedAddress");
-        if (!selectedAddress) {
-          box.classList.remove("is-visible");
-          box.textContent = "";
-          return;
-        }
-        box.classList.add("is-visible");
-        box.innerHTML =
-          "<strong>" +
-          (selectedAddress.isManual ? "Adresse saisie manuellement" : "Adresse sélectionnée") +
-          "</strong><br>" +
-          escapeHtml(selectedAddress.label) +
-          "<br>" +
-          escapeHtml(selectedAddress.postcode + " " + selectedAddress.city) +
-          (selectedAddress.isManual
-            ? '<span class="address-note">Position approximative sur la commune, l’adresse exacte sera contrôlée lors de la validation.</span>'
-            : "");
-      }
-
-      function setStatus(type, message) {
-        var node = $("formStatus");
-        node.className = "status is-visible " + type;
-        node.textContent = message;
-      }
-
-      function clearStatus() {
-        var node = $("formStatus");
-        node.className = "status";
-        node.textContent = "";
-      }
-
-      function showAddressModal() {
-        $("addressModal").classList.add("is-visible");
-      }
-
-      function closeAddressModal() {
-        $("addressModal").classList.remove("is-visible");
-      }
-
-      function buildManualAddressLabel(line, postcode, city) {
+    function renderHours() {
+      $("hoursGrid").innerHTML = days.map(function (day, index) {
+        var defaultOpen = index < 5 ? "09:00" : "10:00";
+        var defaultClose = index < 5 ? "18:00" : "12:00";
+        var closed = index === 6 ? " checked" : "";
         return [
-          line,
-          [postcode, city].filter(Boolean).join(" ")
-        ].filter(Boolean).join(", ");
-      }
-
-      function setManualAddressFeedback(message, type) {
-        var node = $("manualAddressFeedback");
-        if (!node) return;
-        node.className = "manual-address-feedback is-visible " + (type || "");
-        node.textContent = message;
-      }
-
-      function renderManualAddressForm() {
-        var currentQuery = $("addressQuery").value.trim();
-        $("addressSuggestions").innerHTML = [
-          '<div class="manual-address-panel">',
-          '<div class="manual-address-callout">',
-          '<span>Alternative</span>',
-          '<strong>Votre adresse n’apparait pas dans les résultats ?</strong>',
-          '<p>Saisissez-la ici. La demande sera positionnée sur la commune, puis l’adresse exacte sera vérifiée pendant la validation.</p>',
-          '</div>',
-          '<form class="manual-address-form" id="manualAddressForm">',
-          '<div class="field full">',
-          '<label for="manualAddressLine">Adresse exacte</label>',
-          '<input id="manualAddressLine" autocomplete="street-address" placeholder="Ex : 12 rue Victor Hugo" value="' + escapeHtml(currentQuery) + '" />',
-          '</div>',
-          '<div class="manual-address-grid">',
-          '<div class="field">',
-          '<label for="manualPostalCode">Code postal</label>',
-          '<input id="manualPostalCode" inputmode="numeric" autocomplete="postal-code" placeholder="Ex : 69002" />',
-          '</div>',
-          '<div class="field">',
-          '<label for="manualCity">Ville</label>',
-          '<input id="manualCity" autocomplete="address-level2" placeholder="Ex : Lyon" />',
-          '</div>',
-          '</div>',
-          '<div class="manual-address-feedback" id="manualAddressFeedback" role="status" aria-live="polite"></div>',
-          '<div class="modal-actions manual-address-actions">',
-          '<button type="button" class="ghost-button" id="manualAddressSearchAgain">Relancer la recherche</button>',
-          '<button type="submit" class="secondary-button" id="manualAddressSubmit">Utiliser cette adresse</button>',
-          '</div>',
-          '</form>',
+          '<div class="hours-row" data-day="' + day[0] + '">',
+          '<div class="hours-day">' + day[1] + '</div>',
+          '<input aria-label="Ouverture ' + day[1] + '" type="time" data-hour="open" value="' + defaultOpen + '" />',
+          '<input aria-label="Fermeture ' + day[1] + '" type="time" data-hour="close" value="' + defaultClose + '" />',
+          '<button type="button" class="hours-pause-button" data-hour="pauseButton">Ajouter une pause</button>',
+          '<label class="check-row"><input type="checkbox" data-hour="closed"' + closed + ' /> Ferme</label>',
           '</div>'
         ].join("");
-        showAddressModal();
-        setTimeout(function () {
-          var input = $("manualAddressLine");
-          if (input) input.focus();
-        }, 0);
-      }
+      }).join("");
 
-      async function resolveManualAddressCoordinates(line, postcode, city) {
-        var cityQuery = [postcode, city].filter(Boolean).join(" ");
-        var preciseQuery = [line, postcode, city].filter(Boolean).join(" ");
-        var urls = [
-          "https://api-adresse.data.gouv.fr/search/?limit=1&type=municipality&q=" + encodeURIComponent(cityQuery),
-          "https://api-adresse.data.gouv.fr/search/?limit=1&q=" + encodeURIComponent(preciseQuery)
-        ];
+      Array.prototype.forEach.call(document.querySelectorAll("[data-hour='closed']"), function (checkbox) {
+        checkbox.addEventListener("change", function () {
+          var row = checkbox.closest(".hours-row");
+          Array.prototype.forEach.call(row.querySelectorAll("input[type='time']"), function (input) {
+            input.disabled = checkbox.checked;
+          });
+          row.querySelector("[data-hour='pauseButton']").disabled = checkbox.checked;
+          updateHoursPreview();
+        });
+        checkbox.dispatchEvent(new Event("change"));
+      });
 
-        for (var index = 0; index < urls.length; index += 1) {
-          var response = await fetch(urls[index]);
-          var json = await response.json();
-          var feature = Array.isArray(json.features) ? json.features[0] : null;
-          var coordinates = feature && feature.geometry && Array.isArray(feature.geometry.coordinates)
-            ? feature.geometry.coordinates
-            : [];
-          var longitude = Number(coordinates[0]);
-          var latitude = Number(coordinates[1]);
-          if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
-            return { latitude: latitude, longitude: longitude };
+      Array.prototype.forEach.call(document.querySelectorAll(".hours-row input[type='time']"), function (input) {
+        input.addEventListener("change", updateHoursPreview);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll("[data-hour='pauseButton']"), function (button) {
+        button.addEventListener("click", function () {
+          openPauseModal(button.closest(".hours-row"));
+        });
+      });
+      updateHoursPreview();
+    }
+
+    function formatHourLabel(value) {
+      var parts = String(value || "").split(":");
+      var hours = Number(parts[0]);
+      var minutes = Number(parts[1]);
+      if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return "";
+      return String(hours) + "h" + String(minutes).padStart(2, "0");
+    }
+
+    function buildHoursString() {
+      var grouped = [];
+      Array.prototype.forEach.call(document.querySelectorAll(".hours-row"), function (row, index) {
+        var label = days[index][2];
+        var closed = row.querySelector("[data-hour='closed']").checked;
+        var schedule = "Ferme";
+        if (!closed) {
+          var open = formatHourLabel(row.querySelector("[data-hour='open']").value);
+          var close = formatHourLabel(row.querySelector("[data-hour='close']").value);
+          if (!open || !close) return;
+          schedule = open + "-" + close;
+          if (row.dataset.pauseStart && row.dataset.pauseEnd) {
+            schedule += " (pause " + formatHourLabel(row.dataset.pauseStart) + "-" + formatHourLabel(row.dataset.pauseEnd) + ")";
           }
         }
-
-        throw new Error("Impossible de positionner cette commune pour le moment.");
-      }
-
-      async function useManualAddress() {
-        var line = $("manualAddressLine") ? $("manualAddressLine").value.trim() : "";
-        var postcode = $("manualPostalCode") ? $("manualPostalCode").value.replace(/\s+/g, "").trim() : "";
-        var city = $("manualCity") ? $("manualCity").value.trim() : "";
-        var submit = $("manualAddressSubmit");
-
-        if (line.length < 5) {
-          setManualAddressFeedback("Ajoutez une adresse plus complète.", "error");
-          return;
-        }
-        if (!/^\d{5}$/.test(postcode)) {
-          setManualAddressFeedback("Indiquez un code postal français à 5 chiffres.", "error");
-          return;
-        }
-        if (city.length < 2) {
-          setManualAddressFeedback("Indiquez la ville associée à l’adresse.", "error");
-          return;
-        }
-
-        if (submit) {
-          submit.disabled = true;
-          submit.textContent = "Validation...";
-        }
-
-        try {
-          var coordinates = await resolveManualAddressCoordinates(line, postcode, city);
-          selectedAddress = {
-            label: buildManualAddressLabel(line, postcode, city),
-            city: city,
-            postcode: postcode,
-            latitude: coordinates.latitude,
-            longitude: coordinates.longitude,
-            isManual: true
-          };
-          $("addressQuery").value = selectedAddress.label;
-          updateSelectedAddress();
-          closeAddressModal();
-        } catch (error) {
-          setManualAddressFeedback(
-            error && error.message
-              ? error.message
-              : "Impossible de valider cette adresse. Vérifiez la ville et le code postal.",
-            "error"
-          );
-        } finally {
-          if (submit) {
-            submit.disabled = false;
-            submit.textContent = "Utiliser cette adresse";
-          }
-        }
-      }
-
-      function updatePauseButton(row) {
-        if (!row) return;
-        var button = row.querySelector("[data-hour='pauseButton']");
-        if (!button) return;
-        if (row.dataset.pauseStart && row.dataset.pauseEnd) {
-          button.textContent =
-            formatHourLabel(row.dataset.pauseStart) +
-            "-" +
-            formatHourLabel(row.dataset.pauseEnd);
+        var existing = grouped.find(function (entry) { return entry.schedule === schedule; });
+        if (existing) {
+          existing.days.push(label);
         } else {
-          button.textContent = "Ajouter une pause";
+          grouped.push({ schedule: schedule, days: [label] });
+        }
+      });
+      return grouped.map(function (entry) {
+        return entry.days.join(", ") + " : " + entry.schedule;
+      }).join("\n");
+    }
+
+    function updateHoursPreview() {
+      var preview = $("hoursPreview");
+      if (!preview) return;
+      var value = buildHoursString();
+      preview.textContent = value ? value : "Aucun horaire renseigne.";
+    }
+
+    /* ---- STEP WIZARD ---- */
+
+    function goToStep(n) {
+      var prev = $("step" + currentStep);
+      if (prev) prev.classList.remove("is-active");
+      currentStep = n;
+      var next = $("step" + n);
+      if (next) next.classList.add("is-active");
+      updateStepIndicator();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function updateStepIndicator() {
+      Array.prototype.forEach.call(document.querySelectorAll("[data-bar]"), function (bar) {
+        var n = Number(bar.dataset.bar);
+        bar.classList.toggle("active", n === currentStep);
+        bar.classList.toggle("done", n < currentStep);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll("[data-label]"), function (lbl) {
+        var n = Number(lbl.dataset.label);
+        lbl.classList.toggle("active", n === currentStep);
+        lbl.classList.toggle("done", n < currentStep);
+      });
+    }
+
+    function showStepError(errId, message) {
+      var el = $(errId);
+      if (el) el.textContent = message || "";
+    }
+
+    function clearStepError(errId) {
+      var el = $(errId);
+      if (el) el.textContent = "";
+    }
+
+    function validateStep2() {
+      var email = $("email").value.trim().toLowerCase();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return "Saisissez une adresse email valide.";
+      }
+      if (emailAvailable === false) {
+        return "Cette adresse email est deja utilisee par un autre compte.";
+      }
+      var password = $("password").value;
+      if (!password || password.length < 8) {
+        return "Le mot de passe doit contenir au moins 8 caracteres.";
+      }
+      if (password !== $("confirmPassword").value) {
+        return "Les mots de passe ne correspondent pas.";
+      }
+      if (currentAccountType === "merchant") {
+        if (!$("merchantName").value.trim()) return "Le nom du commerce est obligatoire.";
+        var siren = $("merchantSIREN").value.replace(/\D/g, "");
+        if (siren.length !== 9) return "Le SIREN doit contenir 9 chiffres.";
+        if (!$("merchantBusinessTypeKey").value) return "Selectionnez un type d'activite.";
+        if ($("merchantBusinessTypeKey").value === "OTHER" && $("merchantBusinessTypeCustom").value.trim().length < 2) {
+          return "Precisez l'activite du commerce.";
+        }
+        if (!$("managerFirstName").value.trim() || !$("managerLastName").value.trim()) {
+          return "Le prenom et le nom du responsable sont obligatoires.";
         }
       }
+      if (currentAccountType === "municipality") {
+        var muniSiren = $("municipalitySIREN").value.replace(/\D/g, "");
+        if (!muniSiren || muniSiren.length < 9) return "Le SIREN de la mairie est obligatoire.";
+        if (!$("municipalityPhone").value.trim()) return "Le telephone de la mairie est obligatoire.";
+      }
+      if (currentAccountType === "social") {
+        if (!$("socialClubName").value.trim()) return "Le nom de la structure est obligatoire.";
+        var soc = $("socialSIREN").value.replace(/\D/g, "");
+        if (soc && soc.length !== 9) return "Le SIREN doit contenir 9 chiffres.";
+        if (!$("managerFirstName").value.trim() || !$("managerLastName").value.trim()) {
+          return "Le prenom et le nom du responsable sont obligatoires.";
+        }
+        if (!$("socialClubPhone").value.trim()) return "Le telephone de la structure est obligatoire.";
+        if (!$("socialDomainKey").value) return "Selectionnez un domaine.";
+        if ($("socialDomainKey").value === "OTHER" && $("socialDomainCustom").value.trim().length < 2) {
+          return "Precisez le domaine de la structure.";
+        }
+      }
+      return null;
+    }
 
-      function showPauseModal() {
-        $("pauseModal").classList.add("is-visible");
+    function validateStep3() {
+      if (!selectedAddress || !selectedAddress.city || !selectedAddress.postcode ||
+          !Number.isFinite(selectedAddress.latitude) || !Number.isFinite(selectedAddress.longitude)) {
+        return "Selectionnez ou saisissez une adresse.";
+      }
+      if (currentAccountType !== "social") {
+        var hours = buildHoursString();
+        if (!hours.trim()) return "Renseignez les horaires.";
+      }
+      return null;
+    }
+
+    /* ---- ACCOUNT TYPE ---- */
+
+    function setAccountType(nextType) {
+      currentAccountType = nextType;
+      $("accountType").value = nextType;
+
+      Array.prototype.forEach.call(document.querySelectorAll("[data-account-tab]"), function (button) {
+        button.classList.toggle("selected", button.dataset.accountTab === nextType);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll(".account-section"), function (section) {
+        section.classList.toggle("is-hidden", section.dataset.section !== nextType);
+      });
+
+      var isMunicipality = nextType === "municipality";
+      var isSocial = nextType === "social";
+
+      Array.prototype.forEach.call(document.querySelectorAll(".manager-field"), function (field) {
+        field.classList.toggle("is-hidden", isMunicipality);
+      });
+      $("hoursSection").classList.toggle("is-hidden", isSocial);
+
+      var addressLabel = $("addressLabel");
+      if (addressLabel) {
+        addressLabel.textContent = isMunicipality
+          ? "Indiquez l'adresse officielle de la mairie."
+          : isSocial
+          ? "Indiquez l'adresse de la structure, puis renseignez les informations."
+          : "Indiquez l'adresse precise de votre commerce, puis renseignez vos horaires d'ouverture.";
       }
 
-      function closePauseModal() {
-        $("pauseModal").classList.remove("is-visible");
-        activePauseRow = null;
+      selectedAddress = null;
+      if ($("addressQuery")) $("addressQuery").value = "";
+      updateSelectedAddress();
+    }
+
+    function updateSelectedAddress() {
+      var box = $("selectedAddress");
+      if (!box) return;
+      if (!selectedAddress) {
+        box.classList.remove("is-visible");
+        box.textContent = "";
+        return;
+      }
+      box.classList.add("is-visible");
+      box.innerHTML =
+        "<strong>" + (selectedAddress.isManual ? "Adresse saisie manuellement" : "Adresse selectionnee") + "</strong>" +
+        escapeHtml(selectedAddress.label) + "<br>" +
+        escapeHtml(selectedAddress.postcode + " " + selectedAddress.city) +
+        (selectedAddress.isManual ? '<span class="addr-note">Position approximative - l\'adresse exacte sera verifiee lors de la validation.</span>' : "");
+    }
+
+    /* ---- ADDRESS (inline, no modal) ---- */
+
+    async function searchAddress() {
+      var query = $("addressQuery").value.trim();
+      var container = $("addrResults");
+      if (!container) return;
+
+      if (query.length < 3) {
+        container.classList.remove("is-visible");
+        container.innerHTML = "";
+        return;
       }
 
-      function openPauseModal(row) {
-        if (!row || row.querySelector("[data-hour='closed']").checked) return;
-        activePauseRow = row;
-        var dayIndex = Array.prototype.indexOf.call(
-          document.querySelectorAll(".hours-row"),
-          row
-        );
-        var dayLabel = days[dayIndex] ? days[dayIndex][1] : "ce jour";
-        $("pauseModalTitle").textContent = "Pause - " + dayLabel;
-        $("pauseModalSubtitle").textContent =
-          "Choisissez le créneau de pause pour " + dayLabel.toLowerCase() + ".";
-        $("pauseStart").value = row.dataset.pauseStart || "12:00";
-        $("pauseEnd").value = row.dataset.pauseEnd || "14:00";
-        showPauseModal();
-      }
+      container.innerHTML = '<div class="addr-searching">Recherche en cours...</div>';
+      container.classList.add("is-visible");
 
-      function savePause() {
-        if (!activePauseRow) return;
-        var start = $("pauseStart").value;
-        var end = $("pauseEnd").value;
-        if (!start || !end || start >= end) {
-          setStatus("error", "La fin de pause doit être après le début de pause.");
+      try {
+        var url = "https://api-adresse.data.gouv.fr/search/?limit=8&q=" + encodeURIComponent(query);
+        var response = await fetch(url);
+        var json = await response.json();
+        var features = Array.isArray(json.features) ? json.features : [];
+
+        features.sort(function (a, b) {
+          var aHn = a.properties && a.properties.type === "housenumber" ? 0 : 1;
+          var bHn = b.properties && b.properties.type === "housenumber" ? 0 : 1;
+          return aHn - bHn;
+        });
+
+        if (features.length === 0) {
+          container.innerHTML =
+            '<div class="addr-searching">Aucune adresse trouvee. Essayez avec le numero, la rue et la ville.</div>' +
+            '<button type="button" class="addr-manual-link" id="addrManualLink">Saisir l\'adresse manuellement</button>';
+          bindManualLink();
           return;
         }
-        activePauseRow.dataset.pauseStart = start;
-        activePauseRow.dataset.pauseEnd = end;
-        updatePauseButton(activePauseRow);
-        updateHoursPreview();
-        closePauseModal();
-      }
 
-      function removePause() {
-        if (!activePauseRow) return;
-        delete activePauseRow.dataset.pauseStart;
-        delete activePauseRow.dataset.pauseEnd;
-        updatePauseButton(activePauseRow);
-        updateHoursPreview();
-        closePauseModal();
-      }
+        container.innerHTML = features.map(function (feature, i) {
+          var props = feature.properties || {};
+          return '<button type="button" class="addr-suggestion" data-addr-idx="' + i + '">' +
+            '<strong>' + escapeHtml(props.label || props.name || "") + '</strong>' +
+            '<span>' + escapeHtml((props.postcode || "") + " " + (props.city || "")) + '</span>' +
+            '</button>';
+        }).join("") +
+        '<button type="button" class="addr-manual-link" id="addrManualLink">Adresse introuvable ? Saisir manuellement</button>';
 
-      async function searchAddress() {
-        var query = $("addressQuery").value.trim();
-        if (query.length < 4) {
-          setStatus("error", "Saisissez une adresse plus précise avant de lancer la vérification.");
-          return;
-        }
-
-        clearStatus();
-        $("addressSuggestions").innerHTML = '<p class="muted">Recherche des adresses...</p>';
-        showAddressModal();
-
-        try {
-          var url = "https://api-adresse.data.gouv.fr/search/?limit=8&q=" + encodeURIComponent(query);
-          var response = await fetch(url);
-          var json = await response.json();
-          var features = Array.isArray(json.features) ? json.features : [];
-
-          if (features.length === 0) {
-            $("addressSuggestions").innerHTML = [
-              '<div class="empty-address-results">',
-              '<p class="muted">Aucune adresse trouvée. Essayez avec le numéro, la rue et la ville.</p>',
-              '<button type="button" class="manual-address-inline" id="manualAddressInlineButton">Saisir l’adresse manuellement</button>',
-              '</div>'
-            ].join("");
-            return;
-          }
-
-          $("addressSuggestions").innerHTML = features.map(function (feature, index) {
+        Array.prototype.forEach.call(container.querySelectorAll("[data-addr-idx]"), function (button) {
+          button.addEventListener("click", function () {
+            var feature = features[Number(button.dataset.addrIdx)];
             var props = feature.properties || {};
-            return [
-              '<button type="button" class="suggestion" data-address-index="' + index + '">',
-              '<strong>' + escapeHtml(props.label || props.name || "Adresse") + '</strong>',
-              '<span>' + escapeHtml([props.postcode, props.city].filter(Boolean).join(" ")) + '</span>',
-              '</button>'
-            ].join("");
-          }).join("");
-
-          Array.prototype.forEach.call(document.querySelectorAll("[data-address-index]"), function (button) {
-            button.addEventListener("click", function () {
-              var feature = features[Number(button.dataset.addressIndex)];
-              var props = feature.properties || {};
-              var coordinates = feature.geometry && Array.isArray(feature.geometry.coordinates)
-                ? feature.geometry.coordinates
-                : [];
-              selectedAddress = {
-                label: props.label || props.name || query,
-                city: props.city || "",
-                postcode: props.postcode || "",
-                longitude: Number(coordinates[0]),
-                latitude: Number(coordinates[1])
-              };
-              $("addressQuery").value = selectedAddress.label;
-              updateSelectedAddress();
-              closeAddressModal();
-            });
+            var coords = feature.geometry && Array.isArray(feature.geometry.coordinates) ? feature.geometry.coordinates : [];
+            selectedAddress = {
+              label: props.label || props.name || query,
+              city: props.city || "",
+              postcode: props.postcode || "",
+              longitude: Number(coords[0]),
+              latitude: Number(coords[1])
+            };
+            $("addressQuery").value = selectedAddress.label;
+            container.classList.remove("is-visible");
+            container.innerHTML = "";
+            $("manualAddrPanel").classList.remove("is-visible");
+            updateSelectedAddress();
           });
-        } catch (error) {
-          $("addressSuggestions").innerHTML = '<p class="muted">La vérification d\'adresse est indisponible pour le moment. Réessayez dans quelques instants.</p>';
-        }
+        });
+        bindManualLink();
+      } catch (_err) {
+        container.innerHTML = '<div class="addr-searching">La recherche d\'adresse est indisponible. Reessayez.</div>' +
+          '<button type="button" class="addr-manual-link" id="addrManualLink">Saisir manuellement</button>';
+        bindManualLink();
       }
+    }
 
-      function validatePhotos(files) {
-        if (!files || files.length === 0) {
-          throw new Error("Ajoutez au moins une photo.");
-        }
-        if (files.length > 8) {
-          throw new Error("Vous pouvez ajouter 8 photos maximum.");
-        }
-        Array.prototype.forEach.call(files, function (file) {
-          if (!/^image\//.test(file.type || "")) {
-            throw new Error("Les fichiers ajoutés doivent être des images.");
-          }
-          if (file.size > 10 * 1024 * 1024) {
-            throw new Error("Chaque photo doit faire moins de 10 Mo.");
+    function bindManualLink() {
+      var link = $("addrManualLink");
+      if (link) {
+        link.addEventListener("click", function () {
+          var container = $("addrResults");
+          container.classList.remove("is-visible");
+          container.innerHTML = "";
+          $("manualAddrPanel").classList.add("is-visible");
+          var input = $("manualAddressLine");
+          if (input) {
+            input.value = $("addressQuery").value.trim();
+            input.focus();
           }
         });
       }
+    }
 
-      function appendCommonFormData(fd) {
-        var email = $("email").value.trim().toLowerCase();
-        var password = $("password").value;
-        var confirmPassword = $("confirmPassword").value;
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          throw new Error("Saisissez un email professionnel valide.");
-        }
-        if (!password || password.length < 8) {
-          throw new Error("Le mot de passe doit contenir au moins 8 caractères.");
-        }
-        if (password !== confirmPassword) {
-          throw new Error("Les mots de passe ne correspondent pas.");
-        }
-        if (!$("termsAccepted").checked) {
-          throw new Error("Vous devez accepter les conditions d'utilisation.");
-        }
-        if (!selectedAddress || !selectedAddress.city || !selectedAddress.postcode || !Number.isFinite(selectedAddress.latitude) || !Number.isFinite(selectedAddress.longitude)) {
-          throw new Error("Sélectionnez une adresse proposée ou utilisez la saisie manuelle.");
-        }
+    function buildManualAddressLabel(line, postcode, city) {
+      return [line, [postcode, city].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+    }
 
-        fd.append("email", email);
-        fd.append("password", password);
-        fd.append("accountType", currentAccountType);
-        fd.append("nom_commune", selectedAddress.city);
-        fd.append("code_postal", selectedAddress.postcode);
-        fd.append("latitude", String(selectedAddress.latitude));
-        fd.append("longitude", String(selectedAddress.longitude));
-        fd.append("addressVerificationMode", selectedAddress.isManual ? "manual" : "api-adresse");
-        fd.append("acceptedTermsAt", new Date().toISOString());
-        fd.append("acceptedTermsVersion", TERMS_VERSION);
+    function setManualAddressFeedback(message, type) {
+      var node = $("manualAddressFeedback");
+      if (!node) return;
+      node.className = "manual-addr-feedback" + (type ? " " + type : "");
+      node.textContent = message;
+    }
 
-        var photos = $("photos").files;
-        validatePhotos(photos);
-        Array.prototype.forEach.call(photos, function (file) {
-          fd.append("photos", file, file.name);
+    async function resolveManualAddressCoordinates(line, postcode, city) {
+      var cityQuery = [postcode, city].filter(Boolean).join(" ");
+      var preciseQuery = [line, postcode, city].filter(Boolean).join(" ");
+      var urls = [
+        "https://api-adresse.data.gouv.fr/search/?limit=1&type=municipality&q=" + encodeURIComponent(cityQuery),
+        "https://api-adresse.data.gouv.fr/search/?limit=1&q=" + encodeURIComponent(preciseQuery)
+      ];
+      for (var i = 0; i < urls.length; i++) {
+        var resp = await fetch(urls[i]);
+        var js = await resp.json();
+        var feat = Array.isArray(js.features) ? js.features[0] : null;
+        var coords = feat && feat.geometry && Array.isArray(feat.geometry.coordinates) ? feat.geometry.coordinates : [];
+        var lng = Number(coords[0]);
+        var lat = Number(coords[1]);
+        if (Number.isFinite(lat) && Number.isFinite(lng)) {
+          return { latitude: lat, longitude: lng };
+        }
+      }
+      throw new Error("Impossible de positionner cette commune pour le moment.");
+    }
+
+    async function useManualAddress() {
+      var line = $("manualAddressLine") ? $("manualAddressLine").value.trim() : "";
+      var postcode = $("manualPostalCode") ? $("manualPostalCode").value.replace(/\s+/g, "").trim() : "";
+      var city = $("manualCity") ? $("manualCity").value.trim() : "";
+      var submit = $("manualAddrSubmit");
+
+      if (line.length < 5) { setManualAddressFeedback("Ajoutez une adresse plus complete.", "error"); return; }
+      if (!/^\d{5}$/.test(postcode)) { setManualAddressFeedback("Code postal francais a 5 chiffres.", "error"); return; }
+      if (city.length < 2) { setManualAddressFeedback("Indiquez la ville.", "error"); return; }
+
+      if (submit) { submit.disabled = true; submit.textContent = "Validation..."; }
+      setManualAddressFeedback("", "");
+
+      try {
+        var coordinates = await resolveManualAddressCoordinates(line, postcode, city);
+        selectedAddress = {
+          label: buildManualAddressLabel(line, postcode, city),
+          city: city, postcode: postcode,
+          latitude: coordinates.latitude, longitude: coordinates.longitude,
+          isManual: true
+        };
+        $("addressQuery").value = selectedAddress.label;
+        $("manualAddrPanel").classList.remove("is-visible");
+        updateSelectedAddress();
+      } catch (err) {
+        setManualAddressFeedback(
+          err && err.message ? err.message : "Impossible de valider cette adresse.",
+          "error"
+        );
+      } finally {
+        if (submit) { submit.disabled = false; submit.textContent = "Utiliser cette adresse"; }
+      }
+    }
+
+    /* ---- PAUSE MODAL ---- */
+
+    function showPauseModal() { $("pauseModal").classList.add("is-visible"); }
+    function closePauseModal() { $("pauseModal").classList.remove("is-visible"); activePauseRow = null; }
+
+    function openPauseModal(row) {
+      if (!row || row.querySelector("[data-hour='closed']").checked) return;
+      activePauseRow = row;
+      var dayIndex = Array.prototype.indexOf.call(document.querySelectorAll(".hours-row"), row);
+      var dayLabel = days[dayIndex] ? days[dayIndex][1] : "ce jour";
+      $("pauseModalTitle").textContent = "Pause - " + dayLabel;
+      $("pauseModalSubtitle").textContent = "Choisissez le creneau de pause pour " + dayLabel.toLowerCase() + ".";
+      $("pauseStart").value = row.dataset.pauseStart || "12:00";
+      $("pauseEnd").value = row.dataset.pauseEnd || "14:00";
+      showPauseModal();
+    }
+
+    function updatePauseButton(row) {
+      if (!row) return;
+      var button = row.querySelector("[data-hour='pauseButton']");
+      if (!button) return;
+      button.textContent = (row.dataset.pauseStart && row.dataset.pauseEnd)
+        ? formatHourLabel(row.dataset.pauseStart) + "-" + formatHourLabel(row.dataset.pauseEnd)
+        : "Ajouter une pause";
+    }
+
+    function savePause() {
+      if (!activePauseRow) return;
+      var start = $("pauseStart").value;
+      var end = $("pauseEnd").value;
+      if (!start || !end || start >= end) {
+        setStatus("error", "La fin de pause doit etre apres le debut.");
+        return;
+      }
+      activePauseRow.dataset.pauseStart = start;
+      activePauseRow.dataset.pauseEnd = end;
+      updatePauseButton(activePauseRow);
+      updateHoursPreview();
+      closePauseModal();
+    }
+
+    function removePause() {
+      if (!activePauseRow) return;
+      delete activePauseRow.dataset.pauseStart;
+      delete activePauseRow.dataset.pauseEnd;
+      updatePauseButton(activePauseRow);
+      updateHoursPreview();
+      closePauseModal();
+    }
+
+    /* ---- STATUS ---- */
+
+    function setStatus(type, message) {
+      var node = $("formStatus");
+      node.className = "form-status is-visible " + type;
+      node.textContent = message;
+    }
+
+    function clearStatus() {
+      var node = $("formStatus");
+      node.className = "form-status";
+      node.textContent = "";
+    }
+
+    /* ---- PHOTOS ---- */
+
+    function validatePhotos(files) {
+      if (!files || files.length === 0) throw new Error("Ajoutez au moins une photo.");
+      if (files.length > 8) throw new Error("8 photos maximum.");
+      Array.prototype.forEach.call(files, function (file) {
+        if (!/^image\//.test(file.type || "")) throw new Error("Les fichiers doivent etre des images.");
+        if (file.size > 10 * 1024 * 1024) throw new Error("Chaque photo doit faire moins de 10 Mo.");
+      });
+    }
+
+    function renderPhotoPreview(files) {
+      var preview = $("photoPreview");
+      preview.innerHTML = "";
+      Array.prototype.slice.call(files || [], 0, 8).forEach(function (file) {
+        if (!/^image\//.test(file.type || "")) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+          var card = document.createElement("div");
+          card.className = "photo-thumb";
+          card.innerHTML = '<img alt="" src="' + String(reader.result || "") + '" />';
+          preview.appendChild(card);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    /* ---- FORM SUBMISSION ---- */
+
+    function appendCommonFormData(fd) {
+      var email = $("email").value.trim().toLowerCase();
+      var password = $("password").value;
+      var confirmPassword = $("confirmPassword").value;
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Saisissez un email professionnel valide.");
+      if (!password || password.length < 8) throw new Error("Le mot de passe doit contenir au moins 8 caracteres.");
+      if (password !== confirmPassword) throw new Error("Les mots de passe ne correspondent pas.");
+      if (!$("termsAccepted").checked) throw new Error("Vous devez accepter les conditions d'utilisation.");
+      if (!selectedAddress || !selectedAddress.city || !selectedAddress.postcode ||
+          !Number.isFinite(selectedAddress.latitude) || !Number.isFinite(selectedAddress.longitude)) {
+        throw new Error("Selectionnez une adresse proposee ou utilisez la saisie manuelle.");
+      }
+
+      fd.append("email", email);
+      fd.append("password", password);
+      fd.append("accountType", currentAccountType);
+      fd.append("nom_commune", selectedAddress.city);
+      fd.append("code_postal", selectedAddress.postcode);
+      fd.append("latitude", String(selectedAddress.latitude));
+      fd.append("longitude", String(selectedAddress.longitude));
+      fd.append("addressVerificationMode", selectedAddress.isManual ? "manual" : "api-adresse");
+      fd.append("acceptedTermsAt", new Date().toISOString());
+      fd.append("acceptedTermsVersion", TERMS_VERSION);
+
+      var photos = $("photos").files;
+      validatePhotos(photos);
+      Array.prototype.forEach.call(photos, function (file) {
+        fd.append("photos", file, file.name);
+      });
+    }
+
+    function appendMerchantFormData(fd) {
+      var typeSelect = $("merchantBusinessTypeKey");
+      var selectedOption = typeSelect.options[typeSelect.selectedIndex];
+      var merchantName = $("merchantName").value.trim();
+      var merchantSIREN = $("merchantSIREN").value.replace(/\D/g, "");
+      var managerFirstName = $("managerFirstName").value.trim();
+      var managerLastName = $("managerLastName").value.trim();
+      var businessTypeKey = typeSelect.value;
+      var custom = $("merchantBusinessTypeCustom").value.trim();
+      var hours = buildHoursString();
+
+      if (!merchantName) throw new Error("Le nom du commerce est obligatoire.");
+      if (merchantSIREN.length !== 9) throw new Error("Le SIREN doit contenir 9 chiffres.");
+      if (!managerFirstName || !managerLastName) throw new Error("Le prenom et le nom du responsable sont obligatoires.");
+      if (!businessTypeKey) throw new Error("Selectionnez un type d'activite.");
+      if (businessTypeKey === "OTHER" && custom.length < 2) throw new Error("Precisez l'activite du commerce.");
+      if (!hours.trim()) throw new Error("Renseignez les horaires du commerce.");
+
+      fd.append("isMunicipality", "false");
+      fd.append("lastName", merchantName);
+      fd.append("firstName", "Commercant");
+      fd.append("username", "");
+      fd.append("merchantName", merchantName);
+      fd.append("merchantManagerFirstName", managerFirstName);
+      fd.append("merchantManagerLastName", managerLastName);
+      fd.append("merchantSIREN", merchantSIREN);
+      fd.append("merchantAddress", selectedAddress.label);
+      fd.append("merchantHours", hours);
+      fd.append("merchantPhone", $("merchantPhone").value.trim());
+      fd.append("merchantWebsite", $("merchantWebsite").value.trim());
+      fd.append("merchantDescription", $("merchantDescription").value.trim());
+      fd.append("merchantCategory", selectedOption ? selectedOption.dataset.category || "" : "");
+      fd.append("merchantBusinessTypeKey", businessTypeKey);
+      fd.append("merchantBusinessTypeCustom", businessTypeKey === "OTHER" ? custom : "");
+    }
+
+    function appendMunicipalityFormData(fd) {
+      var siren = $("municipalitySIREN").value.replace(/\D/g, "");
+      var phone = $("municipalityPhone").value.trim();
+      var hours = buildHoursString();
+      var municipalityName = "Mairie de " + selectedAddress.city;
+
+      if (!siren || siren.length < 9) throw new Error("Le SIREN de la mairie est obligatoire.");
+      if (!phone) throw new Error("Le telephone officiel de la mairie est obligatoire.");
+      if (!hours.trim()) throw new Error("Renseignez les horaires de la mairie.");
+
+      fd.append("isMunicipality", "true");
+      fd.append("lastName", municipalityName);
+      fd.append("firstName", "");
+      fd.append("username", "");
+      fd.append("municipalityName", municipalityName);
+      fd.append("municipalitySIREN", siren);
+      fd.append("municipalityPhone", phone);
+      fd.append("municipalityAddress", selectedAddress.label);
+      fd.append("municipalityHours", hours);
+    }
+
+    function appendSocialFormData(fd) {
+      var clubName = $("socialClubName").value.trim();
+      var socialSIREN = $("socialSIREN").value.replace(/\D/g, "");
+      var managerFirstName = $("managerFirstName").value.trim();
+      var managerLastName = $("managerLastName").value.trim();
+      var phone = $("socialClubPhone").value.trim();
+      var domainKey = $("socialDomainKey").value;
+      var domainCustom = $("socialDomainCustom").value.trim();
+
+      if (!clubName) throw new Error("Le nom de la structure est obligatoire.");
+      if (socialSIREN && socialSIREN.length !== 9) throw new Error("Le SIREN doit contenir 9 chiffres.");
+      if (!managerFirstName || !managerLastName) throw new Error("Le prenom et le nom du responsable sont obligatoires.");
+      if (!phone) throw new Error("Le telephone de la structure est obligatoire.");
+      if (!domainKey) throw new Error("Selectionnez un domaine.");
+      if (domainKey === "OTHER" && domainCustom.length < 2) throw new Error("Precisez le domaine de la structure.");
+
+      fd.append("isMunicipality", "false");
+      fd.append("lastName", managerLastName);
+      fd.append("firstName", managerFirstName);
+      fd.append("username", "");
+      fd.append("socialSIREN", socialSIREN);
+      fd.append("socialClubName", clubName);
+      fd.append("socialClubDescription", $("socialClubDescription").value.trim());
+      fd.append("socialClubAddress", selectedAddress.label);
+      fd.append("socialClubPhone", phone);
+      fd.append("socialStructureType", $("socialStructureType").value);
+      fd.append("socialDomainKey", domainKey);
+      fd.append("socialDomainCustom", domainKey === "OTHER" ? domainCustom : "");
+    }
+
+    async function submitForm(event) {
+      event.preventDefault();
+      clearStatus();
+
+      var button = $("submitButton");
+      button.disabled = true;
+      button.textContent = "Envoi en cours...";
+
+      try {
+        var fd = new FormData();
+        appendCommonFormData(fd);
+        if (currentAccountType === "merchant") appendMerchantFormData(fd);
+        if (currentAccountType === "municipality") appendMunicipalityFormData(fd);
+        if (currentAccountType === "social") appendSocialFormData(fd);
+
+        var response = await fetch(API_BASE + "/auth/register", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: fd
         });
+        var text = await response.text();
+        var data = null;
+        try { data = text ? JSON.parse(text) : null; } catch (_) { data = text; }
+
+        if (!response.ok) {
+          var apiMessage = data && data.message;
+          if (Array.isArray(apiMessage)) apiMessage = apiMessage.join("\n");
+          throw new Error(apiMessage || (typeof data === "string" ? data : "Impossible d'envoyer la demande."));
+        }
+
+        $("professionalSignupForm").reset();
+        selectedAddress = null;
+        updateSelectedAddress();
+        $("photoPreview").innerHTML = "";
+        emailAvailable = null;
+        $("emailStatus").className = "email-status";
+        $("emailStatus").textContent = "";
+        renderHours();
+        setAccountType(currentAccountType);
+        goToStep(1);
+        setStatus("success", "Demande envoyee avec succes. Votre compte est en attente de validation par le support Urbalya.");
+      } catch (error) {
+        setStatus("error", error && error.message ? error.message : "Impossible d'envoyer la demande.");
+      } finally {
+        button.disabled = false;
+        button.textContent = "Envoyer la demande";
+      }
+    }
+
+    /* ---- EMAIL CHECK ---- */
+
+    async function checkEmailAvailability(email) {
+      var statusEl = $("emailStatus");
+      if (!statusEl) return;
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailAvailable = null;
+        statusEl.className = "email-status";
+        statusEl.textContent = "";
+        return;
+      }
+      statusEl.className = "email-status checking";
+      statusEl.textContent = "Verification...";
+      try {
+        var response = await fetch(API_BASE + "/auth/check-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({ email: email })
+        });
+        if (response.status === 409) {
+          emailAvailable = false;
+          statusEl.className = "email-status error";
+          statusEl.textContent = "Cette adresse est deja utilisee.";
+        } else {
+          emailAvailable = true;
+          statusEl.className = "email-status ok";
+          statusEl.textContent = "Adresse disponible.";
+        }
+      } catch (_) {
+        emailAvailable = null;
+        statusEl.className = "email-status";
+        statusEl.textContent = "";
+      }
+    }
+
+    /* ---- BILLING ---- */
+
+    function safeUrl(value) {
+      var raw = String(value || "").trim();
+      if (!raw) return "";
+      try {
+        var parsed = new URL(raw);
+        if (parsed.protocol === "https:" || parsed.protocol === "http:") return parsed.toString();
+      } catch (_) {}
+      return "";
+    }
+
+    function formatBillingDate(value) {
+      var raw = String(value || "").trim();
+      if (!raw) return "Indisponible";
+      var date = new Date(raw);
+      if (Number.isNaN(date.getTime())) return "Indisponible";
+      return date.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
+    }
+
+    function isExpiredBillingDate(value) {
+      var raw = String(value || "").trim();
+      if (!raw) return false;
+      var date = new Date(raw);
+      if (Number.isNaN(date.getTime())) return false;
+      return date.getTime() <= Date.now();
+    }
+
+    function resolveAccountLabel(value) {
+      var n = String(value || "").trim().toLowerCase();
+      if (n === "merchant") return "Commerce";
+      if (n === "municipality") return "Mairie";
+      if (n === "social") return "Association";
+      return "Compte pro";
+    }
+
+    function resolveBillingStatusLabel(status, exempt, cancelAtPeriodEnd) {
+      if (exempt) return "Acces administre";
+      if (cancelAtPeriodEnd) return "Renouvellement arrete";
+      if (status === "ACTIVE") return "Actif";
+      if (status === "PAST_DUE") return "Paiement a regulariser";
+      if (status === "CANCELED") return "Annule";
+      if (status === "INCOMPLETE") return "A finaliser";
+      return status || "Indisponible";
+    }
+
+    function setBillingFeedback(message, tone) {
+      var node = $("billingFeedback");
+      if (!node) return;
+      node.className = "billing-feedback" + (tone ? " " + tone : "");
+      node.textContent = message || "";
+    }
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
+    }
+
+    function setupBillingSection() {
+      var params = new URLSearchParams(window.location.search);
+      var hasBillingContext = params.has("accountType") || params.has("billingStatus") || params.has("billingExempt") ||
+        params.has("cancelAtPeriodEnd") || params.has("currentPeriodEnd") || params.has("unsubscribeUrl") || params.has("reactivateUrl");
+
+      if (hasBillingContext) {
+        var accountType = params.get("accountType");
+        var billingStatus = String(params.get("billingStatus") || "").trim().toUpperCase();
+        var billingExempt = params.get("billingExempt") === "1";
+        var cancelAtPeriodEnd = params.get("cancelAtPeriodEnd") === "1";
+        var currentPeriodEnd = params.get("currentPeriodEnd");
+        var hasExpiredPeriod = isExpiredBillingDate(currentPeriodEnd);
+        var unsubscribeUrl = safeUrl(params.get("unsubscribeUrl"));
+        var reactivateUrl = safeUrl(params.get("reactivateUrl"));
+        var contextBlock = $("billingContextBlock");
+        var actions = $("billingActions");
+
+        if (contextBlock) contextBlock.classList.add("is-visible");
+        $("billingAccountValue").textContent = resolveAccountLabel(accountType);
+        $("billingStatusValue").textContent = resolveBillingStatusLabel(billingStatus, billingExempt, cancelAtPeriodEnd);
+        if (hasExpiredPeriod) {
+          $("billingStatusValue").textContent = "Expire";
+          $("billingRenewalValue").textContent = "Acces expire le " + formatBillingDate(currentPeriodEnd);
+        } else {
+          $("billingRenewalValue").textContent = cancelAtPeriodEnd ? "Arret demande" : formatBillingDate(currentPeriodEnd);
+        }
+
+        if (actions) {
+          var html = "";
+          if (!hasExpiredPeriod && reactivateUrl) {
+            html += '<a class="billing-pill primary" href="' + escapeHtml(reactivateUrl) + '">Reactiver le renouvellement</a>';
+          }
+          if (!hasExpiredPeriod && unsubscribeUrl) {
+            html += '<a class="billing-pill danger" href="' + escapeHtml(unsubscribeUrl) + '">Arreter le renouvellement</a>';
+          }
+          if (hasExpiredPeriod) {
+            html += '<a class="billing-pill primary" href="mailto:contact@urbalya.com?subject=Renouvellement%20abonnement%20Urbalya">Demander un nouveau lien de paiement</a>';
+          }
+          html += '<a class="billing-pill outline" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
+          actions.innerHTML = html;
+        }
       }
 
-      function appendMerchantFormData(fd) {
-        var typeSelect = $("merchantBusinessTypeKey");
-        var selectedOption = typeSelect.options[typeSelect.selectedIndex];
-        var merchantName = $("merchantName").value.trim();
-        var merchantSIREN = $("merchantSIREN").value.replace(/\D/g, "");
-        var managerFirstName = $("managerFirstName").value.trim();
-        var managerLastName = $("managerLastName").value.trim();
-        var businessTypeKey = typeSelect.value;
-        var custom = $("merchantBusinessTypeCustom").value.trim();
-        var hours = buildHoursString();
+      var form = $("billingSelfServeForm");
+      var input = $("billingSelfServeEmail");
+      var submit = $("billingSelfServeSubmit");
+      if (!form || !input) return;
 
-        if (!merchantName) throw new Error("Le nom du commerce est obligatoire.");
-        if (merchantSIREN.length !== 9) throw new Error("Le SIREN du commerce est obligatoire et doit contenir 9 chiffres.");
-        if (!managerFirstName || !managerLastName) throw new Error("Le prénom et le nom du responsable sont obligatoires.");
-        if (!businessTypeKey) throw new Error("Sélectionnez un type d'activité.");
-        if (businessTypeKey === "OTHER" && custom.length < 2) throw new Error("Précisez l'activité du commerce.");
-        if (!hours.trim()) throw new Error("Renseignez les horaires du commerce.");
-
-        fd.append("isMunicipality", "false");
-        fd.append("lastName", merchantName);
-        fd.append("firstName", "Commercant");
-        fd.append("username", "");
-        fd.append("merchantName", merchantName);
-        fd.append("merchantManagerFirstName", managerFirstName);
-        fd.append("merchantManagerLastName", managerLastName);
-        fd.append("merchantSIREN", merchantSIREN);
-        fd.append("merchantAddress", selectedAddress.label);
-        fd.append("merchantHours", hours);
-        fd.append("merchantPhone", $("merchantPhone").value.trim());
-        fd.append("merchantWebsite", $("merchantWebsite").value.trim());
-        fd.append("merchantDescription", $("merchantDescription").value.trim());
-        fd.append("merchantCategory", selectedOption ? selectedOption.dataset.category || "" : "");
-        fd.append("merchantBusinessTypeKey", businessTypeKey);
-        fd.append("merchantBusinessTypeCustom", businessTypeKey === "OTHER" ? custom : "");
-      }
-
-      function appendMunicipalityFormData(fd) {
-        var siren = $("municipalitySIREN").value.replace(/\D/g, "");
-        var phone = $("municipalityPhone").value.trim();
-        var hours = buildHoursString();
-        var municipalityName = "Mairie de " + selectedAddress.city;
-
-        if (!siren || siren.length < 9) throw new Error("Le SIREN de la mairie est obligatoire.");
-        if (!phone) throw new Error("Le téléphone officiel de la mairie est obligatoire.");
-        if (!hours.trim()) throw new Error("Renseignez les horaires de la mairie.");
-
-        fd.append("isMunicipality", "true");
-        fd.append("lastName", municipalityName);
-        fd.append("firstName", "");
-        fd.append("username", "");
-        fd.append("municipalityName", municipalityName);
-        fd.append("municipalitySIREN", siren);
-        fd.append("municipalityPhone", phone);
-        fd.append("municipalityAddress", selectedAddress.label);
-        fd.append("municipalityHours", hours);
-      }
-
-      function appendSocialFormData(fd) {
-        var clubName = $("socialClubName").value.trim();
-        var socialSIREN = $("socialSIREN").value.replace(/\D/g, "");
-        var managerFirstName = $("managerFirstName").value.trim();
-        var managerLastName = $("managerLastName").value.trim();
-        var phone = $("socialClubPhone").value.trim();
-        var domainKey = $("socialDomainKey").value;
-        var domainCustom = $("socialDomainCustom").value.trim();
-
-        if (!clubName) throw new Error("Le nom de la structure est obligatoire.");
-        if (socialSIREN && socialSIREN.length !== 9) throw new Error("Le SIREN de l'association doit contenir 9 chiffres.");
-        if (!managerFirstName || !managerLastName) throw new Error("Le prénom et le nom du responsable sont obligatoires.");
-        if (!phone) throw new Error("Le téléphone de la structure est obligatoire.");
-        if (!domainKey) throw new Error("Sélectionnez un domaine.");
-        if (domainKey === "OTHER" && domainCustom.length < 2) throw new Error("Précisez le domaine de la structure.");
-
-        fd.append("isMunicipality", "false");
-        fd.append("lastName", managerLastName);
-        fd.append("firstName", managerFirstName);
-        fd.append("username", "");
-        fd.append("socialSIREN", socialSIREN);
-        fd.append("socialClubName", clubName);
-        fd.append("socialClubDescription", $("socialClubDescription").value.trim());
-        fd.append("socialClubAddress", selectedAddress.label);
-        fd.append("socialClubPhone", phone);
-        fd.append("socialStructureType", $("socialStructureType").value);
-        fd.append("socialDomainKey", domainKey);
-        fd.append("socialDomainCustom", domainKey === "OTHER" ? domainCustom : "");
-      }
-
-      async function submitForm(event) {
+      form.addEventListener("submit", async function (event) {
         event.preventDefault();
-        clearStatus();
-
-        var button = $("submitButton");
-        button.disabled = true;
-        button.textContent = "Envoi en cours...";
-
+        var email = input.value.trim().toLowerCase();
+        if (!isValidEmail(email)) {
+          setBillingFeedback("Entrez une adresse email valide.", "error");
+          input.focus();
+          return;
+        }
         try {
-          var fd = new FormData();
-          appendCommonFormData(fd);
-          if (currentAccountType === "merchant") appendMerchantFormData(fd);
-          if (currentAccountType === "municipality") appendMunicipalityFormData(fd);
-          if (currentAccountType === "social") appendSocialFormData(fd);
+          if (submit) submit.disabled = true;
+          input.disabled = true;
+          setBillingFeedback("Envoi du lien securise...", "");
 
-          var response = await fetch(API_BASE + "/auth/register", {
+          var response = await fetch(API_BASE + "/pro/request-management-link", {
             method: "POST",
-            headers: { Accept: "application/json" },
-            body: fd
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify({ email: email })
           });
-          var text = await response.text();
-          var data = null;
-          try {
-            data = text ? JSON.parse(text) : null;
-          } catch (_) {
-            data = text;
-          }
+          var payload = null;
+          try { payload = await response.json(); } catch (_) { payload = null; }
 
           if (!response.ok) {
-            var apiMessage = data && data.message;
-            if (Array.isArray(apiMessage)) apiMessage = apiMessage.join("\n");
-            throw new Error(apiMessage || (typeof data === "string" ? data : "Impossible d'envoyer la demande."));
+            var message = payload && payload.message;
+            if (Array.isArray(message)) message = message.join(" ");
+            throw new Error(message || "Impossible d'envoyer le lien pour le moment.");
           }
-
-          $("professionalSignupForm").reset();
-          selectedAddress = null;
-          updateSelectedAddress();
-          $("photoPreview").innerHTML = "";
-          renderHours();
-          setAccountType(currentAccountType);
-          setStatus("success", "Demande envoyée. Votre compte est en attente de validation par le support Urbalya.");
-        } catch (error) {
-          setStatus("error", error && error.message ? error.message : "Impossible d'envoyer la demande.");
-        } finally {
-          button.disabled = false;
-          button.textContent = "Envoyer la demande";
-        }
-      }
-
-      function setupMenu() {
-        var root = document.documentElement;
-        var btn = $("menuBtn");
-        var closeBtn = $("closeBtn");
-        var backdrop = $("backdrop");
-        var drawer = $("drawer");
-        if (!btn || !closeBtn || !backdrop || !drawer) return;
-
-        var lastFocus = null;
-        function setOpen(open) {
-          if (open) {
-            lastFocus = document.activeElement;
-            root.classList.add("menu-open");
-            btn.setAttribute("aria-expanded", "true");
-            backdrop.setAttribute("aria-hidden", "false");
-            var firstLink = drawer.querySelector("a, button");
-            setTimeout(function () {
-              if (firstLink) firstLink.focus();
-            }, 50);
-          } else {
-            root.classList.remove("menu-open");
-            btn.setAttribute("aria-expanded", "false");
-            backdrop.setAttribute("aria-hidden", "true");
-            if (lastFocus && typeof lastFocus.focus === "function") {
-              lastFocus.focus();
-            }
-          }
-        }
-
-        btn.addEventListener("click", function () { setOpen(true); });
-        closeBtn.addEventListener("click", function () { setOpen(false); });
-        backdrop.addEventListener("click", function () { setOpen(false); });
-        document.addEventListener("keydown", function (event) {
-          if ($("pauseModal").classList.contains("is-visible")) {
-            if (event.key === "Escape") {
-              event.preventDefault();
-              closePauseModal();
-            }
-            return;
-          }
-          if ($("addressModal").classList.contains("is-visible")) {
-            if (event.key === "Escape") {
-              event.preventDefault();
-              closeAddressModal();
-            }
-            return;
-          }
-          if (!root.classList.contains("menu-open")) return;
-          if (event.key === "Escape") {
-            event.preventDefault();
-            setOpen(false);
-          }
-        });
-        drawer.addEventListener("click", function (event) {
-          var target = event.target;
-          if (target && target.closest && target.closest("a")) {
-            setOpen(false);
-          }
-        });
-      }
-
-      function safeUrl(value) {
-        var raw = String(value || "").trim();
-        if (!raw) return "";
-        try {
-          var parsed = new URL(raw);
-          if (parsed.protocol === "https:" || parsed.protocol === "http:") {
-            return parsed.toString();
-          }
-        } catch (error) {}
-        return "";
-      }
-
-      function formatBillingDate(value) {
-        var raw = String(value || "").trim();
-        if (!raw) return "Indisponible";
-        var date = new Date(raw);
-        if (Number.isNaN(date.getTime())) return "Indisponible";
-        return date.toLocaleDateString("fr-FR", {
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        });
-      }
-
-      function isExpiredBillingDate(value) {
-        var raw = String(value || "").trim();
-        if (!raw) return false;
-        var date = new Date(raw);
-        if (Number.isNaN(date.getTime())) return false;
-        return date.getTime() <= Date.now();
-      }
-
-      function resolveAccountLabel(value) {
-        var normalized = String(value || "").trim().toLowerCase();
-        if (normalized === "merchant") return "Commerce";
-        if (normalized === "municipality") return "Mairie";
-        if (normalized === "social") return "Association";
-        return "Compte pro";
-      }
-
-      function resolveBillingStatusLabel(status, exempt, cancelAtPeriodEnd) {
-        if (exempt) return "Accès administré";
-        if (cancelAtPeriodEnd) return "Renouvellement arrêté";
-        if (status === "ACTIVE") return "Actif";
-        if (status === "PAST_DUE") return "Paiement à régulariser";
-        if (status === "CANCELED") return "Annulé";
-        if (status === "INCOMPLETE") return "À finaliser";
-        return status || "Indisponible";
-      }
-
-      function setBillingFeedback(message, tone) {
-        var node = $("billingFeedback");
-        if (!node) return;
-        node.className = "billing-feedback" + (tone ? " " + tone : "");
-        node.textContent = message || "";
-      }
-
-      function isValidEmail(value) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
-      }
-
-      function setupBillingSection() {
-        var params = new URLSearchParams(window.location.search);
-        var hasBillingContext =
-          params.has("accountType") ||
-          params.has("billingStatus") ||
-          params.has("billingExempt") ||
-          params.has("cancelAtPeriodEnd") ||
-          params.has("currentPeriodEnd") ||
-          params.has("unsubscribeUrl") ||
-          params.has("reactivateUrl");
-
-        if (hasBillingContext) {
-          var accountType = params.get("accountType");
-          var billingStatus = String(params.get("billingStatus") || "").trim().toUpperCase();
-          var billingExempt = params.get("billingExempt") === "1";
-          var cancelAtPeriodEnd = params.get("cancelAtPeriodEnd") === "1";
-          var currentPeriodEnd = params.get("currentPeriodEnd");
-          var hasExpiredPeriod = isExpiredBillingDate(currentPeriodEnd);
-          var unsubscribeUrl = safeUrl(params.get("unsubscribeUrl"));
-          var reactivateUrl = safeUrl(params.get("reactivateUrl"));
-          var contextBlock = $("billingContextBlock");
-          var actions = $("billingActions");
-
-          if (contextBlock) contextBlock.classList.add("is-visible");
-          $("billingAccountValue").textContent = resolveAccountLabel(accountType);
-          $("billingStatusValue").textContent = resolveBillingStatusLabel(
-            billingStatus,
-            billingExempt,
-            cancelAtPeriodEnd
+          setBillingFeedback(
+            "Si un compte professionnel correspond a cette adresse, vous recevrez un lien securise.",
+            "ok"
           );
-          if (hasExpiredPeriod) {
-            $("billingStatusValue").textContent = "Expiré";
-            $("billingRenewalValue").textContent = "Acces expire le " + formatBillingDate(currentPeriodEnd);
-          } else {
-            $("billingRenewalValue").textContent = cancelAtPeriodEnd
-              ? "Arrêt demandé"
-              : formatBillingDate(currentPeriodEnd);
-          }
-
-          if (actions) {
-            var html = "";
-            if (!hasExpiredPeriod && reactivateUrl) {
-              html += '<a class="pill primary" href="' + escapeHtml(reactivateUrl) + '">Réactiver le renouvellement</a>';
-            }
-            if (!hasExpiredPeriod && unsubscribeUrl) {
-              html += '<a class="pill danger" href="' + escapeHtml(unsubscribeUrl) + '">Arrêter le renouvellement</a>';
-            }
-            if (hasExpiredPeriod) {
-              html += '<a class="pill primary" href="mailto:contact@urbalya.com?subject=Renouvellement%20abonnement%20Urbalya">Demander un nouveau lien de paiement</a>';
-            }
-            html += '<a class="pill" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
-            actions.innerHTML = html;
-          }
+          form.reset();
+        } catch (err) {
+          setBillingFeedback(err && err.message ? err.message : "Impossible d'envoyer le lien.", "error");
+        } finally {
+          if (submit) submit.disabled = false;
+          input.disabled = false;
         }
+      });
+    }
 
-        var form = $("billingSelfServeForm");
-        var input = $("billingSelfServeEmail");
-        var submit = $("billingSelfServeSubmit");
-        if (!form || !input) return;
+    /* ---- MENU ---- */
 
-        form.addEventListener("submit", async function (event) {
-          event.preventDefault();
-          var email = input.value.trim().toLowerCase();
-          if (!isValidEmail(email)) {
-            setBillingFeedback("Veuillez entrer une adresse email valide.", "error");
-            input.focus();
-            return;
-          }
+    function setupMenu() {
+      var root = document.documentElement;
+      var btn = $("menuBtn");
+      var closeBtn = $("closeBtn");
+      var backdrop = $("backdrop");
+      var drawer = $("drawer");
+      if (!btn || !closeBtn || !backdrop || !drawer) return;
 
-          try {
-            if (submit) submit.disabled = true;
-            input.disabled = true;
-            setBillingFeedback("Envoi du lien sécurisé...", "");
-
-            var response = await fetch(API_BASE + "/pro/request-management-link", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-              },
-              body: JSON.stringify({ email: email })
-            });
-
-            var payload = null;
-            try {
-              payload = await response.json();
-            } catch (error) {
-              payload = null;
-            }
-
-            if (!response.ok) {
-              var message = payload && payload.message;
-              if (Array.isArray(message)) message = message.join(" ");
-              throw new Error(message || "Impossible d'envoyer le lien pour le moment.");
-            }
-
-            setBillingFeedback(
-              "Si un compte professionnel correspond à cette adresse, vous recevrez un lien sécurisé pour vous connecter, gérer l'abonnement Pro ou demander la suppression du compte.",
-              "ok"
-            );
-            form.reset();
-          } catch (error) {
-            setBillingFeedback(
-              error && error.message ? error.message : "Impossible d'envoyer le lien pour le moment.",
-              "error"
-            );
-          } finally {
-            if (submit) submit.disabled = false;
-            input.disabled = false;
-          }
-        });
+      var lastFocus = null;
+      function setOpen(open) {
+        if (open) {
+          lastFocus = document.activeElement;
+          root.classList.add("menu-open");
+          btn.setAttribute("aria-expanded", "true");
+          backdrop.setAttribute("aria-hidden", "false");
+          var firstLink = drawer.querySelector("a, button");
+          setTimeout(function () { if (firstLink) firstLink.focus(); }, 50);
+        } else {
+          root.classList.remove("menu-open");
+          btn.setAttribute("aria-expanded", "false");
+          backdrop.setAttribute("aria-hidden", "true");
+          if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+        }
       }
 
-      function bindEvents() {
-        $("year").textContent = new Date().getFullYear();
-        setupMenu();
-        setupBillingSection();
+      btn.addEventListener("click", function () { setOpen(true); });
+      closeBtn.addEventListener("click", function () { setOpen(false); });
+      backdrop.addEventListener("click", function () { setOpen(false); });
+      document.addEventListener("keydown", function (event) {
+        if ($("pauseModal").classList.contains("is-visible")) {
+          if (event.key === "Escape") { event.preventDefault(); closePauseModal(); }
+          return;
+        }
+        if (!root.classList.contains("menu-open")) return;
+        if (event.key === "Escape") { event.preventDefault(); setOpen(false); }
+      });
+      drawer.addEventListener("click", function (event) {
+        if (event.target && event.target.closest && event.target.closest("a")) setOpen(false);
+      });
+    }
 
-        Array.prototype.forEach.call(document.querySelectorAll("[data-account-tab]"), function (button) {
-          button.addEventListener("click", function () {
-            setAccountType(button.dataset.accountTab);
+    /* ---- BIND EVENTS ---- */
+
+    function bindEvents() {
+      $("year").textContent = new Date().getFullYear();
+      setupMenu();
+      setupBillingSection();
+
+      /* Type cards */
+      Array.prototype.forEach.call(document.querySelectorAll("[data-account-tab]"), function (button) {
+        button.addEventListener("click", function () {
+          setAccountType(button.dataset.accountTab);
+        });
+      });
+
+      /* Step navigation */
+      $("nextBtn1").addEventListener("click", function () {
+        clearStepError("stepErr1");
+        goToStep(2);
+      });
+      $("prevBtn2").addEventListener("click", function () { goToStep(1); });
+      $("nextBtn2").addEventListener("click", function () {
+        var err = validateStep2();
+        if (err) { showStepError("stepErr2", err); return; }
+        clearStepError("stepErr2");
+        goToStep(3);
+      });
+      $("prevBtn3").addEventListener("click", function () { goToStep(2); });
+      $("nextBtn3").addEventListener("click", function () {
+        var err = validateStep3();
+        if (err) { showStepError("stepErr3", err); return; }
+        clearStepError("stepErr3");
+        goToStep(4);
+      });
+      $("prevBtn4").addEventListener("click", function () { goToStep(3); });
+
+      /* Business type selects */
+      $("merchantBusinessTypeKey").addEventListener("change", function () {
+        $("merchantCustomWrap").classList.toggle("is-hidden", $("merchantBusinessTypeKey").value !== "OTHER");
+      });
+      $("socialDomainKey").addEventListener("change", function () {
+        $("socialCustomWrap").classList.toggle("is-hidden", $("socialDomainKey").value !== "OTHER");
+      });
+
+      /* Email real-time check */
+      $("email").addEventListener("input", function () {
+        emailAvailable = null;
+        clearTimeout(emailCheckTimer);
+        var email = $("email").value.trim().toLowerCase();
+        emailCheckTimer = setTimeout(function () { checkEmailAvailability(email); }, 600);
+      });
+
+      /* Password toggle */
+      $("passwordToggle").addEventListener("click", function () {
+        var input = $("password");
+        var isText = input.type === "text";
+        input.type = isText ? "password" : "text";
+        $("eyeIcon").innerHTML = isText
+          ? '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>'
+          : '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19M1 1l22 22"/>';
+      });
+
+      /* Address auto-search */
+      $("addressQuery").addEventListener("input", function () {
+        selectedAddress = null;
+        updateSelectedAddress();
+        clearTimeout(addrSearchTimer);
+        addrSearchTimer = setTimeout(searchAddress, 500);
+      });
+      $("addressQuery").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") { event.preventDefault(); clearTimeout(addrSearchTimer); searchAddress(); }
+      });
+
+      /* Manual address panel */
+      $("manualAddrCancel").addEventListener("click", function () {
+        $("manualAddrPanel").classList.remove("is-visible");
+        $("manualAddressFeedback").textContent = "";
+      });
+      $("manualAddrSubmit").addEventListener("click", useManualAddress);
+
+      /* Pause modal */
+      $("closePauseModal").addEventListener("click", closePauseModal);
+      $("savePauseButton").addEventListener("click", savePause);
+      $("removePauseButton").addEventListener("click", removePause);
+      $("pauseModal").addEventListener("click", function (event) {
+        if (event.target === $("pauseModal")) closePauseModal();
+      });
+
+      /* Hours presets */
+      $("copyMondayButton").addEventListener("click", function () {
+        var rows = Array.prototype.slice.call(document.querySelectorAll(".hours-row"));
+        var monday = rows[0];
+        if (!monday) return;
+        rows.slice(1, 5).forEach(function (row) {
+          ["open", "close"].forEach(function (key) {
+            row.querySelector("[data-hour='" + key + "']").value = monday.querySelector("[data-hour='" + key + "']").value;
           });
-        });
-
-        $("merchantBusinessTypeKey").addEventListener("change", function () {
-          $("merchantCustomWrap").classList.toggle("is-hidden", $("merchantBusinessTypeKey").value !== "OTHER");
-        });
-
-        $("socialDomainKey").addEventListener("change", function () {
-          $("socialCustomWrap").classList.toggle("is-hidden", $("socialDomainKey").value !== "OTHER");
-        });
-
-        $("searchAddressButton").addEventListener("click", searchAddress);
-        $("manualAddressButton").addEventListener("click", renderManualAddressForm);
-        $("addressSuggestions").addEventListener("click", function (event) {
-          if (event.target.closest("#manualAddressInlineButton")) {
-            renderManualAddressForm();
-            return;
-          }
-          if (event.target.closest("#manualAddressSearchAgain")) {
-            searchAddress();
-          }
-        });
-        $("addressSuggestions").addEventListener("submit", function (event) {
-          if (event.target && event.target.id === "manualAddressForm") {
-            event.preventDefault();
-            useManualAddress();
-          }
-        });
-        $("addressQuery").addEventListener("keydown", function (event) {
-          if (event.key === "Enter") {
-            event.preventDefault();
-            searchAddress();
-          }
-        });
-        $("closeAddressModal").addEventListener("click", closeAddressModal);
-        $("addressModal").addEventListener("click", function (event) {
-          if (event.target === $("addressModal")) closeAddressModal();
-        });
-        $("closePauseModal").addEventListener("click", closePauseModal);
-        $("savePauseButton").addEventListener("click", savePause);
-        $("removePauseButton").addEventListener("click", removePause);
-        $("pauseModal").addEventListener("click", function (event) {
-          if (event.target === $("pauseModal")) closePauseModal();
-        });
-
-        $("copyMondayButton").addEventListener("click", function () {
-          var rows = Array.prototype.slice.call(document.querySelectorAll(".hours-row"));
-          var monday = rows[0];
-          if (!monday) return;
-          rows.slice(1, 5).forEach(function (row) {
-            ["open", "close"].forEach(function (key) {
-              row.querySelector("[data-hour='" + key + "']").value = monday.querySelector("[data-hour='" + key + "']").value;
-            });
-            row.querySelector("[data-hour='closed']").checked = false;
-            row.querySelector("[data-hour='closed']").dispatchEvent(new Event("change"));
-            if (monday.dataset.pauseStart && monday.dataset.pauseEnd) {
-              row.dataset.pauseStart = monday.dataset.pauseStart;
-              row.dataset.pauseEnd = monday.dataset.pauseEnd;
-            } else {
-              delete row.dataset.pauseStart;
-              delete row.dataset.pauseEnd;
-            }
-            updatePauseButton(row);
-          });
-          updateHoursPreview();
-        });
-
-        $("weekdayPresetButton").addEventListener("click", function () {
-          var rows = Array.prototype.slice.call(document.querySelectorAll(".hours-row"));
-          rows.forEach(function (row, index) {
-            row.querySelector("[data-hour='open']").value = index < 5 ? "09:00" : "10:00";
-            row.querySelector("[data-hour='close']").value = index < 5 ? "18:00" : "12:00";
-            row.querySelector("[data-hour='closed']").checked = index === 6;
-            row.querySelector("[data-hour='closed']").dispatchEvent(new Event("change"));
+          row.querySelector("[data-hour='closed']").checked = false;
+          row.querySelector("[data-hour='closed']").dispatchEvent(new Event("change"));
+          if (monday.dataset.pauseStart && monday.dataset.pauseEnd) {
+            row.dataset.pauseStart = monday.dataset.pauseStart;
+            row.dataset.pauseEnd = monday.dataset.pauseEnd;
+          } else {
             delete row.dataset.pauseStart;
             delete row.dataset.pauseEnd;
-            updatePauseButton(row);
-          });
-          updateHoursPreview();
+          }
+          updatePauseButton(row);
         });
+        updateHoursPreview();
+      });
 
-        $("photos").addEventListener("change", function () {
-          var preview = $("photoPreview");
-          preview.innerHTML = "";
-          Array.prototype.slice.call($("photos").files || [], 0, 8).forEach(function (file) {
-            if (!/^image\//.test(file.type || "")) return;
-            var reader = new FileReader();
-            reader.onload = function () {
-              var card = document.createElement("div");
-              card.className = "preview";
-              card.innerHTML = '<img alt="" src="' + String(reader.result || "") + '" />';
-              preview.appendChild(card);
-            };
-            reader.readAsDataURL(file);
-          });
+      $("weekdayPresetButton").addEventListener("click", function () {
+        var rows = Array.prototype.slice.call(document.querySelectorAll(".hours-row"));
+        rows.forEach(function (row, index) {
+          row.querySelector("[data-hour='open']").value = index < 5 ? "09:00" : "10:00";
+          row.querySelector("[data-hour='close']").value = index < 5 ? "18:00" : "12:00";
+          row.querySelector("[data-hour='closed']").checked = index === 6;
+          row.querySelector("[data-hour='closed']").dispatchEvent(new Event("change"));
+          delete row.dataset.pauseStart;
+          delete row.dataset.pauseEnd;
+          updatePauseButton(row);
         });
+        updateHoursPreview();
+      });
 
-        $("professionalSignupForm").addEventListener("submit", submitForm);
-      }
+      /* Photo drop zone */
+      var dropZone = $("photoDropZone");
+      dropZone.addEventListener("click", function () { $("photos").click(); });
+      dropZone.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("photos").click(); } });
+      dropZone.addEventListener("dragover", function (e) { e.preventDefault(); dropZone.classList.add("drag-over"); });
+      dropZone.addEventListener("dragleave", function () { dropZone.classList.remove("drag-over"); });
+      dropZone.addEventListener("drop", function (e) {
+        e.preventDefault();
+        dropZone.classList.remove("drag-over");
+        try { $("photos").files = e.dataTransfer.files; } catch (_) {}
+        $("photos").dispatchEvent(new Event("change"));
+      });
+      $("photos").addEventListener("change", function () {
+        renderPhotoPreview($("photos").files);
+      });
 
-      populateSelects();
-      renderHours();
-      bindEvents();
-      setAccountType("merchant");
-    })();
-  </script>
-  <script src="../cookie-consent.js"></script>
+      /* Form submit */
+      $("professionalSignupForm").addEventListener("submit", submitForm);
+    }
+
+    populateSelects();
+    renderHours();
+    bindEvents();
+    setAccountType("merchant");
+  })();
+</script>
+<script src="../cookie-consent.js"></script>
 </body>
 </html>
