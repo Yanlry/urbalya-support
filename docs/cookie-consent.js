@@ -311,8 +311,7 @@
         infoBlock.innerHTML =
           "© " +
           new Date().getFullYear() +
-          " Urbalya — Urbalya est une application développée par Lemach Labs. " +
-          'Contact : <a href="mailto:contact@urbalya.com">contact@urbalya.com</a>';
+          " Urbalya — Urbalya est une application développée par Lemach Labs. " 
       }
 
       var linksContainer = foot.querySelector("div:last-child");
