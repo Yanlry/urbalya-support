@@ -1,0 +1,1352 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>Support — Urbalya</title>
+  <meta name="description" content="Centre d’assistance Urbalya : FAQ, support, signalement de bugs et contenus." />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="cookie-consent.css" />
+
+  <style>
+    :root{
+      --bg:#0B1220;
+      --panel:#0F172A;
+      --text:#E5E7EB;
+      --muted:#94A3B8;
+      --line:rgba(255,255,255,.10);
+      --line2:rgba(255,255,255,.14);
+
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --shadow2: 0 10px 30px rgba(0,0,0,.35);
+
+      --radius: 18px;
+      --radius2: 24px;
+
+      --accent:#3B82F6;
+      --accentSoft: rgba(59,130,246,.14);
+      --danger:#EF4444;
+      --warn:#F59E0B;
+
+      --container: 1100px;
+      --tap: 44px;
+      --navH: 64px;
+      --focus: 0 0 0 4px rgba(59,130,246,.25);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: geometricPrecision;
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; height:auto; display:block}
+    button{font-family:inherit}
+    strong{font-weight:900}
+
+    .container{max-width: var(--container); margin:0 auto; padding:0 16px}
+    @media (min-width: 720px){ .container{padding:0 20px} }
+
+    .skip{
+      position:absolute;
+      left:12px;
+      top:12px;
+      padding:10px 12px;
+      border-radius:12px;
+      background: rgba(2,6,23,.95);
+      border:1px solid var(--line2);
+      transform: translateY(-200%);
+      transition: transform .15s ease;
+      z-index: 9999;
+    }
+    .skip:focus{transform: translateY(0); outline:none; box-shadow: var(--focus)}
+    :focus{outline:none}
+    :focus-visible{box-shadow: var(--focus); border-radius: 12px}
+
+    .ico{width:18px;height:18px; display:inline-block; flex:0 0 auto}
+    .ico.sm{width:16px;height:16px}
+    .ico.lg{width:20px;height:20px}
+    .ico.xl{width:22px;height:22px}
+
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.82);
+      border-bottom: 1px solid var(--line);
+      padding-top: env(safe-area-inset-top);
+    }
+    .nav-inner{
+      min-height: var(--navH);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 0;
+    }
+
+    .logo{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+    .logo-img{width:100%; height:100%; object-fit: cover}
+
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+      min-width: 0;
+    }
+    .brand-text strong{
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size: 15px;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .brand-text small{
+      display:block;
+      color:var(--muted);
+      font-weight:600;
+      letter-spacing:.2px;
+      font-size: 12px;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-actions{display:flex; align-items:center; gap:10px}
+
+    .nav-toggle{
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.45);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      color: var(--text);
+    }
+    .nav-toggle:hover{transform: translateY(-1px); background: rgba(15,23,42,.65); border-color: rgba(255,255,255,.18)}
+
+    .links{display:none; gap:10px; align-items:center}
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.45);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      color:var(--text);
+      font-weight:900;
+      font-size:14px;
+      line-height: 1;
+      white-space: nowrap;
+      min-height: 38px;
+    }
+    .pill:hover{transform: translateY(-1px); background: rgba(15,23,42,.65); border-color: rgba(255,255,255,.18)}
+    .pill.primary{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(59,130,246,.92);
+      box-shadow: 0 14px 30px rgba(59,130,246,.14);
+    }
+    .pill.danger,
+    .pill.danger[aria-current="page"]{
+      border: 1px solid rgba(239,68,68,.55);
+      background: rgba(239,68,68,.92);
+      color:#fff;
+      box-shadow: 0 14px 30px rgba(239,68,68,.20);
+    }
+    .pill.danger:hover{
+      background: rgba(220,38,38,.95);
+      border-color: rgba(252,165,165,.65);
+    }
+    .pill[aria-current="page"]{
+      background: rgba(245,158,11,.20);
+      border-color: rgba(245,158,11,.55);
+      color:#FDE68A;
+    }
+    .store-link{
+      width: clamp(180px, 44vw, 240px);
+      padding:0;
+      overflow:hidden;
+      border-radius: 12px;
+     
+      background: transparent !important;
+      box-shadow: 0 6px 16px rgba(2,6,23,.35);
+      min-height: auto;
+    }
+    .store-link{
+      width: clamp(220px, 50vw, 300px);
+      padding: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      background: transparent !important;
+      box-shadow: 0 6px 16px rgba(2,6,23,.35);
+      min-height: auto;
+    }
+    
+    .store-link:hover{
+      background: rgba(15,23,42,.15) !important;
+      border-color: rgba(226,232,240,.95) !important;
+    }
+    
+    .store-badge{
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    
+    .drawer .store-link{
+      display: block;
+      width: 100%;
+      max-width: none;
+      min-height: auto;
+      border-width: 0;
+      box-shadow: none;
+      margin: 0;
+      align-self: stretch;
+    }
+    
+    .drawer .store-badge{
+      display: block;
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      height: auto;
+      margin: 0;
+      object-fit: contain;
+    }
+
+
+    .backdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(2,6,23,.60);
+      backdrop-filter: blur(6px);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+      z-index: 80;
+    }
+    .drawer{
+      position:fixed;
+      top: env(safe-area-inset-top);
+      right:0;
+      width: min(92vw, 360px);
+      height: calc(100vh - env(safe-area-inset-top));
+      background: rgba(15,23,42,.94);
+      border-left: 1px solid var(--line);
+      box-shadow: 0 30px 80px rgba(0,0,0,.55);
+      transform: translateX(110%);
+      transition: transform .22s ease;
+      z-index: 90;
+      display:flex;
+      flex-direction:column;
+      padding: 14px;
+    }
+    .drawer-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 8px 6px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .drawer-title{font-weight:900; letter-spacing:.2px}
+    .drawer-close{
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(2,6,23,.35);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      color: var(--text);
+    }
+    .drawer-nav{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding: 14px 6px;
+    }
+    .drawer .pill{
+      width:100%;
+      justify-content:center;
+      padding: 14px 12px;
+      border-radius: 16px;
+      font-size: 15px;
+      min-height: 46px;
+    }
+    .drawer-foot{
+      margin-top:auto;
+      padding: 12px 6px 6px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .drawer-foot .pill{
+      width:100%;
+      min-height: 46px;
+    }
+
+    .menu-open .backdrop{opacity:1; pointer-events:auto}
+    .menu-open .drawer{transform: translateX(0)}
+
+    main{padding: 18px 0 22px}
+    .hero{
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.62);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    @media (min-width: 720px){ .hero{padding: 26px} }
+    .hero:before{
+      content:"";
+      position:absolute;
+      left:0; right:0; top:0;
+      height:4px;
+      background: rgba(59,130,246,.70);
+      opacity:.85;
+    }
+
+    .hero-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: var(--accentSoft);
+      border: 1px solid rgba(59,130,246,.25);
+      color: #CFE3FF;
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size: 13px;
+    }
+
+    h1{
+      margin: 12px 0 8px;
+      font-size: clamp(24px, 4.6vw, 32px);
+      letter-spacing: -0.7px;
+      line-height: 1.08;
+    }
+    .lead{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+      max-width: 78ch;
+      font-size: 15px;
+    }
+    @media (min-width: 720px){ .lead{font-size: 16px} }
+
+    .grid{
+      margin-top: 16px;
+      display:grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px){ .grid{grid-template-columns: repeat(2, 1fr); gap: 14px} }
+    @media (min-width: 980px){ .grid{grid-template-columns: repeat(3, 1fr)} }
+
+    .card{
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+      box-shadow: var(--shadow2);
+      padding: 16px;
+      position:relative;
+      overflow:hidden;
+      min-height: 154px;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      left:0; top:0; right:0;
+      height:3px;
+      background: rgba(59,130,246,.70);
+      opacity:.85;
+    }
+
+    .card h2{
+      margin:0 0 8px;
+      font-size: 16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      letter-spacing: -.2px;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size: 14px;
+    }
+
+    .btn{
+      margin-top: 12px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(2,6,23,.35);
+      font-weight:900;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      min-height: var(--tap);
+      width: 100%;
+      text-align:center;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(2,6,23,.55); border-color: rgba(255,255,255,.18)}
+    .btn.primary{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(59,130,246,.92);
+      box-shadow: 0 16px 35px rgba(59,130,246,.14);
+    }
+    @media (min-width: 720px){
+      .btn{width:auto}
+    }
+
+    .note{
+      margin-top: 14px;
+      border-radius: var(--radius);
+      border:1px solid rgba(245,158,11,.22);
+      background: rgba(245,158,11,.10);
+      padding: 14px;
+      color:#FDE68A;
+      line-height:1.7;
+      font-size: 14px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .note .icoWrap{
+      width: 30px;
+      height: 30px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius: 12px;
+      background: rgba(245,158,11,.14);
+      border: 1px solid rgba(245,158,11,.22);
+      flex: 0 0 auto;
+    }
+
+    .section{margin-top: 18px}
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin: 18px 0 12px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: -.3px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .section-title span{color:var(--muted); font-weight:600; font-size:13px; line-height:1.3}
+
+    .search{
+      margin-top: 12px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+      box-shadow: var(--shadow2);
+      padding: 10px 12px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .search input{
+      width:100%;
+      border:none; outline:none;
+      background: transparent;
+      color: var(--text);
+      font-size: 15px;
+      padding: 12px 6px;
+    }
+    .search input::placeholder{color: rgba(148,163,184,.85)}
+    .kbd{
+      font-weight:900;
+      font-size:12px;
+      color: var(--muted);
+      border:1px solid rgba(148,163,184,.18);
+      border-bottom-color: rgba(148,163,184,.12);
+      padding:6px 10px;
+      border-radius: 10px;
+      background: rgba(2,6,23,.25);
+      white-space:nowrap;
+    }
+
+    .faq{
+      margin-top: 14px;
+      display:grid;
+      gap: 10px;
+    }
+    details{
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      font-weight:900;
+      color: var(--text);
+    }
+    summary::-webkit-details-marker{display:none}
+
+    .sum-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 0;
+    }
+    .sum-left span{
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .chev{opacity:.85; transition: transform .15s ease}
+    details[open] .chev{transform: rotate(90deg)}
+
+    .answer{
+      padding: 0 16px 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14px;
+    }
+    .answer ul{margin: 10px 0 0 18px}
+    .answer a{font-weight:900; color: var(--text); opacity:.95}
+    .answer a:hover{opacity:1}
+
+    footer{
+      border-top: 1px solid var(--line);
+      background: rgba(11,18,32,.55);
+      padding: 18px 0;
+      color: var(--muted);
+      font-size:14px;
+      margin-top: 20px;
+    }
+    .foot{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .foot a{color: var(--text); font-weight:900; opacity:.92}
+    .foot a:hover{opacity:1}
+
+    .sr-only{
+      position:absolute!important;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);
+      white-space:nowrap;border:0;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto!important}
+      .pill,.btn,.nav-toggle,.chev{transition:none}
+    }
+    /* Menu variant: list minimal (sans cartes) */
+    .drawer{
+      background: rgba(7,18,38,.92);
+      backdrop-filter: blur(16px);
+      color:#E6EEF8;
+    }
+
+    .drawer-title,
+    .drawer-close{
+      color:#E6EEF8;
+    }
+
+    .drawer-nav{
+      gap:0;
+      padding:12px 2px 8px;
+    }
+
+    .drawer .pill{
+      position:relative;
+      width:100%;
+      justify-content:flex-start;
+      gap:12px;
+      padding:13px 4px;
+      min-height:52px;
+      border:0;
+      border-radius:0;
+      background:transparent !important;
+      color:inherit;
+      box-shadow:none;
+      transform:none;
+    }
+
+    .drawer .pill::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:1px;
+      background:linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
+      pointer-events:none;
+    }
+
+    .drawer .pill::before{
+      content:"";
+      position:absolute;
+      left:-4px;
+      top:50%;
+      width:2px;
+      height:0;
+      border-radius:999px;
+      background:linear-gradient(180deg,#7DD3FC,#38BDF8);
+      transform:translateY(-50%);
+      transition:height .18s ease, opacity .18s ease;
+      opacity:0;
+    }
+
+    .drawer .pill:hover,
+    .drawer .pill[aria-current="page"]{
+      background:linear-gradient(90deg, rgba(56,189,248,.12), rgba(56,189,248,.03)) !important;
+    }
+
+    .drawer .pill:hover::before,
+    .drawer .pill[aria-current="page"]::before{
+      height:28px;
+      opacity:1;
+    }
+
+    .drawer .pill[aria-current="page"]{
+      color:#F2F8FF;
+      border-color:transparent;
+    }
+
+    .drawer .pill .ico{
+      width:18px;
+      height:18px;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent !important;
+      box-shadow:none;
+      opacity:.95;
+      flex:0 0 18px;
+      color:#BFD2E6;
+    }
+
+    .drawer .pill.primary,
+    .drawer .pill.danger{
+      color:inherit;
+    }
+
+    .drawer .pill.danger{
+      color:#FF8D98;
+    }
+
+    .drawer-nav > .store-link:nth-last-child(2){
+      margin-top:16px;
+      position:relative;
+    }
+
+    .drawer-nav > .store-link:nth-last-child(2)::before{
+      content:"App mobile";
+      position:absolute;
+      left:0;
+      top:-10px;
+      transform:translateY(-100%);
+      font-size:11px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      color:#9FB3CC;
+      font-weight:800;
+      pointer-events:none;
+    }
+
+    .drawer .store-link{
+      padding:0;
+      margin-top:10px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:12px;
+      overflow:hidden;
+      background:rgba(10,24,45,.55) !important;
+      min-height:auto;
+    }
+
+    .drawer .store-link::before,
+    .drawer .store-link::after{
+      display:none;
+    }
+
+    .drawer .store-link .ico{
+      display:none;
+    }
+
+    .drawer .store-link .store-badge{
+      width:100%;
+      display:block;
+    }
+
+    .drawer-foot{
+      padding:10px 2px 0;
+      gap:0;
+      border-top:1px solid rgba(255,255,255,.12);
+    }
+
+    .drawer-foot .pill{
+      min-height:52px;
+    }
+
+    .drawer-foot .pill.primary,
+    .drawer-foot .pill.primary[href*="billing"],
+    .drawer-foot .pill.primary[href^="mailto"]{
+      background:transparent !important;
+      color:inherit;
+    }
+
+    @media (max-width:640px){
+      .drawer{
+        width:min(94vw, 350px);
+      }
+
+      .drawer .pill{
+        min-height:50px;
+        padding:12px 3px;
+      }
+    }
+
+</style>
+  <link rel="stylesheet" href="site.css" />
+</head>
+
+<body>
+  <a class="skip" href="#main">Aller au contenu principal</a>
+
+    <svg width="0" height="0" style="position:absolute">
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 7.5h16M4 12h16M4 16.5h16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-x" viewBox="0 0 24 24">
+      <path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-arrow-left" viewBox="0 0 24 24">
+      <path d="M19 12H5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+      <path d="m11 6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+
+    <symbol id="i-arrow-right" viewBox="0 0 24 24">
+      <path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+      <path d="m13 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+
+    <symbol id="i-support" viewBox="0 0 24 24">
+      <path d="M4 12a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+      <rect x="3" y="12" width="4.5" height="7" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <rect x="16.5" y="12" width="4.5" height="7" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="M18.8 19.5A2.4 2.4 0 0 1 16.6 21H12" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="M3.8 10.6 12 4l8.2 6.6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6.5 9.8V20h11V9.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M10 20v-5h4v5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-lock" viewBox="0 0 24 24">
+      <rect x="5" y="10.5" width="14" height="10" rx="2.4" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="M8 10.5V8a4 4 0 1 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-file" viewBox="0 0 24 24">
+      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.7.7L19.3 6.3A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M14 2v5a1 1 0 0 0 1 1h5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M9.5 13h5M9.5 17h5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect x="3.5" y="5.5" width="17" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="m4.5 8 7.5 5.2L19.5 8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+    </symbol>
+
+    <symbol id="i-life" viewBox="0 0 24 24">
+      <path d="M4 12h3.3l1.9-3.4L12 16l2.2-4h5.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="2.1" />
+    </symbol>
+
+    <symbol id="i-map" viewBox="0 0 24 24">
+      <path d="M9 4 3.8 6.2v13.6L9 17.6l6 2.4 5.2-2.2V4.2L15 6.4Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M9 4v13.6M15 6.4V20" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-bell" viewBox="0 0 24 24">
+      <path d="M6.8 16h10.4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+      <path d="M8.2 16V10a3.8 3.8 0 1 1 7.6 0v6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M10.4 18a1.8 1.8 0 0 0 3.2 0" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-building" viewBox="0 0 24 24">
+      <rect x="4.5" y="3.5" width="15" height="17" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="M8 8h1.4M8 11.6h1.4M8 15.2h1.4M14.6 8H16M14.6 11.6H16M14.6 15.2H16M11.3 20.5v-3h1.4v3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-camera" viewBox="0 0 24 24">
+      <path d="M4.5 8h3.8l1.6-2h4.2l1.6 2h3.8a1.9 1.9 0 0 1 1.9 1.9V18a1.9 1.9 0 0 1-1.9 1.9H4.5A1.9 1.9 0 0 1 2.6 18V9.9A1.9 1.9 0 0 1 4.5 8Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <circle cx="12" cy="13.2" r="3.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+    </symbol>
+
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <circle cx="9" cy="7.2" r="3" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="M3.8 20v-1.2A4.2 4.2 0 0 1 8 14.6h2a4.2 4.2 0 0 1 4.2 4.2V20" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M16 4.6a2.8 2.8 0 0 1 0 5.4M20.2 20v-1a3.7 3.7 0 0 0-3-3.6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M12 2.8 20 6.6v5.3c0 5.1-3.5 9.2-8 10.3-4.5-1.1-8-5.2-8-10.3V6.6Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="m9 12.3 2.1 2.2 4-4.3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="m20 7.5-10 10-5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+
+    <symbol id="i-news-premium" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2" />
+      <rect x="6.5" y="7" width="4.8" height="4.2" rx="1" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M13.6 8.1H18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M13.6 10.6H18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M6.5 14.5H18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M6.5 17.1H14.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-signal-premium" viewBox="0 0 24 24">
+      <path d="M12 21.25s-6.8-4.4-6.8-10.5a6.8 6.8 0 0 1 13.6 0c0 6.1-6.8 10.5-6.8 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M12 8.25v3.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+      <circle cx="12" cy="14.4" r="1.1" fill="currentColor" />
+    </symbol>
+
+    <symbol id="i-ranking-premium" viewBox="0 0 24 24">
+      <path d="M8 4.5h8v2.7a4 4 0 1 1-8 0V4.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M8 7.3H5.5a2.5 2.5 0 0 0 2.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M16 7.3h2.5a2.5 2.5 0 0 1-2.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M12 11.2v5.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M9.2 20h5.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M10.2 14.6h3.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <path d="M12 3.5 21 19.5H3L12 3.5Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M12 9.2v4.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <circle cx="12" cy="17" r="1.1" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="i-ban" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="M7.8 7.8 16.2 16.2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-book" viewBox="0 0 24 24">
+      <path d="M5.5 4.5h5.8a2.2 2.2 0 0 1 2.2 2.2V20a2.2 2.2 0 0 0-2.2-2.2H5.5Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M18.5 4.5h-5.8a2.2 2.2 0 0 0-2.2 2.2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M18.5 4.5V20h-5.8a2.2 2.2 0 0 0-2.2 2.2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-image" viewBox="0 0 24 24">
+      <rect x="3.5" y="4.5" width="17" height="15" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <circle cx="9" cy="9" r="1.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="m5.8 17 4.8-5 3.3 3 2.7-2.8 2.6 4.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-link" viewBox="0 0 24 24">
+      <path d="M9.2 14.8 7.4 16.6a3.5 3.5 0 1 1-4.9-4.9l1.8-1.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="m14.8 9.2 1.8-1.8a3.5 3.5 0 1 1 4.9 4.9l-1.8 1.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="m8.8 15.2 6.4-6.4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-pause" viewBox="0 0 24 24">
+      <rect x="7" y="5.5" width="3.8" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <rect x="13.2" y="5.5" width="3.8" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="2.1"/>
+    </symbol>
+
+    <symbol id="i-refresh" viewBox="0 0 24 24">
+      <path d="M19.2 9.2A8.2 8.2 0 1 0 20 12" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M20 4.5v5.5h-5.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="M12 7.5v4.9l3.5 2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-target" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <circle cx="12" cy="12" r="4.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="i-hand" viewBox="0 0 24 24">
+      <path d="M6.8 12v-1.2a1.8 1.8 0 0 1 3.6 0V12" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M10.4 12V9.7a1.8 1.8 0 0 1 3.6 0V12" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M14 12v-1a1.8 1.8 0 0 1 3.6 0v4.1c0 3.1-2.1 5.9-5.9 5.9H9c-2.1 0-3.4-1-4.4-3l-.9-1.9" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-baby" viewBox="0 0 24 24">
+      <circle cx="12" cy="10" r="4.1" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="M6.2 21c1.1-3 3.3-4.9 5.8-4.9s4.7 1.9 5.8 4.9" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <circle cx="10.4" cy="9.6" r=".7" fill="currentColor"/>
+      <circle cx="13.6" cy="9.6" r=".7" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="i-bug" viewBox="0 0 24 24">
+      <path d="M8.8 9.5a3.2 3.2 0 0 1 6.4 0v4.2a4 4 0 0 1-8 0V9.5Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M12 6.2V4.4M8.2 10.2H5.3M18.7 10.2h-2.9M8.2 14H5.3M18.7 14h-2.9M10 19.6l-2 2M14 19.6l2 2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-flag" viewBox="0 0 24 24">
+      <path d="M6 21V3.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M6 5h12l-2 3.4L18 12H6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="10.8" cy="10.8" r="6.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="m19.2 19.2-3.6-3.6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-chevron" viewBox="0 0 24 24">
+      <path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-info" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="M12 10.4v5.1" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <circle cx="12" cy="7.4" r="1" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="i-stack" viewBox="0 0 24 24">
+      <path d="m12 3.5 8.8 4.7L12 13 3.2 8.2 12 3.5Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="m3.2 12.1 8.8 4.7 8.8-4.7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="m3.2 16.2 8.8 4.7 8.8-4.7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    </symbol>
+
+
+
+
+
+    <symbol id="i-apple" viewBox="0 0 24 24">
+      <path d="M16.45 13.15c0 2.75 2.22 3.62 2.22 3.62s-1.58 4.49-3.78 4.49c-1.06 0-1.98-.65-3.19-.65-1.21 0-2.2.65-3.18.65-2.04 0-4.12-4.09-4.12-7.44 0-2.99 1.9-4.63 3.8-4.63 1 0 2.01.77 3.2.77s2.11-.77 3.48-.77c.46 0 2.2.09 3.21 1.67-2.72 1.48-1.63 4.91 1.56 4.91Z" fill="currentColor"/>
+      <path d="M14.66 2.83c-.57.79-1.55 1.37-2.45 1.31-.11-.96.35-1.93.87-2.63.61-.77 1.66-1.35 2.55-1.43.08.96-.27 1.93-.97 2.75Z" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+
+  <header class="nav" role="banner">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="Aller à l'accueil Urbalya">
+        <span class="logo" aria-hidden="true">
+          <img class="logo-img" src="logo.png" alt="Urbalya" />
+        </span>
+        <span class="brand-text">
+          <strong>Urbalya</strong>
+          <small>Support</small>
+        </span>
+      </a>
+
+      <div class="nav-actions">
+        <a class="pill primary header-create-btn" href="professionnels/#pro-signup-section">Créer un dossier</a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Ouvrir le menu"
+          aria-controls="drawer"
+          aria-expanded="false"
+          id="menuBtn"
+        >
+          <svg class="ico xl" aria-hidden="true"><use href="#i-menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer-head">
+      <div class="drawer-title">Navigation</div>
+      <button class="drawer-close" type="button" aria-label="Fermer le menu" id="closeBtn">
+        <svg class="ico xl" aria-hidden="true"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+
+    <nav class="drawer-nav" aria-label="Navigation mobile">
+      <a class="pill" href="index.html" >
+        <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
+        Accueil
+      </a>
+      <a class="pill" href="professionnels/">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Compte Pro
+      </a>
+      <a class="pill" href="support.html" aria-current="page">
+        <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
+        Support
+      </a>
+      <a class="pill" href="privacy.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        Confidentialité
+      </a>
+      <a class="pill" href="terms.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Conditions
+      </a>
+      <a class="pill" href="mentions-legales.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Mentions légales
+      </a>
+      <a class="pill primary store-link" href="https://apps.apple.com/app/urbalya/id6754794588" rel="noopener noreferrer" aria-label="Ouvrir l'App Store">
+        <img class="store-badge" src="apple.png" alt="Télécharger sur l'App Store" loading="lazy" decoding="async" />
+      </a>
+      <a class="pill primary store-link" href="https://play.google.com/store/apps/details?id=com.urbalya.app&pcampaignid=web_share" rel="noopener noreferrer" aria-label="Ouvrir Google Play">
+        <img class="store-badge" src="google.png" alt="Disponible sur Google Play" loading="lazy" decoding="async" />
+      </a>
+    </nav>
+
+    <div class="drawer-foot">
+      <a class="pill primary" href="billing.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        Gerer mon compte
+      </a>
+      <a class="pill danger" href="delete-account.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Supprimer mon compte
+      </a>
+      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20Urbalya">
+        <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+        Contactez-nous
+      </a>
+    </div>
+  </aside>
+
+  <main class="container support-page" role="main" id="main">
+    <section class="hero page-hero" aria-label="Support Urbalya">
+      <p class="page-kicker">Assistance Urbalya</p>
+      <h1>Centre d’assistance</h1>
+      <p class="lead">
+        Trouvez une réponse immédiatement (FAQ + solutions rapides), ou contactez le support.
+        Pour gagner du temps, indiquez : modèle d’appareil, plateforme (iOS/Android), version OS, heure du problème et étapes de reproduction.
+      </p>
+
+      <div class="grid support-action-grid" aria-label="Actions rapides">
+        <article class="card">
+          <h2>
+            <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+            Contacter le support
+          </h2>
+          <p>Question, problème, ou demande RGPD : réponse par email.</p>
+          <a class="btn primary"
+             href="mailto:contact@urbalya.com?subject=Support%20Urbalya&body=Bonjour%2C%0A%0A%5BExpliquez%20votre%20demande%5D%0A%0AAppareil%20%3A%20%0APlateforme%20%28iOS%2FAndroid%29%20%3A%20%0AVersion%20OS%20%3A%20%0AVersion%20Urbalya%20%3A%20%0AHeure%20du%20bug%20%3A%20%0A%0AMerci.">
+            <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+            Envoyer un email
+          </a>
+        </article>
+
+        <article class="card">
+          <h2>
+            <svg class="ico" aria-hidden="true"><use href="#i-bug"></use></svg>
+            Signaler un bug
+          </h2>
+          <p>Ajoutez captures d’écran + étapes exactes pour qu’on puisse reproduire.</p>
+          <a class="btn"
+             href="mailto:contact@urbalya.com?subject=Bug%20-%20Urbalya&body=Bonjour%2C%0A%0AType%20de%20bug%20%3A%20%0AEtapes%20pour%20reproduire%20%3A%0A1)%20%0A2)%20%0A3)%20%0A%0AResultat%20obtenu%20%3A%20%0AResultat%20attendu%20%3A%20%0A%0AAppareil%20%3A%20%0APlateforme%20%28iOS%2FAndroid%29%20%3A%20%0AVersion%20OS%20%3A%20%0AHeure%20%3A%20%0A%0AMerci.">
+            <svg class="ico" aria-hidden="true"><use href="#i-bug"></use></svg>
+            Décrire le bug
+          </a>
+        </article>
+
+        <article class="card">
+          <h2>
+            <svg class="ico" aria-hidden="true"><use href="#i-flag"></use></svg>
+            Signaler un contenu
+          </h2>
+          <p>Contenu choquant, harcèlement, illégal : signalement prioritaire.</p>
+          <a class="btn"
+             href="mailto:contact@urbalya.com?subject=Signalement%20contenu%20-%20Urbalya&body=Bonjour%2C%0A%0AJe%20souhaite%20signaler%20un%20contenu%20:%0A%0A-%20Type%20(contenu%2Fprofil%2Fmessage)%20:%20%0A-%20Lien%2FID%20(si%20possible)%20:%20%0A-%20Description%20:%20%0A-%20Captures%20d%E2%80%99%C3%A9cran%20:%20%0A%0AMerci.">
+            <svg class="ico" aria-hidden="true"><use href="#i-flag"></use></svg>
+            Signaler
+          </a>
+        </article>
+      </div>
+
+      <div class="note" role="note" aria-label="Note modération">
+        <div class="icoWrap" aria-hidden="true">
+          <svg class="ico lg"><use href="#i-info"></use></svg>
+        </div>
+        <div>
+          <strong>Modération</strong><br/>
+          Dans l’app, vous pouvez aussi <strong>signaler</strong> et <strong>bloquer</strong> un utilisateur.
+          Les contenus inappropriés peuvent être retirés rapidement selon leur gravité.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="FAQ">
+      <div class="section-title">
+        <h2>
+          <svg class="ico" aria-hidden="true"><use href="#i-search"></use></svg>
+          FAQ & solutions
+        </h2>
+        <span>Recherche instantanée + réponses actionnables.</span>
+      </div>
+
+      <div class="search" role="search">
+        <label class="sr-only" for="q">Rechercher dans la FAQ</label>
+        <svg class="ico" aria-hidden="true"><use href="#i-search"></use></svg>
+        <input id="q" type="search" placeholder="Ex: notifications, localisation, compte, supprimer…" autocomplete="off" />
+        <span class="kbd" aria-hidden="true">Entrée</span>
+      </div>
+
+      <div class="faq" id="faq">
+        <details data-keywords="notifications push ios android autoriser reglages">
+          <summary>
+            <div class="sum-left">
+              <svg class="ico sm" aria-hidden="true"><use href="#i-shield"></use></svg>
+              <span>Je ne reçois pas les notifications</span>
+            </div>
+            <svg class="ico chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+          </summary>
+          <div class="answer">
+            <ul>
+              <li>iOS → <strong>Réglages</strong> → <strong>Notifications</strong> → <strong>Urbalya</strong> → activer <strong>Autoriser</strong>.</li>
+              <li>Android → <strong>Paramètres</strong> → <strong>Applications</strong> → <strong>Urbalya</strong> → <strong>Notifications</strong> → activer <strong>Autoriser</strong>.</li>
+              <li>Vérifier les modes <strong>Concentration</strong> / <strong>Ne pas déranger</strong>.</li>
+              <li>Ouvrir l’app au moins une fois après installation (initialisation des permissions).</li>
+            </ul>
+          </div>
+        </details>
+
+        <details data-keywords="localisation gps autorisation ios android quand active mairie me localiser">
+          <summary>
+            <div class="sum-left">
+              <svg class="ico sm" aria-hidden="true"><use href="#i-shield"></use></svg>
+              <span>La localisation ne fonctionne pas / pas de précision</span>
+            </div>
+            <svg class="ico chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+          </summary>
+          <div class="answer">
+            <ul>
+              <li>iOS → <strong>Réglages</strong> → <strong>Confidentialité</strong> → <strong>Service de localisation</strong> → <strong>Urbalya</strong> → <strong>Lorsque l’app est active</strong>.</li>
+              <li>Android → <strong>Paramètres</strong> → <strong>Applications</strong> → <strong>Urbalya</strong> → <strong>Autorisations</strong> → activer <strong>Localisation</strong> (pendant l’utilisation).</li>
+              <li>Activer la précision de localisation pour de meilleurs résultats sur la carte.</li>
+              <li>Sans localisation, certaines fonctions sont moins précises (affichages par ville, etc.).</li>
+            </ul>
+          </div>
+        </details>
+
+        <details data-keywords="supprimer compte effacement rgpd desinscription">
+          <summary>
+            <div class="sum-left">
+              <svg class="ico sm" aria-hidden="true"><use href="#i-file"></use></svg>
+              <span>Comment supprimer mon compte ?</span>
+            </div>
+            <svg class="ico chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+          </summary>
+          <div class="answer">
+            <ul>
+              <li>Dans l’app : <strong>Paramètres</strong> → <strong>Compte</strong> → <strong>Supprimer mon compte</strong>.</li>
+              <li>Via le web : <a href="delete-account.html">page publique de suppression de compte</a>.</li>
+              <li>Pour une demande RGPD spécifique : <a href="mailto:contact@urbalya.com?subject=Demande%20RGPD%20-%20Urbalya">contact@urbalya.com</a>.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details data-keywords="bug crash blocage erreur ecran noir ios android">
+          <summary>
+            <div class="sum-left">
+              <svg class="ico sm" aria-hidden="true"><use href="#i-bug"></use></svg>
+              <span>L’app crash / écran blanc / bug bloquant</span>
+            </div>
+            <svg class="ico chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+          </summary>
+          <div class="answer">
+            <ul>
+              <li>Redémarrer l’app et vérifier la connexion réseau.</li>
+              <li>Mettre iOS ou Android à jour et installer la dernière version de Urbalya.</li>
+              <li>Envoyer un rapport : modèle d’appareil + plateforme + version OS + capture + heure + étapes à <a href="mailto:contact@urbalya.com?subject=Crash%20-%20Urbalya">contact@urbalya.com</a>.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details data-keywords="contenu choquant harcelement abus signaler bloquer">
+          <summary>
+            <div class="sum-left">
+              <svg class="ico sm" aria-hidden="true"><use href="#i-flag"></use></svg>
+              <span>Contenu choquant / harcèlement : que faire ?</span>
+            </div>
+            <svg class="ico chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+          </summary>
+          <div class="answer">
+            <ul>
+              <li>Dans l’app : utilisez <strong>Signaler</strong> + <strong>Bloquer</strong>.</li>
+              <li>Par email : <a href="mailto:contact@urbalya.com?subject=Signalement%20contenu%20-%20Urbalya">contact@urbalya.com</a> avec captures, ID/lien, description.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container foot">
+      <div>© <span id="y"></span> Urbalya — <a href="mailto:contact@urbalya.com">contact@urbalya.com</a></div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <a href="index.html">Accueil</a>
+        <a href="support.html">Support</a>
+        <a href="professionnels/">Professionnels</a>
+        <a href="privacy.html">Confidentialité</a>
+        <a href="terms.html">Conditions</a>
+        <a href="delete-account.html">Suppression compte</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    const root = document.documentElement;
+    const btn = document.getElementById("menuBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const backdrop = document.getElementById("backdrop");
+    const drawer = document.getElementById("drawer");
+
+    let lastFocus = null;
+
+    function setOpen(open) {
+      if (open) {
+        lastFocus = document.activeElement;
+        root.classList.add("menu-open");
+        btn.setAttribute("aria-expanded", "true");
+        backdrop.setAttribute("aria-hidden", "false");
+        const firstLink = drawer.querySelector("a, button");
+        setTimeout(() => firstLink && firstLink.focus(), 50);
+      } else {
+        root.classList.remove("menu-open");
+        btn.setAttribute("aria-expanded", "false");
+        backdrop.setAttribute("aria-hidden", "true");
+        if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+      }
+      console.log("📝 [WEB] menu =", { open });
+    }
+
+    if (btn) btn.addEventListener("click", () => setOpen(true));
+    if (closeBtn) closeBtn.addEventListener("click", () => setOpen(false));
+    if (backdrop) backdrop.addEventListener("click", () => setOpen(false));
+
+    document.addEventListener("keydown", (e) => {
+      if (!root.classList.contains("menu-open")) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+      }
+    });
+
+    if (drawer) {
+      drawer.addEventListener("click", (e) => {
+        const t = e.target;
+        if (t && t.closest && t.closest("a")) setOpen(false);
+      });
+    }
+
+    const input = document.getElementById("q");
+    const items = Array.from(document.querySelectorAll("#faq details"));
+
+    function norm(s){
+      return (s||"")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"");
+    }
+
+    function filter(){
+      const q = norm(input.value.trim());
+      let shown = 0;
+
+      items.forEach(d => {
+        const t = norm(d.textContent);
+        const k = norm(d.getAttribute("data-keywords") || "");
+        const show = !q || t.includes(q) || k.includes(q);
+
+        d.style.display = show ? "" : "none";
+        if(!show) d.open = false;
+        if(show) shown++;
+      });
+
+      console.log("📝 [WEB] faq_filter =", { q: input.value.trim(), shown, total: items.length });
+    }
+
+    if (input) {
+      input.addEventListener("input", filter);
+      input.addEventListener("keydown", (e) => {
+        if(e.key === "Enter"){ e.preventDefault(); filter(); }
+      });
+    }
+  </script>
+  <script src="cookie-consent.js"></script>
+</body>
+</html>

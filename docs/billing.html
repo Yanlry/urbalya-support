@@ -1,0 +1,1807 @@
+"<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Gerer mon compte — Urbalya</title>
+  <meta
+    name="description"
+    content="Page de gestion du compte professionnel Urbalya : recevoir un lien sécurisé, gérer l'abonnement Pro et accéder aux actions de suppression de compte."
+  />
+  <meta name="theme-color" content="#0b1220" />
+
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="cookie-consent.css" />
+
+  <style>
+    :root{
+      --bg:#F4F7FC;
+      --panel:#FFFFFF;
+      --panel-soft:#FFFFFF;
+      --text:#0F172A;
+      --muted:#475569;
+      --line:rgba(15,23,42,.12);
+      --line2:rgba(15,23,42,.20);
+
+      --shadow: 0 16px 36px rgba(15,23,42,.08);
+      --shadow2: 0 8px 20px rgba(15,23,42,.08);
+
+      --radius: 18px;
+      --radius2: 24px;
+
+      --accent:#1D4ED8;
+      --accentSoft: rgba(29,78,216,.10);
+      --accent2:#0F766E;
+
+      --ok:#10B981;
+      --ok-soft: rgba(16, 185, 129, 0.16);
+      --warn:#F59E0B;
+      --warn-soft: rgba(245, 158, 11, 0.16);
+      --danger:#EF4444;
+      --danger-soft: rgba(239, 68, 68, 0.16);
+
+      --container: 1120px;
+      --tap: 44px;
+      --navH: 64px;
+      --focus: 0 0 0 4px rgba(59,130,246,.25);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(37,99,235,.12), transparent 30%),
+        radial-gradient(circle at 88% 10%, rgba(15,118,110,.10), transparent 26%),
+        linear-gradient(180deg, #F8FBFF 0%, #EEF3FA 100%);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: geometricPrecision;
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; height:auto; display:block}
+    button{font-family:inherit}
+    strong{font-weight:800}
+
+    .container{max-width: var(--container); margin:0 auto; padding:0 16px}
+    @media (min-width: 720px){ .container{padding:0 20px} }
+
+    .skip{
+      position:absolute;
+      left:12px;
+      top:12px;
+      padding:10px 12px;
+      border-radius:12px;
+      background: #FFFFFF;
+      border:1px solid var(--line2);
+      transform: translateY(-200%);
+      transition: transform .15s ease;
+      z-index: 9999;
+    }
+    .skip:focus{transform: translateY(0); outline:none; box-shadow: var(--focus)}
+    :focus{outline:none}
+    :focus-visible{box-shadow: var(--focus); border-radius: 12px}
+
+    .ico{width:18px;height:18px; display:inline-block; flex:0 0 auto}
+    .ico.sm{width:16px;height:16px}
+    .ico.lg{width:20px;height:20px}
+    .ico.xl{width:22px;height:22px}
+
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.86);
+      border-bottom: 1px solid var(--line);
+      padding-top: env(safe-area-inset-top);
+    }
+    .nav-inner{
+      min-height: var(--navH);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 0;
+    }
+
+    .logo{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+    .logo-img{width:100%; height:100%; object-fit: cover}
+
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+      min-width: 0;
+    }
+    .brand-text strong{
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size: 15px;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .brand-text small{
+      display:block;
+      color:var(--muted);
+      font-weight:600;
+      letter-spacing:.2px;
+      font-size: 12px;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-actions{display:flex; align-items:center; gap:10px}
+
+    .nav-toggle{
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: #FFFFFF;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      color: var(--text);
+    }
+    .nav-toggle:hover{
+      transform: translateY(-1px);
+      background: #F8FAFC;
+      border-color: rgba(15,23,42,.24);
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: #FFFFFF;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      color:var(--text);
+      font-weight:900;
+      font-size:14px;
+      line-height: 1;
+      white-space: nowrap;
+      min-height: 38px;
+    }
+    .pill:hover{
+      transform: translateY(-1px);
+      background: #F8FAFC;
+      border-color: rgba(15,23,42,.22);
+    }
+    .pill.primary{
+      border: 1px solid rgba(29,78,216,.24);
+      background: rgba(29,78,216,.96);
+      color: #FFFFFF;
+      box-shadow: 0 10px 20px rgba(29,78,216,.20);
+    }
+    .pill.danger,
+    .pill.danger[aria-current="page"]{
+      border: 1px solid rgba(239,68,68,.55);
+      background: rgba(239,68,68,.92);
+      color:#fff;
+      box-shadow: 0 14px 30px rgba(239,68,68,.20);
+    }
+    .pill.danger:hover{
+      background: rgba(220,38,38,.95);
+      border-color: rgba(252,165,165,.65);
+    }
+    .pill[aria-current="page"]{
+      background: #E2E8F0;
+      border-color: #CBD5E1;
+      color:#0F172A;
+    }
+
+    .store-link{
+      width: clamp(220px, 50vw, 300px);
+      padding: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      background: transparent !important;
+      box-shadow: 0 6px 14px rgba(15,23,42,.12);
+      min-height: auto;
+    }
+    .store-link:hover{
+      background: rgba(248,250,252,.8) !important;
+      border-color: rgba(15,23,42,.20) !important;
+    }
+    .store-badge{
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .backdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(15,23,42,.32);
+      backdrop-filter: blur(6px);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+      z-index: 80;
+    }
+    .drawer{
+      position:fixed;
+      top: env(safe-area-inset-top);
+      right:0;
+      width: min(92vw, 360px);
+      height: calc(100vh - env(safe-area-inset-top));
+      background: rgba(255,255,255,.98);
+      border-left: 1px solid var(--line);
+      box-shadow: 0 26px 50px rgba(15,23,42,.18);
+      transform: translateX(110%);
+      transition: transform .22s ease;
+      z-index: 90;
+      display:flex;
+      flex-direction:column;
+      padding: 14px;
+      overflow-y: auto;
+    }
+    .drawer-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 8px 6px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .drawer-title{font-weight:900; letter-spacing:.2px}
+    .drawer-close{
+      width: var(--tap);
+      height: var(--tap);
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: #FFFFFF;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      color: var(--text);
+    }
+    .drawer-nav{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding: 14px 6px;
+    }
+    .drawer .pill{
+      width:100%;
+      justify-content:center;
+      padding: 14px 12px;
+      border-radius: 16px;
+      font-size: 15px;
+      min-height: 46px;
+    }
+    .drawer .store-link{
+      display: block;
+      width: 100%;
+      max-width: none;
+      min-height: auto;
+      border-width: 0;
+      box-shadow: none;
+      margin: 0;
+      align-self: stretch;
+    }
+    .drawer .store-badge{
+      display: block;
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      height: auto;
+      margin: 0;
+      object-fit: contain;
+    }
+    .drawer-foot{
+      margin-top:auto;
+      padding: 12px 6px 6px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .drawer-foot .pill{
+      width:100%;
+      min-height: 46px;
+    }
+
+    .menu-open .backdrop{opacity:1; pointer-events:auto}
+    .menu-open .drawer{transform: translateX(0)}
+
+    main{padding-bottom: 22px}
+    .hero{padding: 30px 0 16px}
+    .hero-intro{
+      max-width: 980px;
+      margin: 0 auto 16px;
+      text-align: center;
+    }
+    .page-kicker{
+      margin:0;
+      color:#1D4ED8;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      display:block;
+      width:100%;
+      text-align:center;
+    }
+    .hero h1{
+      margin:10px auto 0;
+      font-size: clamp(30px, 5.6vw, 48px);
+      line-height:1.04;
+      letter-spacing: -0.01em;
+      max-width: 920px;
+    }
+    .lead{
+      margin:14px auto 0;
+      color:#334155;
+      font-size: clamp(16px, 2.1vw, 20px);
+      line-height:1.58;
+      max-width: 860px;
+      text-align: center;
+    }
+    .hero-grid{display:grid; grid-template-columns: 1fr; gap: 18px}
+    .hero-intro,
+    .hero-grid,
+    .section-head,
+    .plans,
+    .section .note-card{
+      max-width: 980px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-grid .status-card{
+      width: 100%;
+    }
+    @media (min-width: 980px){
+      .hero{padding: 34px 0 18px}
+    }
+
+    .status-card,
+    .plan-card,
+    .note-card,
+    .action-card{
+      border-radius: 18px;
+      border:1px solid var(--line);
+      background: var(--panel-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .status-card,
+    .note-card,
+    .action-card{
+      padding: 22px;
+    }
+
+    .status-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:14px;
+    }
+    .status-title{
+      margin:0;
+      font-size:20px;
+      font-weight:900;
+    }
+    .status-subtitle{
+      margin:6px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .status-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      min-width:96px;
+      border:1px solid transparent;
+      white-space:nowrap;
+    }
+    .status-pill.active{
+      color:#065F46;
+      background: var(--ok-soft);
+      border-color: rgba(16, 185, 129, 0.24);
+    }
+    .status-pill.warning{
+      color:#92400E;
+      background: var(--warn-soft);
+      border-color: rgba(245, 158, 11, 0.24);
+    }
+    .status-pill.inactive{
+      color:#991B1B;
+      background: var(--danger-soft);
+      border-color: rgba(239, 68, 68, 0.24);
+    }
+
+    .meta-grid{
+      display:grid;
+      gap:12px;
+      margin-top:16px;
+    }
+    @media (min-width: 720px){
+      .meta-grid{grid-template-columns: repeat(2, minmax(0, 1fr))}
+    }
+    .meta-item{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: #F8FAFC;
+    }
+    .meta-label{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:6px;
+    }
+    .meta-value{
+      display:block;
+      color:var(--text);
+      font-size:15px;
+      font-weight:700;
+      line-height:1.4;
+    }
+
+    .status-actions{
+      margin-top:18px;
+      padding:16px;
+      border-radius:16px;
+      border:1px solid #DBEAFE;
+      background: #F8FBFF;
+    }
+    .status-actions p{
+      margin:0;
+      color:#334155;
+      line-height:1.65;
+    }
+    .self-serve{
+      margin-top:14px;
+      padding-top:14px;
+      border-top:1px solid var(--line);
+    }
+    .self-serve h4{
+      margin:0;
+      font-size:16px;
+      font-weight:900;
+      color:var(--text);
+    }
+    .self-serve p{
+      margin-top:8px;
+      margin-bottom:0;
+    }
+    .self-serve-form{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .self-serve-input{
+      flex:1 1 260px;
+      min-height:46px;
+      border-radius:14px;
+      border:1px solid var(--line2);
+      background: #FFFFFF;
+      color:var(--text);
+      font-size:15px;
+      padding:0 14px;
+    }
+    .self-serve-input::placeholder{
+      color:#64748B;
+    }
+    .self-serve-input:focus{
+      box-shadow: var(--focus);
+      border-color: rgba(147, 197, 253, 0.5);
+    }
+    .self-serve-feedback{
+      margin-top:10px;
+      font-size:13px;
+      line-height:1.6;
+    }
+    .self-serve-feedback.muted{color:var(--muted)}
+    .self-serve-feedback.ok{color:#047857}
+    .self-serve-feedback.error{color:#B91C1C}
+    @media (max-width: 560px){
+      .self-serve-form .btn{
+        width:100%;
+      }
+    }
+
+    .section{padding: 18px 0 28px}
+    .section-head{margin-bottom:16px}
+    .section-head h2{
+      margin:0 0 8px;
+      font-size:28px;
+      font-weight:900;
+    }
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .plans{
+      display:grid;
+      gap:16px;
+    }
+    @media (min-width: 860px){
+      .plans{grid-template-columns: repeat(2, minmax(0, 1fr))}
+    }
+
+    .plan-card{
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .plan-card.current{
+      border-color: rgba(59,130,246,.36);
+      box-shadow: 0 16px 32px rgba(29,78,216,.14);
+    }
+    .plan-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: #EFF6FF;
+      border:1px solid var(--line);
+      font-size:13px;
+      font-weight:900;
+      margin-bottom:18px;
+    }
+    .plan-card.current .plan-label{
+      background: var(--accentSoft);
+      color:#1D4ED8;
+      border-color: rgba(59,130,246,.24);
+    }
+    .plan-title{
+      margin:0 0 8px;
+      font-size:24px;
+      font-weight:900;
+    }
+    .plan-price{
+      margin:0 0 10px;
+      font-size:32px;
+      font-weight:900;
+      letter-spacing:-0.03em;
+    }
+    .plan-summary{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.6;
+      min-height:52px;
+    }
+
+    .benefits{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:10px;
+    }
+    .benefits li{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      color:var(--text);
+      line-height:1.55;
+    }
+    .benefits li::before{
+      content:"•";
+      color:#2563EB;
+      font-weight:900;
+      line-height:1.2;
+    }
+
+    .note-card p,
+    .action-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .note-card h3,
+    .action-card h3{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:900;
+    }
+
+    .action-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border:1px solid var(--line2);
+      background: #FFFFFF;
+      color:var(--text);
+      font-weight:800;
+      font-size:15px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      text-align:center;
+      min-height: 46px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: #F8FAFC;
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn.primary{
+      border: 1px solid rgba(59,130,246,.22);
+      background: rgba(29,78,216,.96);
+      color: #FFFFFF;
+    }
+    .btn.primary:hover{
+      background: rgba(30,64,175,.98);
+      border-color: rgba(147,197,253,.4);
+    }
+    .btn.danger{
+      border: 1px solid rgba(239,68,68,.35);
+      background: rgba(239,68,68,.92);
+      color:#fff;
+    }
+    .btn.danger:hover{
+      background: rgba(220,38,38,.95);
+      border-color: rgba(252,165,165,.5);
+    }
+
+    .banner{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: #F8FAFC;
+      color:var(--text);
+      line-height:1.65;
+    }
+    .banner.ok{
+      border-color: rgba(16, 185, 129, 0.24);
+      background: var(--ok-soft);
+    }
+    .banner.warn{
+      border-color: rgba(245, 158, 11, 0.24);
+      background: var(--warn-soft);
+    }
+    .banner.muted{
+      color:#334155;
+    }
+
+    footer{
+      border-top: 1px solid var(--line);
+      margin-top: 12px;
+      padding: 22px 0 34px;
+      color: var(--muted);
+      background: #F8FAFC;
+      font-size:14px;
+    }
+    .foot{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    @media (min-width: 860px){
+      .foot{
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+      }
+    }
+    .foot-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .foot a{
+      color: var(--text);
+      font-weight: 900;
+      opacity: .92;
+    }
+    .foot a:hover{opacity:1}
+
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto!important}
+      .pill,.btn,.nav-toggle{transition:none !important}
+    }
+    /* Menu variant: list minimal (sans cartes) */
+    .drawer{
+      background: rgba(7,18,38,.92);
+      backdrop-filter: blur(16px);
+      color:#E6EEF8;
+    }
+
+    .drawer-title,
+    .drawer-close{
+      color:#E6EEF8;
+    }
+
+    .drawer-nav{
+      gap:0;
+      padding:12px 2px 8px;
+    }
+
+    .drawer .pill{
+      position:relative;
+      width:100%;
+      justify-content:flex-start;
+      gap:12px;
+      padding:13px 4px;
+      min-height:52px;
+      border:0;
+      border-radius:0;
+      background:transparent !important;
+      color:inherit;
+      box-shadow:none;
+      transform:none;
+    }
+
+    .drawer .pill::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:1px;
+      background:linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
+      pointer-events:none;
+    }
+
+    .drawer .pill::before{
+      content:"";
+      position:absolute;
+      left:-4px;
+      top:50%;
+      width:2px;
+      height:0;
+      border-radius:999px;
+      background:linear-gradient(180deg,#7DD3FC,#38BDF8);
+      transform:translateY(-50%);
+      transition:height .18s ease, opacity .18s ease;
+      opacity:0;
+    }
+
+    .drawer .pill:hover,
+    .drawer .pill[aria-current="page"]{
+      background:linear-gradient(90deg, rgba(56,189,248,.12), rgba(56,189,248,.03)) !important;
+    }
+
+    .drawer .pill:hover::before,
+    .drawer .pill[aria-current="page"]::before{
+      height:28px;
+      opacity:1;
+    }
+
+    .drawer .pill[aria-current="page"]{
+      color:#F2F8FF;
+      border-color:transparent;
+    }
+
+    .drawer .pill .ico{
+      width:18px;
+      height:18px;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent !important;
+      box-shadow:none;
+      opacity:.95;
+      flex:0 0 18px;
+      color:#BFD2E6;
+    }
+
+    .drawer .pill.primary,
+    .drawer .pill.danger{
+      color:inherit;
+    }
+
+    .drawer .pill.danger{
+      color:#FF8D98;
+    }
+
+    .drawer-nav > .store-link:nth-last-child(2){
+      margin-top:16px;
+      position:relative;
+    }
+
+    .drawer-nav > .store-link:nth-last-child(2)::before{
+      content:"App mobile";
+      position:absolute;
+      left:0;
+      top:-10px;
+      transform:translateY(-100%);
+      font-size:11px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      color:#9FB3CC;
+      font-weight:800;
+      pointer-events:none;
+    }
+
+    .drawer .store-link{
+      padding:0;
+      margin-top:10px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:12px;
+      overflow:hidden;
+      background:rgba(10,24,45,.55) !important;
+      min-height:auto;
+    }
+
+    .drawer .store-link::before,
+    .drawer .store-link::after{
+      display:none;
+    }
+
+    .drawer .store-link .ico{
+      display:none;
+    }
+
+    .drawer .store-link .store-badge{
+      width:100%;
+      display:block;
+    }
+
+    .drawer-foot{
+      padding:10px 2px 0;
+      gap:0;
+      border-top:1px solid rgba(255,255,255,.12);
+    }
+
+    .drawer-foot .pill{
+      min-height:52px;
+    }
+
+    .drawer-foot .pill.primary,
+    .drawer-foot .pill.primary[href*="billing"],
+    .drawer-foot .pill.primary[href^="mailto"]{
+      background:transparent !important;
+      color:inherit;
+    }
+
+    @media (max-width:640px){
+      .drawer{
+        width:min(94vw, 350px);
+      }
+
+      .drawer .pill{
+        min-height:50px;
+        padding:12px 3px;
+      }
+    }
+
+</style>
+  <link rel="stylesheet" href="site.css" />
+</head>
+
+<body>
+  <a class="skip" href="#main">Aller au contenu principal</a>
+
+    <svg width="0" height="0" style="position:absolute">
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 7.5h16M4 12h16M4 16.5h16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-x" viewBox="0 0 24 24">
+      <path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-arrow-left" viewBox="0 0 24 24">
+      <path d="M19 12H5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+      <path d="m11 6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+
+    <symbol id="i-arrow-right" viewBox="0 0 24 24">
+      <path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+      <path d="m13 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+
+    <symbol id="i-support" viewBox="0 0 24 24">
+      <path d="M4 12a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+      <rect x="3" y="12" width="4.5" height="7" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <rect x="16.5" y="12" width="4.5" height="7" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="M18.8 19.5A2.4 2.4 0 0 1 16.6 21H12" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="M3.8 10.6 12 4l8.2 6.6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6.5 9.8V20h11V9.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M10 20v-5h4v5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-lock" viewBox="0 0 24 24">
+      <rect x="5" y="10.5" width="14" height="10" rx="2.4" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="M8 10.5V8a4 4 0 1 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-file" viewBox="0 0 24 24">
+      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.7.7L19.3 6.3A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M14 2v5a1 1 0 0 0 1 1h5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M9.5 13h5M9.5 17h5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect x="3.5" y="5.5" width="17" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="m4.5 8 7.5 5.2L19.5 8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+    </symbol>
+
+    <symbol id="i-life" viewBox="0 0 24 24">
+      <path d="M4 12h3.3l1.9-3.4L12 16l2.2-4h5.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="2.1" />
+    </symbol>
+
+    <symbol id="i-map" viewBox="0 0 24 24">
+      <path d="M9 4 3.8 6.2v13.6L9 17.6l6 2.4 5.2-2.2V4.2L15 6.4Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M9 4v13.6M15 6.4V20" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-bell" viewBox="0 0 24 24">
+      <path d="M6.8 16h10.4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+      <path d="M8.2 16V10a3.8 3.8 0 1 1 7.6 0v6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M10.4 18a1.8 1.8 0 0 0 3.2 0" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-building" viewBox="0 0 24 24">
+      <rect x="4.5" y="3.5" width="15" height="17" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="M8 8h1.4M8 11.6h1.4M8 15.2h1.4M14.6 8H16M14.6 11.6H16M14.6 15.2H16M11.3 20.5v-3h1.4v3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-camera" viewBox="0 0 24 24">
+      <path d="M4.5 8h3.8l1.6-2h4.2l1.6 2h3.8a1.9 1.9 0 0 1 1.9 1.9V18a1.9 1.9 0 0 1-1.9 1.9H4.5A1.9 1.9 0 0 1 2.6 18V9.9A1.9 1.9 0 0 1 4.5 8Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <circle cx="12" cy="13.2" r="3.2" fill="none" stroke="currentColor" stroke-width="2.1" />
+    </symbol>
+
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <circle cx="9" cy="7.2" r="3" fill="none" stroke="currentColor" stroke-width="2.1" />
+      <path d="M3.8 20v-1.2A4.2 4.2 0 0 1 8 14.6h2a4.2 4.2 0 0 1 4.2 4.2V20" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="M16 4.6a2.8 2.8 0 0 1 0 5.4M20.2 20v-1a3.7 3.7 0 0 0-3-3.6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M12 2.8 20 6.6v5.3c0 5.1-3.5 9.2-8 10.3-4.5-1.1-8-5.2-8-10.3V6.6Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+      <path d="m9 12.3 2.1 2.2 4-4.3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="m20 7.5-10 10-5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+
+    <symbol id="i-news-premium" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2" />
+      <rect x="6.5" y="7" width="4.8" height="4.2" rx="1" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M13.6 8.1H18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M13.6 10.6H18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M6.5 14.5H18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M6.5 17.1H14.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-signal-premium" viewBox="0 0 24 24">
+      <path d="M12 21.25s-6.8-4.4-6.8-10.5a6.8 6.8 0 0 1 13.6 0c0 6.1-6.8 10.5-6.8 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M12 8.25v3.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+      <circle cx="12" cy="14.4" r="1.1" fill="currentColor" />
+    </symbol>
+
+    <symbol id="i-ranking-premium" viewBox="0 0 24 24">
+      <path d="M8 4.5h8v2.7a4 4 0 1 1-8 0V4.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M8 7.3H5.5a2.5 2.5 0 0 0 2.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M16 7.3h2.5a2.5 2.5 0 0 1-2.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M12 11.2v5.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M9.2 20h5.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M10.2 14.6h3.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <path d="M12 3.5 21 19.5H3L12 3.5Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M12 9.2v4.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <circle cx="12" cy="17" r="1.1" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="i-ban" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="M7.8 7.8 16.2 16.2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-book" viewBox="0 0 24 24">
+      <path d="M5.5 4.5h5.8a2.2 2.2 0 0 1 2.2 2.2V20a2.2 2.2 0 0 0-2.2-2.2H5.5Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M18.5 4.5h-5.8a2.2 2.2 0 0 0-2.2 2.2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M18.5 4.5V20h-5.8a2.2 2.2 0 0 0-2.2 2.2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-image" viewBox="0 0 24 24">
+      <rect x="3.5" y="4.5" width="17" height="15" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <circle cx="9" cy="9" r="1.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="m5.8 17 4.8-5 3.3 3 2.7-2.8 2.6 4.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-link" viewBox="0 0 24 24">
+      <path d="M9.2 14.8 7.4 16.6a3.5 3.5 0 1 1-4.9-4.9l1.8-1.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="m14.8 9.2 1.8-1.8a3.5 3.5 0 1 1 4.9 4.9l-1.8 1.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="m8.8 15.2 6.4-6.4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-pause" viewBox="0 0 24 24">
+      <rect x="7" y="5.5" width="3.8" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <rect x="13.2" y="5.5" width="3.8" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="2.1"/>
+    </symbol>
+
+    <symbol id="i-refresh" viewBox="0 0 24 24">
+      <path d="M19.2 9.2A8.2 8.2 0 1 0 20 12" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M20 4.5v5.5h-5.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="M12 7.5v4.9l3.5 2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-target" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <circle cx="12" cy="12" r="4.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="i-hand" viewBox="0 0 24 24">
+      <path d="M6.8 12v-1.2a1.8 1.8 0 0 1 3.6 0V12" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M10.4 12V9.7a1.8 1.8 0 0 1 3.6 0V12" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M14 12v-1a1.8 1.8 0 0 1 3.6 0v4.1c0 3.1-2.1 5.9-5.9 5.9H9c-2.1 0-3.4-1-4.4-3l-.9-1.9" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-baby" viewBox="0 0 24 24">
+      <circle cx="12" cy="10" r="4.1" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="M6.2 21c1.1-3 3.3-4.9 5.8-4.9s4.7 1.9 5.8 4.9" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <circle cx="10.4" cy="9.6" r=".7" fill="currentColor"/>
+      <circle cx="13.6" cy="9.6" r=".7" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="i-bug" viewBox="0 0 24 24">
+      <path d="M8.8 9.5a3.2 3.2 0 0 1 6.4 0v4.2a4 4 0 0 1-8 0V9.5Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M12 6.2V4.4M8.2 10.2H5.3M18.7 10.2h-2.9M8.2 14H5.3M18.7 14h-2.9M10 19.6l-2 2M14 19.6l2 2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-flag" viewBox="0 0 24 24">
+      <path d="M6 21V3.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M6 5h12l-2 3.4L18 12H6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="10.8" cy="10.8" r="6.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="m19.2 19.2-3.6-3.6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-chevron" viewBox="0 0 24 24">
+      <path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-info" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="M12 10.4v5.1" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <circle cx="12" cy="7.4" r="1" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="i-stack" viewBox="0 0 24 24">
+      <path d="m12 3.5 8.8 4.7L12 13 3.2 8.2 12 3.5Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="m3.2 12.1 8.8 4.7 8.8-4.7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="m3.2 16.2 8.8 4.7 8.8-4.7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    </symbol>
+
+
+
+
+
+    <symbol id="i-apple" viewBox="0 0 24 24">
+      <path d="M16.45 13.15c0 2.75 2.22 3.62 2.22 3.62s-1.58 4.49-3.78 4.49c-1.06 0-1.98-.65-3.19-.65-1.21 0-2.2.65-3.18.65-2.04 0-4.12-4.09-4.12-7.44 0-2.99 1.9-4.63 3.8-4.63 1 0 2.01.77 3.2.77s2.11-.77 3.48-.77c.46 0 2.2.09 3.21 1.67-2.72 1.48-1.63 4.91 1.56 4.91Z" fill="currentColor"/>
+      <path d="M14.66 2.83c-.57.79-1.55 1.37-2.45 1.31-.11-.96.35-1.93.87-2.63.61-.77 1.66-1.35 2.55-1.43.08.96-.27 1.93-.97 2.75Z" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+
+  <header class="nav" role="banner">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="Aller à l'accueil Urbalya">
+        <span class="logo" aria-hidden="true">
+          <img class="logo-img" src="logo.png" alt="Urbalya" />
+        </span>
+        <span class="brand-text">
+          <strong>Urbalya</strong>
+          <small>Gestion de compte</small>
+        </span>
+      </a>
+
+      <div class="nav-actions">
+        <a class="pill primary header-create-btn" href="professionnels/#pro-signup-section">Créer un dossier</a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Ouvrir le menu"
+          aria-controls="drawer"
+          aria-expanded="false"
+          id="menuBtn"
+        >
+          <svg class="ico xl" aria-hidden="true"><use href="#i-menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer-head">
+      <div class="drawer-title">Navigation</div>
+      <button class="drawer-close" type="button" aria-label="Fermer le menu" id="closeBtn">
+        <svg class="ico xl" aria-hidden="true"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+
+    <nav class="drawer-nav" aria-label="Navigation mobile">
+      <a class="pill" href="index.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>
+        Accueil
+      </a>
+      <a class="pill" href="professionnels/">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Compte Pro
+      </a>
+      <a class="pill" href="support.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-support"></use></svg>
+        Support
+      </a>
+      <a class="pill" href="privacy.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        Confidentialité
+      </a>
+      <a class="pill" href="terms.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Conditions
+      </a>
+      <a class="pill" href="mentions-legales.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg>
+        Mentions légales
+      </a>
+      <a class="pill primary store-link" href="https://apps.apple.com/app/urbalya/id6754794588" rel="noopener noreferrer" aria-label="Ouvrir l'App Store">
+        <img class="store-badge" src="apple.png" alt="Télécharger sur l'App Store" loading="lazy" decoding="async" />
+      </a>
+      <a class="pill primary store-link" href="https://play.google.com/store/apps/details?id=com.urbalya.app&pcampaignid=web_share" rel="noopener noreferrer" aria-label="Ouvrir Google Play">
+        <img class="store-badge" src="google.png" alt="Disponible sur Google Play" loading="lazy" decoding="async" />
+      </a>
+    </nav>
+
+    <div class="drawer-foot">
+      <a class="pill primary" href="billing.html" aria-current="page">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        Gerer mon compte
+      </a>
+      <a class="pill danger" href="delete-account.html">
+        <svg class="ico" aria-hidden="true"><use href="#i-file"></use></svg>
+        Supprimer mon compte
+      </a>
+      <a class="pill primary" href="mailto:contact@urbalya.com?subject=Support%20abonnement%20Urbalya">
+        <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+        Contactez-nous
+      </a>
+    </div>
+  </aside>
+
+  <main class="container" role="main" id="main">
+    <section class="hero" aria-label="Gestion de l'abonnement">
+      <div class="hero-intro">
+        <p class="page-kicker">Gestion du compte professionnel</p>
+        <h1>Gerer votre compte Pro simplement et en sécurité</h1>
+        <p class="lead">
+          Demandez un lien sécurisé pour accéder à votre espace de gestion, suivre votre abonnement Pro et accéder aux actions de compte.
+        </p>
+      </div>
+      <section class="section" aria-label="Étapes de gestion du compte">
+        <div class="note-card">
+          <h3>Ce qu'il faut faire</h3>
+          <ul class="benefits">
+            <li>Saisissez votre email et demandez le lien sécurisé.</li>
+            <li>Ouvrez le lien reçu par email pour accéder à votre espace de gestion.</li>
+            <li>Depuis cet espace, gérez l'abonnement Pro ou demandez la suppression du compte.</li>
+          </ul>
+        </div>
+      </section>
+      <div class="hero-grid">
+        <div class="status-card" aria-live="polite">
+          <div class="status-head">
+            <div>
+              <h2 class="status-title" id="statusTitle">Gerer mon compte professionnel</h2>
+              <p class="status-subtitle" id="statusText">
+                Chargement des informations de votre abonnement...
+              </p>
+            </div>
+            <span class="status-pill warning" id="statusPill">Chargement</span>
+          </div>
+            <div class="self-serve" id="selfServeBlock" hidden>
+              <h4>Recevoir un lien sécurisé</h4>
+              <p>
+                Si une adresse existe, vous recevrez un lien sécurisé pour vous connecter.
+              </p>
+              <form class="self-serve-form" id="selfServeForm" novalidate>
+                <input
+                  id="selfServeEmail"
+                  class="self-serve-input"
+                  type="email"
+                  inputmode="email"
+                  autocomplete="email"
+                  placeholder="vous@exemple.com"
+                  required
+                />
+                <button class="btn primary" id="selfServeSubmit" type="submit">
+                  Recevoir un lien
+                </button>
+              </form>
+              <p class="self-serve-feedback muted" id="selfServeFeedback" role="status" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <div class="meta-grid">
+            <div class="meta-item">
+              <span class="meta-label">Type de compte</span>
+              <span class="meta-value" id="accountValue">Compte pro</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Prochain renouvellement</span>
+              <span class="meta-value" id="nextRenewalValue">Indisponible</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Formules">
+      <div class="section-head">
+        <h2>Formules et avantages</h2>
+        <p>
+          Les montants affichés correspondent à la grille actuellement utilisée par Urbalya.
+          Pour les mairies, le prix dépend de la taille de la commune.
+        </p>
+      </div>
+
+      <div class="plans">
+        <article class="plan-card" id="merchantCard">
+          <div class="plan-label" id="merchantLabel">Formule commerce</div>
+          <h3 class="plan-title">Commerce</h3>
+          <p class="plan-price" id="merchantPrice">29 EUR / mois</p>
+          <p class="plan-summary">
+            Une formule pensée pour donner de la visibilité locale à votre activité et garder une présence utile dans l'application.
+          </p>
+          <ul class="benefits">
+            <li>Présence dédiée de votre commerce dans l'application.</li>
+            <li>Publication de contenus et informations utiles à votre activité locale.</li>
+            <li>Mise en avant de vos actualités et de votre fiche commerce.</li>
+            <li>Gestion simplifiée depuis votre espace professionnel.</li>
+          </ul>
+        </article>
+
+        <article class="plan-card" id="municipalityCard">
+          <div class="plan-label" id="municipalityLabel">Formule mairie</div>
+          <h3 class="plan-title">Mairie et collectivité</h3>
+          <p class="plan-price" id="municipalityPrice">200 EUR / mois</p>
+          <p class="plan-summary">
+            Une formule dédiée aux mairies et collectivités souhaitant renforcer leur communication locale et centraliser leurs échanges avec les habitants
+          </p>
+          <ul class="benefits"> 
+            <li>Compte officiel pour représenter la commune sur Urbalya.</li> 
+            <li>Publication d’actualités, d’annonces et d’informations pratiques.</li> 
+            <li>Outils de modération pour garder un espace local fiable et encadré.</li> 
+            <li>Communication municipale centralisée et plus visible auprès des citoyens.</li> 
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Informations utiles">
+      <div class="note-card">
+        <h3>Bon à savoir</h3>
+        <p>
+          Arrêter le renouvellement n'interrompt pas immédiatement votre accès. La formule reste active
+          jusqu'à la fin de la période déjà engagée, si une date de fin est disponible pour votre compte.
+        </p>
+        <div class="banner muted" id="supportHint">
+          Si aucune action n'est disponible ci-dessus, le support peut vérifier votre situation à
+          l'adresse <a href="mailto:contact@urbalya.com">contact@urbalya.com</a>.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container foot">
+      <div>© <span id="y"></span> Urbalya — Contact : <a href="mailto:contact@urbalya.com">contact@urbalya.com</a></div>
+      <div class="foot-links">
+        <a href="index.html">Accueil</a>
+        <a href="support.html">Support</a>
+        <a href="professionnels/">Professionnels</a>
+        <a href="privacy.html">Confidentialité</a>
+        <a href="terms.html">Conditions</a>
+        <a href="delete-account.html">Suppression compte</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    const root = document.documentElement;
+    const btn = document.getElementById("menuBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const backdrop = document.getElementById("backdrop");
+    const drawer = document.getElementById("drawer");
+
+    let lastFocus = null;
+
+    function setOpen(open) {
+      if (open) {
+        lastFocus = document.activeElement;
+        root.classList.add("menu-open");
+        btn.setAttribute("aria-expanded", "true");
+        backdrop.setAttribute("aria-hidden", "false");
+        const firstLink = drawer.querySelector("a, button");
+        setTimeout(() => firstLink && firstLink.focus(), 50);
+      } else {
+        root.classList.remove("menu-open");
+        btn.setAttribute("aria-expanded", "false");
+        backdrop.setAttribute("aria-hidden", "true");
+        if (lastFocus && typeof lastFocus.focus === "function") {
+          lastFocus.focus();
+        } else {
+          btn.focus();
+        }
+      }
+      console.log("📝 [WEB] billing menu", { open });
+    }
+
+    btn.addEventListener("click", () => setOpen(true));
+    closeBtn.addEventListener("click", () => setOpen(false));
+    backdrop.addEventListener("click", () => setOpen(false));
+
+    document.addEventListener("keydown", (e) => {
+      if (!root.classList.contains("menu-open")) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+      }
+    });
+
+    drawer.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target && target.closest && target.closest("a")) {
+        setOpen(false);
+      }
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const accountTypeRaw = String(params.get("accountType") || "").trim().toLowerCase();
+    const billingStatus = String(params.get("billingStatus") || "").trim().toUpperCase();
+    const billingExempt = params.get("billingExempt") === "1";
+    const cancelAtPeriodEnd = params.get("cancelAtPeriodEnd") === "1";
+    const currentPeriodEnd = String(params.get("currentPeriodEnd") || "").trim();
+
+    function safeUrl(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return "";
+      try {
+        const parsed = new URL(raw);
+        if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+          return parsed.toString();
+        }
+      } catch (error) {
+        console.error("❌ [WEB][BILLING] invalid action url", error && error.message ? error.message : error);
+      }
+      return "";
+    }
+
+    const unsubscribeUrl = safeUrl(params.get("unsubscribeUrl"));
+    const reactivateUrl = safeUrl(params.get("reactivateUrl"));
+    const hasManagementContext =
+      params.has("accountType") ||
+      params.has("billingStatus") ||
+      params.has("billingExempt") ||
+      params.has("cancelAtPeriodEnd") ||
+      params.has("currentPeriodEnd") ||
+      params.has("unsubscribeUrl") ||
+      params.has("reactivateUrl");
+
+    const selfServeBlock = document.getElementById("selfServeBlock");
+    const selfServeForm = document.getElementById("selfServeForm");
+    const selfServeEmailInput = document.getElementById("selfServeEmail");
+    const selfServeSubmit = document.getElementById("selfServeSubmit");
+    const selfServeFeedback = document.getElementById("selfServeFeedback");
+    const selfServeApiUrl = "https://urbalya.com/api/pro/request-management-link";
+
+    function setSelfServeFeedback(message, tone) {
+      if (!selfServeFeedback) return;
+      selfServeFeedback.className = "self-serve-feedback " + (tone || "muted");
+      selfServeFeedback.textContent = message || "";
+    }
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
+    }
+
+    function resolveApiErrorMessage(payload, fallback) {
+      const backendMessage = payload && payload.message;
+      if (Array.isArray(backendMessage)) {
+        const normalized = backendMessage
+          .map((entry) => String(entry || "").trim())
+          .filter(Boolean);
+        if (normalized.length > 0) {
+          return normalized.join(" ");
+        }
+      }
+      if (typeof backendMessage === "string" && backendMessage.trim()) {
+        return backendMessage.trim();
+      }
+      if (payload && typeof payload.error === "string" && payload.error.trim()) {
+        return payload.error.trim();
+      }
+      return fallback;
+    }
+
+    function setupSelfServeForm() {
+      if (!selfServeBlock) return;
+      selfServeBlock.hidden = hasManagementContext;
+      if (hasManagementContext || !selfServeForm || !selfServeEmailInput) {
+        return;
+      }
+
+      setSelfServeFeedback("", "muted");
+
+      selfServeForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = String(selfServeEmailInput.value || "").trim().toLowerCase();
+        if (!isValidEmail(email)) {
+          setSelfServeFeedback("Veuillez entrer une adresse email valide.", "error");
+          selfServeEmailInput.focus();
+          return;
+        }
+
+        try {
+          if (selfServeSubmit) selfServeSubmit.setAttribute("disabled", "disabled");
+          selfServeEmailInput.setAttribute("disabled", "disabled");
+          setSelfServeFeedback("Envoi en cours...", "muted");
+
+          const response = await fetch(selfServeApiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+            body: JSON.stringify({ email }),
+          });
+
+          let payload = null;
+          try {
+            payload = await response.json();
+          } catch (error) {
+            payload = null;
+          }
+
+          if (!response.ok) {
+            const fallbackMessage =
+              response.status >= 500
+                ? "Le service est momentanément indisponible. Réessayez dans quelques instants."
+                : "Impossible d'envoyer le lien pour le moment.";
+            setSelfServeFeedback(resolveApiErrorMessage(payload, fallbackMessage), "error");
+            return;
+          }
+
+          setSelfServeFeedback(
+            "Si un compte professionnel correspond à cette adresse, vous recevrez un lien sécurisé pour vous connecter, gérer l'abonnement Pro ou demander la suppression du compte.",
+            "ok"
+          );
+          selfServeForm.reset();
+        } catch (error) {
+          console.error("❌ [WEB][BILLING] self-serve request failed", error && error.message ? error.message : error);
+          setSelfServeFeedback("Impossible d'envoyer le lien pour le moment. Réessayez plus tard.", "error");
+        } finally {
+          if (selfServeSubmit) selfServeSubmit.removeAttribute("disabled");
+          selfServeEmailInput.removeAttribute("disabled");
+        }
+      });
+    }
+
+    function formatDateLabel(value) {
+      if (!value) return "";
+      const date = new Date(value);
+      if (!Number.isFinite(date.getTime())) return "";
+      return new Intl.DateTimeFormat("fr-FR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }).format(date);
+    }
+
+    function parseDateValue(value) {
+      if (!value) return null;
+      const parsed = new Date(value);
+      if (!Number.isFinite(parsed.getTime())) return null;
+      return parsed;
+    }
+
+    function isPastDateValue(value) {
+      const parsed = parseDateValue(value);
+      if (!parsed) return false;
+      return parsed.getTime() <= Date.now();
+    }
+
+    function formatMoney(value, currency) {
+      const amount = Number(value);
+      if (!Number.isFinite(amount)) return "Tarif indisponible";
+      return new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: currency || "EUR",
+        maximumFractionDigits: 0,
+      }).format(amount);
+    }
+
+    function resolveAccountLabel(type) {
+      if (type === "municipality") return "Mairie";
+      if (type === "merchant") return "Commerce";
+      return "Compte pro";
+    }
+
+    function resolveStatusMeta(status) {
+      if (status === "ACTIVE") {
+        return { label: "Actif", variant: "active" };
+      }
+      if (status === "PENDING_REVIEW" || status === "PENDING_PAYMENT" || status === "PAST_DUE") {
+        return { label: "En cours", variant: "warning" };
+      }
+      return { label: "Inactif", variant: "inactive" };
+    }
+
+    function renderCurrentPlanHighlight(type) {
+      const merchantCard = document.getElementById("merchantCard");
+      const municipalityCard = document.getElementById("municipalityCard");
+      const merchantLabel = document.getElementById("merchantLabel");
+      const municipalityLabel = document.getElementById("municipalityLabel");
+
+      if (type === "merchant") {
+        merchantCard.classList.add("current");
+        merchantLabel.textContent = "Votre formule actuelle";
+      }
+
+      if (type === "municipality") {
+        municipalityCard.classList.add("current");
+        municipalityLabel.textContent = "Votre formule actuelle";
+      }
+    }
+
+    function renderStatus() {
+      const accountValue = document.getElementById("accountValue");
+      const nextRenewalValue = document.getElementById("nextRenewalValue");
+      const statusText = document.getElementById("statusText");
+      const statusPill = document.getElementById("statusPill");
+      const periodLabel = formatDateLabel(currentPeriodEnd);
+      const hasExpiredPeriod = isPastDateValue(currentPeriodEnd);
+      const statusMeta = resolveStatusMeta(billingStatus);
+
+      if (!hasManagementContext) {
+        accountValue.textContent = "Non détecté";
+        nextRenewalValue.textContent = "À déterminer";
+        statusPill.textContent = "Accès sécurisé";
+        statusPill.className = "status-pill warning";
+        statusText.textContent =
+          "Vous pouvez demander un lien sécurisé par email pour retrouver la gestion de votre abonnement.";
+        return;
+      }
+
+      accountValue.textContent = resolveAccountLabel(accountTypeRaw);
+
+      statusPill.textContent = statusMeta.label;
+      statusPill.className = "status-pill " + statusMeta.variant;
+
+      if (billingExempt) {
+        nextRenewalValue.textContent = "Aucun renouvellement automatique";
+        statusText.textContent = "Votre accès est actuellement actif sans renouvellement automatique géré depuis le web.";
+        return;
+      }
+
+      if (cancelAtPeriodEnd) {
+        if (hasExpiredPeriod) {
+          nextRenewalValue.textContent = periodLabel
+            ? "Acces expire le " + periodLabel
+            : "Acces expire";
+          statusPill.textContent = "Inactif";
+          statusPill.className = "status-pill inactive";
+          statusText.textContent = periodLabel
+            ? "Le renouvellement automatique est desactive et l'acces a expire le " + periodLabel + "."
+            : "Le renouvellement automatique est desactive et l'acces est expire.";
+          return;
+        }
+        nextRenewalValue.textContent = periodLabel
+          ? "Aucun. Accès actif jusqu'au " + periodLabel
+          : "Aucun renouvellement programmé";
+        statusText.textContent = periodLabel
+          ? "Le renouvellement automatique est déjà désactivé. Votre accès reste actif jusqu'au " + periodLabel + "."
+          : "Le renouvellement automatique est déjà désactivé.";
+        return;
+      }
+
+      if (billingStatus === "ACTIVE") {
+        if (hasExpiredPeriod) {
+          nextRenewalValue.textContent = periodLabel
+            ? "Acces expire le " + periodLabel
+            : "Acces expire";
+          statusPill.textContent = "Inactif";
+          statusPill.className = "status-pill inactive";
+          statusText.textContent = periodLabel
+            ? "L'acces associe a cet abonnement a expire le " + periodLabel + "."
+            : "L'acces associe a cet abonnement est expire.";
+          return;
+        }
+        nextRenewalValue.textContent = periodLabel || "Date non communiquée";
+        statusText.textContent = periodLabel
+          ? "Votre abonnement est actif. En cas d'arrêt du renouvellement, l'accès restera disponible jusqu'au " + periodLabel + "."
+          : "Votre abonnement est actif et peut être géré depuis cette page si une action est disponible.";
+        return;
+      }
+
+      nextRenewalValue.textContent = "Indisponible";
+      statusText.textContent = "Le statut actuel de votre compte ne permet pas forcément une action immédiate depuis cette page.";
+    }
+
+    function renderActions() {
+      const manageText = document.getElementById("manageText");
+      const manageActions = document.getElementById("manageActions");
+      const periodLabel = formatDateLabel(currentPeriodEnd);
+      const hasExpiredPeriod = isPastDateValue(currentPeriodEnd);
+
+      if (!hasManagementContext) {
+        manageText.textContent =
+          "Entrez votre adresse email ci-dessous pour recevoir un lien sécurisé de gestion.";
+        manageActions.innerHTML =
+          '<a class="btn" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
+        return;
+      }
+
+      if (billingExempt) {
+        manageText.textContent = "Ce compte ne dispose pas d'un renouvellement automatique à arrêter depuis le web.";
+        manageActions.innerHTML =
+          '<a class="btn" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
+        return;
+      }
+
+      if (hasExpiredPeriod) {
+        manageText.textContent = periodLabel
+          ? "L'acces a expire le " + periodLabel + ". Un nouveau paiement est necessaire pour relancer l'abonnement."
+          : "L'acces est expire. Un nouveau paiement est necessaire pour relancer l'abonnement.";
+        manageActions.innerHTML =
+          '<a class="btn" href="mailto:contact@urbalya.com?subject=Renouvellement%20abonnement%20Urbalya">Demander un nouveau lien de paiement</a>' +
+          '<a class="btn" href="mailto:contact@urbalya.com?subject=Question%20abonnement%20Urbalya">Contacter le support</a>';
+        return;
+      }
+
+      if (cancelAtPeriodEnd) {
+        manageText.textContent = periodLabel
+          ? "Le renouvellement automatique est déjà désactivé. Votre accès reste actif jusqu'au " + periodLabel + "."
+          : "Le renouvellement automatique est déjà désactivé pour ce compte.";
+        if (reactivateUrl) {
+          manageActions.innerHTML =
+            '<a class="btn" href="' + reactivateUrl.replace(/"/g, "&quot;") + '">Réactiver le renouvellement</a>' +
+            '<a class="btn" href="mailto:contact@urbalya.com?subject=Question%20abonnement%20Urbalya">Contacter le support</a>';
+        } else {
+          manageActions.innerHTML =
+            '<a class="btn" href="support.html">Voir le support</a>';
+        }
+        return;
+      }
+
+      if (unsubscribeUrl) {
+        manageText.textContent = periodLabel
+          ? "Vous pouvez arrêter le renouvellement automatique. L'accès restera actif jusqu'au " + periodLabel + "."
+          : "Vous pouvez arrêter le renouvellement automatique. L'accès déjà engagé reste disponible jusqu'à la fin de période.";
+        manageActions.innerHTML =
+          '<a class="btn danger" href="' + unsubscribeUrl.replace(/"/g, "&quot;") + '">Arrêter le renouvellement</a>' +
+          '<a class="btn" href="mailto:contact@urbalya.com?subject=Question%20abonnement%20Urbalya">Contacter le support</a>';
+        return;
+      }
+
+      manageText.textContent = "Aucune action de désabonnement web n'est disponible pour ce compte actuellement.";
+      manageActions.innerHTML =
+        '<a class="btn" href="mailto:contact@urbalya.com?subject=Gestion%20abonnement%20Urbalya">Contacter le support</a>';
+    }
+
+    async function loadPricing() {
+      const merchantPriceNode = document.getElementById("merchantPrice");
+      const municipalityPriceNode = document.getElementById("municipalityPrice");
+      const defaultCurrency = "EUR";
+      const fallbackMerchantMonthly = 29;
+      const fallbackMunicipalityMonthly = 79;
+      const apiUrl = "https://urbalya.com/api/pricing/public";
+
+      merchantPriceNode.textContent = formatMoney(fallbackMerchantMonthly, defaultCurrency) + " / mois";
+      municipalityPriceNode.textContent = "À partir de " + formatMoney(fallbackMunicipalityMonthly, defaultCurrency) + " / mois";
+
+      try {
+        console.log("📝 [WEB][BILLING] pricing fetch start", { apiUrl });
+
+        const response = await fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            "Accept": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Pricing request failed with status " + response.status);
+        }
+
+        const data = await response.json();
+        const merchantMonthly = Number(data && data.merchantMonthly);
+        const currency = String(data && data.currency ? data.currency : defaultCurrency).trim() || defaultCurrency;
+
+        console.log("📝 [WEB][BILLING] pricing fetch success", {
+          hasMerchantMonthly: Number.isFinite(merchantMonthly),
+          currency,
+        });
+
+        if (Number.isFinite(merchantMonthly) && merchantMonthly > 0) {
+          merchantPriceNode.textContent = formatMoney(merchantMonthly, currency) + " / mois";
+        }
+
+        municipalityPriceNode.textContent = "À partir de " + formatMoney(fallbackMunicipalityMonthly, currency) + " / mois";
+      } catch (error) {
+        console.error("❌ [WEB][BILLING] pricing fetch failed", error && error.message ? error.message : error);
+      }
+    }
+
+    setupSelfServeForm();
+    renderCurrentPlanHighlight(accountTypeRaw);
+    renderStatus();
+    renderActions();
+    loadPricing();
+  </script>
+  <script src="cookie-consent.js"></script>
+</body>
+</html>
+"
